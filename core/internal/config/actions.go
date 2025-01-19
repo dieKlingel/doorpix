@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"text/template"
 
 	"gopkg.in/yaml.v3"
 )
@@ -13,7 +14,26 @@ type SleepAction struct {
 }
 
 type LogAction struct {
-	Message string `yaml:"log"`
+	Message *template.Template
+}
+
+func (a *LogAction) UnmarshalYAML(node *yaml.Node) error {
+	action := struct {
+		Log string `yaml:"log"`
+	}{}
+
+	err := node.Decode(&action)
+	if err != nil {
+		return err
+	}
+
+	tmpl, err := template.New("log").Parse(action.Log)
+	if err != nil {
+		return err
+	}
+
+	a.Message = tmpl
+	return nil
 }
 
 type EvalAction struct {

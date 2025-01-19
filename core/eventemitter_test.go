@@ -2,6 +2,7 @@ package core_test
 
 import (
 	"testing"
+	"text/template"
 	"time"
 
 	"github.com/dieklingel/doorpix/core"
@@ -12,7 +13,7 @@ func TestEventLoopEmitBefore(t *testing.T) {
 	t.Run("should emit before event", func(t *testing.T) {
 		conf := config.New()
 		conf.BeforeEvents[config.StartupEvent] = append(conf.BeforeEvents[config.StartupEvent], config.LogAction{
-			Message: "Test",
+			Message: template.Must(template.New("log").Parse("before event")),
 		})
 
 		callback := make(chan bool, 1)

@@ -1,6 +1,6 @@
 on:
   startup:
-    - log: hello world # prints hello world to the console 
+    - log: hello world at {{.date}} {{.time}} from {{.pwd}}
     - eval:
         - echo "I am a shell command running in $SHELL"
   shutdown:

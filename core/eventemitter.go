@@ -42,7 +42,7 @@ func (emitter *EventEmitter) Execute(eventtype config.Event, actions []config.Ac
 	go func() {
 		defer emitter.waitgroup.Done()
 
-		event := &Event{}
+		event := NewEvent()
 		for _, action := range actions {
 			for _, handler := range emitter.listeners {
 				handler(action, event)

@@ -1,6 +1,7 @@
 package core
 
 import (
+	"bytes"
 	"fmt"
 	"log/slog"
 	"time"
@@ -14,7 +15,13 @@ type SystemHandler struct{}
 func (s *SystemHandler) HandleEvent(action config.Action, event *Event) {
 	switch action := action.(type) {
 	case config.LogAction:
-		slog.Info(action.Message)
+		msg := bytes.Buffer{}
+		if err := action.Message.Execute(&msg, event.Data); err != nil {
+			slog.Error(err.Error())
+			break
+		}
+
+		slog.Info(msg.String())
 	case config.SleepAction:
 		time.Sleep(time.Duration(action.Duration) * time.Second)
 	case config.EvalAction:
