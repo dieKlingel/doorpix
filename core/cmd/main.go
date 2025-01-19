@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"os"
 
+	"github.com/dieklingel/doorpix/core"
 	"github.com/dieklingel/doorpix/core/internal/config"
 )
 
@@ -18,4 +19,7 @@ func main() {
 		slog.Error(err.Error())
 		os.Exit(1)
 	}
+
+	app := core.NewApp()
+	app.Exec()
 }

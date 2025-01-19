@@ -10,6 +10,6 @@ func Read() error {
 	return global.Read()
 }
 
-func Get() *Config {
+func GetGlobal() *Config {
 	return &global
 }

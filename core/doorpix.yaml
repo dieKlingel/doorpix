@@ -1,5 +1,7 @@
 on:
   startup:
-    - sleep: 1 # sleeps 1 second
-    - log: hello world # prints hello world to the console
-
+    - log: hello world # prints hello world to the console 
+    - eval:
+        - echo "I am a shell command running in $SHELL"
+  shutdown:
+    - log: goodbye world # prints goodbye world to the console

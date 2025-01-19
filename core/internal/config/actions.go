@@ -16,6 +16,10 @@ type LogAction struct {
 	Message string `yaml:"log"`
 }
 
+type EvalAction struct {
+	Expressions []string `yaml:"eval"`
+}
+
 type InviteAction struct {
 	Numbers []string `yaml:"invite"`
 }
@@ -46,6 +50,11 @@ func newActionFromNode(node yaml.Node) (Action, error) {
 		}
 		if raw["invite"] != nil {
 			action := InviteAction{}
+			err := node.Decode(&action)
+			return action, err
+		}
+		if raw["eval"] != nil {
+			action := EvalAction{}
 			err := node.Decode(&action)
 			return action, err
 		}
