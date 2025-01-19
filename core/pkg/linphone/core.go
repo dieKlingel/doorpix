@@ -35,7 +35,7 @@ func (c *Core) SetVideoDevice(device string) {
 	C.linphone_core_set_video_device(c.cPtr(), dev)
 }
 
-func (c *Core) CreateChatRoom(params ChatRoomParams, localAddr Address, participants []Address) *ChatRoom {
+func (c *Core) CreateChatRoom(params *ChatRoomParams, localAddr *Address, participants []*Address) *ChatRoom {
 	if len(participants) == 0 {
 		return nil
 	}

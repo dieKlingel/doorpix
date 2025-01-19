@@ -1,11 +1,21 @@
 package main
 
 import (
-	"fmt"
+	"log/slog"
+	"os"
 
-	"github.com/dieklingel/doorpix/core/pkg/linphone"
+	"github.com/dieklingel/doorpix/core/internal/config"
 )
 
 func main() {
-	fmt.Printf("doorpix, linphone version: %s", linphone.GetVersion())
+	config.AddConfigPath(
+		"/etc/doorpix/doorpix.yaml",
+		"/etc/doorpix/config.yaml",
+		"doorpix.yaml",
+		"config.yaml",
+	)
+	if err := config.Read(); err != nil {
+		slog.Error(err.Error())
+		os.Exit(1)
+	}
 }

@@ -1,0 +1,5 @@
+on:
+  startup:
+    - sleep: 1 # sleeps 1 second
+    - log: hello world # prints hello world to the console
+
