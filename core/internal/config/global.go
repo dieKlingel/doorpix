@@ -11,5 +11,5 @@ func Read() error {
 }
 
 func GetGlobal() *Config {
-	return &global
+	return global
 }

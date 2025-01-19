@@ -1,43 +1,34 @@
 package core
 
 import (
-	"fmt"
-	"log/slog"
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/dieklingel/doorpix/core/internal/config"
-	"github.com/dieklingel/doorpix/core/internal/exec"
 )
 
 type App struct {
-	emitter *EventEmitter
+	emitter  *EventEmitter
+	handlers []Handler
 }
 
 func NewApp() *App {
+	emitter := NewEventEmitter()
+
 	return &App{
-		emitter: NewEventEmitter(),
+		emitter: emitter,
 	}
 }
 
+func (app *App) RegisterHandler(handler Handler) {
+	app.handlers = append(app.handlers, handler)
+}
+
 func (app *App) setup() {
-	app.emitter.Listen(func(action config.Action, event *Event) {
-		switch action := action.(type) {
-		case config.LogAction:
-			slog.Info(action.Message)
-		case config.SleepAction:
-			time.Sleep(time.Duration(action.Duration) * time.Second)
-		case config.EvalAction:
-			out, err := exec.Run(action.Expressions)
-			if err != nil {
-				slog.Error(err.Error())
-				break
-			}
-			fmt.Print(out)
-		}
-	})
+	for _, handler := range app.handlers {
+		handler.Setup(app.emitter)
+	}
 
 	app.emitter.Before(config.StartupEvent)
 	app.emitter.On(config.StartupEvent)
@@ -47,6 +38,11 @@ func (app *App) setup() {
 func (app *App) cleanup() {
 	// cleanup the application state
 	app.emitter.Before(config.ShutdownEvent)
+
+	for _, handler := range app.handlers {
+		handler.Cleanup()
+	}
+
 	app.emitter.On(config.ShutdownEvent)
 	app.emitter.After(config.ShutdownEvent)
 
@@ -58,6 +54,10 @@ func (app *App) Exec() {
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+
+	for _, handler := range app.handlers {
+		go handler.Exec()
+	}
 
 	<-c
 	app.cleanup()

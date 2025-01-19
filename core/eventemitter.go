@@ -9,17 +9,17 @@ import (
 type EventCallback = func(config.Action, *Event)
 
 type EventEmitter struct {
-	conf      config.Config
+	conf      *config.Config
 	listeners []EventCallback
 	mutex     sync.Mutex
 	waitgroup sync.WaitGroup
 }
 
 func NewEventEmitter() *EventEmitter {
-	return NewEventEmitterWithConfig(*config.GetGlobal())
+	return NewEventEmitterWithConfig(config.GetGlobal())
 }
 
-func NewEventEmitterWithConfig(conf config.Config) *EventEmitter {
+func NewEventEmitterWithConfig(conf *config.Config) *EventEmitter {
 	return &EventEmitter{
 		conf:      conf,
 		listeners: make([]EventCallback, 0),
@@ -31,6 +31,10 @@ func (emitter *EventEmitter) Listen(cb EventCallback) {
 	defer emitter.mutex.Unlock()
 
 	emitter.listeners = append(emitter.listeners, cb)
+}
+
+func (emitter *EventEmitter) Handler(handler EventHandler) {
+	emitter.Listen(handler.HandleEvent)
 }
 
 func (emitter *EventEmitter) Execute(eventtype config.Event, actions []config.Action) {

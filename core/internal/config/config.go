@@ -15,8 +15,8 @@ type Config struct {
 	AfterEvents  EventCollection `yaml:"after"`
 }
 
-func New() Config {
-	return Config{
+func New() *Config {
+	return &Config{
 		OnEvents:     EventCollection{},
 		BeforeEvents: EventCollection{},
 		AfterEvents:  EventCollection{},

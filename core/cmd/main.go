@@ -21,5 +21,8 @@ func main() {
 	}
 
 	app := core.NewApp()
+	app.RegisterHandler(&core.SystemHandler{})
+	app.RegisterHandler(&core.SIPPhone{Config: config.GetGlobal()})
+
 	app.Exec()
 }
