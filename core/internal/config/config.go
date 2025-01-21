@@ -13,6 +13,8 @@ type Config struct {
 	OnEvents     EventCollection `yaml:"on"`
 	BeforeEvents EventCollection `yaml:"before"`
 	AfterEvents  EventCollection `yaml:"after"`
+
+	SIPPhone SIPPhone `yaml:"sip-phone"`
 }
 
 func New() *Config {

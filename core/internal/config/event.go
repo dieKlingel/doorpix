@@ -16,6 +16,7 @@ const (
 	CallStateDisconnectEvent Event = "call-state-disconnect"
 	DtmfActionEvent          Event = "dtmf-action"
 	CallIncomingEvent        Event = "call-incoming"
+	NewMessageEvent          Event = "new-message"
 )
 
 func (collection EventCollection) UnmarshalYAML(node *yaml.Node) error {

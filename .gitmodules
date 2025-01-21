@@ -1,3 +1,6 @@
 [submodule "3rdparty/linphone-sdk"]
 	path = 3rdparty/linphone-sdk
 	url = https://gitlab.linphone.org/BC/public/linphone-sdk.git
+[submodule "3rdparty/pjproject"]
+	path = 3rdparty/pjproject
+	url = https://github.com/pjsip/pjproject

@@ -22,7 +22,7 @@ func main() {
 
 	app := core.NewApp()
 	app.RegisterHandler(&core.SystemHandler{})
-	app.RegisterHandler(&core.SIPPhone{Config: config.GetGlobal()})
+	app.RegisterHandler(&core.PJSIPPhone{Config: config.GetGlobal()})
 
 	app.Exec()
 }

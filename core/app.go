@@ -56,7 +56,7 @@ func (app *App) Exec() {
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 
 	for _, handler := range app.handlers {
-		go handler.Exec()
+		handler.Exec()
 	}
 
 	<-c

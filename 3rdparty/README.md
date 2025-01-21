@@ -9,4 +9,14 @@ rm -rf build
 cmake --preset "default" -B "build" -G "Ninja Multi-Config" -DENABLE_DB_STORAGE=OFF -DENABLE_VCARD=OFF -DENABLE_NON_FREE_FEATURES=ON -DENABLE_OPENH264=ON
 cmake --build "build" --config "Release" --parallel 8
 sudo cmake --install "build" --prefix "/usr"
-````
+```
+
+## pjsua2
+
+```sh
+sudo apt-get install build-essential libssl-dev uuid-dev libasound2-dev
+cd 3rdparty/pjproject
+./configure
+make dep
+make
+```
