@@ -1,4 +1,4 @@
-package config
+package doorpix
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ type Config struct {
 	SIPPhone SIPPhone `yaml:"sip-phone"`
 }
 
-func New() *Config {
+func NewConfig() *Config {
 	return &Config{
 		OnEvents:     EventCollection{},
 		BeforeEvents: EventCollection{},

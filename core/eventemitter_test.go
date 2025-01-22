@@ -6,26 +6,27 @@ import (
 	"time"
 
 	"github.com/dieklingel/doorpix/core"
-	"github.com/dieklingel/doorpix/core/internal/config"
+
+	"github.com/dieklingel/doorpix/core/internal/doorpix"
 )
 
 func TestEventLoopEmitBefore(t *testing.T) {
 	t.Run("should emit before event", func(t *testing.T) {
-		conf := config.New()
-		conf.BeforeEvents[config.StartupEvent] = append(conf.BeforeEvents[config.StartupEvent], config.LogAction{
+		config := doorpix.NewConfig()
+		config.BeforeEvents[doorpix.StartupEvent] = append(config.BeforeEvents[doorpix.StartupEvent], doorpix.LogAction{
 			Message: template.Must(template.New("log").Parse("before event")),
 		})
 
 		callback := make(chan bool, 1)
 
-		emitter := core.NewEventEmitterWithConfig(conf)
-		emitter.Listen(func(action config.Action, event *core.Event) {
-			if _, ok := action.(config.LogAction); ok {
+		emitter := core.NewEventEmitterWithConfig(config)
+		emitter.Listen(func(action doorpix.Action, event *doorpix.Event) {
+			if _, ok := action.(doorpix.LogAction); ok {
 				callback <- true
 			}
 		})
 
-		emitter.Before(config.StartupEvent)
+		emitter.Before(doorpix.StartupEvent)
 
 		select {
 		case <-callback:

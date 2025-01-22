@@ -5,19 +5,17 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/dieklingel/doorpix/core/internal/config"
+	"github.com/dieklingel/doorpix/core/internal/doorpix"
 )
 
 type App struct {
-	emitter  *EventEmitter
+	system   doorpix.System
 	handlers []Handler
 }
 
-func NewApp() *App {
-	emitter := NewEventEmitter()
-
+func NewAppWithConfig(system doorpix.System) *App {
 	return &App{
-		emitter: emitter,
+		system: system,
 	}
 }
 
@@ -27,26 +25,21 @@ func (app *App) RegisterHandler(handler Handler) {
 
 func (app *App) setup() {
 	for _, handler := range app.handlers {
-		handler.Setup(app.emitter)
+		handler.Setup()
 	}
 
-	app.emitter.Before(config.StartupEvent)
-	app.emitter.On(config.StartupEvent)
-	app.emitter.After(config.StartupEvent)
+	app.system.Bus.On(doorpix.StartupEvent)
 }
 
 func (app *App) cleanup() {
 	// cleanup the application state
-	app.emitter.Before(config.ShutdownEvent)
+	app.system.Bus.On(doorpix.ShutdownEvent)
 
 	for _, handler := range app.handlers {
 		handler.Cleanup()
 	}
 
-	app.emitter.On(config.ShutdownEvent)
-	app.emitter.After(config.ShutdownEvent)
-
-	app.emitter.Wait()
+	app.system.Bus.Wait()
 }
 
 func (app *App) Exec() {

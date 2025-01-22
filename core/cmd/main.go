@@ -5,10 +5,17 @@ import (
 	"os"
 
 	"github.com/dieklingel/doorpix/core"
-	"github.com/dieklingel/doorpix/core/internal/config"
+	"github.com/dieklingel/doorpix/core/internal/doorpix"
+	"github.com/dieklingel/doorpix/core/internal/env"
 )
 
 func main() {
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		Level: env.LogLevel(),
+	}))
+	slog.SetDefault(logger)
+
+	config := doorpix.NewConfig()
 	config.AddConfigPath(
 		"/etc/doorpix/doorpix.yaml",
 		"/etc/doorpix/config.yaml",
@@ -19,10 +26,19 @@ func main() {
 		slog.Error(err.Error())
 		os.Exit(1)
 	}
+	bus := core.NewEventEmitterWithConfig(config)
+	system := doorpix.System{
+		Config: config,
+		Bus:    bus,
+	}
 
-	app := core.NewApp()
-	app.RegisterHandler(&core.SystemHandler{})
-	app.RegisterHandler(&core.PJSIPPhone{Config: config.GetGlobal()})
+	app := core.NewAppWithConfig(system)
+	app.RegisterHandler(&core.SystemHandler{
+		System: system,
+	})
+	app.RegisterHandler(&core.PJSIPPhone{
+		System: system,
+	})
 
 	app.Exec()
 }

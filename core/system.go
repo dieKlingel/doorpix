@@ -6,15 +6,17 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/dieklingel/doorpix/core/internal/config"
+	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/internal/exec"
 )
 
-type SystemHandler struct{}
+type SystemHandler struct {
+	System doorpix.System
+}
 
-func (s *SystemHandler) HandleEvent(action config.Action, event *Event) {
+func (s *SystemHandler) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 	switch action := action.(type) {
-	case config.LogAction:
+	case doorpix.LogAction:
 		msg := bytes.Buffer{}
 		if err := action.Message.Execute(&msg, event.Data); err != nil {
 			slog.Error(err.Error())
@@ -22,9 +24,9 @@ func (s *SystemHandler) HandleEvent(action config.Action, event *Event) {
 		}
 
 		slog.Info(msg.String())
-	case config.SleepAction:
+	case doorpix.SleepAction:
 		time.Sleep(time.Duration(action.Duration) * time.Second)
-	case config.EvalAction:
+	case doorpix.EvalAction:
 		out, err := exec.Run(action.Expressions)
 		if err != nil {
 			slog.Error(err.Error())
@@ -34,8 +36,8 @@ func (s *SystemHandler) HandleEvent(action config.Action, event *Event) {
 	}
 }
 
-func (s *SystemHandler) Setup(emitter *EventEmitter) {
-	emitter.Handler(s)
+func (s *SystemHandler) Setup() {
+	s.System.Bus.Handler(s)
 }
 
 func (s *SystemHandler) Cleanup() {

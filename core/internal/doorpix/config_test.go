@@ -1,9 +1,9 @@
-package config_test
+package doorpix_test
 
 import (
 	"testing"
 
-	"github.com/dieklingel/doorpix/core/internal/config"
+	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 )
@@ -15,11 +15,11 @@ on:
   startup:
     - sleep: 1
 `
-		c := config.New()
+		c := doorpix.NewConfig()
 		err := yaml.Unmarshal([]byte(data), &c)
 
 		assert.NoError(t, err)
-		assert.Len(t, c.OnEvents[config.StartupEvent], 1)
+		assert.Len(t, c.OnEvents[doorpix.StartupEvent], 1)
 	})
 
 	t.Run("action is parsed as type", func(t *testing.T) {
@@ -30,15 +30,15 @@ on:
     - log: hello
     - hangup: {}
 `
-		c := config.New()
+		c := doorpix.NewConfig()
 		err := yaml.Unmarshal([]byte(data), &c)
 		assert.NoError(t, err)
 
-		sleepAction := c.OnEvents[config.StartupEvent][0]
-		assert.IsType(t, config.SleepAction{}, sleepAction)
-		logAction := c.OnEvents[config.StartupEvent][1]
-		assert.IsType(t, config.LogAction{}, logAction)
-		hangupAction := c.OnEvents[config.StartupEvent][2]
-		assert.IsType(t, config.HangupAction{}, hangupAction)
+		sleepAction := c.OnEvents[doorpix.StartupEvent][0]
+		assert.IsType(t, doorpix.SleepAction{}, sleepAction)
+		logAction := c.OnEvents[doorpix.StartupEvent][1]
+		assert.IsType(t, doorpix.LogAction{}, logAction)
+		hangupAction := c.OnEvents[doorpix.StartupEvent][2]
+		assert.IsType(t, doorpix.HangupAction{}, hangupAction)
 	})
 }

@@ -1,4 +1,4 @@
-package core
+package doorpix
 
 import (
 	"os"

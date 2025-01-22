@@ -1,7 +1,7 @@
 package core
 
 type Handler interface {
-	Setup(*EventEmitter)
+	Setup()
 	Cleanup()
 	Exec()
 }
