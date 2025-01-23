@@ -39,6 +39,9 @@ func main() {
 	app.RegisterHandler(&core.PJSIPPhone{
 		System: system,
 	})
+	app.RegisterHandler(&core.HttpHandler{
+		System: system,
+	})
 
 	app.Exec()
 }

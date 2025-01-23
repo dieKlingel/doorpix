@@ -5,3 +5,15 @@ on:
         - echo "I am a shell command running in $SHELL"
   shutdown:
     - log: goodbye world # prints goodbye world to the console
+  api:ring:
+    - log: ring ring ring
+
+sip-phone:
+  server: sip.linphone.org
+  username: example
+  password: secret
+  realm: sip.linphone.org
+  whitelist: []
+
+http:
+  port: 8080

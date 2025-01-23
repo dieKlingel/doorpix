@@ -17,6 +17,8 @@ const (
 	DtmfActionEvent          EventType = "dtmf-action"
 	CallIncomingEvent        EventType = "call-incoming"
 	NewMessageEvent          EventType = "new-message"
+	APIRingEvent             EventType = "api:ring"
+	APIUnlockEvent           EventType = "api:unlock"
 )
 
 func (collection EventCollection) UnmarshalYAML(node *yaml.Node) error {
