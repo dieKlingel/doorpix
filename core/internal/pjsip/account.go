@@ -2,6 +2,7 @@ package pjsip
 
 import (
 	"log/slog"
+	"regexp"
 
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
@@ -37,12 +38,28 @@ func (a *account) OnRegState(param pjsua2.OnRegStateParam) {
 func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 	call := NewCall(a.account, param.GetCallId(), a.system)
 	remoteUri := call.GetInfo().GetRemoteUri()
+	regex := regexp.MustCompile("^\".*?\"\\s<sip:(.*?)>$")
+	matches := regex.FindStringSubmatch(remoteUri)
+	if len(matches) >= 1 {
+		remoteUri = matches[1]
+	}
+
 	slog.Info("incoming call", "uri", remoteUri)
 	a.system.Bus.On(doorpix.CallIncomingEvent)
 
 	callParam := pjsua2.NewCallOpParam()
 	callParam.SetStatusCode(pjsua2.PJSIP_SC_DECLINE)
 	a.calls[param.GetCallId()] = call
+
+	for _, uri := range a.system.Config.SIPPhone.Whitelist {
+		if uri == remoteUri {
+			callParam.SetStatusCode(pjsua2.PJSIP_SC_OK)
+			break
+		}
+	}
+
+	call.GetInfo().GetSetting().SetAudioCount(1)
+	call.GetInfo().GetSetting().SetVideoCount(1)
 	call.Answer(callParam)
 }
 

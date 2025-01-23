@@ -28,6 +28,13 @@ func (p *PJSIPPhone) Setup() {
 	// global config
 	config := pjsua2.NewEpConfig()
 	config.GetLogConfig().SetLevel(2)
+
+	ua := config.GetUaConfig()
+	ua.SetUserAgent("DoorPiX")
+
+	ua.GetStunServer().Add("stun.l.google.com:19302")
+	ua.GetStunServer().Add("stun.linphone.org:3478")
+
 	p.endpoint = pjsua2.NewEndpoint()
 	p.endpoint.LibCreate()
 	p.endpoint.LibInit(config)

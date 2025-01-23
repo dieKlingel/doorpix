@@ -41,4 +41,24 @@ func (c *call) OnCallState(param pjsua2.OnCallStateParam) {
 	}
 }
 
-func (c *call) OnCallMediaState(param pjsua2.OnCallMediaStateParam) {}
+func (c *call) OnCallMediaState(param pjsua2.OnCallMediaStateParam) {
+	audioMedia := c.call.GetAudioMedia(-1)
+	if audioMedia == nil {
+		slog.Debug("no audio media", "call id", c.call.GetId())
+		return
+	}
+
+	audioPlayback := pjsua2.EndpointInstance().AudDevManager().GetPlaybackDevMedia()
+	if audioPlayback != nil {
+		audioMedia.StartTransmit(audioPlayback)
+	} else {
+		slog.Error("failed to get playback device media", "call id", c.call.GetId())
+	}
+
+	audioRecording := pjsua2.EndpointInstance().AudDevManager().GetCaptureDevMedia()
+	if audioRecording != nil {
+		audioRecording.StartTransmit(audioMedia)
+	} else {
+		slog.Error("failed to get capture device media", "call id", c.call.GetId())
+	}
+}
