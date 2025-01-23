@@ -14,7 +14,7 @@ sudo cmake --install "build" --prefix "/usr"
 ## pjsua2
 
 ```sh
-sudo apt-get install build-essential libssl-dev uuid-dev libasound2-dev
+sudo apt-get install build-essential libssl-dev uuid-dev libasound2-dev libv4l-dev libvpx-dev libyuv-dev libopenh264-dev libsdl2-dev
 cd 3rdparty/pjproject
 ./configure
 make dep

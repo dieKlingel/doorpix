@@ -58,8 +58,6 @@ func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 		}
 	}
 
-	call.GetInfo().GetSetting().SetAudioCount(1)
-	call.GetInfo().GetSetting().SetVideoCount(1)
 	call.Answer(callParam)
 }
 

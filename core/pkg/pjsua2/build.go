@@ -11,4 +11,5 @@ package pjsua2
 // #cgo LDFLAGS: -L${SRCDIR}/../../../3rdparty/pjproject/pjlib/lib -lpj-aarch64-unknown-linux-gnu
 // #cgo LDFLAGS: -L${SRCDIR}/../../../3rdparty/pjproject/third_party/lib -lresample-aarch64-unknown-linux-gnu -lspeex-aarch64-unknown-linux-gnu -lgsmcodec-aarch64-unknown-linux-gnu -lsrtp-aarch64-unknown-linux-gnu -lilbccodec-aarch64-unknown-linux-gnu -lg7221codec-aarch64-unknown-linux-gnu -lwebrtc-aarch64-unknown-linux-gnu -lyuv-aarch64-unknown-linux-gnu
 // #cgo LDFLAGS: -lssl -lcrypto -lm -lpthread -luuid -lrt -lasound
+// #cgo LDFLAGS: -lSDL2 -lv4l2 -lvpx -lopenh264
 import "C"

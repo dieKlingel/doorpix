@@ -60,6 +60,11 @@ func (p *PJSIPPhone) Exec() {
 	p.accountConfig.SetIdUri(fmt.Sprintf("sip:%s@%s", p.System.Config.SIPPhone.Username, p.System.Config.SIPPhone.Realm))
 	p.accountConfig.GetRegConfig().SetRegistrarUri(fmt.Sprintf("sip:%s", p.System.Config.SIPPhone.Realm))
 
+	p.accountConfig.GetVideoConfig().SetAutoTransmitOutgoing(true)
+	p.accountConfig.GetVideoConfig().SetAutoShowIncoming(false)
+	p.accountConfig.GetMediaConfig().SetSrtpSecureSignaling(1)
+	p.accountConfig.GetMediaConfig().SetSrtpUse(pjsua2.PJMEDIA_SRTP_MANDATORY)
+
 	cred := pjsua2.NewAuthCredInfo("digest", "*", p.System.Config.SIPPhone.Username, 0, p.System.Config.SIPPhone.Password)
 	p.accountConfig.GetSipConfig().GetAuthCreds().Add(cred)
 
