@@ -1,6 +1,7 @@
 package core
 
 import (
+	"bytes"
 	"fmt"
 	"log/slog"
 
@@ -18,8 +19,39 @@ type PJSIPPhone struct {
 	accountConfig pjsua2.AccountConfig
 }
 
-func (p *PJSIPPhone) HandleEvent(config doorpix.Action, event *doorpix.Event) {
+func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
+	if !pjsua2.EndpointInstance().LibIsThreadRegistered() {
+		pjsua2.EndpointInstance().LibRegisterThread("pjsipphone")
+	}
 
+	switch action := action.(type) {
+	case doorpix.InviteAction:
+	case doorpix.MessageAction:
+		var msg bytes.Buffer
+		if err := action.Message.Execute(&msg, event.Data); err != nil {
+			slog.Error(err.Error())
+			break
+		}
+
+		for _, number := range action.Numbers {
+			buddy := pjsua2.NewBuddy()
+			config := pjsua2.NewBuddyConfig()
+
+			var uri bytes.Buffer
+			if err := number.Execute(&uri, event.Data); err != nil {
+				slog.Error(err.Error())
+				continue
+			}
+			slog.Info("Sending message to", "number", uri.String())
+
+			config.SetUri(fmt.Sprintf("sip:%s", uri.String()))
+			buddy.Create(p.account, config)
+
+			message := pjsua2.NewSendInstantMessageParam()
+			message.SetContent(msg.String())
+			buddy.SendInstantMessage(message)
+		}
+	}
 }
 
 func (p *PJSIPPhone) Setup() {

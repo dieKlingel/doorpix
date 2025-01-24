@@ -7,6 +7,13 @@ on:
     - log: goodbye world # prints goodbye world to the console
   api:ring:
     - log: ring ring ring
+    - to: '{{ .sip }}'
+      message: |-
+        Jemand steht vor deiner Tür {{.date}} {{.time}}
+        {{- if .message }}
+        
+        {{ .message }}
+        {{- end }}
 
 sip-phone:
   server: sip.linphone.org

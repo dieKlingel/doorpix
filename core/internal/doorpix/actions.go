@@ -41,7 +41,45 @@ type EvalAction struct {
 }
 
 type InviteAction struct {
-	Numbers []string `yaml:"invite"`
+	Numbers []string
+}
+
+func (a *InviteAction) UnmarshalYAML(node *yaml.Node) error {
+	action := struct {
+		Numbers YamlScalarOrList[string] `yaml:"invite"`
+	}{}
+
+	err := node.Decode(&action)
+	if err != nil {
+		return err
+	}
+
+	a.Numbers = action.Numbers
+	return nil
+}
+
+type MessageAction struct {
+	Numbers []template.Template `yaml:"to"`
+	Message template.Template   `yaml:"message"`
+}
+
+func (a *MessageAction) UnmarshalYAML(node *yaml.Node) error {
+	action := struct {
+		Numbers YamlScalarOrList[YamlStringTemplate] `yaml:"to"`
+		Message YamlStringTemplate                   `yaml:"message"`
+	}{}
+
+	err := node.Decode(&action)
+	if err != nil {
+		return err
+	}
+
+	a.Numbers = make([]template.Template, len(action.Numbers))
+	for i, number := range action.Numbers {
+		a.Numbers[i] = (template.Template)(number)
+	}
+	a.Message = (template.Template)(action.Message)
+	return nil
 }
 
 type HangupAction struct{}
@@ -75,6 +113,11 @@ func newActionFromNode(node yaml.Node) (Action, error) {
 		}
 		if raw["eval"] != nil {
 			action := EvalAction{}
+			err := node.Decode(&action)
+			return action, err
+		}
+		if raw["message"] != nil {
+			action := MessageAction{}
 			err := node.Decode(&action)
 			return action, err
 		}

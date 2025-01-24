@@ -33,12 +33,14 @@ func (emitter *EventEmitter) Handler(handler doorpix.BusEventHandler) {
 	emitter.Listen(handler.HandleEvent)
 }
 
-func (emitter *EventEmitter) Execute(eventtype doorpix.EventType, actions []doorpix.Action) {
+func (emitter *EventEmitter) Execute(eventtype doorpix.EventType, actions []doorpix.Action, data map[string]any) {
 	emitter.waitgroup.Add(1)
 	go func() {
 		defer emitter.waitgroup.Done()
 
 		event := doorpix.NewEvent()
+		event.AddData(data)
+
 		for _, action := range actions {
 			for _, handler := range emitter.listeners {
 				handler(action, event)
@@ -57,7 +59,7 @@ func (emitter *EventEmitter) Before(eventtype doorpix.EventType) {
 		return
 	}
 
-	emitter.Execute(eventtype, actions)
+	emitter.Execute(eventtype, actions, nil)
 }
 
 func (emitter *EventEmitter) On(eventtype doorpix.EventType) {
@@ -66,7 +68,16 @@ func (emitter *EventEmitter) On(eventtype doorpix.EventType) {
 		return
 	}
 
-	emitter.Execute(eventtype, actions)
+	emitter.Execute(eventtype, actions, nil)
+}
+
+func (emitter *EventEmitter) OnWithData(eventtype doorpix.EventType, data map[string]any) {
+	actions := emitter.config.OnEvents[eventtype]
+	if actions == nil {
+		return
+	}
+
+	emitter.Execute(eventtype, actions, data)
 }
 
 func (emitter *EventEmitter) After(eventtype doorpix.EventType) {
@@ -75,5 +86,5 @@ func (emitter *EventEmitter) After(eventtype doorpix.EventType) {
 		return
 	}
 
-	emitter.Execute(eventtype, actions)
+	emitter.Execute(eventtype, actions, nil)
 }

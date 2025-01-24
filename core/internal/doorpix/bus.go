@@ -2,6 +2,7 @@ package doorpix
 
 type Bus interface {
 	On(EventType)
+	OnWithData(EventType, map[string]interface{})
 	Handler(BusEventHandler)
 	Wait()
 }

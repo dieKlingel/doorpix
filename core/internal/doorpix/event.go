@@ -22,3 +22,13 @@ func NewEvent() *Event {
 
 	return event
 }
+
+func (e *Event) AddData(data map[string]any) {
+	if data == nil {
+		return
+	}
+
+	for key, value := range data {
+		e.Data[key] = value
+	}
+}

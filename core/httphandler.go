@@ -17,6 +17,7 @@ type HttpHandler struct {
 
 type APIEventRequest struct {
 	Event doorpix.EventType `json:"event"`
+	Data  map[string]any    `json:"data"`
 }
 
 func (h *HttpHandler) HandleEvent(config doorpix.Action, event *doorpix.Event) {
@@ -31,7 +32,7 @@ func (h *HttpHandler) Setup() {
 	}
 
 	handler := http.NewServeMux()
-	handler.HandleFunc("POST /api/events", h.handleEmitEvent)
+	handler.HandleFunc("POST /api/events", h.HandleEmitEvent)
 
 	// global config
 	h.server = &http.Server{
@@ -50,7 +51,7 @@ func (h *HttpHandler) Exec() {
 
 func (h *HttpHandler) Cleanup() {}
 
-func (h *HttpHandler) handleEmitEvent(w http.ResponseWriter, r *http.Request) {
+func (h *HttpHandler) HandleEmitEvent(w http.ResponseWriter, r *http.Request) {
 	var req APIEventRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -64,7 +65,7 @@ func (h *HttpHandler) handleEmitEvent(w http.ResponseWriter, r *http.Request) {
 
 	for _, eventType := range allowedEventTypes {
 		if req.Event == eventType {
-			h.System.Bus.On(req.Event)
+			h.System.Bus.OnWithData(req.Event, req.Data)
 			w.WriteHeader(http.StatusOK)
 			return
 		}
