@@ -1,15 +1,64 @@
 package pjsip
 
 import (
+	"fmt"
 	"log/slog"
 	"regexp"
+	"strings"
 
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
+// Account is a wrapper around the pjsua2.Account struct. It provides a user
+// friendly interface to interact with the pjsip account tailored for the
+// doorpix system
 type Account struct {
 	pjsua2.Account
+}
+
+// Invite sends an invite to the given uri. The uri must be a valid sip uri
+// (e.g. sip:example@example.org or example@example.org)
+func (a *Account) Invite(uri string) error {
+	if !strings.HasPrefix(uri, "sip:") {
+		uri = fmt.Sprintf("sip:%s", uri)
+	}
+
+	if pjsua2.EndpointInstance().UtilVerifySipUri(uri) != 0 {
+		return fmt.Errorf("%s is not a valid sip uri", uri)
+	}
+
+	account := a.Account.DirectorInterface().(*account)
+
+	param := pjsua2.NewCallOpParam()
+	call := NewCall(a, -1, account.system)
+	call.MakeCall(uri, param)
+
+	account.calls[call.GetId()] = call
+	return nil
+}
+
+// SendInstantMessage sends an instant message to the given uri. The uri must be
+// a valid sip uri (e.g. sip:example@example.org or example@example.org)
+func (a *Account) SendInstantMessage(uri string, message string) error {
+	if !strings.HasPrefix(uri, "sip:") {
+		uri = fmt.Sprintf("sip:%s", uri)
+	}
+
+	if pjsua2.EndpointInstance().UtilVerifySipUri(uri) != 0 {
+		return fmt.Errorf("%s is not valid sip uri", uri)
+	}
+
+	buddy := pjsua2.NewBuddy()
+	config := pjsua2.NewBuddyConfig()
+
+	config.SetUri(uri)
+	buddy.Create(a, config)
+
+	messageParam := pjsua2.NewSendInstantMessageParam()
+	messageParam.SetContent(message)
+	buddy.SendInstantMessage(messageParam)
+	return nil
 }
 
 type account struct {
@@ -62,7 +111,8 @@ func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 }
 
 func (a *account) OnInstantMessage(param pjsua2.OnInstantMessageParam) {
-	slog.Info("instant message", "uri", param.GetFromUri(), "message", param.GetMsgBody())
+	slog.Debug("new message received", "from", param.GetFromUri(), "type", param.GetContentType())
+
 	a.system.Bus.On(doorpix.NewMessageEvent)
 }
 

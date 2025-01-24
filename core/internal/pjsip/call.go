@@ -31,7 +31,7 @@ func NewCall(account pjsua2.Account, callId int, system doorpix.System) *Call {
 }
 
 func (c *call) OnCallState(param pjsua2.OnCallStateParam) {
-	slog.Info("call state changed", "state", c.call.GetInfo().GetState())
+	slog.Debug("call state changed", "state", c.call.GetInfo().GetState(), "call id", c.call.GetId())
 
 	switch c.call.GetInfo().GetState() {
 	case pjsua2.PJSIP_INV_STATE_DISCONNECTED:

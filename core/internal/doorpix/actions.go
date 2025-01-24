@@ -41,12 +41,12 @@ type EvalAction struct {
 }
 
 type InviteAction struct {
-	Numbers []string
+	UriTemplates []template.Template
 }
 
 func (a *InviteAction) UnmarshalYAML(node *yaml.Node) error {
 	action := struct {
-		Numbers YamlScalarOrList[string] `yaml:"invite"`
+		UriTemplates YamlScalarOrList[YamlStringTemplate] `yaml:"invite"`
 	}{}
 
 	err := node.Decode(&action)
@@ -54,19 +54,22 @@ func (a *InviteAction) UnmarshalYAML(node *yaml.Node) error {
 		return err
 	}
 
-	a.Numbers = action.Numbers
+	a.UriTemplates = make([]template.Template, len(action.UriTemplates))
+	for i := range action.UriTemplates {
+		a.UriTemplates[i] = (template.Template)(action.UriTemplates[i])
+	}
 	return nil
 }
 
 type MessageAction struct {
-	Numbers []template.Template `yaml:"to"`
-	Message template.Template   `yaml:"message"`
+	UriTemplates    []template.Template `yaml:"to"`
+	MessageTemplate template.Template   `yaml:"message"`
 }
 
 func (a *MessageAction) UnmarshalYAML(node *yaml.Node) error {
 	action := struct {
-		Numbers YamlScalarOrList[YamlStringTemplate] `yaml:"to"`
-		Message YamlStringTemplate                   `yaml:"message"`
+		UriTemplates YamlScalarOrList[YamlStringTemplate] `yaml:"to"`
+		Message      YamlStringTemplate                   `yaml:"message"`
 	}{}
 
 	err := node.Decode(&action)
@@ -74,11 +77,11 @@ func (a *MessageAction) UnmarshalYAML(node *yaml.Node) error {
 		return err
 	}
 
-	a.Numbers = make([]template.Template, len(action.Numbers))
-	for i, number := range action.Numbers {
-		a.Numbers[i] = (template.Template)(number)
+	a.UriTemplates = make([]template.Template, len(action.UriTemplates))
+	for i, number := range action.UriTemplates {
+		a.UriTemplates[i] = (template.Template)(number)
 	}
-	a.Message = (template.Template)(action.Message)
+	a.MessageTemplate = (template.Template)(action.Message)
 	return nil
 }
 

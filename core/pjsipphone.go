@@ -26,30 +26,37 @@ func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 
 	switch action := action.(type) {
 	case doorpix.InviteAction:
+		for _, uriTemplate := range action.UriTemplates {
+			var uri bytes.Buffer
+			if err := uriTemplate.Execute(&uri, event.Data); err != nil {
+				slog.Error(err.Error())
+				continue
+			}
+
+			err := p.account.Invite(uri.String())
+			if err != nil {
+				slog.Error(err.Error())
+			}
+		}
+
 	case doorpix.MessageAction:
-		var msg bytes.Buffer
-		if err := action.Message.Execute(&msg, event.Data); err != nil {
+		var message bytes.Buffer
+		if err := action.MessageTemplate.Execute(&message, event.Data); err != nil {
 			slog.Error(err.Error())
 			break
 		}
 
-		for _, number := range action.Numbers {
-			buddy := pjsua2.NewBuddy()
-			config := pjsua2.NewBuddyConfig()
-
+		for _, uriTemplate := range action.UriTemplates {
 			var uri bytes.Buffer
-			if err := number.Execute(&uri, event.Data); err != nil {
+			if err := uriTemplate.Execute(&uri, event.Data); err != nil {
 				slog.Error(err.Error())
 				continue
 			}
-			slog.Info("Sending message to", "number", uri.String())
 
-			config.SetUri(fmt.Sprintf("sip:%s", uri.String()))
-			buddy.Create(p.account, config)
-
-			message := pjsua2.NewSendInstantMessageParam()
-			message.SetContent(msg.String())
-			buddy.SendInstantMessage(message)
+			err := p.account.SendInstantMessage(uri.String(), message.String())
+			if err != nil {
+				slog.Error(err.Error())
+			}
 		}
 	}
 }
