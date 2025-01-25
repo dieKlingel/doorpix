@@ -38,13 +38,13 @@ var device string = "videotestsrc"
 func createNewCamera() *camera.Camera {
 	c, err := camera.NewFromString(
 		device,
-		camera.NewElement("videoscale"),
-		camera.NewElement(
+		camera.MustNewElement("videoscale"),
+		camera.MustNewElement(
 			"capsfilter",
 			"caps", gst.NewCapsFromString("video/x-raw,width=1920,height=1080"),
 		),
-		camera.NewElement("videoconvert"),
-		camera.NewElement(
+		camera.MustNewElement("videoconvert"),
+		camera.MustNewElement(
 			"capsfilter",
 			"caps", gst.NewCapsFromString("video/x-raw,format=I420,framerate=30/1"),
 		),
@@ -100,7 +100,7 @@ func go_video_stream_get_frame(streamPtr *C.pjmedia_vid_dev_stream, framePtr *C.
 
 	usedSize := min(expectedSize, recivedSize)
 	if expectedSize != recivedSize {
-		slog.Warn("frame size mismatch", "expected", expectedSize, "recived", recivedSize)
+		slog.Warn("video frame size mismatch", "expected", expectedSize, "recived", recivedSize)
 	}
 
 	bufferPtr := (*[3110400]C.uchar)(framePtr.buf)

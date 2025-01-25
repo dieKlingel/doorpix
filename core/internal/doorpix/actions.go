@@ -40,6 +40,23 @@ type EvalAction struct {
 	Expressions []string `yaml:"eval"`
 }
 
+func (a *EvalAction) UnmarshalYAML(node *yaml.Node) error {
+	action := struct {
+		Expressions YamlScalarOrList[string] `yaml:"eval"`
+	}{}
+
+	err := node.Decode(&action)
+	if err != nil {
+		return err
+	}
+
+	a.Expressions = make([]string, len(action.Expressions))
+	for i, expr := range action.Expressions {
+		a.Expressions[i] = string(expr)
+	}
+	return nil
+}
+
 type InviteAction struct {
 	UriTemplates []template.Template
 }

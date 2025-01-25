@@ -4,7 +4,7 @@ import (
 	"github.com/go-gst/go-gst/gst"
 )
 
-func NewElement(name string, properties ...any) *gst.Element {
+func NewElement(name string, properties ...any) (*gst.Element, error) {
 	props := make(map[string]any, 0)
 
 	if len(properties)%2 != 0 {
@@ -16,6 +16,15 @@ func NewElement(name string, properties ...any) *gst.Element {
 	}
 
 	element, err := gst.NewElementWithProperties(name, props)
+	if err != nil {
+		return nil, err
+	}
+
+	return element, nil
+}
+
+func MustNewElement(name string, properties ...any) *gst.Element {
+	element, err := NewElement(name, properties...)
 	if err != nil {
 		panic(err)
 	}

@@ -26,6 +26,11 @@ func main() {
 		slog.Error(err.Error())
 		os.Exit(1)
 	}
+	if err := config.Error(); err != nil {
+		slog.Error(err.Error())
+		os.Exit(1)
+	}
+
 	bus := core.NewEventEmitterWithConfig(config)
 	system := doorpix.System{
 		Config: config,

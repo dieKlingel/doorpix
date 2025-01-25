@@ -27,6 +27,14 @@ func NewConfig() *Config {
 	}
 }
 
+func (c *Config) Error() error {
+	if err := c.Camera.Error(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (c *Config) AddConfigPath(file ...string) {
 	c.files = append(c.files, file...)
 }
