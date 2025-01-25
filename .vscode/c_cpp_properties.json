@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/3rdparty/pjproject/pjsip/include"
+            ],
+            "defines": [
+                "PJ_IS_BIG_ENDIAN=0",
+                "PJ_IS_LITTLE_ENDIAN=1"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "gnu++17"
+        }
+    ],
+    "version": 4
+}

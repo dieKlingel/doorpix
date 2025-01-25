@@ -14,8 +14,9 @@ type Config struct {
 	BeforeEvents EventCollection `yaml:"before"`
 	AfterEvents  EventCollection `yaml:"after"`
 
-	SIPPhone SIPPhone   `yaml:"sip-phone"`
-	HTTP     HTTPConfig `yaml:"http"`
+	SIPPhone SIPPhone     `yaml:"sip-phone"`
+	HTTP     HTTPConfig   `yaml:"http"`
+	Camera   CameraConfig `yaml:"camera"`
 }
 
 func NewConfig() *Config {

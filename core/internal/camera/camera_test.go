@@ -71,5 +71,16 @@ func TestCamera_LookUp(t *testing.T) {
 }
 
 func TestCamera_ReadSingleFrame(t *testing.T) {
+	cam, err := camera.NewFromString("videotestsrc",
+		camera.NewElement("capsfilter", "caps", gst.NewCapsFromString("video/x-raw,format=I420,width=640,height=480")),
+	)
+	assert.NoError(t, err)
 
+	cam.Start()
+	frame, ok := <-cam.Frame()
+	assert.True(t, ok)
+	cam.Stop()
+
+	assert.NotNil(t, frame)
+	assert.Len(t, frame, 460800)
 }

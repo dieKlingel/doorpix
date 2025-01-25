@@ -99,6 +99,19 @@ func (p *PJSIPPhone) Exec() {
 	p.accountConfig.SetIdUri(fmt.Sprintf("sip:%s@%s", p.System.Config.SIPPhone.Username, p.System.Config.SIPPhone.Realm))
 	p.accountConfig.GetRegConfig().SetRegistrarUri(fmt.Sprintf("sip:%s", p.System.Config.SIPPhone.Realm))
 
+	videoDeviceIndex := -1
+	videoDevices := pjsua2.EndpointInstance().VidDevManager().EnumDev2()
+	for i := 0; i < int(videoDevices.Size()); i++ {
+		if videoDevices.Get(i).GetName() == "DoorPiX Emulated Video Device" {
+			videoDeviceIndex = i
+			break
+		}
+	}
+	if videoDeviceIndex >= 0 {
+		slog.Info("Setting video device", "name", videoDevices.Get(videoDeviceIndex).GetName())
+		p.accountConfig.GetVideoConfig().SetDefaultCaptureDevice(videoDeviceIndex)
+	}
+
 	p.accountConfig.GetVideoConfig().SetAutoTransmitOutgoing(true)
 	p.accountConfig.GetVideoConfig().SetAutoShowIncoming(false)
 	p.accountConfig.GetMediaConfig().SetSrtpSecureSignaling(1)

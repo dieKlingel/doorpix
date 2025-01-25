@@ -23,6 +23,15 @@ type Camera struct {
 	isRunning      bool
 }
 
+func NewFromString(device string, elements ...*gst.Element) (*Camera, error) {
+	hardwareCamera, err := NewHardwareCamera(device)
+	if err != nil {
+		return nil, err
+	}
+
+	return New(hardwareCamera, elements...)
+}
+
 func New(hardwareCamera *HardwareCamera, elements ...*gst.Element) (*Camera, error) {
 	queue, err := gst.NewElement("queue")
 	if err != nil {
