@@ -19,10 +19,11 @@ pj_status_t app_video_dev_factory_get_dev_info(pjmedia_vid_dev_factory *f, unsig
 	info->fmt_cnt = 1;
 	info->fmt[0].id = PJMEDIA_FORMAT_I420;
 	info->fmt[0].detail_type = PJMEDIA_FORMAT_DETAIL_VIDEO;
-	info->fmt[0].det.vid.size.w = 640;
-	info->fmt[0].det.vid.size.h = 480;
+	info->fmt[0].det.vid.size.w = 1920;
+	info->fmt[0].det.vid.size.h = 1080;
 	info->fmt[0].det.vid.fps.num = 30;
 	info->fmt[0].det.vid.fps.denum = 1;
+	info->caps = 0;
 
 	return PJ_SUCCESS;
 }

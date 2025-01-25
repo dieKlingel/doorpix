@@ -34,7 +34,7 @@ func createNewCameraSafe() *camera.Camera {
 			"videotestsrc",
 			camera.NewElement(
 				"capsfilter",
-				"caps", gst.NewCapsFromString("video/x-raw,format=I420,width=640,height=480,framerate=60/1"),
+				"caps", gst.NewCapsFromString("video/x-raw,format=I420,width=1920,height=1080,framerate=30/1"),
 			),
 		)
 		if err != nil {
@@ -81,11 +81,20 @@ func go_video_stream_get_frame(streamPtr *C.pjmedia_vid_dev_stream, framePtr *C.
 		return
 	}
 
-	frame := <-stream.Frame()
-	size := min(int(framePtr.size), len(frame))
+	frame, ok := <-stream.Frame()
+	if !ok {
+		slog.Debug("frame channel closed")
+	}
+	expectedSize := int(framePtr.size)
+	recivedSize := len(frame)
 
-	bufferPtr := (*[460800]C.uchar)(framePtr.buf)
-	for i := 0; i < size; i++ {
+	usedSize := min(expectedSize, recivedSize)
+	if expectedSize != recivedSize {
+		slog.Warn("frame size mismatch", "expected", expectedSize, "recived", recivedSize)
+	}
+
+	bufferPtr := (*[3110400]C.uchar)(framePtr.buf)
+	for i := 0; i < usedSize; i++ {
 		bufferPtr[i] = (C.uchar)(frame[i])
 	}
 }

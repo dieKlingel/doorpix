@@ -65,9 +65,15 @@ func (app *App) Exec() {
 func (app *App) newCameraFactory() *camera.Camera {
 	c, err := camera.NewFromString(
 		app.system.Config.Camera.Device,
+		camera.NewElement("videoscale"),
 		camera.NewElement(
 			"capsfilter",
-			"caps", gst.NewCapsFromString("video/x-raw,format=I420,width=640,height=480,framerate=25/1"),
+			"caps", gst.NewCapsFromString("video/x-raw,width=1920,height=1080"),
+		),
+		camera.NewElement("videoconvert"),
+		camera.NewElement(
+			"capsfilter",
+			"caps", gst.NewCapsFromString("video/x-raw,format=I420,framerate=30/1"),
 		),
 	)
 

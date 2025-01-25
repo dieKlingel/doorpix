@@ -51,7 +51,10 @@ func NewHardwareCamera(identifier string) (*HardwareCamera, error) {
 		gstTeeElement: gstTeeElement,
 	}
 	cameras[identifier] = hwcamera
-	gstPipeline.GetPipelineBus().AddWatch(hwcamera.onNewPipelineBusMessage)
+	success := gstPipeline.GetPipelineBus().AddWatch(hwcamera.onNewPipelineBusMessage)
+	if !success {
+		slog.Error("failed to add watch to pipeline bus")
+	}
 
 	return hwcamera, nil
 }
@@ -62,6 +65,8 @@ func LookUpHardwareCamera(identifier string) (*HardwareCamera, bool) {
 }
 
 func (c *HardwareCamera) pause() {
+	slog.Debug("pausing camera")
+
 	currentState := c.gstPipeline.GetCurrentState()
 	if currentState == gst.StatePlaying {
 		err := c.gstPipeline.SetState(gst.StatePaused)
@@ -72,6 +77,8 @@ func (c *HardwareCamera) pause() {
 }
 
 func (c *HardwareCamera) play() {
+	slog.Debug("playing camera")
+
 	err := c.gstPipeline.SetState(gst.StatePlaying)
 	if err != nil {
 		slog.Error(err.Error())
@@ -79,6 +86,8 @@ func (c *HardwareCamera) play() {
 }
 
 func (c *HardwareCamera) stop() {
+	slog.Debug("stopping camera")
+
 	err := c.gstPipeline.SetState(gst.StateNull)
 	if err != nil {
 		slog.Error(err.Error())
@@ -89,9 +98,14 @@ func (c *HardwareCamera) stop() {
 }
 
 func (c *HardwareCamera) onNewPipelineBusMessage(msg *gst.Message) bool {
+	slog.Debug("received message", "type", msg.Type().String())
+
 	switch msg.Type() {
 	case gst.MessageEOS: // When end-of-stream is received flush the pipeling and stop the main loop
-		c.gstPipeline.BlockSetState(gst.StateNull)
+		err := c.gstPipeline.BlockSetState(gst.StateNull)
+		if err != nil {
+			slog.Error(err.Error())
+		}
 	case gst.MessageError: // Error messages are always fatal
 		err := msg.ParseError()
 
