@@ -93,7 +93,7 @@ func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 		remoteUri = matches[1]
 	}
 
-	slog.Info("incoming call", "uri", remoteUri)
+	slog.Info("incoming call received", "uri", remoteUri)
 	a.system.Bus.On(doorpix.CallIncomingEvent)
 
 	callParam := pjsua2.NewCallOpParam()
@@ -105,6 +105,12 @@ func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 			callParam.SetStatusCode(pjsua2.PJSIP_SC_OK)
 			break
 		}
+	}
+
+	if callParam.GetStatusCode() == pjsua2.PJSIP_SC_DECLINE {
+		slog.Info("decline incomming call, because the uri is not whitelisted", "uri", remoteUri)
+	} else {
+		slog.Info("accept incomming call", "uri", remoteUri)
 	}
 
 	call.Answer(callParam)

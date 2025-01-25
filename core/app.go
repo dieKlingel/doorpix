@@ -7,7 +7,6 @@ import (
 
 	"github.com/dieklingel/doorpix/core/internal/camera"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
-	"github.com/dieklingel/doorpix/core/internal/drivers/appvideo"
 	"github.com/go-gst/go-gst/gst"
 )
 
@@ -17,9 +16,16 @@ type App struct {
 }
 
 func NewAppWithConfig(system doorpix.System) *App {
-	return &App{
+	app := &App{
 		system: system,
 	}
+
+	app.init()
+
+	return app
+}
+
+func (app *App) init() {
 }
 
 func (app *App) RegisterHandler(handler Handler) {
@@ -30,8 +36,6 @@ func (app *App) setup() {
 	for _, handler := range app.handlers {
 		handler.Setup()
 	}
-	appvideo.SetCameraFactory(app.newCameraFactory)
-	appvideo.Initialize()
 
 	app.system.Bus.On(doorpix.StartupEvent)
 }

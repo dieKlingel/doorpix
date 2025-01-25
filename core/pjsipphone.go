@@ -6,6 +6,7 @@ import (
 	"log/slog"
 
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
+	"github.com/dieklingel/doorpix/core/internal/drivers/appvideo"
 	"github.com/dieklingel/doorpix/core/internal/pjsip"
 	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
@@ -13,15 +14,13 @@ import (
 type PJSIPPhone struct {
 	System doorpix.System
 
-	// pjsua2
-	endpoint      pjsua2.Endpoint
 	account       *pjsip.Account
 	accountConfig pjsua2.AccountConfig
 }
 
 func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 	if !pjsua2.EndpointInstance().LibIsThreadRegistered() {
-		pjsua2.EndpointInstance().LibRegisterThread("pjsipphone")
+		pjsua2.EndpointInstance().LibRegisterThread("")
 	}
 
 	switch action := action.(type) {
@@ -64,32 +63,41 @@ func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 func (p *PJSIPPhone) Setup() {
 	p.System.Bus.Handler(p)
 
-	// global config
+	// init
+	p.init()
+}
+
+func (p *PJSIPPhone) init() {
 	config := pjsua2.NewEpConfig()
 	config.GetLogConfig().SetLevel(2)
 
 	ua := config.GetUaConfig()
 	ua.SetUserAgent("DoorPiX")
 
-	ua.GetStunServer().Add("stun.l.google.com:19302")
-	ua.GetStunServer().Add("stun.linphone.org:3478")
+	for _, server := range p.System.Config.SIPPhone.StunServers {
+		ua.GetStunServer().Add(server)
+	}
 
-	p.endpoint = pjsua2.NewEndpoint()
-	p.endpoint.LibCreate()
-	p.endpoint.LibInit(config)
-	p.endpoint.LibStart()
+	endpoint := pjsua2.NewEndpoint()
+	endpoint.LibCreate()
+	endpoint.LibInit(config)
+	endpoint.LibStart()
+
+	// needs to be called after pjlib is started
+	// TODO: refactor to a proper way to initialize the video device
+	appvideo.SetCameraDevice(p.System.Config.Camera.Device)
 }
 
 func (p *PJSIPPhone) Exec() {
 	if !pjsua2.EndpointInstance().LibIsThreadRegistered() {
-		slog.Info("Registering thread")
 		pjsua2.EndpointInstance().LibRegisterThread("exec")
+		slog.Debug("register thread for pjsip", "name", "exec", "for", "PJSIPPhone")
 	}
 
 	// transport
 	transport := pjsua2.NewTransportConfig()
 	//transport.SetPort(5067)
-	if res := p.endpoint.TransportCreate(pjsua2.PJSIP_TRANSPORT_TLS, transport); res != 0 {
+	if res := pjsua2.EndpointInstance().TransportCreate(pjsua2.PJSIP_TRANSPORT_TLS, transport); res != 0 {
 		slog.Error("Error creating transport")
 	}
 
@@ -102,13 +110,12 @@ func (p *PJSIPPhone) Exec() {
 	videoDeviceIndex := -1
 	videoDevices := pjsua2.EndpointInstance().VidDevManager().EnumDev2()
 	for i := 0; i < int(videoDevices.Size()); i++ {
-		if videoDevices.Get(i).GetName() == "DoorPiX Emulated Video Device" {
+		if videoDevices.Get(i).GetName() == appvideo.GetCameraDeviceName() {
 			videoDeviceIndex = i
 			break
 		}
 	}
 	if videoDeviceIndex >= 0 {
-		slog.Info("Setting video device", "name", videoDevices.Get(videoDeviceIndex).GetName())
 		p.accountConfig.GetVideoConfig().SetDefaultCaptureDevice(videoDeviceIndex)
 	}
 

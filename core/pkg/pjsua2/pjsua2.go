@@ -4056,30 +4056,26 @@ extern void _wrap_Endpoint_onRejectedIncomingCall_pjsua2_b603cabda4e82a85(uintpt
 */
 import "C"
 
-import "unsafe"
-import _ "runtime/cgo"
-import "sync"
-
+import (
+	_ "runtime/cgo"
+	"sync"
+	"unsafe"
+)
 
 type _ unsafe.Pointer
-
-
 
 var Swig_escape_always_false bool
 var Swig_escape_val interface{}
 
-
 type _swig_fnptr *byte
 type _swig_memberptr *byte
 
-
-func getSwigcptr(v interface { Swigcptr() uintptr }) uintptr {
+func getSwigcptr(v interface{ Swigcptr() uintptr }) uintptr {
 	if v == nil {
 		return 0
 	}
 	return v.Swigcptr()
 }
-
 
 type _ sync.Mutex
 
@@ -4094,13 +4090,16 @@ func cgo_panic__pjsua2_b603cabda4e82a85(p *byte) {
 	panic(string(s))
 }
 
+type swig_gostring struct {
+	p uintptr
+	n int
+}
 
-type swig_gostring struct { p uintptr; n int }
 func swigCopyString(s string) string {
-  p := *(*swig_gostring)(unsafe.Pointer(&s))
-  r := string((*[0x7fffffff]byte)(unsafe.Pointer(p.p))[:p.n])
-  Swig_free(p.p)
-  return r
+	p := *(*swig_gostring)(unsafe.Pointer(&s))
+	r := string((*[0x7fffffff]byte)(unsafe.Pointer(p.p))[:p.n])
+	Swig_free(p.p)
+	return r
 }
 
 func Swig_free(arg1 uintptr) {
@@ -4116,6 +4115,7 @@ func Swig_malloc(arg1 int) (_swig_ret uintptr) {
 }
 
 type Pj_constants_ int
+
 func _swig_getPJ_SUCCESS() (_swig_ret Pj_constants_) {
 	var swig_r Pj_constants_
 	swig_r = (Pj_constants_)(C._wrap_PJ_SUCCESS_pjsua2_b603cabda4e82a85())
@@ -4123,6 +4123,7 @@ func _swig_getPJ_SUCCESS() (_swig_ret Pj_constants_) {
 }
 
 var PJ_SUCCESS Pj_constants_ = _swig_getPJ_SUCCESS()
+
 func _swig_getPJ_TRUE() (_swig_ret Pj_constants_) {
 	var swig_r Pj_constants_
 	swig_r = (Pj_constants_)(C._wrap_PJ_TRUE_pjsua2_b603cabda4e82a85())
@@ -4130,6 +4131,7 @@ func _swig_getPJ_TRUE() (_swig_ret Pj_constants_) {
 }
 
 var PJ_TRUE Pj_constants_ = _swig_getPJ_TRUE()
+
 func _swig_getPJ_FALSE() (_swig_ret Pj_constants_) {
 	var swig_r Pj_constants_
 	swig_r = (Pj_constants_)(C._wrap_PJ_FALSE_pjsua2_b603cabda4e82a85())
@@ -4137,7 +4139,9 @@ func _swig_getPJ_FALSE() (_swig_ret Pj_constants_) {
 }
 
 var PJ_FALSE Pj_constants_ = _swig_getPJ_FALSE()
+
 type Pj_file_access int
+
 func _swig_getPJ_O_RDONLY() (_swig_ret Pj_file_access) {
 	var swig_r Pj_file_access
 	swig_r = (Pj_file_access)(C._wrap_PJ_O_RDONLY_pjsua2_b603cabda4e82a85())
@@ -4145,6 +4149,7 @@ func _swig_getPJ_O_RDONLY() (_swig_ret Pj_file_access) {
 }
 
 var PJ_O_RDONLY Pj_file_access = _swig_getPJ_O_RDONLY()
+
 func _swig_getPJ_O_WRONLY() (_swig_ret Pj_file_access) {
 	var swig_r Pj_file_access
 	swig_r = (Pj_file_access)(C._wrap_PJ_O_WRONLY_pjsua2_b603cabda4e82a85())
@@ -4152,6 +4157,7 @@ func _swig_getPJ_O_WRONLY() (_swig_ret Pj_file_access) {
 }
 
 var PJ_O_WRONLY Pj_file_access = _swig_getPJ_O_WRONLY()
+
 func _swig_getPJ_O_RDWR() (_swig_ret Pj_file_access) {
 	var swig_r Pj_file_access
 	swig_r = (Pj_file_access)(C._wrap_PJ_O_RDWR_pjsua2_b603cabda4e82a85())
@@ -4159,6 +4165,7 @@ func _swig_getPJ_O_RDWR() (_swig_ret Pj_file_access) {
 }
 
 var PJ_O_RDWR Pj_file_access = _swig_getPJ_O_RDWR()
+
 func _swig_getPJ_O_APPEND() (_swig_ret Pj_file_access) {
 	var swig_r Pj_file_access
 	swig_r = (Pj_file_access)(C._wrap_PJ_O_APPEND_pjsua2_b603cabda4e82a85())
@@ -4166,6 +4173,7 @@ func _swig_getPJ_O_APPEND() (_swig_ret Pj_file_access) {
 }
 
 var PJ_O_APPEND Pj_file_access = _swig_getPJ_O_APPEND()
+
 func _swig_getPJ_O_CLOEXEC() (_swig_ret Pj_file_access) {
 	var swig_r Pj_file_access
 	swig_r = (Pj_file_access)(C._wrap_PJ_O_CLOEXEC_pjsua2_b603cabda4e82a85())
@@ -4173,7 +4181,9 @@ func _swig_getPJ_O_CLOEXEC() (_swig_ret Pj_file_access) {
 }
 
 var PJ_O_CLOEXEC Pj_file_access = _swig_getPJ_O_CLOEXEC()
+
 type Pj_log_decoration int
+
 func _swig_getPJ_LOG_HAS_DAY_NAME() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_DAY_NAME_pjsua2_b603cabda4e82a85())
@@ -4181,6 +4191,7 @@ func _swig_getPJ_LOG_HAS_DAY_NAME() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_DAY_NAME Pj_log_decoration = _swig_getPJ_LOG_HAS_DAY_NAME()
+
 func _swig_getPJ_LOG_HAS_YEAR() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_YEAR_pjsua2_b603cabda4e82a85())
@@ -4188,6 +4199,7 @@ func _swig_getPJ_LOG_HAS_YEAR() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_YEAR Pj_log_decoration = _swig_getPJ_LOG_HAS_YEAR()
+
 func _swig_getPJ_LOG_HAS_MONTH() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_MONTH_pjsua2_b603cabda4e82a85())
@@ -4195,6 +4207,7 @@ func _swig_getPJ_LOG_HAS_MONTH() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_MONTH Pj_log_decoration = _swig_getPJ_LOG_HAS_MONTH()
+
 func _swig_getPJ_LOG_HAS_DAY_OF_MON() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_DAY_OF_MON_pjsua2_b603cabda4e82a85())
@@ -4202,6 +4215,7 @@ func _swig_getPJ_LOG_HAS_DAY_OF_MON() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_DAY_OF_MON Pj_log_decoration = _swig_getPJ_LOG_HAS_DAY_OF_MON()
+
 func _swig_getPJ_LOG_HAS_TIME() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_TIME_pjsua2_b603cabda4e82a85())
@@ -4209,6 +4223,7 @@ func _swig_getPJ_LOG_HAS_TIME() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_TIME Pj_log_decoration = _swig_getPJ_LOG_HAS_TIME()
+
 func _swig_getPJ_LOG_HAS_MICRO_SEC() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_MICRO_SEC_pjsua2_b603cabda4e82a85())
@@ -4216,6 +4231,7 @@ func _swig_getPJ_LOG_HAS_MICRO_SEC() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_MICRO_SEC Pj_log_decoration = _swig_getPJ_LOG_HAS_MICRO_SEC()
+
 func _swig_getPJ_LOG_HAS_SENDER() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_SENDER_pjsua2_b603cabda4e82a85())
@@ -4223,6 +4239,7 @@ func _swig_getPJ_LOG_HAS_SENDER() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_SENDER Pj_log_decoration = _swig_getPJ_LOG_HAS_SENDER()
+
 func _swig_getPJ_LOG_HAS_NEWLINE() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_NEWLINE_pjsua2_b603cabda4e82a85())
@@ -4230,6 +4247,7 @@ func _swig_getPJ_LOG_HAS_NEWLINE() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_NEWLINE Pj_log_decoration = _swig_getPJ_LOG_HAS_NEWLINE()
+
 func _swig_getPJ_LOG_HAS_CR() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_CR_pjsua2_b603cabda4e82a85())
@@ -4237,6 +4255,7 @@ func _swig_getPJ_LOG_HAS_CR() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_CR Pj_log_decoration = _swig_getPJ_LOG_HAS_CR()
+
 func _swig_getPJ_LOG_HAS_SPACE() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_SPACE_pjsua2_b603cabda4e82a85())
@@ -4244,6 +4263,7 @@ func _swig_getPJ_LOG_HAS_SPACE() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_SPACE Pj_log_decoration = _swig_getPJ_LOG_HAS_SPACE()
+
 func _swig_getPJ_LOG_HAS_COLOR() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_COLOR_pjsua2_b603cabda4e82a85())
@@ -4251,6 +4271,7 @@ func _swig_getPJ_LOG_HAS_COLOR() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_COLOR Pj_log_decoration = _swig_getPJ_LOG_HAS_COLOR()
+
 func _swig_getPJ_LOG_HAS_LEVEL_TEXT() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_LEVEL_TEXT_pjsua2_b603cabda4e82a85())
@@ -4258,6 +4279,7 @@ func _swig_getPJ_LOG_HAS_LEVEL_TEXT() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_LEVEL_TEXT Pj_log_decoration = _swig_getPJ_LOG_HAS_LEVEL_TEXT()
+
 func _swig_getPJ_LOG_HAS_THREAD_ID() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_THREAD_ID_pjsua2_b603cabda4e82a85())
@@ -4265,6 +4287,7 @@ func _swig_getPJ_LOG_HAS_THREAD_ID() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_THREAD_ID Pj_log_decoration = _swig_getPJ_LOG_HAS_THREAD_ID()
+
 func _swig_getPJ_LOG_HAS_THREAD_SWC() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_THREAD_SWC_pjsua2_b603cabda4e82a85())
@@ -4272,6 +4295,7 @@ func _swig_getPJ_LOG_HAS_THREAD_SWC() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_THREAD_SWC Pj_log_decoration = _swig_getPJ_LOG_HAS_THREAD_SWC()
+
 func _swig_getPJ_LOG_HAS_INDENT() (_swig_ret Pj_log_decoration) {
 	var swig_r Pj_log_decoration
 	swig_r = (Pj_log_decoration)(C._wrap_PJ_LOG_HAS_INDENT_pjsua2_b603cabda4e82a85())
@@ -4279,7 +4303,9 @@ func _swig_getPJ_LOG_HAS_INDENT() (_swig_ret Pj_log_decoration) {
 }
 
 var PJ_LOG_HAS_INDENT Pj_log_decoration = _swig_getPJ_LOG_HAS_INDENT()
+
 type Pj_qos_type int
+
 func _swig_getPJ_QOS_TYPE_BEST_EFFORT() (_swig_ret Pj_qos_type) {
 	var swig_r Pj_qos_type
 	swig_r = (Pj_qos_type)(C._wrap_PJ_QOS_TYPE_BEST_EFFORT_pjsua2_b603cabda4e82a85())
@@ -4287,6 +4313,7 @@ func _swig_getPJ_QOS_TYPE_BEST_EFFORT() (_swig_ret Pj_qos_type) {
 }
 
 var PJ_QOS_TYPE_BEST_EFFORT Pj_qos_type = _swig_getPJ_QOS_TYPE_BEST_EFFORT()
+
 func _swig_getPJ_QOS_TYPE_BACKGROUND() (_swig_ret Pj_qos_type) {
 	var swig_r Pj_qos_type
 	swig_r = (Pj_qos_type)(C._wrap_PJ_QOS_TYPE_BACKGROUND_pjsua2_b603cabda4e82a85())
@@ -4294,6 +4321,7 @@ func _swig_getPJ_QOS_TYPE_BACKGROUND() (_swig_ret Pj_qos_type) {
 }
 
 var PJ_QOS_TYPE_BACKGROUND Pj_qos_type = _swig_getPJ_QOS_TYPE_BACKGROUND()
+
 func _swig_getPJ_QOS_TYPE_VIDEO() (_swig_ret Pj_qos_type) {
 	var swig_r Pj_qos_type
 	swig_r = (Pj_qos_type)(C._wrap_PJ_QOS_TYPE_VIDEO_pjsua2_b603cabda4e82a85())
@@ -4301,6 +4329,7 @@ func _swig_getPJ_QOS_TYPE_VIDEO() (_swig_ret Pj_qos_type) {
 }
 
 var PJ_QOS_TYPE_VIDEO Pj_qos_type = _swig_getPJ_QOS_TYPE_VIDEO()
+
 func _swig_getPJ_QOS_TYPE_VOICE() (_swig_ret Pj_qos_type) {
 	var swig_r Pj_qos_type
 	swig_r = (Pj_qos_type)(C._wrap_PJ_QOS_TYPE_VOICE_pjsua2_b603cabda4e82a85())
@@ -4308,6 +4337,7 @@ func _swig_getPJ_QOS_TYPE_VOICE() (_swig_ret Pj_qos_type) {
 }
 
 var PJ_QOS_TYPE_VOICE Pj_qos_type = _swig_getPJ_QOS_TYPE_VOICE()
+
 func _swig_getPJ_QOS_TYPE_CONTROL() (_swig_ret Pj_qos_type) {
 	var swig_r Pj_qos_type
 	swig_r = (Pj_qos_type)(C._wrap_PJ_QOS_TYPE_CONTROL_pjsua2_b603cabda4e82a85())
@@ -4315,6 +4345,7 @@ func _swig_getPJ_QOS_TYPE_CONTROL() (_swig_ret Pj_qos_type) {
 }
 
 var PJ_QOS_TYPE_CONTROL Pj_qos_type = _swig_getPJ_QOS_TYPE_CONTROL()
+
 func _swig_getPJ_QOS_TYPE_SIGNALLING() (_swig_ret Pj_qos_type) {
 	var swig_r Pj_qos_type
 	swig_r = (Pj_qos_type)(C._wrap_PJ_QOS_TYPE_SIGNALLING_pjsua2_b603cabda4e82a85())
@@ -4322,7 +4353,9 @@ func _swig_getPJ_QOS_TYPE_SIGNALLING() (_swig_ret Pj_qos_type) {
 }
 
 var PJ_QOS_TYPE_SIGNALLING Pj_qos_type = _swig_getPJ_QOS_TYPE_SIGNALLING()
+
 type Pj_qos_flag int
+
 func _swig_getPJ_QOS_PARAM_HAS_DSCP() (_swig_ret Pj_qos_flag) {
 	var swig_r Pj_qos_flag
 	swig_r = (Pj_qos_flag)(C._wrap_PJ_QOS_PARAM_HAS_DSCP_pjsua2_b603cabda4e82a85())
@@ -4330,6 +4363,7 @@ func _swig_getPJ_QOS_PARAM_HAS_DSCP() (_swig_ret Pj_qos_flag) {
 }
 
 var PJ_QOS_PARAM_HAS_DSCP Pj_qos_flag = _swig_getPJ_QOS_PARAM_HAS_DSCP()
+
 func _swig_getPJ_QOS_PARAM_HAS_SO_PRIO() (_swig_ret Pj_qos_flag) {
 	var swig_r Pj_qos_flag
 	swig_r = (Pj_qos_flag)(C._wrap_PJ_QOS_PARAM_HAS_SO_PRIO_pjsua2_b603cabda4e82a85())
@@ -4337,6 +4371,7 @@ func _swig_getPJ_QOS_PARAM_HAS_SO_PRIO() (_swig_ret Pj_qos_flag) {
 }
 
 var PJ_QOS_PARAM_HAS_SO_PRIO Pj_qos_flag = _swig_getPJ_QOS_PARAM_HAS_SO_PRIO()
+
 func _swig_getPJ_QOS_PARAM_HAS_WMM() (_swig_ret Pj_qos_flag) {
 	var swig_r Pj_qos_flag
 	swig_r = (Pj_qos_flag)(C._wrap_PJ_QOS_PARAM_HAS_WMM_pjsua2_b603cabda4e82a85())
@@ -4344,7 +4379,9 @@ func _swig_getPJ_QOS_PARAM_HAS_WMM() (_swig_ret Pj_qos_flag) {
 }
 
 var PJ_QOS_PARAM_HAS_WMM Pj_qos_flag = _swig_getPJ_QOS_PARAM_HAS_WMM()
+
 type Pj_qos_wmm_prio int
+
 func _swig_getPJ_QOS_WMM_PRIO_BULK_EFFORT() (_swig_ret Pj_qos_wmm_prio) {
 	var swig_r Pj_qos_wmm_prio
 	swig_r = (Pj_qos_wmm_prio)(C._wrap_PJ_QOS_WMM_PRIO_BULK_EFFORT_pjsua2_b603cabda4e82a85())
@@ -4352,6 +4389,7 @@ func _swig_getPJ_QOS_WMM_PRIO_BULK_EFFORT() (_swig_ret Pj_qos_wmm_prio) {
 }
 
 var PJ_QOS_WMM_PRIO_BULK_EFFORT Pj_qos_wmm_prio = _swig_getPJ_QOS_WMM_PRIO_BULK_EFFORT()
+
 func _swig_getPJ_QOS_WMM_PRIO_BULK() (_swig_ret Pj_qos_wmm_prio) {
 	var swig_r Pj_qos_wmm_prio
 	swig_r = (Pj_qos_wmm_prio)(C._wrap_PJ_QOS_WMM_PRIO_BULK_pjsua2_b603cabda4e82a85())
@@ -4359,6 +4397,7 @@ func _swig_getPJ_QOS_WMM_PRIO_BULK() (_swig_ret Pj_qos_wmm_prio) {
 }
 
 var PJ_QOS_WMM_PRIO_BULK Pj_qos_wmm_prio = _swig_getPJ_QOS_WMM_PRIO_BULK()
+
 func _swig_getPJ_QOS_WMM_PRIO_VIDEO() (_swig_ret Pj_qos_wmm_prio) {
 	var swig_r Pj_qos_wmm_prio
 	swig_r = (Pj_qos_wmm_prio)(C._wrap_PJ_QOS_WMM_PRIO_VIDEO_pjsua2_b603cabda4e82a85())
@@ -4366,6 +4405,7 @@ func _swig_getPJ_QOS_WMM_PRIO_VIDEO() (_swig_ret Pj_qos_wmm_prio) {
 }
 
 var PJ_QOS_WMM_PRIO_VIDEO Pj_qos_wmm_prio = _swig_getPJ_QOS_WMM_PRIO_VIDEO()
+
 func _swig_getPJ_QOS_WMM_PRIO_VOICE() (_swig_ret Pj_qos_wmm_prio) {
 	var swig_r Pj_qos_wmm_prio
 	swig_r = (Pj_qos_wmm_prio)(C._wrap_PJ_QOS_WMM_PRIO_VOICE_pjsua2_b603cabda4e82a85())
@@ -4373,6 +4413,7 @@ func _swig_getPJ_QOS_WMM_PRIO_VOICE() (_swig_ret Pj_qos_wmm_prio) {
 }
 
 var PJ_QOS_WMM_PRIO_VOICE Pj_qos_wmm_prio = _swig_getPJ_QOS_WMM_PRIO_VOICE()
+
 type SwigcptrPj_qos_params uintptr
 
 func (p SwigcptrPj_qos_params) Swigcptr() uintptr {
@@ -4459,6 +4500,7 @@ type Pj_qos_params interface {
 }
 
 type Pj_ssl_cipher int
+
 func _swig_getPJ_TLS_UNKNOWN_CIPHER() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_UNKNOWN_CIPHER_pjsua2_b603cabda4e82a85())
@@ -4466,6 +4508,7 @@ func _swig_getPJ_TLS_UNKNOWN_CIPHER() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_UNKNOWN_CIPHER Pj_ssl_cipher = _swig_getPJ_TLS_UNKNOWN_CIPHER()
+
 func _swig_getPJ_TLS_NULL_WITH_NULL_NULL() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_NULL_WITH_NULL_NULL_pjsua2_b603cabda4e82a85())
@@ -4473,6 +4516,7 @@ func _swig_getPJ_TLS_NULL_WITH_NULL_NULL() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_NULL_WITH_NULL_NULL Pj_ssl_cipher = _swig_getPJ_TLS_NULL_WITH_NULL_NULL()
+
 func _swig_getPJ_TLS_RSA_WITH_NULL_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_NULL_MD5_pjsua2_b603cabda4e82a85())
@@ -4480,6 +4524,7 @@ func _swig_getPJ_TLS_RSA_WITH_NULL_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_NULL_MD5 Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_NULL_MD5()
+
 func _swig_getPJ_TLS_RSA_WITH_NULL_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_NULL_SHA_pjsua2_b603cabda4e82a85())
@@ -4487,6 +4532,7 @@ func _swig_getPJ_TLS_RSA_WITH_NULL_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_NULL_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_NULL_SHA()
+
 func _swig_getPJ_TLS_RSA_WITH_NULL_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_NULL_SHA256_pjsua2_b603cabda4e82a85())
@@ -4494,6 +4540,7 @@ func _swig_getPJ_TLS_RSA_WITH_NULL_SHA256() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_NULL_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_NULL_SHA256()
+
 func _swig_getPJ_TLS_RSA_WITH_RC4_128_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_RC4_128_MD5_pjsua2_b603cabda4e82a85())
@@ -4501,6 +4548,7 @@ func _swig_getPJ_TLS_RSA_WITH_RC4_128_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_RC4_128_MD5 Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_RC4_128_MD5()
+
 func _swig_getPJ_TLS_RSA_WITH_RC4_128_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_RC4_128_SHA_pjsua2_b603cabda4e82a85())
@@ -4508,6 +4556,7 @@ func _swig_getPJ_TLS_RSA_WITH_RC4_128_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_RC4_128_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_RC4_128_SHA()
+
 func _swig_getPJ_TLS_RSA_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_3DES_EDE_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4515,6 +4564,7 @@ func _swig_getPJ_TLS_RSA_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_3DES_EDE_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_3DES_EDE_CBC_SHA()
+
 func _swig_getPJ_TLS_RSA_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_AES_128_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4522,6 +4572,7 @@ func _swig_getPJ_TLS_RSA_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_AES_128_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_AES_128_CBC_SHA()
+
 func _swig_getPJ_TLS_RSA_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_AES_256_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4529,6 +4580,7 @@ func _swig_getPJ_TLS_RSA_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_AES_256_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_AES_256_CBC_SHA()
+
 func _swig_getPJ_TLS_RSA_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_AES_128_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4536,6 +4588,7 @@ func _swig_getPJ_TLS_RSA_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_AES_128_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_AES_128_CBC_SHA256()
+
 func _swig_getPJ_TLS_RSA_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_AES_256_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4543,6 +4596,7 @@ func _swig_getPJ_TLS_RSA_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_AES_256_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_AES_256_CBC_SHA256()
+
 func _swig_getPJ_TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4550,6 +4604,7 @@ func _swig_getPJ_TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4557,6 +4612,7 @@ func _swig_getPJ_TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4564,6 +4620,7 @@ func _swig_getPJ_TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4571,6 +4628,7 @@ func _swig_getPJ_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4578,6 +4636,7 @@ func _swig_getPJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4585,6 +4644,7 @@ func _swig_getPJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4592,6 +4652,7 @@ func _swig_getPJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4599,6 +4660,7 @@ func _swig_getPJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4606,6 +4668,7 @@ func _swig_getPJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4613,6 +4676,7 @@ func _swig_getPJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4620,6 +4684,7 @@ func _swig_getPJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4627,6 +4692,7 @@ func _swig_getPJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4634,6 +4700,7 @@ func _swig_getPJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) 
 }
 
 var PJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DH_DSS_WITH_AES_128_CBC_SHA256()
+
 func _swig_getPJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4641,6 +4708,7 @@ func _swig_getPJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) 
 }
 
 var PJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DH_RSA_WITH_AES_128_CBC_SHA256()
+
 func _swig_getPJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4648,6 +4716,7 @@ func _swig_getPJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher)
 }
 
 var PJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DHE_DSS_WITH_AES_128_CBC_SHA256()
+
 func _swig_getPJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4655,6 +4724,7 @@ func _swig_getPJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher)
 }
 
 var PJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256()
+
 func _swig_getPJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4662,6 +4732,7 @@ func _swig_getPJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) 
 }
 
 var PJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DH_DSS_WITH_AES_256_CBC_SHA256()
+
 func _swig_getPJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4669,6 +4740,7 @@ func _swig_getPJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) 
 }
 
 var PJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DH_RSA_WITH_AES_256_CBC_SHA256()
+
 func _swig_getPJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4676,6 +4748,7 @@ func _swig_getPJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher)
 }
 
 var PJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DHE_DSS_WITH_AES_256_CBC_SHA256()
+
 func _swig_getPJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4683,6 +4756,7 @@ func _swig_getPJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher)
 }
 
 var PJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256()
+
 func _swig_getPJ_TLS_DH_anon_WITH_RC4_128_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_WITH_RC4_128_MD5_pjsua2_b603cabda4e82a85())
@@ -4690,6 +4764,7 @@ func _swig_getPJ_TLS_DH_anon_WITH_RC4_128_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_anon_WITH_RC4_128_MD5 Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_WITH_RC4_128_MD5()
+
 func _swig_getPJ_TLS_DH_anon_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_WITH_3DES_EDE_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4697,6 +4772,7 @@ func _swig_getPJ_TLS_DH_anon_WITH_3DES_EDE_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_anon_WITH_3DES_EDE_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_WITH_3DES_EDE_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_anon_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_WITH_AES_128_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4704,6 +4780,7 @@ func _swig_getPJ_TLS_DH_anon_WITH_AES_128_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_anon_WITH_AES_128_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_WITH_AES_128_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_anon_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_WITH_AES_256_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4711,6 +4788,7 @@ func _swig_getPJ_TLS_DH_anon_WITH_AES_256_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_anon_WITH_AES_256_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_WITH_AES_256_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_anon_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_WITH_AES_128_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4718,6 +4796,7 @@ func _swig_getPJ_TLS_DH_anon_WITH_AES_128_CBC_SHA256() (_swig_ret Pj_ssl_cipher)
 }
 
 var PJ_TLS_DH_anon_WITH_AES_128_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_WITH_AES_128_CBC_SHA256()
+
 func _swig_getPJ_TLS_DH_anon_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_WITH_AES_256_CBC_SHA256_pjsua2_b603cabda4e82a85())
@@ -4725,6 +4804,7 @@ func _swig_getPJ_TLS_DH_anon_WITH_AES_256_CBC_SHA256() (_swig_ret Pj_ssl_cipher)
 }
 
 var PJ_TLS_DH_anon_WITH_AES_256_CBC_SHA256 Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_WITH_AES_256_CBC_SHA256()
+
 func _swig_getPJ_TLS_RSA_EXPORT_WITH_RC4_40_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_EXPORT_WITH_RC4_40_MD5_pjsua2_b603cabda4e82a85())
@@ -4732,6 +4812,7 @@ func _swig_getPJ_TLS_RSA_EXPORT_WITH_RC4_40_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_EXPORT_WITH_RC4_40_MD5 Pj_ssl_cipher = _swig_getPJ_TLS_RSA_EXPORT_WITH_RC4_40_MD5()
+
 func _swig_getPJ_TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5_pjsua2_b603cabda4e82a85())
@@ -4739,6 +4820,7 @@ func _swig_getPJ_TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5() (_swig_ret Pj_ssl_cipher) 
 }
 
 var PJ_TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5 Pj_ssl_cipher = _swig_getPJ_TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5()
+
 func _swig_getPJ_TLS_RSA_WITH_IDEA_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_IDEA_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4746,6 +4828,7 @@ func _swig_getPJ_TLS_RSA_WITH_IDEA_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_IDEA_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_IDEA_CBC_SHA()
+
 func _swig_getPJ_TLS_RSA_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_EXPORT_WITH_DES40_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4753,6 +4836,7 @@ func _swig_getPJ_TLS_RSA_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_EXPORT_WITH_DES40_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_EXPORT_WITH_DES40_CBC_SHA()
+
 func _swig_getPJ_TLS_RSA_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_RSA_WITH_DES_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4760,6 +4844,7 @@ func _swig_getPJ_TLS_RSA_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_RSA_WITH_DES_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_RSA_WITH_DES_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4767,6 +4852,7 @@ func _swig_getPJ_TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher
 }
 
 var PJ_TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_DSS_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_DSS_WITH_DES_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4774,6 +4860,7 @@ func _swig_getPJ_TLS_DH_DSS_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_DSS_WITH_DES_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_DSS_WITH_DES_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4781,6 +4868,7 @@ func _swig_getPJ_TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher
 }
 
 var PJ_TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_RSA_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_RSA_WITH_DES_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4788,6 +4876,7 @@ func _swig_getPJ_TLS_DH_RSA_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_RSA_WITH_DES_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_RSA_WITH_DES_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4795,6 +4884,7 @@ func _swig_getPJ_TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_ciphe
 }
 
 var PJ_TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_DSS_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_DSS_WITH_DES_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4802,6 +4892,7 @@ func _swig_getPJ_TLS_DHE_DSS_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_DSS_WITH_DES_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_DSS_WITH_DES_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4809,6 +4900,7 @@ func _swig_getPJ_TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_ciphe
 }
 
 var PJ_TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA()
+
 func _swig_getPJ_TLS_DHE_RSA_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DHE_RSA_WITH_DES_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4816,6 +4908,7 @@ func _swig_getPJ_TLS_DHE_RSA_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DHE_RSA_WITH_DES_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DHE_RSA_WITH_DES_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_anon_EXPORT_WITH_RC4_40_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_EXPORT_WITH_RC4_40_MD5_pjsua2_b603cabda4e82a85())
@@ -4823,6 +4916,7 @@ func _swig_getPJ_TLS_DH_anon_EXPORT_WITH_RC4_40_MD5() (_swig_ret Pj_ssl_cipher) 
 }
 
 var PJ_TLS_DH_anon_EXPORT_WITH_RC4_40_MD5 Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_EXPORT_WITH_RC4_40_MD5()
+
 func _swig_getPJ_TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4830,6 +4924,7 @@ func _swig_getPJ_TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA() (_swig_ret Pj_ssl_ciphe
 }
 
 var PJ_TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA()
+
 func _swig_getPJ_TLS_DH_anon_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_TLS_DH_anon_WITH_DES_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4837,6 +4932,7 @@ func _swig_getPJ_TLS_DH_anon_WITH_DES_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_TLS_DH_anon_WITH_DES_CBC_SHA Pj_ssl_cipher = _swig_getPJ_TLS_DH_anon_WITH_DES_CBC_SHA()
+
 func _swig_getPJ_SSL_FORTEZZA_KEA_WITH_NULL_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_FORTEZZA_KEA_WITH_NULL_SHA_pjsua2_b603cabda4e82a85())
@@ -4844,6 +4940,7 @@ func _swig_getPJ_SSL_FORTEZZA_KEA_WITH_NULL_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_FORTEZZA_KEA_WITH_NULL_SHA Pj_ssl_cipher = _swig_getPJ_SSL_FORTEZZA_KEA_WITH_NULL_SHA()
+
 func _swig_getPJ_SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA_pjsua2_b603cabda4e82a85())
@@ -4851,6 +4948,7 @@ func _swig_getPJ_SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA() (_swig_ret Pj_ssl_ciph
 }
 
 var PJ_SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA Pj_ssl_cipher = _swig_getPJ_SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA()
+
 func _swig_getPJ_SSL_FORTEZZA_KEA_WITH_RC4_128_SHA() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_FORTEZZA_KEA_WITH_RC4_128_SHA_pjsua2_b603cabda4e82a85())
@@ -4858,6 +4956,7 @@ func _swig_getPJ_SSL_FORTEZZA_KEA_WITH_RC4_128_SHA() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_FORTEZZA_KEA_WITH_RC4_128_SHA Pj_ssl_cipher = _swig_getPJ_SSL_FORTEZZA_KEA_WITH_RC4_128_SHA()
+
 func _swig_getPJ_SSL_CK_RC4_128_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_CK_RC4_128_WITH_MD5_pjsua2_b603cabda4e82a85())
@@ -4865,6 +4964,7 @@ func _swig_getPJ_SSL_CK_RC4_128_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_CK_RC4_128_WITH_MD5 Pj_ssl_cipher = _swig_getPJ_SSL_CK_RC4_128_WITH_MD5()
+
 func _swig_getPJ_SSL_CK_RC4_128_EXPORT40_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_CK_RC4_128_EXPORT40_WITH_MD5_pjsua2_b603cabda4e82a85())
@@ -4872,6 +4972,7 @@ func _swig_getPJ_SSL_CK_RC4_128_EXPORT40_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_CK_RC4_128_EXPORT40_WITH_MD5 Pj_ssl_cipher = _swig_getPJ_SSL_CK_RC4_128_EXPORT40_WITH_MD5()
+
 func _swig_getPJ_SSL_CK_RC2_128_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_CK_RC2_128_CBC_WITH_MD5_pjsua2_b603cabda4e82a85())
@@ -4879,6 +4980,7 @@ func _swig_getPJ_SSL_CK_RC2_128_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_CK_RC2_128_CBC_WITH_MD5 Pj_ssl_cipher = _swig_getPJ_SSL_CK_RC2_128_CBC_WITH_MD5()
+
 func _swig_getPJ_SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5_pjsua2_b603cabda4e82a85())
@@ -4886,6 +4988,7 @@ func _swig_getPJ_SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5() (_swig_ret Pj_ssl_cipher
 }
 
 var PJ_SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5 Pj_ssl_cipher = _swig_getPJ_SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5()
+
 func _swig_getPJ_SSL_CK_IDEA_128_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_CK_IDEA_128_CBC_WITH_MD5_pjsua2_b603cabda4e82a85())
@@ -4893,6 +4996,7 @@ func _swig_getPJ_SSL_CK_IDEA_128_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_CK_IDEA_128_CBC_WITH_MD5 Pj_ssl_cipher = _swig_getPJ_SSL_CK_IDEA_128_CBC_WITH_MD5()
+
 func _swig_getPJ_SSL_CK_DES_64_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_CK_DES_64_CBC_WITH_MD5_pjsua2_b603cabda4e82a85())
@@ -4900,6 +5004,7 @@ func _swig_getPJ_SSL_CK_DES_64_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_CK_DES_64_CBC_WITH_MD5 Pj_ssl_cipher = _swig_getPJ_SSL_CK_DES_64_CBC_WITH_MD5()
+
 func _swig_getPJ_SSL_CK_DES_192_EDE3_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 	var swig_r Pj_ssl_cipher
 	swig_r = (Pj_ssl_cipher)(C._wrap_PJ_SSL_CK_DES_192_EDE3_CBC_WITH_MD5_pjsua2_b603cabda4e82a85())
@@ -4907,7 +5012,9 @@ func _swig_getPJ_SSL_CK_DES_192_EDE3_CBC_WITH_MD5() (_swig_ret Pj_ssl_cipher) {
 }
 
 var PJ_SSL_CK_DES_192_EDE3_CBC_WITH_MD5 Pj_ssl_cipher = _swig_getPJ_SSL_CK_DES_192_EDE3_CBC_WITH_MD5()
+
 type Pj_ssl_sock_proto int
+
 func _swig_getPJ_SSL_SOCK_PROTO_DEFAULT() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_DEFAULT_pjsua2_b603cabda4e82a85())
@@ -4915,6 +5022,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_DEFAULT() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_DEFAULT Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_DEFAULT()
+
 func _swig_getPJ_SSL_SOCK_PROTO_SSL2() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_SSL2_pjsua2_b603cabda4e82a85())
@@ -4922,6 +5030,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_SSL2() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_SSL2 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_SSL2()
+
 func _swig_getPJ_SSL_SOCK_PROTO_SSL3() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_SSL3_pjsua2_b603cabda4e82a85())
@@ -4929,6 +5038,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_SSL3() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_SSL3 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_SSL3()
+
 func _swig_getPJ_SSL_SOCK_PROTO_TLS1() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_TLS1_pjsua2_b603cabda4e82a85())
@@ -4936,6 +5046,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_TLS1() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_TLS1 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_TLS1()
+
 func _swig_getPJ_SSL_SOCK_PROTO_TLS1_1() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_TLS1_1_pjsua2_b603cabda4e82a85())
@@ -4943,6 +5054,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_TLS1_1() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_TLS1_1 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_TLS1_1()
+
 func _swig_getPJ_SSL_SOCK_PROTO_TLS1_2() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_TLS1_2_pjsua2_b603cabda4e82a85())
@@ -4950,6 +5062,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_TLS1_2() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_TLS1_2 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_TLS1_2()
+
 func _swig_getPJ_SSL_SOCK_PROTO_TLS1_3() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_TLS1_3_pjsua2_b603cabda4e82a85())
@@ -4957,6 +5070,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_TLS1_3() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_TLS1_3 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_TLS1_3()
+
 func _swig_getPJ_SSL_SOCK_PROTO_SSL23() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_SSL23_pjsua2_b603cabda4e82a85())
@@ -4964,6 +5078,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_SSL23() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_SSL23 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_SSL23()
+
 func _swig_getPJ_SSL_SOCK_PROTO_ALL() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_ALL_pjsua2_b603cabda4e82a85())
@@ -4971,6 +5086,7 @@ func _swig_getPJ_SSL_SOCK_PROTO_ALL() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_ALL Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_ALL()
+
 func _swig_getPJ_SSL_SOCK_PROTO_DTLS1() (_swig_ret Pj_ssl_sock_proto) {
 	var swig_r Pj_ssl_sock_proto
 	swig_r = (Pj_ssl_sock_proto)(C._wrap_PJ_SSL_SOCK_PROTO_DTLS1_pjsua2_b603cabda4e82a85())
@@ -4978,7 +5094,9 @@ func _swig_getPJ_SSL_SOCK_PROTO_DTLS1() (_swig_ret Pj_ssl_sock_proto) {
 }
 
 var PJ_SSL_SOCK_PROTO_DTLS1 Pj_ssl_sock_proto = _swig_getPJ_SSL_SOCK_PROTO_DTLS1()
+
 type Pj_ssl_cert_name_type int
+
 func _swig_getPJ_SSL_CERT_NAME_UNKNOWN() (_swig_ret Pj_ssl_cert_name_type) {
 	var swig_r Pj_ssl_cert_name_type
 	swig_r = (Pj_ssl_cert_name_type)(C._wrap_PJ_SSL_CERT_NAME_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -4986,6 +5104,7 @@ func _swig_getPJ_SSL_CERT_NAME_UNKNOWN() (_swig_ret Pj_ssl_cert_name_type) {
 }
 
 var PJ_SSL_CERT_NAME_UNKNOWN Pj_ssl_cert_name_type = _swig_getPJ_SSL_CERT_NAME_UNKNOWN()
+
 func _swig_getPJ_SSL_CERT_NAME_RFC822() (_swig_ret Pj_ssl_cert_name_type) {
 	var swig_r Pj_ssl_cert_name_type
 	swig_r = (Pj_ssl_cert_name_type)(C._wrap_PJ_SSL_CERT_NAME_RFC822_pjsua2_b603cabda4e82a85())
@@ -4993,6 +5112,7 @@ func _swig_getPJ_SSL_CERT_NAME_RFC822() (_swig_ret Pj_ssl_cert_name_type) {
 }
 
 var PJ_SSL_CERT_NAME_RFC822 Pj_ssl_cert_name_type = _swig_getPJ_SSL_CERT_NAME_RFC822()
+
 func _swig_getPJ_SSL_CERT_NAME_DNS() (_swig_ret Pj_ssl_cert_name_type) {
 	var swig_r Pj_ssl_cert_name_type
 	swig_r = (Pj_ssl_cert_name_type)(C._wrap_PJ_SSL_CERT_NAME_DNS_pjsua2_b603cabda4e82a85())
@@ -5000,6 +5120,7 @@ func _swig_getPJ_SSL_CERT_NAME_DNS() (_swig_ret Pj_ssl_cert_name_type) {
 }
 
 var PJ_SSL_CERT_NAME_DNS Pj_ssl_cert_name_type = _swig_getPJ_SSL_CERT_NAME_DNS()
+
 func _swig_getPJ_SSL_CERT_NAME_URI() (_swig_ret Pj_ssl_cert_name_type) {
 	var swig_r Pj_ssl_cert_name_type
 	swig_r = (Pj_ssl_cert_name_type)(C._wrap_PJ_SSL_CERT_NAME_URI_pjsua2_b603cabda4e82a85())
@@ -5007,6 +5128,7 @@ func _swig_getPJ_SSL_CERT_NAME_URI() (_swig_ret Pj_ssl_cert_name_type) {
 }
 
 var PJ_SSL_CERT_NAME_URI Pj_ssl_cert_name_type = _swig_getPJ_SSL_CERT_NAME_URI()
+
 func _swig_getPJ_SSL_CERT_NAME_IP() (_swig_ret Pj_ssl_cert_name_type) {
 	var swig_r Pj_ssl_cert_name_type
 	swig_r = (Pj_ssl_cert_name_type)(C._wrap_PJ_SSL_CERT_NAME_IP_pjsua2_b603cabda4e82a85())
@@ -5014,7 +5136,9 @@ func _swig_getPJ_SSL_CERT_NAME_IP() (_swig_ret Pj_ssl_cert_name_type) {
 }
 
 var PJ_SSL_CERT_NAME_IP Pj_ssl_cert_name_type = _swig_getPJ_SSL_CERT_NAME_IP()
+
 type Pj_ssl_cert_verify_flag_t int
+
 func _swig_getPJ_SSL_CERT_ESUCCESS() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_ESUCCESS_pjsua2_b603cabda4e82a85())
@@ -5022,6 +5146,7 @@ func _swig_getPJ_SSL_CERT_ESUCCESS() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 }
 
 var PJ_SSL_CERT_ESUCCESS Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_ESUCCESS()
+
 func _swig_getPJ_SSL_CERT_EISSUER_NOT_FOUND() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EISSUER_NOT_FOUND_pjsua2_b603cabda4e82a85())
@@ -5029,6 +5154,7 @@ func _swig_getPJ_SSL_CERT_EISSUER_NOT_FOUND() (_swig_ret Pj_ssl_cert_verify_flag
 }
 
 var PJ_SSL_CERT_EISSUER_NOT_FOUND Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EISSUER_NOT_FOUND()
+
 func _swig_getPJ_SSL_CERT_EUNTRUSTED() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EUNTRUSTED_pjsua2_b603cabda4e82a85())
@@ -5036,6 +5162,7 @@ func _swig_getPJ_SSL_CERT_EUNTRUSTED() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 }
 
 var PJ_SSL_CERT_EUNTRUSTED Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EUNTRUSTED()
+
 func _swig_getPJ_SSL_CERT_EVALIDITY_PERIOD() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EVALIDITY_PERIOD_pjsua2_b603cabda4e82a85())
@@ -5043,6 +5170,7 @@ func _swig_getPJ_SSL_CERT_EVALIDITY_PERIOD() (_swig_ret Pj_ssl_cert_verify_flag_
 }
 
 var PJ_SSL_CERT_EVALIDITY_PERIOD Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EVALIDITY_PERIOD()
+
 func _swig_getPJ_SSL_CERT_EINVALID_FORMAT() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EINVALID_FORMAT_pjsua2_b603cabda4e82a85())
@@ -5050,6 +5178,7 @@ func _swig_getPJ_SSL_CERT_EINVALID_FORMAT() (_swig_ret Pj_ssl_cert_verify_flag_t
 }
 
 var PJ_SSL_CERT_EINVALID_FORMAT Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EINVALID_FORMAT()
+
 func _swig_getPJ_SSL_CERT_EINVALID_PURPOSE() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EINVALID_PURPOSE_pjsua2_b603cabda4e82a85())
@@ -5057,6 +5186,7 @@ func _swig_getPJ_SSL_CERT_EINVALID_PURPOSE() (_swig_ret Pj_ssl_cert_verify_flag_
 }
 
 var PJ_SSL_CERT_EINVALID_PURPOSE Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EINVALID_PURPOSE()
+
 func _swig_getPJ_SSL_CERT_EISSUER_MISMATCH() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EISSUER_MISMATCH_pjsua2_b603cabda4e82a85())
@@ -5064,6 +5194,7 @@ func _swig_getPJ_SSL_CERT_EISSUER_MISMATCH() (_swig_ret Pj_ssl_cert_verify_flag_
 }
 
 var PJ_SSL_CERT_EISSUER_MISMATCH Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EISSUER_MISMATCH()
+
 func _swig_getPJ_SSL_CERT_ECRL_FAILURE() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_ECRL_FAILURE_pjsua2_b603cabda4e82a85())
@@ -5071,6 +5202,7 @@ func _swig_getPJ_SSL_CERT_ECRL_FAILURE() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 }
 
 var PJ_SSL_CERT_ECRL_FAILURE Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_ECRL_FAILURE()
+
 func _swig_getPJ_SSL_CERT_EREVOKED() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EREVOKED_pjsua2_b603cabda4e82a85())
@@ -5078,6 +5210,7 @@ func _swig_getPJ_SSL_CERT_EREVOKED() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 }
 
 var PJ_SSL_CERT_EREVOKED Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EREVOKED()
+
 func _swig_getPJ_SSL_CERT_ECHAIN_TOO_LONG() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_ECHAIN_TOO_LONG_pjsua2_b603cabda4e82a85())
@@ -5085,6 +5218,7 @@ func _swig_getPJ_SSL_CERT_ECHAIN_TOO_LONG() (_swig_ret Pj_ssl_cert_verify_flag_t
 }
 
 var PJ_SSL_CERT_ECHAIN_TOO_LONG Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_ECHAIN_TOO_LONG()
+
 func _swig_getPJ_SSL_CERT_EWEAK_SIGNATURE() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EWEAK_SIGNATURE_pjsua2_b603cabda4e82a85())
@@ -5092,6 +5226,7 @@ func _swig_getPJ_SSL_CERT_EWEAK_SIGNATURE() (_swig_ret Pj_ssl_cert_verify_flag_t
 }
 
 var PJ_SSL_CERT_EWEAK_SIGNATURE Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EWEAK_SIGNATURE()
+
 func _swig_getPJ_SSL_CERT_EIDENTITY_NOT_MATCH() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EIDENTITY_NOT_MATCH_pjsua2_b603cabda4e82a85())
@@ -5099,6 +5234,7 @@ func _swig_getPJ_SSL_CERT_EIDENTITY_NOT_MATCH() (_swig_ret Pj_ssl_cert_verify_fl
 }
 
 var PJ_SSL_CERT_EIDENTITY_NOT_MATCH Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EIDENTITY_NOT_MATCH()
+
 func _swig_getPJ_SSL_CERT_EUNKNOWN() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 	var swig_r Pj_ssl_cert_verify_flag_t
 	swig_r = (Pj_ssl_cert_verify_flag_t)(C._wrap_PJ_SSL_CERT_EUNKNOWN_pjsua2_b603cabda4e82a85())
@@ -5106,7 +5242,9 @@ func _swig_getPJ_SSL_CERT_EUNKNOWN() (_swig_ret Pj_ssl_cert_verify_flag_t) {
 }
 
 var PJ_SSL_CERT_EUNKNOWN Pj_ssl_cert_verify_flag_t = _swig_getPJ_SSL_CERT_EUNKNOWN()
+
 type Pj_ssl_cert_lookup_type int
+
 func _swig_getPJ_SSL_CERT_LOOKUP_NONE() (_swig_ret Pj_ssl_cert_lookup_type) {
 	var swig_r Pj_ssl_cert_lookup_type
 	swig_r = (Pj_ssl_cert_lookup_type)(C._wrap_PJ_SSL_CERT_LOOKUP_NONE_pjsua2_b603cabda4e82a85())
@@ -5114,6 +5252,7 @@ func _swig_getPJ_SSL_CERT_LOOKUP_NONE() (_swig_ret Pj_ssl_cert_lookup_type) {
 }
 
 var PJ_SSL_CERT_LOOKUP_NONE Pj_ssl_cert_lookup_type = _swig_getPJ_SSL_CERT_LOOKUP_NONE()
+
 func _swig_getPJ_SSL_CERT_LOOKUP_SUBJECT() (_swig_ret Pj_ssl_cert_lookup_type) {
 	var swig_r Pj_ssl_cert_lookup_type
 	swig_r = (Pj_ssl_cert_lookup_type)(C._wrap_PJ_SSL_CERT_LOOKUP_SUBJECT_pjsua2_b603cabda4e82a85())
@@ -5121,6 +5260,7 @@ func _swig_getPJ_SSL_CERT_LOOKUP_SUBJECT() (_swig_ret Pj_ssl_cert_lookup_type) {
 }
 
 var PJ_SSL_CERT_LOOKUP_SUBJECT Pj_ssl_cert_lookup_type = _swig_getPJ_SSL_CERT_LOOKUP_SUBJECT()
+
 func _swig_getPJ_SSL_CERT_LOOKUP_FINGERPRINT() (_swig_ret Pj_ssl_cert_lookup_type) {
 	var swig_r Pj_ssl_cert_lookup_type
 	swig_r = (Pj_ssl_cert_lookup_type)(C._wrap_PJ_SSL_CERT_LOOKUP_FINGERPRINT_pjsua2_b603cabda4e82a85())
@@ -5128,6 +5268,7 @@ func _swig_getPJ_SSL_CERT_LOOKUP_FINGERPRINT() (_swig_ret Pj_ssl_cert_lookup_typ
 }
 
 var PJ_SSL_CERT_LOOKUP_FINGERPRINT Pj_ssl_cert_lookup_type = _swig_getPJ_SSL_CERT_LOOKUP_FINGERPRINT()
+
 func _swig_getPJ_SSL_CERT_LOOKUP_FRIENDLY_NAME() (_swig_ret Pj_ssl_cert_lookup_type) {
 	var swig_r Pj_ssl_cert_lookup_type
 	swig_r = (Pj_ssl_cert_lookup_type)(C._wrap_PJ_SSL_CERT_LOOKUP_FRIENDLY_NAME_pjsua2_b603cabda4e82a85())
@@ -5135,7 +5276,9 @@ func _swig_getPJ_SSL_CERT_LOOKUP_FRIENDLY_NAME() (_swig_ret Pj_ssl_cert_lookup_t
 }
 
 var PJ_SSL_CERT_LOOKUP_FRIENDLY_NAME Pj_ssl_cert_lookup_type = _swig_getPJ_SSL_CERT_LOOKUP_FRIENDLY_NAME()
+
 type Pj_ice_sess_trickle int
+
 func _swig_getPJ_ICE_SESS_TRICKLE_DISABLED() (_swig_ret Pj_ice_sess_trickle) {
 	var swig_r Pj_ice_sess_trickle
 	swig_r = (Pj_ice_sess_trickle)(C._wrap_PJ_ICE_SESS_TRICKLE_DISABLED_pjsua2_b603cabda4e82a85())
@@ -5143,6 +5286,7 @@ func _swig_getPJ_ICE_SESS_TRICKLE_DISABLED() (_swig_ret Pj_ice_sess_trickle) {
 }
 
 var PJ_ICE_SESS_TRICKLE_DISABLED Pj_ice_sess_trickle = _swig_getPJ_ICE_SESS_TRICKLE_DISABLED()
+
 func _swig_getPJ_ICE_SESS_TRICKLE_HALF() (_swig_ret Pj_ice_sess_trickle) {
 	var swig_r Pj_ice_sess_trickle
 	swig_r = (Pj_ice_sess_trickle)(C._wrap_PJ_ICE_SESS_TRICKLE_HALF_pjsua2_b603cabda4e82a85())
@@ -5150,6 +5294,7 @@ func _swig_getPJ_ICE_SESS_TRICKLE_HALF() (_swig_ret Pj_ice_sess_trickle) {
 }
 
 var PJ_ICE_SESS_TRICKLE_HALF Pj_ice_sess_trickle = _swig_getPJ_ICE_SESS_TRICKLE_HALF()
+
 func _swig_getPJ_ICE_SESS_TRICKLE_FULL() (_swig_ret Pj_ice_sess_trickle) {
 	var swig_r Pj_ice_sess_trickle
 	swig_r = (Pj_ice_sess_trickle)(C._wrap_PJ_ICE_SESS_TRICKLE_FULL_pjsua2_b603cabda4e82a85())
@@ -5157,7 +5302,9 @@ func _swig_getPJ_ICE_SESS_TRICKLE_FULL() (_swig_ret Pj_ice_sess_trickle) {
 }
 
 var PJ_ICE_SESS_TRICKLE_FULL Pj_ice_sess_trickle = _swig_getPJ_ICE_SESS_TRICKLE_FULL()
+
 type Pj_stun_nat_type int
+
 func _swig_getPJ_STUN_NAT_TYPE_UNKNOWN() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -5165,6 +5312,7 @@ func _swig_getPJ_STUN_NAT_TYPE_UNKNOWN() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_UNKNOWN Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_UNKNOWN()
+
 func _swig_getPJ_STUN_NAT_TYPE_ERR_UNKNOWN() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_ERR_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -5172,6 +5320,7 @@ func _swig_getPJ_STUN_NAT_TYPE_ERR_UNKNOWN() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_ERR_UNKNOWN Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_ERR_UNKNOWN()
+
 func _swig_getPJ_STUN_NAT_TYPE_OPEN() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_OPEN_pjsua2_b603cabda4e82a85())
@@ -5179,6 +5328,7 @@ func _swig_getPJ_STUN_NAT_TYPE_OPEN() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_OPEN Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_OPEN()
+
 func _swig_getPJ_STUN_NAT_TYPE_BLOCKED() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_BLOCKED_pjsua2_b603cabda4e82a85())
@@ -5186,6 +5336,7 @@ func _swig_getPJ_STUN_NAT_TYPE_BLOCKED() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_BLOCKED Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_BLOCKED()
+
 func _swig_getPJ_STUN_NAT_TYPE_SYMMETRIC_UDP() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_SYMMETRIC_UDP_pjsua2_b603cabda4e82a85())
@@ -5193,6 +5344,7 @@ func _swig_getPJ_STUN_NAT_TYPE_SYMMETRIC_UDP() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_SYMMETRIC_UDP Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_SYMMETRIC_UDP()
+
 func _swig_getPJ_STUN_NAT_TYPE_FULL_CONE() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_FULL_CONE_pjsua2_b603cabda4e82a85())
@@ -5200,6 +5352,7 @@ func _swig_getPJ_STUN_NAT_TYPE_FULL_CONE() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_FULL_CONE Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_FULL_CONE()
+
 func _swig_getPJ_STUN_NAT_TYPE_SYMMETRIC() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_SYMMETRIC_pjsua2_b603cabda4e82a85())
@@ -5207,6 +5360,7 @@ func _swig_getPJ_STUN_NAT_TYPE_SYMMETRIC() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_SYMMETRIC Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_SYMMETRIC()
+
 func _swig_getPJ_STUN_NAT_TYPE_RESTRICTED() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_RESTRICTED_pjsua2_b603cabda4e82a85())
@@ -5214,6 +5368,7 @@ func _swig_getPJ_STUN_NAT_TYPE_RESTRICTED() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_RESTRICTED Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_RESTRICTED()
+
 func _swig_getPJ_STUN_NAT_TYPE_PORT_RESTRICTED() (_swig_ret Pj_stun_nat_type) {
 	var swig_r Pj_stun_nat_type
 	swig_r = (Pj_stun_nat_type)(C._wrap_PJ_STUN_NAT_TYPE_PORT_RESTRICTED_pjsua2_b603cabda4e82a85())
@@ -5221,7 +5376,9 @@ func _swig_getPJ_STUN_NAT_TYPE_PORT_RESTRICTED() (_swig_ret Pj_stun_nat_type) {
 }
 
 var PJ_STUN_NAT_TYPE_PORT_RESTRICTED Pj_stun_nat_type = _swig_getPJ_STUN_NAT_TYPE_PORT_RESTRICTED()
+
 type Pj_turn_tp_type int
+
 func _swig_getPJ_TURN_TP_UDP() (_swig_ret Pj_turn_tp_type) {
 	var swig_r Pj_turn_tp_type
 	swig_r = (Pj_turn_tp_type)(C._wrap_PJ_TURN_TP_UDP_pjsua2_b603cabda4e82a85())
@@ -5229,6 +5386,7 @@ func _swig_getPJ_TURN_TP_UDP() (_swig_ret Pj_turn_tp_type) {
 }
 
 var PJ_TURN_TP_UDP Pj_turn_tp_type = _swig_getPJ_TURN_TP_UDP()
+
 func _swig_getPJ_TURN_TP_TCP() (_swig_ret Pj_turn_tp_type) {
 	var swig_r Pj_turn_tp_type
 	swig_r = (Pj_turn_tp_type)(C._wrap_PJ_TURN_TP_TCP_pjsua2_b603cabda4e82a85())
@@ -5236,6 +5394,7 @@ func _swig_getPJ_TURN_TP_TCP() (_swig_ret Pj_turn_tp_type) {
 }
 
 var PJ_TURN_TP_TCP Pj_turn_tp_type = _swig_getPJ_TURN_TP_TCP()
+
 func _swig_getPJ_TURN_TP_TLS() (_swig_ret Pj_turn_tp_type) {
 	var swig_r Pj_turn_tp_type
 	swig_r = (Pj_turn_tp_type)(C._wrap_PJ_TURN_TP_TLS_pjsua2_b603cabda4e82a85())
@@ -5243,7 +5402,9 @@ func _swig_getPJ_TURN_TP_TLS() (_swig_ret Pj_turn_tp_type) {
 }
 
 var PJ_TURN_TP_TLS Pj_turn_tp_type = _swig_getPJ_TURN_TP_TLS()
+
 type Pjmedia_echo_flag int
+
 func _swig_getPJMEDIA_ECHO_DEFAULT() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_DEFAULT_pjsua2_b603cabda4e82a85())
@@ -5251,6 +5412,7 @@ func _swig_getPJMEDIA_ECHO_DEFAULT() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_DEFAULT Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_DEFAULT()
+
 func _swig_getPJMEDIA_ECHO_SPEEX() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_SPEEX_pjsua2_b603cabda4e82a85())
@@ -5258,6 +5420,7 @@ func _swig_getPJMEDIA_ECHO_SPEEX() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_SPEEX Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_SPEEX()
+
 func _swig_getPJMEDIA_ECHO_SIMPLE() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_SIMPLE_pjsua2_b603cabda4e82a85())
@@ -5265,6 +5428,7 @@ func _swig_getPJMEDIA_ECHO_SIMPLE() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_SIMPLE Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_SIMPLE()
+
 func _swig_getPJMEDIA_ECHO_WEBRTC() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_WEBRTC_pjsua2_b603cabda4e82a85())
@@ -5272,6 +5436,7 @@ func _swig_getPJMEDIA_ECHO_WEBRTC() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_WEBRTC Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_WEBRTC()
+
 func _swig_getPJMEDIA_ECHO_WEBRTC_AEC3() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_WEBRTC_AEC3_pjsua2_b603cabda4e82a85())
@@ -5279,6 +5444,7 @@ func _swig_getPJMEDIA_ECHO_WEBRTC_AEC3() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_WEBRTC_AEC3 Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_WEBRTC_AEC3()
+
 func _swig_getPJMEDIA_ECHO_ALGO_MASK() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_ALGO_MASK_pjsua2_b603cabda4e82a85())
@@ -5286,6 +5452,7 @@ func _swig_getPJMEDIA_ECHO_ALGO_MASK() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_ALGO_MASK Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_ALGO_MASK()
+
 func _swig_getPJMEDIA_ECHO_NO_LOCK() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_NO_LOCK_pjsua2_b603cabda4e82a85())
@@ -5293,6 +5460,7 @@ func _swig_getPJMEDIA_ECHO_NO_LOCK() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_NO_LOCK Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_NO_LOCK()
+
 func _swig_getPJMEDIA_ECHO_USE_SIMPLE_FIFO() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_USE_SIMPLE_FIFO_pjsua2_b603cabda4e82a85())
@@ -5300,6 +5468,7 @@ func _swig_getPJMEDIA_ECHO_USE_SIMPLE_FIFO() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_USE_SIMPLE_FIFO Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_USE_SIMPLE_FIFO()
+
 func _swig_getPJMEDIA_ECHO_USE_SW_ECHO() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_USE_SW_ECHO_pjsua2_b603cabda4e82a85())
@@ -5307,6 +5476,7 @@ func _swig_getPJMEDIA_ECHO_USE_SW_ECHO() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_USE_SW_ECHO Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_USE_SW_ECHO()
+
 func _swig_getPJMEDIA_ECHO_USE_NOISE_SUPPRESSOR() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_USE_NOISE_SUPPRESSOR_pjsua2_b603cabda4e82a85())
@@ -5314,6 +5484,7 @@ func _swig_getPJMEDIA_ECHO_USE_NOISE_SUPPRESSOR() (_swig_ret Pjmedia_echo_flag) 
 }
 
 var PJMEDIA_ECHO_USE_NOISE_SUPPRESSOR Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_USE_NOISE_SUPPRESSOR()
+
 func _swig_getPJMEDIA_ECHO_USE_GAIN_CONTROLLER() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_USE_GAIN_CONTROLLER_pjsua2_b603cabda4e82a85())
@@ -5321,6 +5492,7 @@ func _swig_getPJMEDIA_ECHO_USE_GAIN_CONTROLLER() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_USE_GAIN_CONTROLLER Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_USE_GAIN_CONTROLLER()
+
 func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_DEFAULT() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_AGGRESSIVENESS_DEFAULT_pjsua2_b603cabda4e82a85())
@@ -5328,6 +5500,7 @@ func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_DEFAULT() (_swig_ret Pjmedia_echo_flag
 }
 
 var PJMEDIA_ECHO_AGGRESSIVENESS_DEFAULT Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_DEFAULT()
+
 func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_CONSERVATIVE() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_AGGRESSIVENESS_CONSERVATIVE_pjsua2_b603cabda4e82a85())
@@ -5335,6 +5508,7 @@ func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_CONSERVATIVE() (_swig_ret Pjmedia_echo
 }
 
 var PJMEDIA_ECHO_AGGRESSIVENESS_CONSERVATIVE Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_CONSERVATIVE()
+
 func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_MODERATE() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_AGGRESSIVENESS_MODERATE_pjsua2_b603cabda4e82a85())
@@ -5342,6 +5516,7 @@ func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_MODERATE() (_swig_ret Pjmedia_echo_fla
 }
 
 var PJMEDIA_ECHO_AGGRESSIVENESS_MODERATE Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_MODERATE()
+
 func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_AGGRESSIVE() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_AGGRESSIVENESS_AGGRESSIVE_pjsua2_b603cabda4e82a85())
@@ -5349,6 +5524,7 @@ func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_AGGRESSIVE() (_swig_ret Pjmedia_echo_f
 }
 
 var PJMEDIA_ECHO_AGGRESSIVENESS_AGGRESSIVE Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_AGGRESSIVE()
+
 func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_MASK() (_swig_ret Pjmedia_echo_flag) {
 	var swig_r Pjmedia_echo_flag
 	swig_r = (Pjmedia_echo_flag)(C._wrap_PJMEDIA_ECHO_AGGRESSIVENESS_MASK_pjsua2_b603cabda4e82a85())
@@ -5356,7 +5532,9 @@ func _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_MASK() (_swig_ret Pjmedia_echo_flag) {
 }
 
 var PJMEDIA_ECHO_AGGRESSIVENESS_MASK Pjmedia_echo_flag = _swig_getPJMEDIA_ECHO_AGGRESSIVENESS_MASK()
+
 type Pjmedia_event_type int
+
 func _swig_getPJMEDIA_EVENT_NONE() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_NONE_pjsua2_b603cabda4e82a85())
@@ -5364,6 +5542,7 @@ func _swig_getPJMEDIA_EVENT_NONE() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_NONE Pjmedia_event_type = _swig_getPJMEDIA_EVENT_NONE()
+
 func _swig_getPJMEDIA_EVENT_FMT_CHANGED() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_FMT_CHANGED_pjsua2_b603cabda4e82a85())
@@ -5371,6 +5550,7 @@ func _swig_getPJMEDIA_EVENT_FMT_CHANGED() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_FMT_CHANGED Pjmedia_event_type = _swig_getPJMEDIA_EVENT_FMT_CHANGED()
+
 func _swig_getPJMEDIA_EVENT_WND_CLOSING() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_WND_CLOSING_pjsua2_b603cabda4e82a85())
@@ -5378,6 +5558,7 @@ func _swig_getPJMEDIA_EVENT_WND_CLOSING() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_WND_CLOSING Pjmedia_event_type = _swig_getPJMEDIA_EVENT_WND_CLOSING()
+
 func _swig_getPJMEDIA_EVENT_WND_CLOSED() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_WND_CLOSED_pjsua2_b603cabda4e82a85())
@@ -5385,6 +5566,7 @@ func _swig_getPJMEDIA_EVENT_WND_CLOSED() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_WND_CLOSED Pjmedia_event_type = _swig_getPJMEDIA_EVENT_WND_CLOSED()
+
 func _swig_getPJMEDIA_EVENT_WND_RESIZED() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_WND_RESIZED_pjsua2_b603cabda4e82a85())
@@ -5392,6 +5574,7 @@ func _swig_getPJMEDIA_EVENT_WND_RESIZED() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_WND_RESIZED Pjmedia_event_type = _swig_getPJMEDIA_EVENT_WND_RESIZED()
+
 func _swig_getPJMEDIA_EVENT_MOUSE_BTN_DOWN() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_MOUSE_BTN_DOWN_pjsua2_b603cabda4e82a85())
@@ -5399,6 +5582,7 @@ func _swig_getPJMEDIA_EVENT_MOUSE_BTN_DOWN() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_MOUSE_BTN_DOWN Pjmedia_event_type = _swig_getPJMEDIA_EVENT_MOUSE_BTN_DOWN()
+
 func _swig_getPJMEDIA_EVENT_KEYFRAME_FOUND() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_KEYFRAME_FOUND_pjsua2_b603cabda4e82a85())
@@ -5406,6 +5590,7 @@ func _swig_getPJMEDIA_EVENT_KEYFRAME_FOUND() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_KEYFRAME_FOUND Pjmedia_event_type = _swig_getPJMEDIA_EVENT_KEYFRAME_FOUND()
+
 func _swig_getPJMEDIA_EVENT_KEYFRAME_MISSING() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_KEYFRAME_MISSING_pjsua2_b603cabda4e82a85())
@@ -5413,6 +5598,7 @@ func _swig_getPJMEDIA_EVENT_KEYFRAME_MISSING() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_KEYFRAME_MISSING Pjmedia_event_type = _swig_getPJMEDIA_EVENT_KEYFRAME_MISSING()
+
 func _swig_getPJMEDIA_EVENT_ORIENT_CHANGED() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_ORIENT_CHANGED_pjsua2_b603cabda4e82a85())
@@ -5420,6 +5606,7 @@ func _swig_getPJMEDIA_EVENT_ORIENT_CHANGED() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_ORIENT_CHANGED Pjmedia_event_type = _swig_getPJMEDIA_EVENT_ORIENT_CHANGED()
+
 func _swig_getPJMEDIA_EVENT_RX_RTCP_FB() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_RX_RTCP_FB_pjsua2_b603cabda4e82a85())
@@ -5427,6 +5614,7 @@ func _swig_getPJMEDIA_EVENT_RX_RTCP_FB() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_RX_RTCP_FB Pjmedia_event_type = _swig_getPJMEDIA_EVENT_RX_RTCP_FB()
+
 func _swig_getPJMEDIA_EVENT_AUD_DEV_ERROR() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_AUD_DEV_ERROR_pjsua2_b603cabda4e82a85())
@@ -5434,6 +5622,7 @@ func _swig_getPJMEDIA_EVENT_AUD_DEV_ERROR() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_AUD_DEV_ERROR Pjmedia_event_type = _swig_getPJMEDIA_EVENT_AUD_DEV_ERROR()
+
 func _swig_getPJMEDIA_EVENT_VID_DEV_ERROR() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_VID_DEV_ERROR_pjsua2_b603cabda4e82a85())
@@ -5441,6 +5630,7 @@ func _swig_getPJMEDIA_EVENT_VID_DEV_ERROR() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_VID_DEV_ERROR Pjmedia_event_type = _swig_getPJMEDIA_EVENT_VID_DEV_ERROR()
+
 func _swig_getPJMEDIA_EVENT_MEDIA_TP_ERR() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_MEDIA_TP_ERR_pjsua2_b603cabda4e82a85())
@@ -5448,6 +5638,7 @@ func _swig_getPJMEDIA_EVENT_MEDIA_TP_ERR() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_MEDIA_TP_ERR Pjmedia_event_type = _swig_getPJMEDIA_EVENT_MEDIA_TP_ERR()
+
 func _swig_getPJMEDIA_EVENT_CALLBACK() (_swig_ret Pjmedia_event_type) {
 	var swig_r Pjmedia_event_type
 	swig_r = (Pjmedia_event_type)(C._wrap_PJMEDIA_EVENT_CALLBACK_pjsua2_b603cabda4e82a85())
@@ -5455,7 +5646,9 @@ func _swig_getPJMEDIA_EVENT_CALLBACK() (_swig_ret Pjmedia_event_type) {
 }
 
 var PJMEDIA_EVENT_CALLBACK Pjmedia_event_type = _swig_getPJMEDIA_EVENT_CALLBACK()
+
 type Pjmedia_srtp_use int
+
 func _swig_getPJMEDIA_SRTP_DISABLED() (_swig_ret Pjmedia_srtp_use) {
 	var swig_r Pjmedia_srtp_use
 	swig_r = (Pjmedia_srtp_use)(C._wrap_PJMEDIA_SRTP_DISABLED_pjsua2_b603cabda4e82a85())
@@ -5463,6 +5656,7 @@ func _swig_getPJMEDIA_SRTP_DISABLED() (_swig_ret Pjmedia_srtp_use) {
 }
 
 var PJMEDIA_SRTP_DISABLED Pjmedia_srtp_use = _swig_getPJMEDIA_SRTP_DISABLED()
+
 func _swig_getPJMEDIA_SRTP_UNKNOWN() (_swig_ret Pjmedia_srtp_use) {
 	var swig_r Pjmedia_srtp_use
 	swig_r = (Pjmedia_srtp_use)(C._wrap_PJMEDIA_SRTP_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -5470,6 +5664,7 @@ func _swig_getPJMEDIA_SRTP_UNKNOWN() (_swig_ret Pjmedia_srtp_use) {
 }
 
 var PJMEDIA_SRTP_UNKNOWN Pjmedia_srtp_use = _swig_getPJMEDIA_SRTP_UNKNOWN()
+
 func _swig_getPJMEDIA_SRTP_OPTIONAL() (_swig_ret Pjmedia_srtp_use) {
 	var swig_r Pjmedia_srtp_use
 	swig_r = (Pjmedia_srtp_use)(C._wrap_PJMEDIA_SRTP_OPTIONAL_pjsua2_b603cabda4e82a85())
@@ -5477,6 +5672,7 @@ func _swig_getPJMEDIA_SRTP_OPTIONAL() (_swig_ret Pjmedia_srtp_use) {
 }
 
 var PJMEDIA_SRTP_OPTIONAL Pjmedia_srtp_use = _swig_getPJMEDIA_SRTP_OPTIONAL()
+
 func _swig_getPJMEDIA_SRTP_MANDATORY() (_swig_ret Pjmedia_srtp_use) {
 	var swig_r Pjmedia_srtp_use
 	swig_r = (Pjmedia_srtp_use)(C._wrap_PJMEDIA_SRTP_MANDATORY_pjsua2_b603cabda4e82a85())
@@ -5484,7 +5680,9 @@ func _swig_getPJMEDIA_SRTP_MANDATORY() (_swig_ret Pjmedia_srtp_use) {
 }
 
 var PJMEDIA_SRTP_MANDATORY Pjmedia_srtp_use = _swig_getPJMEDIA_SRTP_MANDATORY()
+
 type Pjmedia_srtp_crypto_option int
+
 func _swig_getPJMEDIA_SRTP_NO_ENCRYPTION() (_swig_ret Pjmedia_srtp_crypto_option) {
 	var swig_r Pjmedia_srtp_crypto_option
 	swig_r = (Pjmedia_srtp_crypto_option)(C._wrap_PJMEDIA_SRTP_NO_ENCRYPTION_pjsua2_b603cabda4e82a85())
@@ -5492,6 +5690,7 @@ func _swig_getPJMEDIA_SRTP_NO_ENCRYPTION() (_swig_ret Pjmedia_srtp_crypto_option
 }
 
 var PJMEDIA_SRTP_NO_ENCRYPTION Pjmedia_srtp_crypto_option = _swig_getPJMEDIA_SRTP_NO_ENCRYPTION()
+
 func _swig_getPJMEDIA_SRTP_NO_AUTHENTICATION() (_swig_ret Pjmedia_srtp_crypto_option) {
 	var swig_r Pjmedia_srtp_crypto_option
 	swig_r = (Pjmedia_srtp_crypto_option)(C._wrap_PJMEDIA_SRTP_NO_AUTHENTICATION_pjsua2_b603cabda4e82a85())
@@ -5499,7 +5698,9 @@ func _swig_getPJMEDIA_SRTP_NO_AUTHENTICATION() (_swig_ret Pjmedia_srtp_crypto_op
 }
 
 var PJMEDIA_SRTP_NO_AUTHENTICATION Pjmedia_srtp_crypto_option = _swig_getPJMEDIA_SRTP_NO_AUTHENTICATION()
+
 type Pjmedia_srtp_keying_method int
+
 func _swig_getPJMEDIA_SRTP_KEYING_SDES() (_swig_ret Pjmedia_srtp_keying_method) {
 	var swig_r Pjmedia_srtp_keying_method
 	swig_r = (Pjmedia_srtp_keying_method)(C._wrap_PJMEDIA_SRTP_KEYING_SDES_pjsua2_b603cabda4e82a85())
@@ -5507,6 +5708,7 @@ func _swig_getPJMEDIA_SRTP_KEYING_SDES() (_swig_ret Pjmedia_srtp_keying_method) 
 }
 
 var PJMEDIA_SRTP_KEYING_SDES Pjmedia_srtp_keying_method = _swig_getPJMEDIA_SRTP_KEYING_SDES()
+
 func _swig_getPJMEDIA_SRTP_KEYING_DTLS_SRTP() (_swig_ret Pjmedia_srtp_keying_method) {
 	var swig_r Pjmedia_srtp_keying_method
 	swig_r = (Pjmedia_srtp_keying_method)(C._wrap_PJMEDIA_SRTP_KEYING_DTLS_SRTP_pjsua2_b603cabda4e82a85())
@@ -5514,6 +5716,7 @@ func _swig_getPJMEDIA_SRTP_KEYING_DTLS_SRTP() (_swig_ret Pjmedia_srtp_keying_met
 }
 
 var PJMEDIA_SRTP_KEYING_DTLS_SRTP Pjmedia_srtp_keying_method = _swig_getPJMEDIA_SRTP_KEYING_DTLS_SRTP()
+
 func _swig_getPJMEDIA_SRTP_KEYINGS_COUNT() (_swig_ret Pjmedia_srtp_keying_method) {
 	var swig_r Pjmedia_srtp_keying_method
 	swig_r = (Pjmedia_srtp_keying_method)(C._wrap_PJMEDIA_SRTP_KEYINGS_COUNT_pjsua2_b603cabda4e82a85())
@@ -5521,7 +5724,9 @@ func _swig_getPJMEDIA_SRTP_KEYINGS_COUNT() (_swig_ret Pjmedia_srtp_keying_method
 }
 
 var PJMEDIA_SRTP_KEYINGS_COUNT Pjmedia_srtp_keying_method = _swig_getPJMEDIA_SRTP_KEYINGS_COUNT()
+
 type Pjmedia_vid_stream_rc_method int
+
 func _swig_getPJMEDIA_VID_STREAM_RC_NONE() (_swig_ret Pjmedia_vid_stream_rc_method) {
 	var swig_r Pjmedia_vid_stream_rc_method
 	swig_r = (Pjmedia_vid_stream_rc_method)(C._wrap_PJMEDIA_VID_STREAM_RC_NONE_pjsua2_b603cabda4e82a85())
@@ -5529,6 +5734,7 @@ func _swig_getPJMEDIA_VID_STREAM_RC_NONE() (_swig_ret Pjmedia_vid_stream_rc_meth
 }
 
 var PJMEDIA_VID_STREAM_RC_NONE Pjmedia_vid_stream_rc_method = _swig_getPJMEDIA_VID_STREAM_RC_NONE()
+
 func _swig_getPJMEDIA_VID_STREAM_RC_SIMPLE_BLOCKING() (_swig_ret Pjmedia_vid_stream_rc_method) {
 	var swig_r Pjmedia_vid_stream_rc_method
 	swig_r = (Pjmedia_vid_stream_rc_method)(C._wrap_PJMEDIA_VID_STREAM_RC_SIMPLE_BLOCKING_pjsua2_b603cabda4e82a85())
@@ -5536,7 +5742,9 @@ func _swig_getPJMEDIA_VID_STREAM_RC_SIMPLE_BLOCKING() (_swig_ret Pjmedia_vid_str
 }
 
 var PJMEDIA_VID_STREAM_RC_SIMPLE_BLOCKING Pjmedia_vid_stream_rc_method = _swig_getPJMEDIA_VID_STREAM_RC_SIMPLE_BLOCKING()
+
 type Pjmedia_vid_dev_std_index int
+
 func _swig_getPJMEDIA_VID_DEFAULT_CAPTURE_DEV() (_swig_ret Pjmedia_vid_dev_std_index) {
 	var swig_r Pjmedia_vid_dev_std_index
 	swig_r = (Pjmedia_vid_dev_std_index)(C._wrap_PJMEDIA_VID_DEFAULT_CAPTURE_DEV_pjsua2_b603cabda4e82a85())
@@ -5544,6 +5752,7 @@ func _swig_getPJMEDIA_VID_DEFAULT_CAPTURE_DEV() (_swig_ret Pjmedia_vid_dev_std_i
 }
 
 var PJMEDIA_VID_DEFAULT_CAPTURE_DEV Pjmedia_vid_dev_std_index = _swig_getPJMEDIA_VID_DEFAULT_CAPTURE_DEV()
+
 func _swig_getPJMEDIA_VID_DEFAULT_RENDER_DEV() (_swig_ret Pjmedia_vid_dev_std_index) {
 	var swig_r Pjmedia_vid_dev_std_index
 	swig_r = (Pjmedia_vid_dev_std_index)(C._wrap_PJMEDIA_VID_DEFAULT_RENDER_DEV_pjsua2_b603cabda4e82a85())
@@ -5551,6 +5760,7 @@ func _swig_getPJMEDIA_VID_DEFAULT_RENDER_DEV() (_swig_ret Pjmedia_vid_dev_std_in
 }
 
 var PJMEDIA_VID_DEFAULT_RENDER_DEV Pjmedia_vid_dev_std_index = _swig_getPJMEDIA_VID_DEFAULT_RENDER_DEV()
+
 func _swig_getPJMEDIA_VID_INVALID_DEV() (_swig_ret Pjmedia_vid_dev_std_index) {
 	var swig_r Pjmedia_vid_dev_std_index
 	swig_r = (Pjmedia_vid_dev_std_index)(C._wrap_PJMEDIA_VID_INVALID_DEV_pjsua2_b603cabda4e82a85())
@@ -5558,7 +5768,9 @@ func _swig_getPJMEDIA_VID_INVALID_DEV() (_swig_ret Pjmedia_vid_dev_std_index) {
 }
 
 var PJMEDIA_VID_INVALID_DEV Pjmedia_vid_dev_std_index = _swig_getPJMEDIA_VID_INVALID_DEV()
+
 type Pjmedia_vid_dev_cap int
+
 func _swig_getPJMEDIA_VID_DEV_CAP_FORMAT() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_FORMAT_pjsua2_b603cabda4e82a85())
@@ -5566,6 +5778,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_FORMAT() (_swig_ret Pjmedia_vid_dev_cap) {
 }
 
 var PJMEDIA_VID_DEV_CAP_FORMAT Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_FORMAT()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_INPUT_SCALE() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_INPUT_SCALE_pjsua2_b603cabda4e82a85())
@@ -5573,6 +5786,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_INPUT_SCALE() (_swig_ret Pjmedia_vid_dev_cap) 
 }
 
 var PJMEDIA_VID_DEV_CAP_INPUT_SCALE Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_INPUT_SCALE()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW_pjsua2_b603cabda4e82a85())
@@ -5580,6 +5794,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW() (_swig_ret Pjmedia_vid_dev_cap
 }
 
 var PJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_RESIZE() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_OUTPUT_RESIZE_pjsua2_b603cabda4e82a85())
@@ -5587,6 +5802,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_RESIZE() (_swig_ret Pjmedia_vid_dev_cap
 }
 
 var PJMEDIA_VID_DEV_CAP_OUTPUT_RESIZE Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_RESIZE()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_POSITION() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_OUTPUT_POSITION_pjsua2_b603cabda4e82a85())
@@ -5594,6 +5810,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_POSITION() (_swig_ret Pjmedia_vid_dev_c
 }
 
 var PJMEDIA_VID_DEV_CAP_OUTPUT_POSITION Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_POSITION()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_HIDE() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_OUTPUT_HIDE_pjsua2_b603cabda4e82a85())
@@ -5601,6 +5818,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_HIDE() (_swig_ret Pjmedia_vid_dev_cap) 
 }
 
 var PJMEDIA_VID_DEV_CAP_OUTPUT_HIDE Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_HIDE()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_INPUT_PREVIEW() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_INPUT_PREVIEW_pjsua2_b603cabda4e82a85())
@@ -5608,6 +5826,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_INPUT_PREVIEW() (_swig_ret Pjmedia_vid_dev_cap
 }
 
 var PJMEDIA_VID_DEV_CAP_INPUT_PREVIEW Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_INPUT_PREVIEW()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_ORIENTATION() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_ORIENTATION_pjsua2_b603cabda4e82a85())
@@ -5615,6 +5834,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_ORIENTATION() (_swig_ret Pjmedia_vid_dev_cap) 
 }
 
 var PJMEDIA_VID_DEV_CAP_ORIENTATION Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_ORIENTATION()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_SWITCH() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_SWITCH_pjsua2_b603cabda4e82a85())
@@ -5622,6 +5842,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_SWITCH() (_swig_ret Pjmedia_vid_dev_cap) {
 }
 
 var PJMEDIA_VID_DEV_CAP_SWITCH Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_SWITCH()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW_FLAGS() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW_FLAGS_pjsua2_b603cabda4e82a85())
@@ -5629,6 +5850,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW_FLAGS() (_swig_ret Pjmedia_vid_d
 }
 
 var PJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW_FLAGS Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_WINDOW_FLAGS()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_FULLSCREEN() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_OUTPUT_FULLSCREEN_pjsua2_b603cabda4e82a85())
@@ -5636,6 +5858,7 @@ func _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_FULLSCREEN() (_swig_ret Pjmedia_vid_dev
 }
 
 var PJMEDIA_VID_DEV_CAP_OUTPUT_FULLSCREEN Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_OUTPUT_FULLSCREEN()
+
 func _swig_getPJMEDIA_VID_DEV_CAP_MAX() (_swig_ret Pjmedia_vid_dev_cap) {
 	var swig_r Pjmedia_vid_dev_cap
 	swig_r = (Pjmedia_vid_dev_cap)(C._wrap_PJMEDIA_VID_DEV_CAP_MAX_pjsua2_b603cabda4e82a85())
@@ -5643,7 +5866,9 @@ func _swig_getPJMEDIA_VID_DEV_CAP_MAX() (_swig_ret Pjmedia_vid_dev_cap) {
 }
 
 var PJMEDIA_VID_DEV_CAP_MAX Pjmedia_vid_dev_cap = _swig_getPJMEDIA_VID_DEV_CAP_MAX()
+
 type Pjmedia_vid_dev_fullscreen_flag int
+
 func _swig_getPJMEDIA_VID_DEV_WINDOWED() (_swig_ret Pjmedia_vid_dev_fullscreen_flag) {
 	var swig_r Pjmedia_vid_dev_fullscreen_flag
 	swig_r = (Pjmedia_vid_dev_fullscreen_flag)(C._wrap_PJMEDIA_VID_DEV_WINDOWED_pjsua2_b603cabda4e82a85())
@@ -5651,6 +5876,7 @@ func _swig_getPJMEDIA_VID_DEV_WINDOWED() (_swig_ret Pjmedia_vid_dev_fullscreen_f
 }
 
 var PJMEDIA_VID_DEV_WINDOWED Pjmedia_vid_dev_fullscreen_flag = _swig_getPJMEDIA_VID_DEV_WINDOWED()
+
 func _swig_getPJMEDIA_VID_DEV_FULLSCREEN() (_swig_ret Pjmedia_vid_dev_fullscreen_flag) {
 	var swig_r Pjmedia_vid_dev_fullscreen_flag
 	swig_r = (Pjmedia_vid_dev_fullscreen_flag)(C._wrap_PJMEDIA_VID_DEV_FULLSCREEN_pjsua2_b603cabda4e82a85())
@@ -5658,6 +5884,7 @@ func _swig_getPJMEDIA_VID_DEV_FULLSCREEN() (_swig_ret Pjmedia_vid_dev_fullscreen
 }
 
 var PJMEDIA_VID_DEV_FULLSCREEN Pjmedia_vid_dev_fullscreen_flag = _swig_getPJMEDIA_VID_DEV_FULLSCREEN()
+
 func _swig_getPJMEDIA_VID_DEV_FULLSCREEN_DESKTOP() (_swig_ret Pjmedia_vid_dev_fullscreen_flag) {
 	var swig_r Pjmedia_vid_dev_fullscreen_flag
 	swig_r = (Pjmedia_vid_dev_fullscreen_flag)(C._wrap_PJMEDIA_VID_DEV_FULLSCREEN_DESKTOP_pjsua2_b603cabda4e82a85())
@@ -5665,7 +5892,9 @@ func _swig_getPJMEDIA_VID_DEV_FULLSCREEN_DESKTOP() (_swig_ret Pjmedia_vid_dev_fu
 }
 
 var PJMEDIA_VID_DEV_FULLSCREEN_DESKTOP Pjmedia_vid_dev_fullscreen_flag = _swig_getPJMEDIA_VID_DEV_FULLSCREEN_DESKTOP()
+
 type Pjmedia_aud_dev_route int
+
 func _swig_getPJMEDIA_AUD_DEV_ROUTE_DEFAULT() (_swig_ret Pjmedia_aud_dev_route) {
 	var swig_r Pjmedia_aud_dev_route
 	swig_r = (Pjmedia_aud_dev_route)(C._wrap_PJMEDIA_AUD_DEV_ROUTE_DEFAULT_pjsua2_b603cabda4e82a85())
@@ -5673,6 +5902,7 @@ func _swig_getPJMEDIA_AUD_DEV_ROUTE_DEFAULT() (_swig_ret Pjmedia_aud_dev_route) 
 }
 
 var PJMEDIA_AUD_DEV_ROUTE_DEFAULT Pjmedia_aud_dev_route = _swig_getPJMEDIA_AUD_DEV_ROUTE_DEFAULT()
+
 func _swig_getPJMEDIA_AUD_DEV_ROUTE_LOUDSPEAKER() (_swig_ret Pjmedia_aud_dev_route) {
 	var swig_r Pjmedia_aud_dev_route
 	swig_r = (Pjmedia_aud_dev_route)(C._wrap_PJMEDIA_AUD_DEV_ROUTE_LOUDSPEAKER_pjsua2_b603cabda4e82a85())
@@ -5680,6 +5910,7 @@ func _swig_getPJMEDIA_AUD_DEV_ROUTE_LOUDSPEAKER() (_swig_ret Pjmedia_aud_dev_rou
 }
 
 var PJMEDIA_AUD_DEV_ROUTE_LOUDSPEAKER Pjmedia_aud_dev_route = _swig_getPJMEDIA_AUD_DEV_ROUTE_LOUDSPEAKER()
+
 func _swig_getPJMEDIA_AUD_DEV_ROUTE_EARPIECE() (_swig_ret Pjmedia_aud_dev_route) {
 	var swig_r Pjmedia_aud_dev_route
 	swig_r = (Pjmedia_aud_dev_route)(C._wrap_PJMEDIA_AUD_DEV_ROUTE_EARPIECE_pjsua2_b603cabda4e82a85())
@@ -5687,6 +5918,7 @@ func _swig_getPJMEDIA_AUD_DEV_ROUTE_EARPIECE() (_swig_ret Pjmedia_aud_dev_route)
 }
 
 var PJMEDIA_AUD_DEV_ROUTE_EARPIECE Pjmedia_aud_dev_route = _swig_getPJMEDIA_AUD_DEV_ROUTE_EARPIECE()
+
 func _swig_getPJMEDIA_AUD_DEV_ROUTE_BLUETOOTH() (_swig_ret Pjmedia_aud_dev_route) {
 	var swig_r Pjmedia_aud_dev_route
 	swig_r = (Pjmedia_aud_dev_route)(C._wrap_PJMEDIA_AUD_DEV_ROUTE_BLUETOOTH_pjsua2_b603cabda4e82a85())
@@ -5694,6 +5926,7 @@ func _swig_getPJMEDIA_AUD_DEV_ROUTE_BLUETOOTH() (_swig_ret Pjmedia_aud_dev_route
 }
 
 var PJMEDIA_AUD_DEV_ROUTE_BLUETOOTH Pjmedia_aud_dev_route = _swig_getPJMEDIA_AUD_DEV_ROUTE_BLUETOOTH()
+
 func _swig_getPJMEDIA_AUD_DEV_ROUTE_CUSTOM() (_swig_ret Pjmedia_aud_dev_route) {
 	var swig_r Pjmedia_aud_dev_route
 	swig_r = (Pjmedia_aud_dev_route)(C._wrap_PJMEDIA_AUD_DEV_ROUTE_CUSTOM_pjsua2_b603cabda4e82a85())
@@ -5701,7 +5934,9 @@ func _swig_getPJMEDIA_AUD_DEV_ROUTE_CUSTOM() (_swig_ret Pjmedia_aud_dev_route) {
 }
 
 var PJMEDIA_AUD_DEV_ROUTE_CUSTOM Pjmedia_aud_dev_route = _swig_getPJMEDIA_AUD_DEV_ROUTE_CUSTOM()
+
 type Pjmedia_aud_dev_cap int
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_EXT_FORMAT() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_EXT_FORMAT_pjsua2_b603cabda4e82a85())
@@ -5709,6 +5944,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_EXT_FORMAT() (_swig_ret Pjmedia_aud_dev_cap) {
 }
 
 var PJMEDIA_AUD_DEV_CAP_EXT_FORMAT Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_EXT_FORMAT()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_LATENCY() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_INPUT_LATENCY_pjsua2_b603cabda4e82a85())
@@ -5716,6 +5952,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_LATENCY() (_swig_ret Pjmedia_aud_dev_cap
 }
 
 var PJMEDIA_AUD_DEV_CAP_INPUT_LATENCY Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_LATENCY()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_LATENCY() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_OUTPUT_LATENCY_pjsua2_b603cabda4e82a85())
@@ -5723,6 +5960,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_LATENCY() (_swig_ret Pjmedia_aud_dev_ca
 }
 
 var PJMEDIA_AUD_DEV_CAP_OUTPUT_LATENCY Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_LATENCY()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_VOLUME_SETTING() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_INPUT_VOLUME_SETTING_pjsua2_b603cabda4e82a85())
@@ -5730,6 +5968,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_VOLUME_SETTING() (_swig_ret Pjmedia_aud_
 }
 
 var PJMEDIA_AUD_DEV_CAP_INPUT_VOLUME_SETTING Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_VOLUME_SETTING()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_VOLUME_SETTING() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_OUTPUT_VOLUME_SETTING_pjsua2_b603cabda4e82a85())
@@ -5737,6 +5976,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_VOLUME_SETTING() (_swig_ret Pjmedia_aud
 }
 
 var PJMEDIA_AUD_DEV_CAP_OUTPUT_VOLUME_SETTING Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_VOLUME_SETTING()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_SIGNAL_METER() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_INPUT_SIGNAL_METER_pjsua2_b603cabda4e82a85())
@@ -5744,6 +5984,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_SIGNAL_METER() (_swig_ret Pjmedia_aud_de
 }
 
 var PJMEDIA_AUD_DEV_CAP_INPUT_SIGNAL_METER Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_SIGNAL_METER()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_SIGNAL_METER() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_OUTPUT_SIGNAL_METER_pjsua2_b603cabda4e82a85())
@@ -5751,6 +5992,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_SIGNAL_METER() (_swig_ret Pjmedia_aud_d
 }
 
 var PJMEDIA_AUD_DEV_CAP_OUTPUT_SIGNAL_METER Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_SIGNAL_METER()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_ROUTE() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_INPUT_ROUTE_pjsua2_b603cabda4e82a85())
@@ -5758,6 +6000,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_ROUTE() (_swig_ret Pjmedia_aud_dev_cap) 
 }
 
 var PJMEDIA_AUD_DEV_CAP_INPUT_ROUTE Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_ROUTE()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_SOURCE() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_INPUT_SOURCE_pjsua2_b603cabda4e82a85())
@@ -5765,6 +6008,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_SOURCE() (_swig_ret Pjmedia_aud_dev_cap)
 }
 
 var PJMEDIA_AUD_DEV_CAP_INPUT_SOURCE Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_INPUT_SOURCE()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_ROUTE() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_OUTPUT_ROUTE_pjsua2_b603cabda4e82a85())
@@ -5772,6 +6016,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_ROUTE() (_swig_ret Pjmedia_aud_dev_cap)
 }
 
 var PJMEDIA_AUD_DEV_CAP_OUTPUT_ROUTE Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_OUTPUT_ROUTE()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_EC() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_EC_pjsua2_b603cabda4e82a85())
@@ -5779,6 +6024,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_EC() (_swig_ret Pjmedia_aud_dev_cap) {
 }
 
 var PJMEDIA_AUD_DEV_CAP_EC Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_EC()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_EC_TAIL() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_EC_TAIL_pjsua2_b603cabda4e82a85())
@@ -5786,6 +6032,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_EC_TAIL() (_swig_ret Pjmedia_aud_dev_cap) {
 }
 
 var PJMEDIA_AUD_DEV_CAP_EC_TAIL Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_EC_TAIL()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_VAD() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_VAD_pjsua2_b603cabda4e82a85())
@@ -5793,6 +6040,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_VAD() (_swig_ret Pjmedia_aud_dev_cap) {
 }
 
 var PJMEDIA_AUD_DEV_CAP_VAD Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_VAD()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_CNG() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_CNG_pjsua2_b603cabda4e82a85())
@@ -5800,6 +6048,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_CNG() (_swig_ret Pjmedia_aud_dev_cap) {
 }
 
 var PJMEDIA_AUD_DEV_CAP_CNG Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_CNG()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_PLC() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_PLC_pjsua2_b603cabda4e82a85())
@@ -5807,6 +6056,7 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_PLC() (_swig_ret Pjmedia_aud_dev_cap) {
 }
 
 var PJMEDIA_AUD_DEV_CAP_PLC Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_PLC()
+
 func _swig_getPJMEDIA_AUD_DEV_CAP_MAX() (_swig_ret Pjmedia_aud_dev_cap) {
 	var swig_r Pjmedia_aud_dev_cap
 	swig_r = (Pjmedia_aud_dev_cap)(C._wrap_PJMEDIA_AUD_DEV_CAP_MAX_pjsua2_b603cabda4e82a85())
@@ -5814,7 +6064,9 @@ func _swig_getPJMEDIA_AUD_DEV_CAP_MAX() (_swig_ret Pjmedia_aud_dev_cap) {
 }
 
 var PJMEDIA_AUD_DEV_CAP_MAX Pjmedia_aud_dev_cap = _swig_getPJMEDIA_AUD_DEV_CAP_MAX()
+
 type Pjmedia_file_writer_option int
+
 func _swig_getPJMEDIA_FILE_WRITE_PCM() (_swig_ret Pjmedia_file_writer_option) {
 	var swig_r Pjmedia_file_writer_option
 	swig_r = (Pjmedia_file_writer_option)(C._wrap_PJMEDIA_FILE_WRITE_PCM_pjsua2_b603cabda4e82a85())
@@ -5822,6 +6074,7 @@ func _swig_getPJMEDIA_FILE_WRITE_PCM() (_swig_ret Pjmedia_file_writer_option) {
 }
 
 var PJMEDIA_FILE_WRITE_PCM Pjmedia_file_writer_option = _swig_getPJMEDIA_FILE_WRITE_PCM()
+
 func _swig_getPJMEDIA_FILE_WRITE_ALAW() (_swig_ret Pjmedia_file_writer_option) {
 	var swig_r Pjmedia_file_writer_option
 	swig_r = (Pjmedia_file_writer_option)(C._wrap_PJMEDIA_FILE_WRITE_ALAW_pjsua2_b603cabda4e82a85())
@@ -5829,6 +6082,7 @@ func _swig_getPJMEDIA_FILE_WRITE_ALAW() (_swig_ret Pjmedia_file_writer_option) {
 }
 
 var PJMEDIA_FILE_WRITE_ALAW Pjmedia_file_writer_option = _swig_getPJMEDIA_FILE_WRITE_ALAW()
+
 func _swig_getPJMEDIA_FILE_WRITE_ULAW() (_swig_ret Pjmedia_file_writer_option) {
 	var swig_r Pjmedia_file_writer_option
 	swig_r = (Pjmedia_file_writer_option)(C._wrap_PJMEDIA_FILE_WRITE_ULAW_pjsua2_b603cabda4e82a85())
@@ -5836,7 +6090,9 @@ func _swig_getPJMEDIA_FILE_WRITE_ULAW() (_swig_ret Pjmedia_file_writer_option) {
 }
 
 var PJMEDIA_FILE_WRITE_ULAW Pjmedia_file_writer_option = _swig_getPJMEDIA_FILE_WRITE_ULAW()
+
 type Pjmedia_file_player_option int
+
 func _swig_getPJMEDIA_FILE_NO_LOOP() (_swig_ret Pjmedia_file_player_option) {
 	var swig_r Pjmedia_file_player_option
 	swig_r = (Pjmedia_file_player_option)(C._wrap_PJMEDIA_FILE_NO_LOOP_pjsua2_b603cabda4e82a85())
@@ -5844,6 +6100,7 @@ func _swig_getPJMEDIA_FILE_NO_LOOP() (_swig_ret Pjmedia_file_player_option) {
 }
 
 var PJMEDIA_FILE_NO_LOOP Pjmedia_file_player_option = _swig_getPJMEDIA_FILE_NO_LOOP()
+
 type SwigcptrPjmedia_tone_digit uintptr
 
 func (p SwigcptrPjmedia_tone_digit) Swigcptr() uintptr {
@@ -6085,6 +6342,7 @@ type Pjmedia_tone_desc interface {
 }
 
 type Pjmedia_type int
+
 func _swig_getPJMEDIA_TYPE_NONE() (_swig_ret Pjmedia_type) {
 	var swig_r Pjmedia_type
 	swig_r = (Pjmedia_type)(C._wrap_PJMEDIA_TYPE_NONE_pjsua2_b603cabda4e82a85())
@@ -6092,6 +6350,7 @@ func _swig_getPJMEDIA_TYPE_NONE() (_swig_ret Pjmedia_type) {
 }
 
 var PJMEDIA_TYPE_NONE Pjmedia_type = _swig_getPJMEDIA_TYPE_NONE()
+
 func _swig_getPJMEDIA_TYPE_AUDIO() (_swig_ret Pjmedia_type) {
 	var swig_r Pjmedia_type
 	swig_r = (Pjmedia_type)(C._wrap_PJMEDIA_TYPE_AUDIO_pjsua2_b603cabda4e82a85())
@@ -6099,6 +6358,7 @@ func _swig_getPJMEDIA_TYPE_AUDIO() (_swig_ret Pjmedia_type) {
 }
 
 var PJMEDIA_TYPE_AUDIO Pjmedia_type = _swig_getPJMEDIA_TYPE_AUDIO()
+
 func _swig_getPJMEDIA_TYPE_VIDEO() (_swig_ret Pjmedia_type) {
 	var swig_r Pjmedia_type
 	swig_r = (Pjmedia_type)(C._wrap_PJMEDIA_TYPE_VIDEO_pjsua2_b603cabda4e82a85())
@@ -6106,6 +6366,7 @@ func _swig_getPJMEDIA_TYPE_VIDEO() (_swig_ret Pjmedia_type) {
 }
 
 var PJMEDIA_TYPE_VIDEO Pjmedia_type = _swig_getPJMEDIA_TYPE_VIDEO()
+
 func _swig_getPJMEDIA_TYPE_APPLICATION() (_swig_ret Pjmedia_type) {
 	var swig_r Pjmedia_type
 	swig_r = (Pjmedia_type)(C._wrap_PJMEDIA_TYPE_APPLICATION_pjsua2_b603cabda4e82a85())
@@ -6113,6 +6374,7 @@ func _swig_getPJMEDIA_TYPE_APPLICATION() (_swig_ret Pjmedia_type) {
 }
 
 var PJMEDIA_TYPE_APPLICATION Pjmedia_type = _swig_getPJMEDIA_TYPE_APPLICATION()
+
 func _swig_getPJMEDIA_TYPE_UNKNOWN() (_swig_ret Pjmedia_type) {
 	var swig_r Pjmedia_type
 	swig_r = (Pjmedia_type)(C._wrap_PJMEDIA_TYPE_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -6120,7 +6382,9 @@ func _swig_getPJMEDIA_TYPE_UNKNOWN() (_swig_ret Pjmedia_type) {
 }
 
 var PJMEDIA_TYPE_UNKNOWN Pjmedia_type = _swig_getPJMEDIA_TYPE_UNKNOWN()
+
 type Pjmedia_dir int
+
 func _swig_getPJMEDIA_DIR_NONE() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_NONE_pjsua2_b603cabda4e82a85())
@@ -6128,6 +6392,7 @@ func _swig_getPJMEDIA_DIR_NONE() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_NONE Pjmedia_dir = _swig_getPJMEDIA_DIR_NONE()
+
 func _swig_getPJMEDIA_DIR_ENCODING() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_ENCODING_pjsua2_b603cabda4e82a85())
@@ -6135,6 +6400,7 @@ func _swig_getPJMEDIA_DIR_ENCODING() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_ENCODING Pjmedia_dir = _swig_getPJMEDIA_DIR_ENCODING()
+
 func _swig_getPJMEDIA_DIR_CAPTURE() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_CAPTURE_pjsua2_b603cabda4e82a85())
@@ -6142,6 +6408,7 @@ func _swig_getPJMEDIA_DIR_CAPTURE() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_CAPTURE Pjmedia_dir = _swig_getPJMEDIA_DIR_CAPTURE()
+
 func _swig_getPJMEDIA_DIR_DECODING() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_DECODING_pjsua2_b603cabda4e82a85())
@@ -6149,6 +6416,7 @@ func _swig_getPJMEDIA_DIR_DECODING() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_DECODING Pjmedia_dir = _swig_getPJMEDIA_DIR_DECODING()
+
 func _swig_getPJMEDIA_DIR_PLAYBACK() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_PLAYBACK_pjsua2_b603cabda4e82a85())
@@ -6156,6 +6424,7 @@ func _swig_getPJMEDIA_DIR_PLAYBACK() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_PLAYBACK Pjmedia_dir = _swig_getPJMEDIA_DIR_PLAYBACK()
+
 func _swig_getPJMEDIA_DIR_RENDER() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_RENDER_pjsua2_b603cabda4e82a85())
@@ -6163,6 +6432,7 @@ func _swig_getPJMEDIA_DIR_RENDER() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_RENDER Pjmedia_dir = _swig_getPJMEDIA_DIR_RENDER()
+
 func _swig_getPJMEDIA_DIR_ENCODING_DECODING() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_ENCODING_DECODING_pjsua2_b603cabda4e82a85())
@@ -6170,6 +6440,7 @@ func _swig_getPJMEDIA_DIR_ENCODING_DECODING() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_ENCODING_DECODING Pjmedia_dir = _swig_getPJMEDIA_DIR_ENCODING_DECODING()
+
 func _swig_getPJMEDIA_DIR_CAPTURE_PLAYBACK() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_CAPTURE_PLAYBACK_pjsua2_b603cabda4e82a85())
@@ -6177,6 +6448,7 @@ func _swig_getPJMEDIA_DIR_CAPTURE_PLAYBACK() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_CAPTURE_PLAYBACK Pjmedia_dir = _swig_getPJMEDIA_DIR_CAPTURE_PLAYBACK()
+
 func _swig_getPJMEDIA_DIR_CAPTURE_RENDER() (_swig_ret Pjmedia_dir) {
 	var swig_r Pjmedia_dir
 	swig_r = (Pjmedia_dir)(C._wrap_PJMEDIA_DIR_CAPTURE_RENDER_pjsua2_b603cabda4e82a85())
@@ -6184,7 +6456,9 @@ func _swig_getPJMEDIA_DIR_CAPTURE_RENDER() (_swig_ret Pjmedia_dir) {
 }
 
 var PJMEDIA_DIR_CAPTURE_RENDER Pjmedia_dir = _swig_getPJMEDIA_DIR_CAPTURE_RENDER()
+
 type Pjmedia_tp_proto int
+
 func _swig_getPJMEDIA_TP_PROTO_NONE() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_NONE_pjsua2_b603cabda4e82a85())
@@ -6192,6 +6466,7 @@ func _swig_getPJMEDIA_TP_PROTO_NONE() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_NONE Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_NONE()
+
 func _swig_getPJMEDIA_TP_PROTO_UNKNOWN() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -6199,6 +6474,7 @@ func _swig_getPJMEDIA_TP_PROTO_UNKNOWN() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_UNKNOWN Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_UNKNOWN()
+
 func _swig_getPJMEDIA_TP_PROTO_UDP() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_UDP_pjsua2_b603cabda4e82a85())
@@ -6206,6 +6482,7 @@ func _swig_getPJMEDIA_TP_PROTO_UDP() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_UDP Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_UDP()
+
 func _swig_getPJMEDIA_TP_PROTO_RTP() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_RTP_pjsua2_b603cabda4e82a85())
@@ -6213,6 +6490,7 @@ func _swig_getPJMEDIA_TP_PROTO_RTP() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_RTP Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_RTP()
+
 func _swig_getPJMEDIA_TP_PROTO_DTLS() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_DTLS_pjsua2_b603cabda4e82a85())
@@ -6220,6 +6498,7 @@ func _swig_getPJMEDIA_TP_PROTO_DTLS() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_DTLS Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_DTLS()
+
 func _swig_getPJMEDIA_TP_PROFILE_RTCP_FB() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROFILE_RTCP_FB_pjsua2_b603cabda4e82a85())
@@ -6227,6 +6506,7 @@ func _swig_getPJMEDIA_TP_PROFILE_RTCP_FB() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROFILE_RTCP_FB Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROFILE_RTCP_FB()
+
 func _swig_getPJMEDIA_TP_PROFILE_SRTP() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROFILE_SRTP_pjsua2_b603cabda4e82a85())
@@ -6234,6 +6514,7 @@ func _swig_getPJMEDIA_TP_PROFILE_SRTP() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROFILE_SRTP Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROFILE_SRTP()
+
 func _swig_getPJMEDIA_TP_PROFILE_AVP() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROFILE_AVP_pjsua2_b603cabda4e82a85())
@@ -6241,6 +6522,7 @@ func _swig_getPJMEDIA_TP_PROFILE_AVP() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROFILE_AVP Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROFILE_AVP()
+
 func _swig_getPJMEDIA_TP_PROTO_RTP_AVP() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_RTP_AVP_pjsua2_b603cabda4e82a85())
@@ -6248,6 +6530,7 @@ func _swig_getPJMEDIA_TP_PROTO_RTP_AVP() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_RTP_AVP Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_RTP_AVP()
+
 func _swig_getPJMEDIA_TP_PROTO_RTP_SAVP() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_RTP_SAVP_pjsua2_b603cabda4e82a85())
@@ -6255,6 +6538,7 @@ func _swig_getPJMEDIA_TP_PROTO_RTP_SAVP() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_RTP_SAVP Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_RTP_SAVP()
+
 func _swig_getPJMEDIA_TP_PROTO_DTLS_SRTP() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_DTLS_SRTP_pjsua2_b603cabda4e82a85())
@@ -6262,6 +6546,7 @@ func _swig_getPJMEDIA_TP_PROTO_DTLS_SRTP() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_DTLS_SRTP Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_DTLS_SRTP()
+
 func _swig_getPJMEDIA_TP_PROTO_RTP_AVPF() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_RTP_AVPF_pjsua2_b603cabda4e82a85())
@@ -6269,6 +6554,7 @@ func _swig_getPJMEDIA_TP_PROTO_RTP_AVPF() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_RTP_AVPF Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_RTP_AVPF()
+
 func _swig_getPJMEDIA_TP_PROTO_RTP_SAVPF() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_RTP_SAVPF_pjsua2_b603cabda4e82a85())
@@ -6276,6 +6562,7 @@ func _swig_getPJMEDIA_TP_PROTO_RTP_SAVPF() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_RTP_SAVPF Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_RTP_SAVPF()
+
 func _swig_getPJMEDIA_TP_PROTO_DTLS_SRTPF() (_swig_ret Pjmedia_tp_proto) {
 	var swig_r Pjmedia_tp_proto
 	swig_r = (Pjmedia_tp_proto)(C._wrap_PJMEDIA_TP_PROTO_DTLS_SRTPF_pjsua2_b603cabda4e82a85())
@@ -6283,7 +6570,9 @@ func _swig_getPJMEDIA_TP_PROTO_DTLS_SRTPF() (_swig_ret Pjmedia_tp_proto) {
 }
 
 var PJMEDIA_TP_PROTO_DTLS_SRTPF Pjmedia_tp_proto = _swig_getPJMEDIA_TP_PROTO_DTLS_SRTPF()
+
 type Pjmedia_orient int
+
 func _swig_getPJMEDIA_ORIENT_UNKNOWN() (_swig_ret Pjmedia_orient) {
 	var swig_r Pjmedia_orient
 	swig_r = (Pjmedia_orient)(C._wrap_PJMEDIA_ORIENT_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -6291,6 +6580,7 @@ func _swig_getPJMEDIA_ORIENT_UNKNOWN() (_swig_ret Pjmedia_orient) {
 }
 
 var PJMEDIA_ORIENT_UNKNOWN Pjmedia_orient = _swig_getPJMEDIA_ORIENT_UNKNOWN()
+
 func _swig_getPJMEDIA_ORIENT_NATURAL() (_swig_ret Pjmedia_orient) {
 	var swig_r Pjmedia_orient
 	swig_r = (Pjmedia_orient)(C._wrap_PJMEDIA_ORIENT_NATURAL_pjsua2_b603cabda4e82a85())
@@ -6298,6 +6588,7 @@ func _swig_getPJMEDIA_ORIENT_NATURAL() (_swig_ret Pjmedia_orient) {
 }
 
 var PJMEDIA_ORIENT_NATURAL Pjmedia_orient = _swig_getPJMEDIA_ORIENT_NATURAL()
+
 func _swig_getPJMEDIA_ORIENT_ROTATE_90DEG() (_swig_ret Pjmedia_orient) {
 	var swig_r Pjmedia_orient
 	swig_r = (Pjmedia_orient)(C._wrap_PJMEDIA_ORIENT_ROTATE_90DEG_pjsua2_b603cabda4e82a85())
@@ -6305,6 +6596,7 @@ func _swig_getPJMEDIA_ORIENT_ROTATE_90DEG() (_swig_ret Pjmedia_orient) {
 }
 
 var PJMEDIA_ORIENT_ROTATE_90DEG Pjmedia_orient = _swig_getPJMEDIA_ORIENT_ROTATE_90DEG()
+
 func _swig_getPJMEDIA_ORIENT_ROTATE_180DEG() (_swig_ret Pjmedia_orient) {
 	var swig_r Pjmedia_orient
 	swig_r = (Pjmedia_orient)(C._wrap_PJMEDIA_ORIENT_ROTATE_180DEG_pjsua2_b603cabda4e82a85())
@@ -6312,6 +6604,7 @@ func _swig_getPJMEDIA_ORIENT_ROTATE_180DEG() (_swig_ret Pjmedia_orient) {
 }
 
 var PJMEDIA_ORIENT_ROTATE_180DEG Pjmedia_orient = _swig_getPJMEDIA_ORIENT_ROTATE_180DEG()
+
 func _swig_getPJMEDIA_ORIENT_ROTATE_270DEG() (_swig_ret Pjmedia_orient) {
 	var swig_r Pjmedia_orient
 	swig_r = (Pjmedia_orient)(C._wrap_PJMEDIA_ORIENT_ROTATE_270DEG_pjsua2_b603cabda4e82a85())
@@ -6319,7 +6612,9 @@ func _swig_getPJMEDIA_ORIENT_ROTATE_270DEG() (_swig_ret Pjmedia_orient) {
 }
 
 var PJMEDIA_ORIENT_ROTATE_270DEG Pjmedia_orient = _swig_getPJMEDIA_ORIENT_ROTATE_270DEG()
+
 type Pjmedia_frame_type int
+
 func _swig_getPJMEDIA_FRAME_TYPE_NONE() (_swig_ret Pjmedia_frame_type) {
 	var swig_r Pjmedia_frame_type
 	swig_r = (Pjmedia_frame_type)(C._wrap_PJMEDIA_FRAME_TYPE_NONE_pjsua2_b603cabda4e82a85())
@@ -6327,6 +6622,7 @@ func _swig_getPJMEDIA_FRAME_TYPE_NONE() (_swig_ret Pjmedia_frame_type) {
 }
 
 var PJMEDIA_FRAME_TYPE_NONE Pjmedia_frame_type = _swig_getPJMEDIA_FRAME_TYPE_NONE()
+
 func _swig_getPJMEDIA_FRAME_TYPE_AUDIO() (_swig_ret Pjmedia_frame_type) {
 	var swig_r Pjmedia_frame_type
 	swig_r = (Pjmedia_frame_type)(C._wrap_PJMEDIA_FRAME_TYPE_AUDIO_pjsua2_b603cabda4e82a85())
@@ -6334,6 +6630,7 @@ func _swig_getPJMEDIA_FRAME_TYPE_AUDIO() (_swig_ret Pjmedia_frame_type) {
 }
 
 var PJMEDIA_FRAME_TYPE_AUDIO Pjmedia_frame_type = _swig_getPJMEDIA_FRAME_TYPE_AUDIO()
+
 func _swig_getPJMEDIA_FRAME_TYPE_EXTENDED() (_swig_ret Pjmedia_frame_type) {
 	var swig_r Pjmedia_frame_type
 	swig_r = (Pjmedia_frame_type)(C._wrap_PJMEDIA_FRAME_TYPE_EXTENDED_pjsua2_b603cabda4e82a85())
@@ -6341,6 +6638,7 @@ func _swig_getPJMEDIA_FRAME_TYPE_EXTENDED() (_swig_ret Pjmedia_frame_type) {
 }
 
 var PJMEDIA_FRAME_TYPE_EXTENDED Pjmedia_frame_type = _swig_getPJMEDIA_FRAME_TYPE_EXTENDED()
+
 func _swig_getPJMEDIA_FRAME_TYPE_VIDEO() (_swig_ret Pjmedia_frame_type) {
 	var swig_r Pjmedia_frame_type
 	swig_r = (Pjmedia_frame_type)(C._wrap_PJMEDIA_FRAME_TYPE_VIDEO_pjsua2_b603cabda4e82a85())
@@ -6348,7 +6646,9 @@ func _swig_getPJMEDIA_FRAME_TYPE_VIDEO() (_swig_ret Pjmedia_frame_type) {
 }
 
 var PJMEDIA_FRAME_TYPE_VIDEO Pjmedia_frame_type = _swig_getPJMEDIA_FRAME_TYPE_VIDEO()
+
 type Pjmedia_format_id int
+
 func _swig_getPJMEDIA_FORMAT_L16() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_L16_pjsua2_b603cabda4e82a85())
@@ -6356,6 +6656,7 @@ func _swig_getPJMEDIA_FORMAT_L16() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_L16 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_L16()
+
 func _swig_getPJMEDIA_FORMAT_PCM() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_PCM_pjsua2_b603cabda4e82a85())
@@ -6363,6 +6664,7 @@ func _swig_getPJMEDIA_FORMAT_PCM() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_PCM Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_PCM()
+
 func _swig_getPJMEDIA_FORMAT_PCMA() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_PCMA_pjsua2_b603cabda4e82a85())
@@ -6370,6 +6672,7 @@ func _swig_getPJMEDIA_FORMAT_PCMA() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_PCMA Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_PCMA()
+
 func _swig_getPJMEDIA_FORMAT_ALAW() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_ALAW_pjsua2_b603cabda4e82a85())
@@ -6377,6 +6680,7 @@ func _swig_getPJMEDIA_FORMAT_ALAW() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_ALAW Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_ALAW()
+
 func _swig_getPJMEDIA_FORMAT_PCMU() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_PCMU_pjsua2_b603cabda4e82a85())
@@ -6384,6 +6688,7 @@ func _swig_getPJMEDIA_FORMAT_PCMU() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_PCMU Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_PCMU()
+
 func _swig_getPJMEDIA_FORMAT_ULAW() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_ULAW_pjsua2_b603cabda4e82a85())
@@ -6391,6 +6696,7 @@ func _swig_getPJMEDIA_FORMAT_ULAW() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_ULAW Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_ULAW()
+
 func _swig_getPJMEDIA_FORMAT_AMR() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_AMR_pjsua2_b603cabda4e82a85())
@@ -6398,6 +6704,7 @@ func _swig_getPJMEDIA_FORMAT_AMR() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_AMR Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_AMR()
+
 func _swig_getPJMEDIA_FORMAT_G729() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_G729_pjsua2_b603cabda4e82a85())
@@ -6405,6 +6712,7 @@ func _swig_getPJMEDIA_FORMAT_G729() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_G729 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_G729()
+
 func _swig_getPJMEDIA_FORMAT_ILBC() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_ILBC_pjsua2_b603cabda4e82a85())
@@ -6412,6 +6720,7 @@ func _swig_getPJMEDIA_FORMAT_ILBC() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_ILBC Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_ILBC()
+
 func _swig_getPJMEDIA_FORMAT_RGB24() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_RGB24_pjsua2_b603cabda4e82a85())
@@ -6419,6 +6728,7 @@ func _swig_getPJMEDIA_FORMAT_RGB24() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_RGB24 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_RGB24()
+
 func _swig_getPJMEDIA_FORMAT_RGBA() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_RGBA_pjsua2_b603cabda4e82a85())
@@ -6426,6 +6736,7 @@ func _swig_getPJMEDIA_FORMAT_RGBA() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_RGBA Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_RGBA()
+
 func _swig_getPJMEDIA_FORMAT_BGRA() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_BGRA_pjsua2_b603cabda4e82a85())
@@ -6433,6 +6744,7 @@ func _swig_getPJMEDIA_FORMAT_BGRA() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_BGRA Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_BGRA()
+
 func _swig_getPJMEDIA_FORMAT_RGB32() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_RGB32_pjsua2_b603cabda4e82a85())
@@ -6440,6 +6752,7 @@ func _swig_getPJMEDIA_FORMAT_RGB32() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_RGB32 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_RGB32()
+
 func _swig_getPJMEDIA_FORMAT_DIB() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_DIB_pjsua2_b603cabda4e82a85())
@@ -6447,6 +6760,7 @@ func _swig_getPJMEDIA_FORMAT_DIB() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_DIB Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_DIB()
+
 func _swig_getPJMEDIA_FORMAT_GBRP() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_GBRP_pjsua2_b603cabda4e82a85())
@@ -6454,6 +6768,7 @@ func _swig_getPJMEDIA_FORMAT_GBRP() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_GBRP Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_GBRP()
+
 func _swig_getPJMEDIA_FORMAT_AYUV() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_AYUV_pjsua2_b603cabda4e82a85())
@@ -6461,6 +6776,7 @@ func _swig_getPJMEDIA_FORMAT_AYUV() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_AYUV Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_AYUV()
+
 func _swig_getPJMEDIA_FORMAT_YUY2() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_YUY2_pjsua2_b603cabda4e82a85())
@@ -6468,6 +6784,7 @@ func _swig_getPJMEDIA_FORMAT_YUY2() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_YUY2 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_YUY2()
+
 func _swig_getPJMEDIA_FORMAT_UYVY() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_UYVY_pjsua2_b603cabda4e82a85())
@@ -6475,6 +6792,7 @@ func _swig_getPJMEDIA_FORMAT_UYVY() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_UYVY Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_UYVY()
+
 func _swig_getPJMEDIA_FORMAT_YVYU() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_YVYU_pjsua2_b603cabda4e82a85())
@@ -6482,6 +6800,7 @@ func _swig_getPJMEDIA_FORMAT_YVYU() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_YVYU Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_YVYU()
+
 func _swig_getPJMEDIA_FORMAT_I420() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_I420_pjsua2_b603cabda4e82a85())
@@ -6489,6 +6808,7 @@ func _swig_getPJMEDIA_FORMAT_I420() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_I420 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_I420()
+
 func _swig_getPJMEDIA_FORMAT_IYUV() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_IYUV_pjsua2_b603cabda4e82a85())
@@ -6496,6 +6816,7 @@ func _swig_getPJMEDIA_FORMAT_IYUV() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_IYUV Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_IYUV()
+
 func _swig_getPJMEDIA_FORMAT_YV12() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_YV12_pjsua2_b603cabda4e82a85())
@@ -6503,6 +6824,7 @@ func _swig_getPJMEDIA_FORMAT_YV12() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_YV12 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_YV12()
+
 func _swig_getPJMEDIA_FORMAT_NV12() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_NV12_pjsua2_b603cabda4e82a85())
@@ -6510,6 +6832,7 @@ func _swig_getPJMEDIA_FORMAT_NV12() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_NV12 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_NV12()
+
 func _swig_getPJMEDIA_FORMAT_NV21() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_NV21_pjsua2_b603cabda4e82a85())
@@ -6517,6 +6840,7 @@ func _swig_getPJMEDIA_FORMAT_NV21() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_NV21 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_NV21()
+
 func _swig_getPJMEDIA_FORMAT_I422() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_I422_pjsua2_b603cabda4e82a85())
@@ -6524,6 +6848,7 @@ func _swig_getPJMEDIA_FORMAT_I422() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_I422 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_I422()
+
 func _swig_getPJMEDIA_FORMAT_I420JPEG() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_I420JPEG_pjsua2_b603cabda4e82a85())
@@ -6531,6 +6856,7 @@ func _swig_getPJMEDIA_FORMAT_I420JPEG() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_I420JPEG Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_I420JPEG()
+
 func _swig_getPJMEDIA_FORMAT_I422JPEG() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_I422JPEG_pjsua2_b603cabda4e82a85())
@@ -6538,6 +6864,7 @@ func _swig_getPJMEDIA_FORMAT_I422JPEG() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_I422JPEG Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_I422JPEG()
+
 func _swig_getPJMEDIA_FORMAT_H261() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_H261_pjsua2_b603cabda4e82a85())
@@ -6545,6 +6872,7 @@ func _swig_getPJMEDIA_FORMAT_H261() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_H261 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_H261()
+
 func _swig_getPJMEDIA_FORMAT_H263() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_H263_pjsua2_b603cabda4e82a85())
@@ -6552,6 +6880,7 @@ func _swig_getPJMEDIA_FORMAT_H263() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_H263 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_H263()
+
 func _swig_getPJMEDIA_FORMAT_H263P() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_H263P_pjsua2_b603cabda4e82a85())
@@ -6559,6 +6888,7 @@ func _swig_getPJMEDIA_FORMAT_H263P() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_H263P Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_H263P()
+
 func _swig_getPJMEDIA_FORMAT_H264() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_H264_pjsua2_b603cabda4e82a85())
@@ -6566,6 +6896,7 @@ func _swig_getPJMEDIA_FORMAT_H264() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_H264 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_H264()
+
 func _swig_getPJMEDIA_FORMAT_VP8() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_VP8_pjsua2_b603cabda4e82a85())
@@ -6573,6 +6904,7 @@ func _swig_getPJMEDIA_FORMAT_VP8() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_VP8 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_VP8()
+
 func _swig_getPJMEDIA_FORMAT_VP9() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_VP9_pjsua2_b603cabda4e82a85())
@@ -6580,6 +6912,7 @@ func _swig_getPJMEDIA_FORMAT_VP9() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_VP9 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_VP9()
+
 func _swig_getPJMEDIA_FORMAT_MJPEG() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_MJPEG_pjsua2_b603cabda4e82a85())
@@ -6587,6 +6920,7 @@ func _swig_getPJMEDIA_FORMAT_MJPEG() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_MJPEG Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_MJPEG()
+
 func _swig_getPJMEDIA_FORMAT_MPEG1VIDEO() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_MPEG1VIDEO_pjsua2_b603cabda4e82a85())
@@ -6594,6 +6928,7 @@ func _swig_getPJMEDIA_FORMAT_MPEG1VIDEO() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_MPEG1VIDEO Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_MPEG1VIDEO()
+
 func _swig_getPJMEDIA_FORMAT_MPEG2VIDEO() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_MPEG2VIDEO_pjsua2_b603cabda4e82a85())
@@ -6601,6 +6936,7 @@ func _swig_getPJMEDIA_FORMAT_MPEG2VIDEO() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_MPEG2VIDEO Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_MPEG2VIDEO()
+
 func _swig_getPJMEDIA_FORMAT_MPEG4() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_MPEG4_pjsua2_b603cabda4e82a85())
@@ -6608,6 +6944,7 @@ func _swig_getPJMEDIA_FORMAT_MPEG4() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_MPEG4 Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_MPEG4()
+
 func _swig_getPJMEDIA_FORMAT_INVALID() (_swig_ret Pjmedia_format_id) {
 	var swig_r Pjmedia_format_id
 	swig_r = (Pjmedia_format_id)(C._wrap_PJMEDIA_FORMAT_INVALID_pjsua2_b603cabda4e82a85())
@@ -6615,7 +6952,9 @@ func _swig_getPJMEDIA_FORMAT_INVALID() (_swig_ret Pjmedia_format_id) {
 }
 
 var PJMEDIA_FORMAT_INVALID Pjmedia_format_id = _swig_getPJMEDIA_FORMAT_INVALID()
+
 type Pjmedia_vid_packing int
+
 func _swig_getPJMEDIA_VID_PACKING_UNKNOWN() (_swig_ret Pjmedia_vid_packing) {
 	var swig_r Pjmedia_vid_packing
 	swig_r = (Pjmedia_vid_packing)(C._wrap_PJMEDIA_VID_PACKING_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -6623,6 +6962,7 @@ func _swig_getPJMEDIA_VID_PACKING_UNKNOWN() (_swig_ret Pjmedia_vid_packing) {
 }
 
 var PJMEDIA_VID_PACKING_UNKNOWN Pjmedia_vid_packing = _swig_getPJMEDIA_VID_PACKING_UNKNOWN()
+
 func _swig_getPJMEDIA_VID_PACKING_PACKETS() (_swig_ret Pjmedia_vid_packing) {
 	var swig_r Pjmedia_vid_packing
 	swig_r = (Pjmedia_vid_packing)(C._wrap_PJMEDIA_VID_PACKING_PACKETS_pjsua2_b603cabda4e82a85())
@@ -6630,6 +6970,7 @@ func _swig_getPJMEDIA_VID_PACKING_PACKETS() (_swig_ret Pjmedia_vid_packing) {
 }
 
 var PJMEDIA_VID_PACKING_PACKETS Pjmedia_vid_packing = _swig_getPJMEDIA_VID_PACKING_PACKETS()
+
 func _swig_getPJMEDIA_VID_PACKING_WHOLE() (_swig_ret Pjmedia_vid_packing) {
 	var swig_r Pjmedia_vid_packing
 	swig_r = (Pjmedia_vid_packing)(C._wrap_PJMEDIA_VID_PACKING_WHOLE_pjsua2_b603cabda4e82a85())
@@ -6637,7 +6978,9 @@ func _swig_getPJMEDIA_VID_PACKING_WHOLE() (_swig_ret Pjmedia_vid_packing) {
 }
 
 var PJMEDIA_VID_PACKING_WHOLE Pjmedia_vid_packing = _swig_getPJMEDIA_VID_PACKING_WHOLE()
+
 type Pjmedia_rtcp_fb_type int
+
 func _swig_getPJMEDIA_RTCP_FB_ACK() (_swig_ret Pjmedia_rtcp_fb_type) {
 	var swig_r Pjmedia_rtcp_fb_type
 	swig_r = (Pjmedia_rtcp_fb_type)(C._wrap_PJMEDIA_RTCP_FB_ACK_pjsua2_b603cabda4e82a85())
@@ -6645,6 +6988,7 @@ func _swig_getPJMEDIA_RTCP_FB_ACK() (_swig_ret Pjmedia_rtcp_fb_type) {
 }
 
 var PJMEDIA_RTCP_FB_ACK Pjmedia_rtcp_fb_type = _swig_getPJMEDIA_RTCP_FB_ACK()
+
 func _swig_getPJMEDIA_RTCP_FB_NACK() (_swig_ret Pjmedia_rtcp_fb_type) {
 	var swig_r Pjmedia_rtcp_fb_type
 	swig_r = (Pjmedia_rtcp_fb_type)(C._wrap_PJMEDIA_RTCP_FB_NACK_pjsua2_b603cabda4e82a85())
@@ -6652,6 +6996,7 @@ func _swig_getPJMEDIA_RTCP_FB_NACK() (_swig_ret Pjmedia_rtcp_fb_type) {
 }
 
 var PJMEDIA_RTCP_FB_NACK Pjmedia_rtcp_fb_type = _swig_getPJMEDIA_RTCP_FB_NACK()
+
 func _swig_getPJMEDIA_RTCP_FB_TRR_INT() (_swig_ret Pjmedia_rtcp_fb_type) {
 	var swig_r Pjmedia_rtcp_fb_type
 	swig_r = (Pjmedia_rtcp_fb_type)(C._wrap_PJMEDIA_RTCP_FB_TRR_INT_pjsua2_b603cabda4e82a85())
@@ -6659,6 +7004,7 @@ func _swig_getPJMEDIA_RTCP_FB_TRR_INT() (_swig_ret Pjmedia_rtcp_fb_type) {
 }
 
 var PJMEDIA_RTCP_FB_TRR_INT Pjmedia_rtcp_fb_type = _swig_getPJMEDIA_RTCP_FB_TRR_INT()
+
 func _swig_getPJMEDIA_RTCP_FB_OTHER() (_swig_ret Pjmedia_rtcp_fb_type) {
 	var swig_r Pjmedia_rtcp_fb_type
 	swig_r = (Pjmedia_rtcp_fb_type)(C._wrap_PJMEDIA_RTCP_FB_OTHER_pjsua2_b603cabda4e82a85())
@@ -6666,7 +7012,9 @@ func _swig_getPJMEDIA_RTCP_FB_OTHER() (_swig_ret Pjmedia_rtcp_fb_type) {
 }
 
 var PJMEDIA_RTCP_FB_OTHER Pjmedia_rtcp_fb_type = _swig_getPJMEDIA_RTCP_FB_OTHER()
+
 type Pjsip_cred_data_type int
+
 func _swig_getPJSIP_CRED_DATA_PLAIN_PASSWD() (_swig_ret Pjsip_cred_data_type) {
 	var swig_r Pjsip_cred_data_type
 	swig_r = (Pjsip_cred_data_type)(C._wrap_PJSIP_CRED_DATA_PLAIN_PASSWD_pjsua2_b603cabda4e82a85())
@@ -6674,6 +7022,7 @@ func _swig_getPJSIP_CRED_DATA_PLAIN_PASSWD() (_swig_ret Pjsip_cred_data_type) {
 }
 
 var PJSIP_CRED_DATA_PLAIN_PASSWD Pjsip_cred_data_type = _swig_getPJSIP_CRED_DATA_PLAIN_PASSWD()
+
 func _swig_getPJSIP_CRED_DATA_DIGEST() (_swig_ret Pjsip_cred_data_type) {
 	var swig_r Pjsip_cred_data_type
 	swig_r = (Pjsip_cred_data_type)(C._wrap_PJSIP_CRED_DATA_DIGEST_pjsua2_b603cabda4e82a85())
@@ -6681,6 +7030,7 @@ func _swig_getPJSIP_CRED_DATA_DIGEST() (_swig_ret Pjsip_cred_data_type) {
 }
 
 var PJSIP_CRED_DATA_DIGEST Pjsip_cred_data_type = _swig_getPJSIP_CRED_DATA_DIGEST()
+
 func _swig_getPJSIP_CRED_DATA_EXT_AKA() (_swig_ret Pjsip_cred_data_type) {
 	var swig_r Pjsip_cred_data_type
 	swig_r = (Pjsip_cred_data_type)(C._wrap_PJSIP_CRED_DATA_EXT_AKA_pjsua2_b603cabda4e82a85())
@@ -6688,7 +7038,9 @@ func _swig_getPJSIP_CRED_DATA_EXT_AKA() (_swig_ret Pjsip_cred_data_type) {
 }
 
 var PJSIP_CRED_DATA_EXT_AKA Pjsip_cred_data_type = _swig_getPJSIP_CRED_DATA_EXT_AKA()
+
 type Pjsip_auth_algorithm_type int
+
 func _swig_getPJSIP_AUTH_ALGORITHM_NOT_SET() (_swig_ret Pjsip_auth_algorithm_type) {
 	var swig_r Pjsip_auth_algorithm_type
 	swig_r = (Pjsip_auth_algorithm_type)(C._wrap_PJSIP_AUTH_ALGORITHM_NOT_SET_pjsua2_b603cabda4e82a85())
@@ -6696,6 +7048,7 @@ func _swig_getPJSIP_AUTH_ALGORITHM_NOT_SET() (_swig_ret Pjsip_auth_algorithm_typ
 }
 
 var PJSIP_AUTH_ALGORITHM_NOT_SET Pjsip_auth_algorithm_type = _swig_getPJSIP_AUTH_ALGORITHM_NOT_SET()
+
 func _swig_getPJSIP_AUTH_ALGORITHM_MD5() (_swig_ret Pjsip_auth_algorithm_type) {
 	var swig_r Pjsip_auth_algorithm_type
 	swig_r = (Pjsip_auth_algorithm_type)(C._wrap_PJSIP_AUTH_ALGORITHM_MD5_pjsua2_b603cabda4e82a85())
@@ -6703,6 +7056,7 @@ func _swig_getPJSIP_AUTH_ALGORITHM_MD5() (_swig_ret Pjsip_auth_algorithm_type) {
 }
 
 var PJSIP_AUTH_ALGORITHM_MD5 Pjsip_auth_algorithm_type = _swig_getPJSIP_AUTH_ALGORITHM_MD5()
+
 func _swig_getPJSIP_AUTH_ALGORITHM_SHA256() (_swig_ret Pjsip_auth_algorithm_type) {
 	var swig_r Pjsip_auth_algorithm_type
 	swig_r = (Pjsip_auth_algorithm_type)(C._wrap_PJSIP_AUTH_ALGORITHM_SHA256_pjsua2_b603cabda4e82a85())
@@ -6710,6 +7064,7 @@ func _swig_getPJSIP_AUTH_ALGORITHM_SHA256() (_swig_ret Pjsip_auth_algorithm_type
 }
 
 var PJSIP_AUTH_ALGORITHM_SHA256 Pjsip_auth_algorithm_type = _swig_getPJSIP_AUTH_ALGORITHM_SHA256()
+
 func _swig_getPJSIP_AUTH_ALGORITHM_SHA512_256() (_swig_ret Pjsip_auth_algorithm_type) {
 	var swig_r Pjsip_auth_algorithm_type
 	swig_r = (Pjsip_auth_algorithm_type)(C._wrap_PJSIP_AUTH_ALGORITHM_SHA512_256_pjsua2_b603cabda4e82a85())
@@ -6717,6 +7072,7 @@ func _swig_getPJSIP_AUTH_ALGORITHM_SHA512_256() (_swig_ret Pjsip_auth_algorithm_
 }
 
 var PJSIP_AUTH_ALGORITHM_SHA512_256 Pjsip_auth_algorithm_type = _swig_getPJSIP_AUTH_ALGORITHM_SHA512_256()
+
 func _swig_getPJSIP_AUTH_ALGORITHM_AKAV1_MD5() (_swig_ret Pjsip_auth_algorithm_type) {
 	var swig_r Pjsip_auth_algorithm_type
 	swig_r = (Pjsip_auth_algorithm_type)(C._wrap_PJSIP_AUTH_ALGORITHM_AKAV1_MD5_pjsua2_b603cabda4e82a85())
@@ -6724,6 +7080,7 @@ func _swig_getPJSIP_AUTH_ALGORITHM_AKAV1_MD5() (_swig_ret Pjsip_auth_algorithm_t
 }
 
 var PJSIP_AUTH_ALGORITHM_AKAV1_MD5 Pjsip_auth_algorithm_type = _swig_getPJSIP_AUTH_ALGORITHM_AKAV1_MD5()
+
 func _swig_getPJSIP_AUTH_ALGORITHM_AKAV2_MD5() (_swig_ret Pjsip_auth_algorithm_type) {
 	var swig_r Pjsip_auth_algorithm_type
 	swig_r = (Pjsip_auth_algorithm_type)(C._wrap_PJSIP_AUTH_ALGORITHM_AKAV2_MD5_pjsua2_b603cabda4e82a85())
@@ -6731,6 +7088,7 @@ func _swig_getPJSIP_AUTH_ALGORITHM_AKAV2_MD5() (_swig_ret Pjsip_auth_algorithm_t
 }
 
 var PJSIP_AUTH_ALGORITHM_AKAV2_MD5 Pjsip_auth_algorithm_type = _swig_getPJSIP_AUTH_ALGORITHM_AKAV2_MD5()
+
 func _swig_getPJSIP_AUTH_ALGORITHM_COUNT() (_swig_ret Pjsip_auth_algorithm_type) {
 	var swig_r Pjsip_auth_algorithm_type
 	swig_r = (Pjsip_auth_algorithm_type)(C._wrap_PJSIP_AUTH_ALGORITHM_COUNT_pjsua2_b603cabda4e82a85())
@@ -6738,7 +7096,9 @@ func _swig_getPJSIP_AUTH_ALGORITHM_COUNT() (_swig_ret Pjsip_auth_algorithm_type)
 }
 
 var PJSIP_AUTH_ALGORITHM_COUNT Pjsip_auth_algorithm_type = _swig_getPJSIP_AUTH_ALGORITHM_COUNT()
+
 type Pjsip_dialog_cap_status int
+
 func _swig_getPJSIP_DIALOG_CAP_UNSUPPORTED() (_swig_ret Pjsip_dialog_cap_status) {
 	var swig_r Pjsip_dialog_cap_status
 	swig_r = (Pjsip_dialog_cap_status)(C._wrap_PJSIP_DIALOG_CAP_UNSUPPORTED_pjsua2_b603cabda4e82a85())
@@ -6746,6 +7106,7 @@ func _swig_getPJSIP_DIALOG_CAP_UNSUPPORTED() (_swig_ret Pjsip_dialog_cap_status)
 }
 
 var PJSIP_DIALOG_CAP_UNSUPPORTED Pjsip_dialog_cap_status = _swig_getPJSIP_DIALOG_CAP_UNSUPPORTED()
+
 func _swig_getPJSIP_DIALOG_CAP_SUPPORTED() (_swig_ret Pjsip_dialog_cap_status) {
 	var swig_r Pjsip_dialog_cap_status
 	swig_r = (Pjsip_dialog_cap_status)(C._wrap_PJSIP_DIALOG_CAP_SUPPORTED_pjsua2_b603cabda4e82a85())
@@ -6753,6 +7114,7 @@ func _swig_getPJSIP_DIALOG_CAP_SUPPORTED() (_swig_ret Pjsip_dialog_cap_status) {
 }
 
 var PJSIP_DIALOG_CAP_SUPPORTED Pjsip_dialog_cap_status = _swig_getPJSIP_DIALOG_CAP_SUPPORTED()
+
 func _swig_getPJSIP_DIALOG_CAP_UNKNOWN() (_swig_ret Pjsip_dialog_cap_status) {
 	var swig_r Pjsip_dialog_cap_status
 	swig_r = (Pjsip_dialog_cap_status)(C._wrap_PJSIP_DIALOG_CAP_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -6760,7 +7122,9 @@ func _swig_getPJSIP_DIALOG_CAP_UNKNOWN() (_swig_ret Pjsip_dialog_cap_status) {
 }
 
 var PJSIP_DIALOG_CAP_UNKNOWN Pjsip_dialog_cap_status = _swig_getPJSIP_DIALOG_CAP_UNKNOWN()
+
 type Pjsip_event_id_e int
+
 func _swig_getPJSIP_EVENT_UNKNOWN() (_swig_ret Pjsip_event_id_e) {
 	var swig_r Pjsip_event_id_e
 	swig_r = (Pjsip_event_id_e)(C._wrap_PJSIP_EVENT_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -6768,6 +7132,7 @@ func _swig_getPJSIP_EVENT_UNKNOWN() (_swig_ret Pjsip_event_id_e) {
 }
 
 var PJSIP_EVENT_UNKNOWN Pjsip_event_id_e = _swig_getPJSIP_EVENT_UNKNOWN()
+
 func _swig_getPJSIP_EVENT_TIMER() (_swig_ret Pjsip_event_id_e) {
 	var swig_r Pjsip_event_id_e
 	swig_r = (Pjsip_event_id_e)(C._wrap_PJSIP_EVENT_TIMER_pjsua2_b603cabda4e82a85())
@@ -6775,6 +7140,7 @@ func _swig_getPJSIP_EVENT_TIMER() (_swig_ret Pjsip_event_id_e) {
 }
 
 var PJSIP_EVENT_TIMER Pjsip_event_id_e = _swig_getPJSIP_EVENT_TIMER()
+
 func _swig_getPJSIP_EVENT_TX_MSG() (_swig_ret Pjsip_event_id_e) {
 	var swig_r Pjsip_event_id_e
 	swig_r = (Pjsip_event_id_e)(C._wrap_PJSIP_EVENT_TX_MSG_pjsua2_b603cabda4e82a85())
@@ -6782,6 +7148,7 @@ func _swig_getPJSIP_EVENT_TX_MSG() (_swig_ret Pjsip_event_id_e) {
 }
 
 var PJSIP_EVENT_TX_MSG Pjsip_event_id_e = _swig_getPJSIP_EVENT_TX_MSG()
+
 func _swig_getPJSIP_EVENT_RX_MSG() (_swig_ret Pjsip_event_id_e) {
 	var swig_r Pjsip_event_id_e
 	swig_r = (Pjsip_event_id_e)(C._wrap_PJSIP_EVENT_RX_MSG_pjsua2_b603cabda4e82a85())
@@ -6789,6 +7156,7 @@ func _swig_getPJSIP_EVENT_RX_MSG() (_swig_ret Pjsip_event_id_e) {
 }
 
 var PJSIP_EVENT_RX_MSG Pjsip_event_id_e = _swig_getPJSIP_EVENT_RX_MSG()
+
 func _swig_getPJSIP_EVENT_TRANSPORT_ERROR() (_swig_ret Pjsip_event_id_e) {
 	var swig_r Pjsip_event_id_e
 	swig_r = (Pjsip_event_id_e)(C._wrap_PJSIP_EVENT_TRANSPORT_ERROR_pjsua2_b603cabda4e82a85())
@@ -6796,6 +7164,7 @@ func _swig_getPJSIP_EVENT_TRANSPORT_ERROR() (_swig_ret Pjsip_event_id_e) {
 }
 
 var PJSIP_EVENT_TRANSPORT_ERROR Pjsip_event_id_e = _swig_getPJSIP_EVENT_TRANSPORT_ERROR()
+
 func _swig_getPJSIP_EVENT_TSX_STATE() (_swig_ret Pjsip_event_id_e) {
 	var swig_r Pjsip_event_id_e
 	swig_r = (Pjsip_event_id_e)(C._wrap_PJSIP_EVENT_TSX_STATE_pjsua2_b603cabda4e82a85())
@@ -6803,6 +7172,7 @@ func _swig_getPJSIP_EVENT_TSX_STATE() (_swig_ret Pjsip_event_id_e) {
 }
 
 var PJSIP_EVENT_TSX_STATE Pjsip_event_id_e = _swig_getPJSIP_EVENT_TSX_STATE()
+
 func _swig_getPJSIP_EVENT_USER() (_swig_ret Pjsip_event_id_e) {
 	var swig_r Pjsip_event_id_e
 	swig_r = (Pjsip_event_id_e)(C._wrap_PJSIP_EVENT_USER_pjsua2_b603cabda4e82a85())
@@ -6810,7 +7180,9 @@ func _swig_getPJSIP_EVENT_USER() (_swig_ret Pjsip_event_id_e) {
 }
 
 var PJSIP_EVENT_USER Pjsip_event_id_e = _swig_getPJSIP_EVENT_USER()
+
 type Pjsip_status_code int
+
 func _swig_getPJSIP_SC_NULL() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_NULL_pjsua2_b603cabda4e82a85())
@@ -6818,6 +7190,7 @@ func _swig_getPJSIP_SC_NULL() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_NULL Pjsip_status_code = _swig_getPJSIP_SC_NULL()
+
 func _swig_getPJSIP_SC_TRYING() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_TRYING_pjsua2_b603cabda4e82a85())
@@ -6825,6 +7198,7 @@ func _swig_getPJSIP_SC_TRYING() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_TRYING Pjsip_status_code = _swig_getPJSIP_SC_TRYING()
+
 func _swig_getPJSIP_SC_RINGING() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_RINGING_pjsua2_b603cabda4e82a85())
@@ -6832,6 +7206,7 @@ func _swig_getPJSIP_SC_RINGING() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_RINGING Pjsip_status_code = _swig_getPJSIP_SC_RINGING()
+
 func _swig_getPJSIP_SC_CALL_BEING_FORWARDED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_CALL_BEING_FORWARDED_pjsua2_b603cabda4e82a85())
@@ -6839,6 +7214,7 @@ func _swig_getPJSIP_SC_CALL_BEING_FORWARDED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_CALL_BEING_FORWARDED Pjsip_status_code = _swig_getPJSIP_SC_CALL_BEING_FORWARDED()
+
 func _swig_getPJSIP_SC_QUEUED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_QUEUED_pjsua2_b603cabda4e82a85())
@@ -6846,6 +7222,7 @@ func _swig_getPJSIP_SC_QUEUED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_QUEUED Pjsip_status_code = _swig_getPJSIP_SC_QUEUED()
+
 func _swig_getPJSIP_SC_PROGRESS() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_PROGRESS_pjsua2_b603cabda4e82a85())
@@ -6853,6 +7230,7 @@ func _swig_getPJSIP_SC_PROGRESS() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_PROGRESS Pjsip_status_code = _swig_getPJSIP_SC_PROGRESS()
+
 func _swig_getPJSIP_SC_EARLY_DIALOG_TERMINATED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_EARLY_DIALOG_TERMINATED_pjsua2_b603cabda4e82a85())
@@ -6860,6 +7238,7 @@ func _swig_getPJSIP_SC_EARLY_DIALOG_TERMINATED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_EARLY_DIALOG_TERMINATED Pjsip_status_code = _swig_getPJSIP_SC_EARLY_DIALOG_TERMINATED()
+
 func _swig_getPJSIP_SC_OK() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_OK_pjsua2_b603cabda4e82a85())
@@ -6867,6 +7246,7 @@ func _swig_getPJSIP_SC_OK() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_OK Pjsip_status_code = _swig_getPJSIP_SC_OK()
+
 func _swig_getPJSIP_SC_ACCEPTED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_ACCEPTED_pjsua2_b603cabda4e82a85())
@@ -6874,6 +7254,7 @@ func _swig_getPJSIP_SC_ACCEPTED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_ACCEPTED Pjsip_status_code = _swig_getPJSIP_SC_ACCEPTED()
+
 func _swig_getPJSIP_SC_NO_NOTIFICATION() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_NO_NOTIFICATION_pjsua2_b603cabda4e82a85())
@@ -6881,6 +7262,7 @@ func _swig_getPJSIP_SC_NO_NOTIFICATION() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_NO_NOTIFICATION Pjsip_status_code = _swig_getPJSIP_SC_NO_NOTIFICATION()
+
 func _swig_getPJSIP_SC_MULTIPLE_CHOICES() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_MULTIPLE_CHOICES_pjsua2_b603cabda4e82a85())
@@ -6888,6 +7270,7 @@ func _swig_getPJSIP_SC_MULTIPLE_CHOICES() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_MULTIPLE_CHOICES Pjsip_status_code = _swig_getPJSIP_SC_MULTIPLE_CHOICES()
+
 func _swig_getPJSIP_SC_MOVED_PERMANENTLY() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_MOVED_PERMANENTLY_pjsua2_b603cabda4e82a85())
@@ -6895,6 +7278,7 @@ func _swig_getPJSIP_SC_MOVED_PERMANENTLY() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_MOVED_PERMANENTLY Pjsip_status_code = _swig_getPJSIP_SC_MOVED_PERMANENTLY()
+
 func _swig_getPJSIP_SC_MOVED_TEMPORARILY() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_MOVED_TEMPORARILY_pjsua2_b603cabda4e82a85())
@@ -6902,6 +7286,7 @@ func _swig_getPJSIP_SC_MOVED_TEMPORARILY() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_MOVED_TEMPORARILY Pjsip_status_code = _swig_getPJSIP_SC_MOVED_TEMPORARILY()
+
 func _swig_getPJSIP_SC_USE_PROXY() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_USE_PROXY_pjsua2_b603cabda4e82a85())
@@ -6909,6 +7294,7 @@ func _swig_getPJSIP_SC_USE_PROXY() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_USE_PROXY Pjsip_status_code = _swig_getPJSIP_SC_USE_PROXY()
+
 func _swig_getPJSIP_SC_ALTERNATIVE_SERVICE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_ALTERNATIVE_SERVICE_pjsua2_b603cabda4e82a85())
@@ -6916,6 +7302,7 @@ func _swig_getPJSIP_SC_ALTERNATIVE_SERVICE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_ALTERNATIVE_SERVICE Pjsip_status_code = _swig_getPJSIP_SC_ALTERNATIVE_SERVICE()
+
 func _swig_getPJSIP_SC_BAD_REQUEST() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BAD_REQUEST_pjsua2_b603cabda4e82a85())
@@ -6923,6 +7310,7 @@ func _swig_getPJSIP_SC_BAD_REQUEST() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BAD_REQUEST Pjsip_status_code = _swig_getPJSIP_SC_BAD_REQUEST()
+
 func _swig_getPJSIP_SC_UNAUTHORIZED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_UNAUTHORIZED_pjsua2_b603cabda4e82a85())
@@ -6930,6 +7318,7 @@ func _swig_getPJSIP_SC_UNAUTHORIZED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_UNAUTHORIZED Pjsip_status_code = _swig_getPJSIP_SC_UNAUTHORIZED()
+
 func _swig_getPJSIP_SC_PAYMENT_REQUIRED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_PAYMENT_REQUIRED_pjsua2_b603cabda4e82a85())
@@ -6937,6 +7326,7 @@ func _swig_getPJSIP_SC_PAYMENT_REQUIRED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_PAYMENT_REQUIRED Pjsip_status_code = _swig_getPJSIP_SC_PAYMENT_REQUIRED()
+
 func _swig_getPJSIP_SC_FORBIDDEN() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_FORBIDDEN_pjsua2_b603cabda4e82a85())
@@ -6944,6 +7334,7 @@ func _swig_getPJSIP_SC_FORBIDDEN() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_FORBIDDEN Pjsip_status_code = _swig_getPJSIP_SC_FORBIDDEN()
+
 func _swig_getPJSIP_SC_NOT_FOUND() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_NOT_FOUND_pjsua2_b603cabda4e82a85())
@@ -6951,6 +7342,7 @@ func _swig_getPJSIP_SC_NOT_FOUND() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_NOT_FOUND Pjsip_status_code = _swig_getPJSIP_SC_NOT_FOUND()
+
 func _swig_getPJSIP_SC_METHOD_NOT_ALLOWED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_METHOD_NOT_ALLOWED_pjsua2_b603cabda4e82a85())
@@ -6958,6 +7350,7 @@ func _swig_getPJSIP_SC_METHOD_NOT_ALLOWED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_METHOD_NOT_ALLOWED Pjsip_status_code = _swig_getPJSIP_SC_METHOD_NOT_ALLOWED()
+
 func _swig_getPJSIP_SC_NOT_ACCEPTABLE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_NOT_ACCEPTABLE_pjsua2_b603cabda4e82a85())
@@ -6965,6 +7358,7 @@ func _swig_getPJSIP_SC_NOT_ACCEPTABLE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_NOT_ACCEPTABLE Pjsip_status_code = _swig_getPJSIP_SC_NOT_ACCEPTABLE()
+
 func _swig_getPJSIP_SC_PROXY_AUTHENTICATION_REQUIRED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_PROXY_AUTHENTICATION_REQUIRED_pjsua2_b603cabda4e82a85())
@@ -6972,6 +7366,7 @@ func _swig_getPJSIP_SC_PROXY_AUTHENTICATION_REQUIRED() (_swig_ret Pjsip_status_c
 }
 
 var PJSIP_SC_PROXY_AUTHENTICATION_REQUIRED Pjsip_status_code = _swig_getPJSIP_SC_PROXY_AUTHENTICATION_REQUIRED()
+
 func _swig_getPJSIP_SC_REQUEST_TIMEOUT() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_REQUEST_TIMEOUT_pjsua2_b603cabda4e82a85())
@@ -6979,6 +7374,7 @@ func _swig_getPJSIP_SC_REQUEST_TIMEOUT() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_REQUEST_TIMEOUT Pjsip_status_code = _swig_getPJSIP_SC_REQUEST_TIMEOUT()
+
 func _swig_getPJSIP_SC_CONFLICT() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_CONFLICT_pjsua2_b603cabda4e82a85())
@@ -6986,6 +7382,7 @@ func _swig_getPJSIP_SC_CONFLICT() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_CONFLICT Pjsip_status_code = _swig_getPJSIP_SC_CONFLICT()
+
 func _swig_getPJSIP_SC_GONE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_GONE_pjsua2_b603cabda4e82a85())
@@ -6993,6 +7390,7 @@ func _swig_getPJSIP_SC_GONE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_GONE Pjsip_status_code = _swig_getPJSIP_SC_GONE()
+
 func _swig_getPJSIP_SC_LENGTH_REQUIRED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_LENGTH_REQUIRED_pjsua2_b603cabda4e82a85())
@@ -7000,6 +7398,7 @@ func _swig_getPJSIP_SC_LENGTH_REQUIRED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_LENGTH_REQUIRED Pjsip_status_code = _swig_getPJSIP_SC_LENGTH_REQUIRED()
+
 func _swig_getPJSIP_SC_CONDITIONAL_REQUEST_FAILED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_CONDITIONAL_REQUEST_FAILED_pjsua2_b603cabda4e82a85())
@@ -7007,6 +7406,7 @@ func _swig_getPJSIP_SC_CONDITIONAL_REQUEST_FAILED() (_swig_ret Pjsip_status_code
 }
 
 var PJSIP_SC_CONDITIONAL_REQUEST_FAILED Pjsip_status_code = _swig_getPJSIP_SC_CONDITIONAL_REQUEST_FAILED()
+
 func _swig_getPJSIP_SC_REQUEST_ENTITY_TOO_LARGE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_REQUEST_ENTITY_TOO_LARGE_pjsua2_b603cabda4e82a85())
@@ -7014,6 +7414,7 @@ func _swig_getPJSIP_SC_REQUEST_ENTITY_TOO_LARGE() (_swig_ret Pjsip_status_code) 
 }
 
 var PJSIP_SC_REQUEST_ENTITY_TOO_LARGE Pjsip_status_code = _swig_getPJSIP_SC_REQUEST_ENTITY_TOO_LARGE()
+
 func _swig_getPJSIP_SC_REQUEST_URI_TOO_LONG() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_REQUEST_URI_TOO_LONG_pjsua2_b603cabda4e82a85())
@@ -7021,6 +7422,7 @@ func _swig_getPJSIP_SC_REQUEST_URI_TOO_LONG() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_REQUEST_URI_TOO_LONG Pjsip_status_code = _swig_getPJSIP_SC_REQUEST_URI_TOO_LONG()
+
 func _swig_getPJSIP_SC_UNSUPPORTED_MEDIA_TYPE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_UNSUPPORTED_MEDIA_TYPE_pjsua2_b603cabda4e82a85())
@@ -7028,6 +7430,7 @@ func _swig_getPJSIP_SC_UNSUPPORTED_MEDIA_TYPE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_UNSUPPORTED_MEDIA_TYPE Pjsip_status_code = _swig_getPJSIP_SC_UNSUPPORTED_MEDIA_TYPE()
+
 func _swig_getPJSIP_SC_UNSUPPORTED_URI_SCHEME() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_UNSUPPORTED_URI_SCHEME_pjsua2_b603cabda4e82a85())
@@ -7035,6 +7438,7 @@ func _swig_getPJSIP_SC_UNSUPPORTED_URI_SCHEME() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_UNSUPPORTED_URI_SCHEME Pjsip_status_code = _swig_getPJSIP_SC_UNSUPPORTED_URI_SCHEME()
+
 func _swig_getPJSIP_SC_UNKNOWN_RESOURCE_PRIORITY() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_UNKNOWN_RESOURCE_PRIORITY_pjsua2_b603cabda4e82a85())
@@ -7042,6 +7446,7 @@ func _swig_getPJSIP_SC_UNKNOWN_RESOURCE_PRIORITY() (_swig_ret Pjsip_status_code)
 }
 
 var PJSIP_SC_UNKNOWN_RESOURCE_PRIORITY Pjsip_status_code = _swig_getPJSIP_SC_UNKNOWN_RESOURCE_PRIORITY()
+
 func _swig_getPJSIP_SC_BAD_EXTENSION() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BAD_EXTENSION_pjsua2_b603cabda4e82a85())
@@ -7049,6 +7454,7 @@ func _swig_getPJSIP_SC_BAD_EXTENSION() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BAD_EXTENSION Pjsip_status_code = _swig_getPJSIP_SC_BAD_EXTENSION()
+
 func _swig_getPJSIP_SC_EXTENSION_REQUIRED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_EXTENSION_REQUIRED_pjsua2_b603cabda4e82a85())
@@ -7056,6 +7462,7 @@ func _swig_getPJSIP_SC_EXTENSION_REQUIRED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_EXTENSION_REQUIRED Pjsip_status_code = _swig_getPJSIP_SC_EXTENSION_REQUIRED()
+
 func _swig_getPJSIP_SC_SESSION_TIMER_TOO_SMALL() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_SESSION_TIMER_TOO_SMALL_pjsua2_b603cabda4e82a85())
@@ -7063,6 +7470,7 @@ func _swig_getPJSIP_SC_SESSION_TIMER_TOO_SMALL() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_SESSION_TIMER_TOO_SMALL Pjsip_status_code = _swig_getPJSIP_SC_SESSION_TIMER_TOO_SMALL()
+
 func _swig_getPJSIP_SC_INTERVAL_TOO_BRIEF() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_INTERVAL_TOO_BRIEF_pjsua2_b603cabda4e82a85())
@@ -7070,6 +7478,7 @@ func _swig_getPJSIP_SC_INTERVAL_TOO_BRIEF() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_INTERVAL_TOO_BRIEF Pjsip_status_code = _swig_getPJSIP_SC_INTERVAL_TOO_BRIEF()
+
 func _swig_getPJSIP_SC_BAD_LOCATION_INFORMATION() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BAD_LOCATION_INFORMATION_pjsua2_b603cabda4e82a85())
@@ -7077,6 +7486,7 @@ func _swig_getPJSIP_SC_BAD_LOCATION_INFORMATION() (_swig_ret Pjsip_status_code) 
 }
 
 var PJSIP_SC_BAD_LOCATION_INFORMATION Pjsip_status_code = _swig_getPJSIP_SC_BAD_LOCATION_INFORMATION()
+
 func _swig_getPJSIP_SC_USE_IDENTITY_HEADER() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_USE_IDENTITY_HEADER_pjsua2_b603cabda4e82a85())
@@ -7084,6 +7494,7 @@ func _swig_getPJSIP_SC_USE_IDENTITY_HEADER() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_USE_IDENTITY_HEADER Pjsip_status_code = _swig_getPJSIP_SC_USE_IDENTITY_HEADER()
+
 func _swig_getPJSIP_SC_PROVIDE_REFERRER_HEADER() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_PROVIDE_REFERRER_HEADER_pjsua2_b603cabda4e82a85())
@@ -7091,6 +7502,7 @@ func _swig_getPJSIP_SC_PROVIDE_REFERRER_HEADER() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_PROVIDE_REFERRER_HEADER Pjsip_status_code = _swig_getPJSIP_SC_PROVIDE_REFERRER_HEADER()
+
 func _swig_getPJSIP_SC_FLOW_FAILED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_FLOW_FAILED_pjsua2_b603cabda4e82a85())
@@ -7098,6 +7510,7 @@ func _swig_getPJSIP_SC_FLOW_FAILED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_FLOW_FAILED Pjsip_status_code = _swig_getPJSIP_SC_FLOW_FAILED()
+
 func _swig_getPJSIP_SC_ANONIMITY_DISALLOWED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_ANONIMITY_DISALLOWED_pjsua2_b603cabda4e82a85())
@@ -7105,6 +7518,7 @@ func _swig_getPJSIP_SC_ANONIMITY_DISALLOWED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_ANONIMITY_DISALLOWED Pjsip_status_code = _swig_getPJSIP_SC_ANONIMITY_DISALLOWED()
+
 func _swig_getPJSIP_SC_BAD_IDENTITY_INFO() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BAD_IDENTITY_INFO_pjsua2_b603cabda4e82a85())
@@ -7112,6 +7526,7 @@ func _swig_getPJSIP_SC_BAD_IDENTITY_INFO() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BAD_IDENTITY_INFO Pjsip_status_code = _swig_getPJSIP_SC_BAD_IDENTITY_INFO()
+
 func _swig_getPJSIP_SC_UNSUPPORTED_CERTIFICATE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_UNSUPPORTED_CERTIFICATE_pjsua2_b603cabda4e82a85())
@@ -7119,6 +7534,7 @@ func _swig_getPJSIP_SC_UNSUPPORTED_CERTIFICATE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_UNSUPPORTED_CERTIFICATE Pjsip_status_code = _swig_getPJSIP_SC_UNSUPPORTED_CERTIFICATE()
+
 func _swig_getPJSIP_SC_INVALID_IDENTITY_HEADER() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_INVALID_IDENTITY_HEADER_pjsua2_b603cabda4e82a85())
@@ -7126,6 +7542,7 @@ func _swig_getPJSIP_SC_INVALID_IDENTITY_HEADER() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_INVALID_IDENTITY_HEADER Pjsip_status_code = _swig_getPJSIP_SC_INVALID_IDENTITY_HEADER()
+
 func _swig_getPJSIP_SC_FIRST_HOP_LACKS_OUTBOUND_SUPPORT() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_FIRST_HOP_LACKS_OUTBOUND_SUPPORT_pjsua2_b603cabda4e82a85())
@@ -7133,6 +7550,7 @@ func _swig_getPJSIP_SC_FIRST_HOP_LACKS_OUTBOUND_SUPPORT() (_swig_ret Pjsip_statu
 }
 
 var PJSIP_SC_FIRST_HOP_LACKS_OUTBOUND_SUPPORT Pjsip_status_code = _swig_getPJSIP_SC_FIRST_HOP_LACKS_OUTBOUND_SUPPORT()
+
 func _swig_getPJSIP_SC_MAX_BREADTH_EXCEEDED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_MAX_BREADTH_EXCEEDED_pjsua2_b603cabda4e82a85())
@@ -7140,6 +7558,7 @@ func _swig_getPJSIP_SC_MAX_BREADTH_EXCEEDED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_MAX_BREADTH_EXCEEDED Pjsip_status_code = _swig_getPJSIP_SC_MAX_BREADTH_EXCEEDED()
+
 func _swig_getPJSIP_SC_BAD_INFO_PACKAGE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BAD_INFO_PACKAGE_pjsua2_b603cabda4e82a85())
@@ -7147,6 +7566,7 @@ func _swig_getPJSIP_SC_BAD_INFO_PACKAGE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BAD_INFO_PACKAGE Pjsip_status_code = _swig_getPJSIP_SC_BAD_INFO_PACKAGE()
+
 func _swig_getPJSIP_SC_CONSENT_NEEDED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_CONSENT_NEEDED_pjsua2_b603cabda4e82a85())
@@ -7154,6 +7574,7 @@ func _swig_getPJSIP_SC_CONSENT_NEEDED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_CONSENT_NEEDED Pjsip_status_code = _swig_getPJSIP_SC_CONSENT_NEEDED()
+
 func _swig_getPJSIP_SC_TEMPORARILY_UNAVAILABLE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_TEMPORARILY_UNAVAILABLE_pjsua2_b603cabda4e82a85())
@@ -7161,6 +7582,7 @@ func _swig_getPJSIP_SC_TEMPORARILY_UNAVAILABLE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_TEMPORARILY_UNAVAILABLE Pjsip_status_code = _swig_getPJSIP_SC_TEMPORARILY_UNAVAILABLE()
+
 func _swig_getPJSIP_SC_CALL_TSX_DOES_NOT_EXIST() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_CALL_TSX_DOES_NOT_EXIST_pjsua2_b603cabda4e82a85())
@@ -7168,6 +7590,7 @@ func _swig_getPJSIP_SC_CALL_TSX_DOES_NOT_EXIST() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_CALL_TSX_DOES_NOT_EXIST Pjsip_status_code = _swig_getPJSIP_SC_CALL_TSX_DOES_NOT_EXIST()
+
 func _swig_getPJSIP_SC_LOOP_DETECTED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_LOOP_DETECTED_pjsua2_b603cabda4e82a85())
@@ -7175,6 +7598,7 @@ func _swig_getPJSIP_SC_LOOP_DETECTED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_LOOP_DETECTED Pjsip_status_code = _swig_getPJSIP_SC_LOOP_DETECTED()
+
 func _swig_getPJSIP_SC_TOO_MANY_HOPS() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_TOO_MANY_HOPS_pjsua2_b603cabda4e82a85())
@@ -7182,6 +7606,7 @@ func _swig_getPJSIP_SC_TOO_MANY_HOPS() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_TOO_MANY_HOPS Pjsip_status_code = _swig_getPJSIP_SC_TOO_MANY_HOPS()
+
 func _swig_getPJSIP_SC_ADDRESS_INCOMPLETE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_ADDRESS_INCOMPLETE_pjsua2_b603cabda4e82a85())
@@ -7189,6 +7614,7 @@ func _swig_getPJSIP_SC_ADDRESS_INCOMPLETE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_ADDRESS_INCOMPLETE Pjsip_status_code = _swig_getPJSIP_SC_ADDRESS_INCOMPLETE()
+
 func _swig_getPJSIP_AC_AMBIGUOUS() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_AC_AMBIGUOUS_pjsua2_b603cabda4e82a85())
@@ -7196,6 +7622,7 @@ func _swig_getPJSIP_AC_AMBIGUOUS() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_AC_AMBIGUOUS Pjsip_status_code = _swig_getPJSIP_AC_AMBIGUOUS()
+
 func _swig_getPJSIP_SC_BUSY_HERE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BUSY_HERE_pjsua2_b603cabda4e82a85())
@@ -7203,6 +7630,7 @@ func _swig_getPJSIP_SC_BUSY_HERE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BUSY_HERE Pjsip_status_code = _swig_getPJSIP_SC_BUSY_HERE()
+
 func _swig_getPJSIP_SC_REQUEST_TERMINATED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_REQUEST_TERMINATED_pjsua2_b603cabda4e82a85())
@@ -7210,6 +7638,7 @@ func _swig_getPJSIP_SC_REQUEST_TERMINATED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_REQUEST_TERMINATED Pjsip_status_code = _swig_getPJSIP_SC_REQUEST_TERMINATED()
+
 func _swig_getPJSIP_SC_NOT_ACCEPTABLE_HERE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_NOT_ACCEPTABLE_HERE_pjsua2_b603cabda4e82a85())
@@ -7217,6 +7646,7 @@ func _swig_getPJSIP_SC_NOT_ACCEPTABLE_HERE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_NOT_ACCEPTABLE_HERE Pjsip_status_code = _swig_getPJSIP_SC_NOT_ACCEPTABLE_HERE()
+
 func _swig_getPJSIP_SC_BAD_EVENT() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BAD_EVENT_pjsua2_b603cabda4e82a85())
@@ -7224,6 +7654,7 @@ func _swig_getPJSIP_SC_BAD_EVENT() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BAD_EVENT Pjsip_status_code = _swig_getPJSIP_SC_BAD_EVENT()
+
 func _swig_getPJSIP_SC_REQUEST_UPDATED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_REQUEST_UPDATED_pjsua2_b603cabda4e82a85())
@@ -7231,6 +7662,7 @@ func _swig_getPJSIP_SC_REQUEST_UPDATED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_REQUEST_UPDATED Pjsip_status_code = _swig_getPJSIP_SC_REQUEST_UPDATED()
+
 func _swig_getPJSIP_SC_REQUEST_PENDING() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_REQUEST_PENDING_pjsua2_b603cabda4e82a85())
@@ -7238,6 +7670,7 @@ func _swig_getPJSIP_SC_REQUEST_PENDING() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_REQUEST_PENDING Pjsip_status_code = _swig_getPJSIP_SC_REQUEST_PENDING()
+
 func _swig_getPJSIP_SC_UNDECIPHERABLE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_UNDECIPHERABLE_pjsua2_b603cabda4e82a85())
@@ -7245,6 +7678,7 @@ func _swig_getPJSIP_SC_UNDECIPHERABLE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_UNDECIPHERABLE Pjsip_status_code = _swig_getPJSIP_SC_UNDECIPHERABLE()
+
 func _swig_getPJSIP_SC_SECURITY_AGREEMENT_NEEDED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_SECURITY_AGREEMENT_NEEDED_pjsua2_b603cabda4e82a85())
@@ -7252,6 +7686,7 @@ func _swig_getPJSIP_SC_SECURITY_AGREEMENT_NEEDED() (_swig_ret Pjsip_status_code)
 }
 
 var PJSIP_SC_SECURITY_AGREEMENT_NEEDED Pjsip_status_code = _swig_getPJSIP_SC_SECURITY_AGREEMENT_NEEDED()
+
 func _swig_getPJSIP_SC_INTERNAL_SERVER_ERROR() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_INTERNAL_SERVER_ERROR_pjsua2_b603cabda4e82a85())
@@ -7259,6 +7694,7 @@ func _swig_getPJSIP_SC_INTERNAL_SERVER_ERROR() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_INTERNAL_SERVER_ERROR Pjsip_status_code = _swig_getPJSIP_SC_INTERNAL_SERVER_ERROR()
+
 func _swig_getPJSIP_SC_NOT_IMPLEMENTED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_NOT_IMPLEMENTED_pjsua2_b603cabda4e82a85())
@@ -7266,6 +7702,7 @@ func _swig_getPJSIP_SC_NOT_IMPLEMENTED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_NOT_IMPLEMENTED Pjsip_status_code = _swig_getPJSIP_SC_NOT_IMPLEMENTED()
+
 func _swig_getPJSIP_SC_BAD_GATEWAY() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BAD_GATEWAY_pjsua2_b603cabda4e82a85())
@@ -7273,6 +7710,7 @@ func _swig_getPJSIP_SC_BAD_GATEWAY() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BAD_GATEWAY Pjsip_status_code = _swig_getPJSIP_SC_BAD_GATEWAY()
+
 func _swig_getPJSIP_SC_SERVICE_UNAVAILABLE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_SERVICE_UNAVAILABLE_pjsua2_b603cabda4e82a85())
@@ -7280,6 +7718,7 @@ func _swig_getPJSIP_SC_SERVICE_UNAVAILABLE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_SERVICE_UNAVAILABLE Pjsip_status_code = _swig_getPJSIP_SC_SERVICE_UNAVAILABLE()
+
 func _swig_getPJSIP_SC_SERVER_TIMEOUT() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_SERVER_TIMEOUT_pjsua2_b603cabda4e82a85())
@@ -7287,6 +7726,7 @@ func _swig_getPJSIP_SC_SERVER_TIMEOUT() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_SERVER_TIMEOUT Pjsip_status_code = _swig_getPJSIP_SC_SERVER_TIMEOUT()
+
 func _swig_getPJSIP_SC_VERSION_NOT_SUPPORTED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_VERSION_NOT_SUPPORTED_pjsua2_b603cabda4e82a85())
@@ -7294,6 +7734,7 @@ func _swig_getPJSIP_SC_VERSION_NOT_SUPPORTED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_VERSION_NOT_SUPPORTED Pjsip_status_code = _swig_getPJSIP_SC_VERSION_NOT_SUPPORTED()
+
 func _swig_getPJSIP_SC_MESSAGE_TOO_LARGE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_MESSAGE_TOO_LARGE_pjsua2_b603cabda4e82a85())
@@ -7301,6 +7742,7 @@ func _swig_getPJSIP_SC_MESSAGE_TOO_LARGE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_MESSAGE_TOO_LARGE Pjsip_status_code = _swig_getPJSIP_SC_MESSAGE_TOO_LARGE()
+
 func _swig_getPJSIP_SC_PUSH_NOTIFICATION_SERVICE_NOT_SUPPORTED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_PUSH_NOTIFICATION_SERVICE_NOT_SUPPORTED_pjsua2_b603cabda4e82a85())
@@ -7308,6 +7750,7 @@ func _swig_getPJSIP_SC_PUSH_NOTIFICATION_SERVICE_NOT_SUPPORTED() (_swig_ret Pjsi
 }
 
 var PJSIP_SC_PUSH_NOTIFICATION_SERVICE_NOT_SUPPORTED Pjsip_status_code = _swig_getPJSIP_SC_PUSH_NOTIFICATION_SERVICE_NOT_SUPPORTED()
+
 func _swig_getPJSIP_SC_PRECONDITION_FAILURE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_PRECONDITION_FAILURE_pjsua2_b603cabda4e82a85())
@@ -7315,6 +7758,7 @@ func _swig_getPJSIP_SC_PRECONDITION_FAILURE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_PRECONDITION_FAILURE Pjsip_status_code = _swig_getPJSIP_SC_PRECONDITION_FAILURE()
+
 func _swig_getPJSIP_SC_BUSY_EVERYWHERE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_BUSY_EVERYWHERE_pjsua2_b603cabda4e82a85())
@@ -7322,6 +7766,7 @@ func _swig_getPJSIP_SC_BUSY_EVERYWHERE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_BUSY_EVERYWHERE Pjsip_status_code = _swig_getPJSIP_SC_BUSY_EVERYWHERE()
+
 func _swig_getPJSIP_SC_DECLINE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_DECLINE_pjsua2_b603cabda4e82a85())
@@ -7329,6 +7774,7 @@ func _swig_getPJSIP_SC_DECLINE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_DECLINE Pjsip_status_code = _swig_getPJSIP_SC_DECLINE()
+
 func _swig_getPJSIP_SC_DOES_NOT_EXIST_ANYWHERE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_DOES_NOT_EXIST_ANYWHERE_pjsua2_b603cabda4e82a85())
@@ -7336,6 +7782,7 @@ func _swig_getPJSIP_SC_DOES_NOT_EXIST_ANYWHERE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_DOES_NOT_EXIST_ANYWHERE Pjsip_status_code = _swig_getPJSIP_SC_DOES_NOT_EXIST_ANYWHERE()
+
 func _swig_getPJSIP_SC_NOT_ACCEPTABLE_ANYWHERE() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_NOT_ACCEPTABLE_ANYWHERE_pjsua2_b603cabda4e82a85())
@@ -7343,6 +7790,7 @@ func _swig_getPJSIP_SC_NOT_ACCEPTABLE_ANYWHERE() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_NOT_ACCEPTABLE_ANYWHERE Pjsip_status_code = _swig_getPJSIP_SC_NOT_ACCEPTABLE_ANYWHERE()
+
 func _swig_getPJSIP_SC_UNWANTED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_UNWANTED_pjsua2_b603cabda4e82a85())
@@ -7350,6 +7798,7 @@ func _swig_getPJSIP_SC_UNWANTED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_UNWANTED Pjsip_status_code = _swig_getPJSIP_SC_UNWANTED()
+
 func _swig_getPJSIP_SC_REJECTED() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_REJECTED_pjsua2_b603cabda4e82a85())
@@ -7357,6 +7806,7 @@ func _swig_getPJSIP_SC_REJECTED() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_REJECTED Pjsip_status_code = _swig_getPJSIP_SC_REJECTED()
+
 func _swig_getPJSIP_SC_TSX_TIMEOUT() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_TSX_TIMEOUT_pjsua2_b603cabda4e82a85())
@@ -7364,6 +7814,7 @@ func _swig_getPJSIP_SC_TSX_TIMEOUT() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_TSX_TIMEOUT Pjsip_status_code = _swig_getPJSIP_SC_TSX_TIMEOUT()
+
 func _swig_getPJSIP_SC_TSX_TRANSPORT_ERROR() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC_TSX_TRANSPORT_ERROR_pjsua2_b603cabda4e82a85())
@@ -7371,6 +7822,7 @@ func _swig_getPJSIP_SC_TSX_TRANSPORT_ERROR() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC_TSX_TRANSPORT_ERROR Pjsip_status_code = _swig_getPJSIP_SC_TSX_TRANSPORT_ERROR()
+
 func _swig_getPJSIP_SC__force_32bit() (_swig_ret Pjsip_status_code) {
 	var swig_r Pjsip_status_code
 	swig_r = (Pjsip_status_code)(C._wrap_PJSIP_SC__force_32bit_pjsua2_b603cabda4e82a85())
@@ -7378,7 +7830,9 @@ func _swig_getPJSIP_SC__force_32bit() (_swig_ret Pjsip_status_code) {
 }
 
 var PJSIP_SC__force_32bit Pjsip_status_code = _swig_getPJSIP_SC__force_32bit()
+
 type Pjsip_hdr_e int
+
 func _swig_getPJSIP_H_ACCEPT() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ACCEPT_pjsua2_b603cabda4e82a85())
@@ -7386,6 +7840,7 @@ func _swig_getPJSIP_H_ACCEPT() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ACCEPT Pjsip_hdr_e = _swig_getPJSIP_H_ACCEPT()
+
 func _swig_getPJSIP_H_ACCEPT_ENCODING_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ACCEPT_ENCODING_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7393,6 +7848,7 @@ func _swig_getPJSIP_H_ACCEPT_ENCODING_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ACCEPT_ENCODING_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_ACCEPT_ENCODING_UNIMP()
+
 func _swig_getPJSIP_H_ACCEPT_LANGUAGE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ACCEPT_LANGUAGE_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7400,6 +7856,7 @@ func _swig_getPJSIP_H_ACCEPT_LANGUAGE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ACCEPT_LANGUAGE_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_ACCEPT_LANGUAGE_UNIMP()
+
 func _swig_getPJSIP_H_ALERT_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ALERT_INFO_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7407,6 +7864,7 @@ func _swig_getPJSIP_H_ALERT_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ALERT_INFO_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_ALERT_INFO_UNIMP()
+
 func _swig_getPJSIP_H_ALLOW() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ALLOW_pjsua2_b603cabda4e82a85())
@@ -7414,6 +7872,7 @@ func _swig_getPJSIP_H_ALLOW() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ALLOW Pjsip_hdr_e = _swig_getPJSIP_H_ALLOW()
+
 func _swig_getPJSIP_H_AUTHENTICATION_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_AUTHENTICATION_INFO_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7421,6 +7880,7 @@ func _swig_getPJSIP_H_AUTHENTICATION_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_AUTHENTICATION_INFO_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_AUTHENTICATION_INFO_UNIMP()
+
 func _swig_getPJSIP_H_AUTHORIZATION() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_AUTHORIZATION_pjsua2_b603cabda4e82a85())
@@ -7428,6 +7888,7 @@ func _swig_getPJSIP_H_AUTHORIZATION() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_AUTHORIZATION Pjsip_hdr_e = _swig_getPJSIP_H_AUTHORIZATION()
+
 func _swig_getPJSIP_H_CALL_ID() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CALL_ID_pjsua2_b603cabda4e82a85())
@@ -7435,6 +7896,7 @@ func _swig_getPJSIP_H_CALL_ID() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CALL_ID Pjsip_hdr_e = _swig_getPJSIP_H_CALL_ID()
+
 func _swig_getPJSIP_H_CALL_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CALL_INFO_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7442,6 +7904,7 @@ func _swig_getPJSIP_H_CALL_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CALL_INFO_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_CALL_INFO_UNIMP()
+
 func _swig_getPJSIP_H_CONTACT() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CONTACT_pjsua2_b603cabda4e82a85())
@@ -7449,6 +7912,7 @@ func _swig_getPJSIP_H_CONTACT() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CONTACT Pjsip_hdr_e = _swig_getPJSIP_H_CONTACT()
+
 func _swig_getPJSIP_H_CONTENT_DISPOSITION_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CONTENT_DISPOSITION_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7456,6 +7920,7 @@ func _swig_getPJSIP_H_CONTENT_DISPOSITION_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CONTENT_DISPOSITION_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_CONTENT_DISPOSITION_UNIMP()
+
 func _swig_getPJSIP_H_CONTENT_ENCODING_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CONTENT_ENCODING_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7463,6 +7928,7 @@ func _swig_getPJSIP_H_CONTENT_ENCODING_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CONTENT_ENCODING_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_CONTENT_ENCODING_UNIMP()
+
 func _swig_getPJSIP_H_CONTENT_LANGUAGE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CONTENT_LANGUAGE_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7470,6 +7936,7 @@ func _swig_getPJSIP_H_CONTENT_LANGUAGE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CONTENT_LANGUAGE_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_CONTENT_LANGUAGE_UNIMP()
+
 func _swig_getPJSIP_H_CONTENT_LENGTH() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CONTENT_LENGTH_pjsua2_b603cabda4e82a85())
@@ -7477,6 +7944,7 @@ func _swig_getPJSIP_H_CONTENT_LENGTH() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CONTENT_LENGTH Pjsip_hdr_e = _swig_getPJSIP_H_CONTENT_LENGTH()
+
 func _swig_getPJSIP_H_CONTENT_TYPE() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CONTENT_TYPE_pjsua2_b603cabda4e82a85())
@@ -7484,6 +7952,7 @@ func _swig_getPJSIP_H_CONTENT_TYPE() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CONTENT_TYPE Pjsip_hdr_e = _swig_getPJSIP_H_CONTENT_TYPE()
+
 func _swig_getPJSIP_H_CSEQ() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_CSEQ_pjsua2_b603cabda4e82a85())
@@ -7491,6 +7960,7 @@ func _swig_getPJSIP_H_CSEQ() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_CSEQ Pjsip_hdr_e = _swig_getPJSIP_H_CSEQ()
+
 func _swig_getPJSIP_H_DATE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_DATE_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7498,6 +7968,7 @@ func _swig_getPJSIP_H_DATE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_DATE_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_DATE_UNIMP()
+
 func _swig_getPJSIP_H_ERROR_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ERROR_INFO_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7505,6 +7976,7 @@ func _swig_getPJSIP_H_ERROR_INFO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ERROR_INFO_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_ERROR_INFO_UNIMP()
+
 func _swig_getPJSIP_H_EXPIRES() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_EXPIRES_pjsua2_b603cabda4e82a85())
@@ -7512,6 +7984,7 @@ func _swig_getPJSIP_H_EXPIRES() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_EXPIRES Pjsip_hdr_e = _swig_getPJSIP_H_EXPIRES()
+
 func _swig_getPJSIP_H_FROM() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_FROM_pjsua2_b603cabda4e82a85())
@@ -7519,6 +7992,7 @@ func _swig_getPJSIP_H_FROM() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_FROM Pjsip_hdr_e = _swig_getPJSIP_H_FROM()
+
 func _swig_getPJSIP_H_IN_REPLY_TO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_IN_REPLY_TO_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7526,6 +8000,7 @@ func _swig_getPJSIP_H_IN_REPLY_TO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_IN_REPLY_TO_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_IN_REPLY_TO_UNIMP()
+
 func _swig_getPJSIP_H_MAX_FORWARDS() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_MAX_FORWARDS_pjsua2_b603cabda4e82a85())
@@ -7533,6 +8008,7 @@ func _swig_getPJSIP_H_MAX_FORWARDS() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_MAX_FORWARDS Pjsip_hdr_e = _swig_getPJSIP_H_MAX_FORWARDS()
+
 func _swig_getPJSIP_H_MIME_VERSION_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_MIME_VERSION_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7540,6 +8016,7 @@ func _swig_getPJSIP_H_MIME_VERSION_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_MIME_VERSION_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_MIME_VERSION_UNIMP()
+
 func _swig_getPJSIP_H_MIN_EXPIRES() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_MIN_EXPIRES_pjsua2_b603cabda4e82a85())
@@ -7547,6 +8024,7 @@ func _swig_getPJSIP_H_MIN_EXPIRES() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_MIN_EXPIRES Pjsip_hdr_e = _swig_getPJSIP_H_MIN_EXPIRES()
+
 func _swig_getPJSIP_H_ORGANIZATION_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ORGANIZATION_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7554,6 +8032,7 @@ func _swig_getPJSIP_H_ORGANIZATION_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ORGANIZATION_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_ORGANIZATION_UNIMP()
+
 func _swig_getPJSIP_H_PRIORITY_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_PRIORITY_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7561,6 +8040,7 @@ func _swig_getPJSIP_H_PRIORITY_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_PRIORITY_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_PRIORITY_UNIMP()
+
 func _swig_getPJSIP_H_PROXY_AUTHENTICATE() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_PROXY_AUTHENTICATE_pjsua2_b603cabda4e82a85())
@@ -7568,6 +8048,7 @@ func _swig_getPJSIP_H_PROXY_AUTHENTICATE() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_PROXY_AUTHENTICATE Pjsip_hdr_e = _swig_getPJSIP_H_PROXY_AUTHENTICATE()
+
 func _swig_getPJSIP_H_PROXY_AUTHORIZATION() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_PROXY_AUTHORIZATION_pjsua2_b603cabda4e82a85())
@@ -7575,6 +8056,7 @@ func _swig_getPJSIP_H_PROXY_AUTHORIZATION() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_PROXY_AUTHORIZATION Pjsip_hdr_e = _swig_getPJSIP_H_PROXY_AUTHORIZATION()
+
 func _swig_getPJSIP_H_PROXY_REQUIRE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_PROXY_REQUIRE_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7582,6 +8064,7 @@ func _swig_getPJSIP_H_PROXY_REQUIRE_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_PROXY_REQUIRE_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_PROXY_REQUIRE_UNIMP()
+
 func _swig_getPJSIP_H_RECORD_ROUTE() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_RECORD_ROUTE_pjsua2_b603cabda4e82a85())
@@ -7589,6 +8072,7 @@ func _swig_getPJSIP_H_RECORD_ROUTE() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_RECORD_ROUTE Pjsip_hdr_e = _swig_getPJSIP_H_RECORD_ROUTE()
+
 func _swig_getPJSIP_H_REPLY_TO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_REPLY_TO_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7596,6 +8080,7 @@ func _swig_getPJSIP_H_REPLY_TO_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_REPLY_TO_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_REPLY_TO_UNIMP()
+
 func _swig_getPJSIP_H_REQUIRE() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_REQUIRE_pjsua2_b603cabda4e82a85())
@@ -7603,6 +8088,7 @@ func _swig_getPJSIP_H_REQUIRE() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_REQUIRE Pjsip_hdr_e = _swig_getPJSIP_H_REQUIRE()
+
 func _swig_getPJSIP_H_RETRY_AFTER() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_RETRY_AFTER_pjsua2_b603cabda4e82a85())
@@ -7610,6 +8096,7 @@ func _swig_getPJSIP_H_RETRY_AFTER() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_RETRY_AFTER Pjsip_hdr_e = _swig_getPJSIP_H_RETRY_AFTER()
+
 func _swig_getPJSIP_H_ROUTE() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_ROUTE_pjsua2_b603cabda4e82a85())
@@ -7617,6 +8104,7 @@ func _swig_getPJSIP_H_ROUTE() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_ROUTE Pjsip_hdr_e = _swig_getPJSIP_H_ROUTE()
+
 func _swig_getPJSIP_H_SERVER_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_SERVER_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7624,6 +8112,7 @@ func _swig_getPJSIP_H_SERVER_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_SERVER_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_SERVER_UNIMP()
+
 func _swig_getPJSIP_H_SUBJECT_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_SUBJECT_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7631,6 +8120,7 @@ func _swig_getPJSIP_H_SUBJECT_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_SUBJECT_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_SUBJECT_UNIMP()
+
 func _swig_getPJSIP_H_SUPPORTED() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_SUPPORTED_pjsua2_b603cabda4e82a85())
@@ -7638,6 +8128,7 @@ func _swig_getPJSIP_H_SUPPORTED() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_SUPPORTED Pjsip_hdr_e = _swig_getPJSIP_H_SUPPORTED()
+
 func _swig_getPJSIP_H_TIMESTAMP_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_TIMESTAMP_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7645,6 +8136,7 @@ func _swig_getPJSIP_H_TIMESTAMP_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_TIMESTAMP_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_TIMESTAMP_UNIMP()
+
 func _swig_getPJSIP_H_TO() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_TO_pjsua2_b603cabda4e82a85())
@@ -7652,6 +8144,7 @@ func _swig_getPJSIP_H_TO() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_TO Pjsip_hdr_e = _swig_getPJSIP_H_TO()
+
 func _swig_getPJSIP_H_UNSUPPORTED() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_UNSUPPORTED_pjsua2_b603cabda4e82a85())
@@ -7659,6 +8152,7 @@ func _swig_getPJSIP_H_UNSUPPORTED() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_UNSUPPORTED Pjsip_hdr_e = _swig_getPJSIP_H_UNSUPPORTED()
+
 func _swig_getPJSIP_H_USER_AGENT_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_USER_AGENT_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7666,6 +8160,7 @@ func _swig_getPJSIP_H_USER_AGENT_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_USER_AGENT_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_USER_AGENT_UNIMP()
+
 func _swig_getPJSIP_H_VIA() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_VIA_pjsua2_b603cabda4e82a85())
@@ -7673,6 +8168,7 @@ func _swig_getPJSIP_H_VIA() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_VIA Pjsip_hdr_e = _swig_getPJSIP_H_VIA()
+
 func _swig_getPJSIP_H_WARNING_UNIMP() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_WARNING_UNIMP_pjsua2_b603cabda4e82a85())
@@ -7680,6 +8176,7 @@ func _swig_getPJSIP_H_WARNING_UNIMP() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_WARNING_UNIMP Pjsip_hdr_e = _swig_getPJSIP_H_WARNING_UNIMP()
+
 func _swig_getPJSIP_H_WWW_AUTHENTICATE() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_WWW_AUTHENTICATE_pjsua2_b603cabda4e82a85())
@@ -7687,6 +8184,7 @@ func _swig_getPJSIP_H_WWW_AUTHENTICATE() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_WWW_AUTHENTICATE Pjsip_hdr_e = _swig_getPJSIP_H_WWW_AUTHENTICATE()
+
 func _swig_getPJSIP_H_OTHER() (_swig_ret Pjsip_hdr_e) {
 	var swig_r Pjsip_hdr_e
 	swig_r = (Pjsip_hdr_e)(C._wrap_PJSIP_H_OTHER_pjsua2_b603cabda4e82a85())
@@ -7694,7 +8192,9 @@ func _swig_getPJSIP_H_OTHER() (_swig_ret Pjsip_hdr_e) {
 }
 
 var PJSIP_H_OTHER Pjsip_hdr_e = _swig_getPJSIP_H_OTHER()
+
 type Pjsip_transport_type_e int
+
 func _swig_getPJSIP_TRANSPORT_UNSPECIFIED() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_UNSPECIFIED_pjsua2_b603cabda4e82a85())
@@ -7702,6 +8202,7 @@ func _swig_getPJSIP_TRANSPORT_UNSPECIFIED() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_UNSPECIFIED Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_UNSPECIFIED()
+
 func _swig_getPJSIP_TRANSPORT_UDP() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_UDP_pjsua2_b603cabda4e82a85())
@@ -7709,6 +8210,7 @@ func _swig_getPJSIP_TRANSPORT_UDP() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_UDP Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_UDP()
+
 func _swig_getPJSIP_TRANSPORT_TCP() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_TCP_pjsua2_b603cabda4e82a85())
@@ -7716,6 +8218,7 @@ func _swig_getPJSIP_TRANSPORT_TCP() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_TCP Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_TCP()
+
 func _swig_getPJSIP_TRANSPORT_TLS() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_TLS_pjsua2_b603cabda4e82a85())
@@ -7723,6 +8226,7 @@ func _swig_getPJSIP_TRANSPORT_TLS() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_TLS Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_TLS()
+
 func _swig_getPJSIP_TRANSPORT_DTLS() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_DTLS_pjsua2_b603cabda4e82a85())
@@ -7730,6 +8234,7 @@ func _swig_getPJSIP_TRANSPORT_DTLS() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_DTLS Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_DTLS()
+
 func _swig_getPJSIP_TRANSPORT_SCTP() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_SCTP_pjsua2_b603cabda4e82a85())
@@ -7737,6 +8242,7 @@ func _swig_getPJSIP_TRANSPORT_SCTP() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_SCTP Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_SCTP()
+
 func _swig_getPJSIP_TRANSPORT_LOOP() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_LOOP_pjsua2_b603cabda4e82a85())
@@ -7744,6 +8250,7 @@ func _swig_getPJSIP_TRANSPORT_LOOP() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_LOOP Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_LOOP()
+
 func _swig_getPJSIP_TRANSPORT_LOOP_DGRAM() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_LOOP_DGRAM_pjsua2_b603cabda4e82a85())
@@ -7751,6 +8258,7 @@ func _swig_getPJSIP_TRANSPORT_LOOP_DGRAM() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_LOOP_DGRAM Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_LOOP_DGRAM()
+
 func _swig_getPJSIP_TRANSPORT_START_OTHER() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_START_OTHER_pjsua2_b603cabda4e82a85())
@@ -7758,6 +8266,7 @@ func _swig_getPJSIP_TRANSPORT_START_OTHER() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_START_OTHER Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_START_OTHER()
+
 func _swig_getPJSIP_TRANSPORT_IPV6() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_IPV6_pjsua2_b603cabda4e82a85())
@@ -7765,6 +8274,7 @@ func _swig_getPJSIP_TRANSPORT_IPV6() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_IPV6 Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_IPV6()
+
 func _swig_getPJSIP_TRANSPORT_UDP6() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_UDP6_pjsua2_b603cabda4e82a85())
@@ -7772,6 +8282,7 @@ func _swig_getPJSIP_TRANSPORT_UDP6() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_UDP6 Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_UDP6()
+
 func _swig_getPJSIP_TRANSPORT_TCP6() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_TCP6_pjsua2_b603cabda4e82a85())
@@ -7779,6 +8290,7 @@ func _swig_getPJSIP_TRANSPORT_TCP6() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_TCP6 Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_TCP6()
+
 func _swig_getPJSIP_TRANSPORT_TLS6() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_TLS6_pjsua2_b603cabda4e82a85())
@@ -7786,6 +8298,7 @@ func _swig_getPJSIP_TRANSPORT_TLS6() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_TLS6 Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_TLS6()
+
 func _swig_getPJSIP_TRANSPORT_DTLS6() (_swig_ret Pjsip_transport_type_e) {
 	var swig_r Pjsip_transport_type_e
 	swig_r = (Pjsip_transport_type_e)(C._wrap_PJSIP_TRANSPORT_DTLS6_pjsua2_b603cabda4e82a85())
@@ -7793,7 +8306,9 @@ func _swig_getPJSIP_TRANSPORT_DTLS6() (_swig_ret Pjsip_transport_type_e) {
 }
 
 var PJSIP_TRANSPORT_DTLS6 Pjsip_transport_type_e = _swig_getPJSIP_TRANSPORT_DTLS6()
+
 type Pjsip_transport_flags_e int
+
 func _swig_getPJSIP_TRANSPORT_RELIABLE() (_swig_ret Pjsip_transport_flags_e) {
 	var swig_r Pjsip_transport_flags_e
 	swig_r = (Pjsip_transport_flags_e)(C._wrap_PJSIP_TRANSPORT_RELIABLE_pjsua2_b603cabda4e82a85())
@@ -7801,6 +8316,7 @@ func _swig_getPJSIP_TRANSPORT_RELIABLE() (_swig_ret Pjsip_transport_flags_e) {
 }
 
 var PJSIP_TRANSPORT_RELIABLE Pjsip_transport_flags_e = _swig_getPJSIP_TRANSPORT_RELIABLE()
+
 func _swig_getPJSIP_TRANSPORT_SECURE() (_swig_ret Pjsip_transport_flags_e) {
 	var swig_r Pjsip_transport_flags_e
 	swig_r = (Pjsip_transport_flags_e)(C._wrap_PJSIP_TRANSPORT_SECURE_pjsua2_b603cabda4e82a85())
@@ -7808,6 +8324,7 @@ func _swig_getPJSIP_TRANSPORT_SECURE() (_swig_ret Pjsip_transport_flags_e) {
 }
 
 var PJSIP_TRANSPORT_SECURE Pjsip_transport_flags_e = _swig_getPJSIP_TRANSPORT_SECURE()
+
 func _swig_getPJSIP_TRANSPORT_DATAGRAM() (_swig_ret Pjsip_transport_flags_e) {
 	var swig_r Pjsip_transport_flags_e
 	swig_r = (Pjsip_transport_flags_e)(C._wrap_PJSIP_TRANSPORT_DATAGRAM_pjsua2_b603cabda4e82a85())
@@ -7815,7 +8332,9 @@ func _swig_getPJSIP_TRANSPORT_DATAGRAM() (_swig_ret Pjsip_transport_flags_e) {
 }
 
 var PJSIP_TRANSPORT_DATAGRAM Pjsip_transport_flags_e = _swig_getPJSIP_TRANSPORT_DATAGRAM()
+
 type Pjsip_transport_state int
+
 func _swig_getPJSIP_TP_STATE_CONNECTED() (_swig_ret Pjsip_transport_state) {
 	var swig_r Pjsip_transport_state
 	swig_r = (Pjsip_transport_state)(C._wrap_PJSIP_TP_STATE_CONNECTED_pjsua2_b603cabda4e82a85())
@@ -7823,6 +8342,7 @@ func _swig_getPJSIP_TP_STATE_CONNECTED() (_swig_ret Pjsip_transport_state) {
 }
 
 var PJSIP_TP_STATE_CONNECTED Pjsip_transport_state = _swig_getPJSIP_TP_STATE_CONNECTED()
+
 func _swig_getPJSIP_TP_STATE_DISCONNECTED() (_swig_ret Pjsip_transport_state) {
 	var swig_r Pjsip_transport_state
 	swig_r = (Pjsip_transport_state)(C._wrap_PJSIP_TP_STATE_DISCONNECTED_pjsua2_b603cabda4e82a85())
@@ -7830,6 +8350,7 @@ func _swig_getPJSIP_TP_STATE_DISCONNECTED() (_swig_ret Pjsip_transport_state) {
 }
 
 var PJSIP_TP_STATE_DISCONNECTED Pjsip_transport_state = _swig_getPJSIP_TP_STATE_DISCONNECTED()
+
 func _swig_getPJSIP_TP_STATE_SHUTDOWN() (_swig_ret Pjsip_transport_state) {
 	var swig_r Pjsip_transport_state
 	swig_r = (Pjsip_transport_state)(C._wrap_PJSIP_TP_STATE_SHUTDOWN_pjsua2_b603cabda4e82a85())
@@ -7837,6 +8358,7 @@ func _swig_getPJSIP_TP_STATE_SHUTDOWN() (_swig_ret Pjsip_transport_state) {
 }
 
 var PJSIP_TP_STATE_SHUTDOWN Pjsip_transport_state = _swig_getPJSIP_TP_STATE_SHUTDOWN()
+
 func _swig_getPJSIP_TP_STATE_DESTROY() (_swig_ret Pjsip_transport_state) {
 	var swig_r Pjsip_transport_state
 	swig_r = (Pjsip_transport_state)(C._wrap_PJSIP_TP_STATE_DESTROY_pjsua2_b603cabda4e82a85())
@@ -7844,7 +8366,9 @@ func _swig_getPJSIP_TP_STATE_DESTROY() (_swig_ret Pjsip_transport_state) {
 }
 
 var PJSIP_TP_STATE_DESTROY Pjsip_transport_state = _swig_getPJSIP_TP_STATE_DESTROY()
+
 type Pjsip_ssl_method int
+
 func _swig_getPJSIP_SSL_UNSPECIFIED_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_SSL_UNSPECIFIED_METHOD_pjsua2_b603cabda4e82a85())
@@ -7852,6 +8376,7 @@ func _swig_getPJSIP_SSL_UNSPECIFIED_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_SSL_UNSPECIFIED_METHOD Pjsip_ssl_method = _swig_getPJSIP_SSL_UNSPECIFIED_METHOD()
+
 func _swig_getPJSIP_SSLV2_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_SSLV2_METHOD_pjsua2_b603cabda4e82a85())
@@ -7859,6 +8384,7 @@ func _swig_getPJSIP_SSLV2_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_SSLV2_METHOD Pjsip_ssl_method = _swig_getPJSIP_SSLV2_METHOD()
+
 func _swig_getPJSIP_SSLV3_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_SSLV3_METHOD_pjsua2_b603cabda4e82a85())
@@ -7866,6 +8392,7 @@ func _swig_getPJSIP_SSLV3_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_SSLV3_METHOD Pjsip_ssl_method = _swig_getPJSIP_SSLV3_METHOD()
+
 func _swig_getPJSIP_TLSV1_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_TLSV1_METHOD_pjsua2_b603cabda4e82a85())
@@ -7873,6 +8400,7 @@ func _swig_getPJSIP_TLSV1_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_TLSV1_METHOD Pjsip_ssl_method = _swig_getPJSIP_TLSV1_METHOD()
+
 func _swig_getPJSIP_TLSV1_1_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_TLSV1_1_METHOD_pjsua2_b603cabda4e82a85())
@@ -7880,6 +8408,7 @@ func _swig_getPJSIP_TLSV1_1_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_TLSV1_1_METHOD Pjsip_ssl_method = _swig_getPJSIP_TLSV1_1_METHOD()
+
 func _swig_getPJSIP_TLSV1_2_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_TLSV1_2_METHOD_pjsua2_b603cabda4e82a85())
@@ -7887,6 +8416,7 @@ func _swig_getPJSIP_TLSV1_2_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_TLSV1_2_METHOD Pjsip_ssl_method = _swig_getPJSIP_TLSV1_2_METHOD()
+
 func _swig_getPJSIP_TLSV1_3_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_TLSV1_3_METHOD_pjsua2_b603cabda4e82a85())
@@ -7894,6 +8424,7 @@ func _swig_getPJSIP_TLSV1_3_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_TLSV1_3_METHOD Pjsip_ssl_method = _swig_getPJSIP_TLSV1_3_METHOD()
+
 func _swig_getPJSIP_SSLV23_METHOD() (_swig_ret Pjsip_ssl_method) {
 	var swig_r Pjsip_ssl_method
 	swig_r = (Pjsip_ssl_method)(C._wrap_PJSIP_SSLV23_METHOD_pjsua2_b603cabda4e82a85())
@@ -7901,7 +8432,9 @@ func _swig_getPJSIP_SSLV23_METHOD() (_swig_ret Pjsip_ssl_method) {
 }
 
 var PJSIP_SSLV23_METHOD Pjsip_ssl_method = _swig_getPJSIP_SSLV23_METHOD()
+
 type Pjsip_tsx_state_e int
+
 func _swig_getPJSIP_TSX_STATE_NULL() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_NULL_pjsua2_b603cabda4e82a85())
@@ -7909,6 +8442,7 @@ func _swig_getPJSIP_TSX_STATE_NULL() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_NULL Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_NULL()
+
 func _swig_getPJSIP_TSX_STATE_CALLING() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_CALLING_pjsua2_b603cabda4e82a85())
@@ -7916,6 +8450,7 @@ func _swig_getPJSIP_TSX_STATE_CALLING() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_CALLING Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_CALLING()
+
 func _swig_getPJSIP_TSX_STATE_TRYING() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_TRYING_pjsua2_b603cabda4e82a85())
@@ -7923,6 +8458,7 @@ func _swig_getPJSIP_TSX_STATE_TRYING() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_TRYING Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_TRYING()
+
 func _swig_getPJSIP_TSX_STATE_PROCEEDING() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_PROCEEDING_pjsua2_b603cabda4e82a85())
@@ -7930,6 +8466,7 @@ func _swig_getPJSIP_TSX_STATE_PROCEEDING() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_PROCEEDING Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_PROCEEDING()
+
 func _swig_getPJSIP_TSX_STATE_COMPLETED() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_COMPLETED_pjsua2_b603cabda4e82a85())
@@ -7937,6 +8474,7 @@ func _swig_getPJSIP_TSX_STATE_COMPLETED() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_COMPLETED Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_COMPLETED()
+
 func _swig_getPJSIP_TSX_STATE_CONFIRMED() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_CONFIRMED_pjsua2_b603cabda4e82a85())
@@ -7944,6 +8482,7 @@ func _swig_getPJSIP_TSX_STATE_CONFIRMED() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_CONFIRMED Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_CONFIRMED()
+
 func _swig_getPJSIP_TSX_STATE_TERMINATED() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_TERMINATED_pjsua2_b603cabda4e82a85())
@@ -7951,6 +8490,7 @@ func _swig_getPJSIP_TSX_STATE_TERMINATED() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_TERMINATED Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_TERMINATED()
+
 func _swig_getPJSIP_TSX_STATE_DESTROYED() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_DESTROYED_pjsua2_b603cabda4e82a85())
@@ -7958,6 +8498,7 @@ func _swig_getPJSIP_TSX_STATE_DESTROYED() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_DESTROYED Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_DESTROYED()
+
 func _swig_getPJSIP_TSX_STATE_MAX() (_swig_ret Pjsip_tsx_state_e) {
 	var swig_r Pjsip_tsx_state_e
 	swig_r = (Pjsip_tsx_state_e)(C._wrap_PJSIP_TSX_STATE_MAX_pjsua2_b603cabda4e82a85())
@@ -7965,7 +8506,9 @@ func _swig_getPJSIP_TSX_STATE_MAX() (_swig_ret Pjsip_tsx_state_e) {
 }
 
 var PJSIP_TSX_STATE_MAX Pjsip_tsx_state_e = _swig_getPJSIP_TSX_STATE_MAX()
+
 type Pjsip_role_e int
+
 func _swig_getPJSIP_ROLE_UAC() (_swig_ret Pjsip_role_e) {
 	var swig_r Pjsip_role_e
 	swig_r = (Pjsip_role_e)(C._wrap_PJSIP_ROLE_UAC_pjsua2_b603cabda4e82a85())
@@ -7973,6 +8516,7 @@ func _swig_getPJSIP_ROLE_UAC() (_swig_ret Pjsip_role_e) {
 }
 
 var PJSIP_ROLE_UAC Pjsip_role_e = _swig_getPJSIP_ROLE_UAC()
+
 func _swig_getPJSIP_ROLE_UAS() (_swig_ret Pjsip_role_e) {
 	var swig_r Pjsip_role_e
 	swig_r = (Pjsip_role_e)(C._wrap_PJSIP_ROLE_UAS_pjsua2_b603cabda4e82a85())
@@ -7980,6 +8524,7 @@ func _swig_getPJSIP_ROLE_UAS() (_swig_ret Pjsip_role_e) {
 }
 
 var PJSIP_ROLE_UAS Pjsip_role_e = _swig_getPJSIP_ROLE_UAS()
+
 func _swig_getPJSIP_UAC_ROLE() (_swig_ret Pjsip_role_e) {
 	var swig_r Pjsip_role_e
 	swig_r = (Pjsip_role_e)(C._wrap_PJSIP_UAC_ROLE_pjsua2_b603cabda4e82a85())
@@ -7987,6 +8532,7 @@ func _swig_getPJSIP_UAC_ROLE() (_swig_ret Pjsip_role_e) {
 }
 
 var PJSIP_UAC_ROLE Pjsip_role_e = _swig_getPJSIP_UAC_ROLE()
+
 func _swig_getPJSIP_UAS_ROLE() (_swig_ret Pjsip_role_e) {
 	var swig_r Pjsip_role_e
 	swig_r = (Pjsip_role_e)(C._wrap_PJSIP_UAS_ROLE_pjsua2_b603cabda4e82a85())
@@ -7994,7 +8540,9 @@ func _swig_getPJSIP_UAS_ROLE() (_swig_ret Pjsip_role_e) {
 }
 
 var PJSIP_UAS_ROLE Pjsip_role_e = _swig_getPJSIP_UAS_ROLE()
+
 type Pjsip_redirect_op int
+
 func _swig_getPJSIP_REDIRECT_REJECT() (_swig_ret Pjsip_redirect_op) {
 	var swig_r Pjsip_redirect_op
 	swig_r = (Pjsip_redirect_op)(C._wrap_PJSIP_REDIRECT_REJECT_pjsua2_b603cabda4e82a85())
@@ -8002,6 +8550,7 @@ func _swig_getPJSIP_REDIRECT_REJECT() (_swig_ret Pjsip_redirect_op) {
 }
 
 var PJSIP_REDIRECT_REJECT Pjsip_redirect_op = _swig_getPJSIP_REDIRECT_REJECT()
+
 func _swig_getPJSIP_REDIRECT_ACCEPT() (_swig_ret Pjsip_redirect_op) {
 	var swig_r Pjsip_redirect_op
 	swig_r = (Pjsip_redirect_op)(C._wrap_PJSIP_REDIRECT_ACCEPT_pjsua2_b603cabda4e82a85())
@@ -8009,6 +8558,7 @@ func _swig_getPJSIP_REDIRECT_ACCEPT() (_swig_ret Pjsip_redirect_op) {
 }
 
 var PJSIP_REDIRECT_ACCEPT Pjsip_redirect_op = _swig_getPJSIP_REDIRECT_ACCEPT()
+
 func _swig_getPJSIP_REDIRECT_ACCEPT_REPLACE() (_swig_ret Pjsip_redirect_op) {
 	var swig_r Pjsip_redirect_op
 	swig_r = (Pjsip_redirect_op)(C._wrap_PJSIP_REDIRECT_ACCEPT_REPLACE_pjsua2_b603cabda4e82a85())
@@ -8016,6 +8566,7 @@ func _swig_getPJSIP_REDIRECT_ACCEPT_REPLACE() (_swig_ret Pjsip_redirect_op) {
 }
 
 var PJSIP_REDIRECT_ACCEPT_REPLACE Pjsip_redirect_op = _swig_getPJSIP_REDIRECT_ACCEPT_REPLACE()
+
 func _swig_getPJSIP_REDIRECT_PENDING() (_swig_ret Pjsip_redirect_op) {
 	var swig_r Pjsip_redirect_op
 	swig_r = (Pjsip_redirect_op)(C._wrap_PJSIP_REDIRECT_PENDING_pjsua2_b603cabda4e82a85())
@@ -8023,6 +8574,7 @@ func _swig_getPJSIP_REDIRECT_PENDING() (_swig_ret Pjsip_redirect_op) {
 }
 
 var PJSIP_REDIRECT_PENDING Pjsip_redirect_op = _swig_getPJSIP_REDIRECT_PENDING()
+
 func _swig_getPJSIP_REDIRECT_STOP() (_swig_ret Pjsip_redirect_op) {
 	var swig_r Pjsip_redirect_op
 	swig_r = (Pjsip_redirect_op)(C._wrap_PJSIP_REDIRECT_STOP_pjsua2_b603cabda4e82a85())
@@ -8030,7 +8582,9 @@ func _swig_getPJSIP_REDIRECT_STOP() (_swig_ret Pjsip_redirect_op) {
 }
 
 var PJSIP_REDIRECT_STOP Pjsip_redirect_op = _swig_getPJSIP_REDIRECT_STOP()
+
 type Pjrpid_activity int
+
 func _swig_getPJRPID_ACTIVITY_UNKNOWN() (_swig_ret Pjrpid_activity) {
 	var swig_r Pjrpid_activity
 	swig_r = (Pjrpid_activity)(C._wrap_PJRPID_ACTIVITY_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -8038,6 +8592,7 @@ func _swig_getPJRPID_ACTIVITY_UNKNOWN() (_swig_ret Pjrpid_activity) {
 }
 
 var PJRPID_ACTIVITY_UNKNOWN Pjrpid_activity = _swig_getPJRPID_ACTIVITY_UNKNOWN()
+
 func _swig_getPJRPID_ACTIVITY_AWAY() (_swig_ret Pjrpid_activity) {
 	var swig_r Pjrpid_activity
 	swig_r = (Pjrpid_activity)(C._wrap_PJRPID_ACTIVITY_AWAY_pjsua2_b603cabda4e82a85())
@@ -8045,6 +8600,7 @@ func _swig_getPJRPID_ACTIVITY_AWAY() (_swig_ret Pjrpid_activity) {
 }
 
 var PJRPID_ACTIVITY_AWAY Pjrpid_activity = _swig_getPJRPID_ACTIVITY_AWAY()
+
 func _swig_getPJRPID_ACTIVITY_BUSY() (_swig_ret Pjrpid_activity) {
 	var swig_r Pjrpid_activity
 	swig_r = (Pjrpid_activity)(C._wrap_PJRPID_ACTIVITY_BUSY_pjsua2_b603cabda4e82a85())
@@ -8052,7 +8608,9 @@ func _swig_getPJRPID_ACTIVITY_BUSY() (_swig_ret Pjrpid_activity) {
 }
 
 var PJRPID_ACTIVITY_BUSY Pjrpid_activity = _swig_getPJRPID_ACTIVITY_BUSY()
+
 type Pjsip_evsub_state int
+
 func _swig_getPJSIP_EVSUB_STATE_NULL() (_swig_ret Pjsip_evsub_state) {
 	var swig_r Pjsip_evsub_state
 	swig_r = (Pjsip_evsub_state)(C._wrap_PJSIP_EVSUB_STATE_NULL_pjsua2_b603cabda4e82a85())
@@ -8060,6 +8618,7 @@ func _swig_getPJSIP_EVSUB_STATE_NULL() (_swig_ret Pjsip_evsub_state) {
 }
 
 var PJSIP_EVSUB_STATE_NULL Pjsip_evsub_state = _swig_getPJSIP_EVSUB_STATE_NULL()
+
 func _swig_getPJSIP_EVSUB_STATE_SENT() (_swig_ret Pjsip_evsub_state) {
 	var swig_r Pjsip_evsub_state
 	swig_r = (Pjsip_evsub_state)(C._wrap_PJSIP_EVSUB_STATE_SENT_pjsua2_b603cabda4e82a85())
@@ -8067,6 +8626,7 @@ func _swig_getPJSIP_EVSUB_STATE_SENT() (_swig_ret Pjsip_evsub_state) {
 }
 
 var PJSIP_EVSUB_STATE_SENT Pjsip_evsub_state = _swig_getPJSIP_EVSUB_STATE_SENT()
+
 func _swig_getPJSIP_EVSUB_STATE_ACCEPTED() (_swig_ret Pjsip_evsub_state) {
 	var swig_r Pjsip_evsub_state
 	swig_r = (Pjsip_evsub_state)(C._wrap_PJSIP_EVSUB_STATE_ACCEPTED_pjsua2_b603cabda4e82a85())
@@ -8074,6 +8634,7 @@ func _swig_getPJSIP_EVSUB_STATE_ACCEPTED() (_swig_ret Pjsip_evsub_state) {
 }
 
 var PJSIP_EVSUB_STATE_ACCEPTED Pjsip_evsub_state = _swig_getPJSIP_EVSUB_STATE_ACCEPTED()
+
 func _swig_getPJSIP_EVSUB_STATE_PENDING() (_swig_ret Pjsip_evsub_state) {
 	var swig_r Pjsip_evsub_state
 	swig_r = (Pjsip_evsub_state)(C._wrap_PJSIP_EVSUB_STATE_PENDING_pjsua2_b603cabda4e82a85())
@@ -8081,6 +8642,7 @@ func _swig_getPJSIP_EVSUB_STATE_PENDING() (_swig_ret Pjsip_evsub_state) {
 }
 
 var PJSIP_EVSUB_STATE_PENDING Pjsip_evsub_state = _swig_getPJSIP_EVSUB_STATE_PENDING()
+
 func _swig_getPJSIP_EVSUB_STATE_ACTIVE() (_swig_ret Pjsip_evsub_state) {
 	var swig_r Pjsip_evsub_state
 	swig_r = (Pjsip_evsub_state)(C._wrap_PJSIP_EVSUB_STATE_ACTIVE_pjsua2_b603cabda4e82a85())
@@ -8088,6 +8650,7 @@ func _swig_getPJSIP_EVSUB_STATE_ACTIVE() (_swig_ret Pjsip_evsub_state) {
 }
 
 var PJSIP_EVSUB_STATE_ACTIVE Pjsip_evsub_state = _swig_getPJSIP_EVSUB_STATE_ACTIVE()
+
 func _swig_getPJSIP_EVSUB_STATE_TERMINATED() (_swig_ret Pjsip_evsub_state) {
 	var swig_r Pjsip_evsub_state
 	swig_r = (Pjsip_evsub_state)(C._wrap_PJSIP_EVSUB_STATE_TERMINATED_pjsua2_b603cabda4e82a85())
@@ -8095,6 +8658,7 @@ func _swig_getPJSIP_EVSUB_STATE_TERMINATED() (_swig_ret Pjsip_evsub_state) {
 }
 
 var PJSIP_EVSUB_STATE_TERMINATED Pjsip_evsub_state = _swig_getPJSIP_EVSUB_STATE_TERMINATED()
+
 func _swig_getPJSIP_EVSUB_STATE_UNKNOWN() (_swig_ret Pjsip_evsub_state) {
 	var swig_r Pjsip_evsub_state
 	swig_r = (Pjsip_evsub_state)(C._wrap_PJSIP_EVSUB_STATE_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -8102,7 +8666,9 @@ func _swig_getPJSIP_EVSUB_STATE_UNKNOWN() (_swig_ret Pjsip_evsub_state) {
 }
 
 var PJSIP_EVSUB_STATE_UNKNOWN Pjsip_evsub_state = _swig_getPJSIP_EVSUB_STATE_UNKNOWN()
+
 type Pjsip_inv_state int
+
 func _swig_getPJSIP_INV_STATE_NULL() (_swig_ret Pjsip_inv_state) {
 	var swig_r Pjsip_inv_state
 	swig_r = (Pjsip_inv_state)(C._wrap_PJSIP_INV_STATE_NULL_pjsua2_b603cabda4e82a85())
@@ -8110,6 +8676,7 @@ func _swig_getPJSIP_INV_STATE_NULL() (_swig_ret Pjsip_inv_state) {
 }
 
 var PJSIP_INV_STATE_NULL Pjsip_inv_state = _swig_getPJSIP_INV_STATE_NULL()
+
 func _swig_getPJSIP_INV_STATE_CALLING() (_swig_ret Pjsip_inv_state) {
 	var swig_r Pjsip_inv_state
 	swig_r = (Pjsip_inv_state)(C._wrap_PJSIP_INV_STATE_CALLING_pjsua2_b603cabda4e82a85())
@@ -8117,6 +8684,7 @@ func _swig_getPJSIP_INV_STATE_CALLING() (_swig_ret Pjsip_inv_state) {
 }
 
 var PJSIP_INV_STATE_CALLING Pjsip_inv_state = _swig_getPJSIP_INV_STATE_CALLING()
+
 func _swig_getPJSIP_INV_STATE_INCOMING() (_swig_ret Pjsip_inv_state) {
 	var swig_r Pjsip_inv_state
 	swig_r = (Pjsip_inv_state)(C._wrap_PJSIP_INV_STATE_INCOMING_pjsua2_b603cabda4e82a85())
@@ -8124,6 +8692,7 @@ func _swig_getPJSIP_INV_STATE_INCOMING() (_swig_ret Pjsip_inv_state) {
 }
 
 var PJSIP_INV_STATE_INCOMING Pjsip_inv_state = _swig_getPJSIP_INV_STATE_INCOMING()
+
 func _swig_getPJSIP_INV_STATE_EARLY() (_swig_ret Pjsip_inv_state) {
 	var swig_r Pjsip_inv_state
 	swig_r = (Pjsip_inv_state)(C._wrap_PJSIP_INV_STATE_EARLY_pjsua2_b603cabda4e82a85())
@@ -8131,6 +8700,7 @@ func _swig_getPJSIP_INV_STATE_EARLY() (_swig_ret Pjsip_inv_state) {
 }
 
 var PJSIP_INV_STATE_EARLY Pjsip_inv_state = _swig_getPJSIP_INV_STATE_EARLY()
+
 func _swig_getPJSIP_INV_STATE_CONNECTING() (_swig_ret Pjsip_inv_state) {
 	var swig_r Pjsip_inv_state
 	swig_r = (Pjsip_inv_state)(C._wrap_PJSIP_INV_STATE_CONNECTING_pjsua2_b603cabda4e82a85())
@@ -8138,6 +8708,7 @@ func _swig_getPJSIP_INV_STATE_CONNECTING() (_swig_ret Pjsip_inv_state) {
 }
 
 var PJSIP_INV_STATE_CONNECTING Pjsip_inv_state = _swig_getPJSIP_INV_STATE_CONNECTING()
+
 func _swig_getPJSIP_INV_STATE_CONFIRMED() (_swig_ret Pjsip_inv_state) {
 	var swig_r Pjsip_inv_state
 	swig_r = (Pjsip_inv_state)(C._wrap_PJSIP_INV_STATE_CONFIRMED_pjsua2_b603cabda4e82a85())
@@ -8145,6 +8716,7 @@ func _swig_getPJSIP_INV_STATE_CONFIRMED() (_swig_ret Pjsip_inv_state) {
 }
 
 var PJSIP_INV_STATE_CONFIRMED Pjsip_inv_state = _swig_getPJSIP_INV_STATE_CONFIRMED()
+
 func _swig_getPJSIP_INV_STATE_DISCONNECTED() (_swig_ret Pjsip_inv_state) {
 	var swig_r Pjsip_inv_state
 	swig_r = (Pjsip_inv_state)(C._wrap_PJSIP_INV_STATE_DISCONNECTED_pjsua2_b603cabda4e82a85())
@@ -8152,7 +8724,9 @@ func _swig_getPJSIP_INV_STATE_DISCONNECTED() (_swig_ret Pjsip_inv_state) {
 }
 
 var PJSIP_INV_STATE_DISCONNECTED Pjsip_inv_state = _swig_getPJSIP_INV_STATE_DISCONNECTED()
+
 type Pjsua_invalid_id_const_ int
+
 func _swig_getPJSUA_INVALID_ID() (_swig_ret Pjsua_invalid_id_const_) {
 	var swig_r Pjsua_invalid_id_const_
 	swig_r = (Pjsua_invalid_id_const_)(C._wrap_PJSUA_INVALID_ID_pjsua2_b603cabda4e82a85())
@@ -8160,7 +8734,9 @@ func _swig_getPJSUA_INVALID_ID() (_swig_ret Pjsua_invalid_id_const_) {
 }
 
 var PJSUA_INVALID_ID Pjsua_invalid_id_const_ = _swig_getPJSUA_INVALID_ID()
+
 type Pjsua_state int
+
 func _swig_getPJSUA_STATE_NULL() (_swig_ret Pjsua_state) {
 	var swig_r Pjsua_state
 	swig_r = (Pjsua_state)(C._wrap_PJSUA_STATE_NULL_pjsua2_b603cabda4e82a85())
@@ -8168,6 +8744,7 @@ func _swig_getPJSUA_STATE_NULL() (_swig_ret Pjsua_state) {
 }
 
 var PJSUA_STATE_NULL Pjsua_state = _swig_getPJSUA_STATE_NULL()
+
 func _swig_getPJSUA_STATE_CREATED() (_swig_ret Pjsua_state) {
 	var swig_r Pjsua_state
 	swig_r = (Pjsua_state)(C._wrap_PJSUA_STATE_CREATED_pjsua2_b603cabda4e82a85())
@@ -8175,6 +8752,7 @@ func _swig_getPJSUA_STATE_CREATED() (_swig_ret Pjsua_state) {
 }
 
 var PJSUA_STATE_CREATED Pjsua_state = _swig_getPJSUA_STATE_CREATED()
+
 func _swig_getPJSUA_STATE_INIT() (_swig_ret Pjsua_state) {
 	var swig_r Pjsua_state
 	swig_r = (Pjsua_state)(C._wrap_PJSUA_STATE_INIT_pjsua2_b603cabda4e82a85())
@@ -8182,6 +8760,7 @@ func _swig_getPJSUA_STATE_INIT() (_swig_ret Pjsua_state) {
 }
 
 var PJSUA_STATE_INIT Pjsua_state = _swig_getPJSUA_STATE_INIT()
+
 func _swig_getPJSUA_STATE_STARTING() (_swig_ret Pjsua_state) {
 	var swig_r Pjsua_state
 	swig_r = (Pjsua_state)(C._wrap_PJSUA_STATE_STARTING_pjsua2_b603cabda4e82a85())
@@ -8189,6 +8768,7 @@ func _swig_getPJSUA_STATE_STARTING() (_swig_ret Pjsua_state) {
 }
 
 var PJSUA_STATE_STARTING Pjsua_state = _swig_getPJSUA_STATE_STARTING()
+
 func _swig_getPJSUA_STATE_RUNNING() (_swig_ret Pjsua_state) {
 	var swig_r Pjsua_state
 	swig_r = (Pjsua_state)(C._wrap_PJSUA_STATE_RUNNING_pjsua2_b603cabda4e82a85())
@@ -8196,6 +8776,7 @@ func _swig_getPJSUA_STATE_RUNNING() (_swig_ret Pjsua_state) {
 }
 
 var PJSUA_STATE_RUNNING Pjsua_state = _swig_getPJSUA_STATE_RUNNING()
+
 func _swig_getPJSUA_STATE_CLOSING() (_swig_ret Pjsua_state) {
 	var swig_r Pjsua_state
 	swig_r = (Pjsua_state)(C._wrap_PJSUA_STATE_CLOSING_pjsua2_b603cabda4e82a85())
@@ -8203,7 +8784,9 @@ func _swig_getPJSUA_STATE_CLOSING() (_swig_ret Pjsua_state) {
 }
 
 var PJSUA_STATE_CLOSING Pjsua_state = _swig_getPJSUA_STATE_CLOSING()
+
 type Pjsua_stun_use int
+
 func _swig_getPJSUA_STUN_USE_DEFAULT() (_swig_ret Pjsua_stun_use) {
 	var swig_r Pjsua_stun_use
 	swig_r = (Pjsua_stun_use)(C._wrap_PJSUA_STUN_USE_DEFAULT_pjsua2_b603cabda4e82a85())
@@ -8211,6 +8794,7 @@ func _swig_getPJSUA_STUN_USE_DEFAULT() (_swig_ret Pjsua_stun_use) {
 }
 
 var PJSUA_STUN_USE_DEFAULT Pjsua_stun_use = _swig_getPJSUA_STUN_USE_DEFAULT()
+
 func _swig_getPJSUA_STUN_USE_DISABLED() (_swig_ret Pjsua_stun_use) {
 	var swig_r Pjsua_stun_use
 	swig_r = (Pjsua_stun_use)(C._wrap_PJSUA_STUN_USE_DISABLED_pjsua2_b603cabda4e82a85())
@@ -8218,6 +8802,7 @@ func _swig_getPJSUA_STUN_USE_DISABLED() (_swig_ret Pjsua_stun_use) {
 }
 
 var PJSUA_STUN_USE_DISABLED Pjsua_stun_use = _swig_getPJSUA_STUN_USE_DISABLED()
+
 func _swig_getPJSUA_STUN_RETRY_ON_FAILURE() (_swig_ret Pjsua_stun_use) {
 	var swig_r Pjsua_stun_use
 	swig_r = (Pjsua_stun_use)(C._wrap_PJSUA_STUN_RETRY_ON_FAILURE_pjsua2_b603cabda4e82a85())
@@ -8225,7 +8810,9 @@ func _swig_getPJSUA_STUN_RETRY_ON_FAILURE() (_swig_ret Pjsua_stun_use) {
 }
 
 var PJSUA_STUN_RETRY_ON_FAILURE Pjsua_stun_use = _swig_getPJSUA_STUN_RETRY_ON_FAILURE()
+
 type Pjsua_upnp_use int
+
 func _swig_getPJSUA_UPNP_USE_DEFAULT() (_swig_ret Pjsua_upnp_use) {
 	var swig_r Pjsua_upnp_use
 	swig_r = (Pjsua_upnp_use)(C._wrap_PJSUA_UPNP_USE_DEFAULT_pjsua2_b603cabda4e82a85())
@@ -8233,6 +8820,7 @@ func _swig_getPJSUA_UPNP_USE_DEFAULT() (_swig_ret Pjsua_upnp_use) {
 }
 
 var PJSUA_UPNP_USE_DEFAULT Pjsua_upnp_use = _swig_getPJSUA_UPNP_USE_DEFAULT()
+
 func _swig_getPJSUA_UPNP_USE_DISABLED() (_swig_ret Pjsua_upnp_use) {
 	var swig_r Pjsua_upnp_use
 	swig_r = (Pjsua_upnp_use)(C._wrap_PJSUA_UPNP_USE_DISABLED_pjsua2_b603cabda4e82a85())
@@ -8240,7 +8828,9 @@ func _swig_getPJSUA_UPNP_USE_DISABLED() (_swig_ret Pjsua_upnp_use) {
 }
 
 var PJSUA_UPNP_USE_DISABLED Pjsua_upnp_use = _swig_getPJSUA_UPNP_USE_DISABLED()
+
 type Pjsua_call_hold_type int
+
 func _swig_getPJSUA_CALL_HOLD_TYPE_RFC3264() (_swig_ret Pjsua_call_hold_type) {
 	var swig_r Pjsua_call_hold_type
 	swig_r = (Pjsua_call_hold_type)(C._wrap_PJSUA_CALL_HOLD_TYPE_RFC3264_pjsua2_b603cabda4e82a85())
@@ -8248,6 +8838,7 @@ func _swig_getPJSUA_CALL_HOLD_TYPE_RFC3264() (_swig_ret Pjsua_call_hold_type) {
 }
 
 var PJSUA_CALL_HOLD_TYPE_RFC3264 Pjsua_call_hold_type = _swig_getPJSUA_CALL_HOLD_TYPE_RFC3264()
+
 func _swig_getPJSUA_CALL_HOLD_TYPE_RFC2543() (_swig_ret Pjsua_call_hold_type) {
 	var swig_r Pjsua_call_hold_type
 	swig_r = (Pjsua_call_hold_type)(C._wrap_PJSUA_CALL_HOLD_TYPE_RFC2543_pjsua2_b603cabda4e82a85())
@@ -8255,7 +8846,9 @@ func _swig_getPJSUA_CALL_HOLD_TYPE_RFC2543() (_swig_ret Pjsua_call_hold_type) {
 }
 
 var PJSUA_CALL_HOLD_TYPE_RFC2543 Pjsua_call_hold_type = _swig_getPJSUA_CALL_HOLD_TYPE_RFC2543()
+
 type Pjsua_destroy_flag int
+
 func _swig_getPJSUA_DESTROY_NO_RX_MSG() (_swig_ret Pjsua_destroy_flag) {
 	var swig_r Pjsua_destroy_flag
 	swig_r = (Pjsua_destroy_flag)(C._wrap_PJSUA_DESTROY_NO_RX_MSG_pjsua2_b603cabda4e82a85())
@@ -8263,6 +8856,7 @@ func _swig_getPJSUA_DESTROY_NO_RX_MSG() (_swig_ret Pjsua_destroy_flag) {
 }
 
 var PJSUA_DESTROY_NO_RX_MSG Pjsua_destroy_flag = _swig_getPJSUA_DESTROY_NO_RX_MSG()
+
 func _swig_getPJSUA_DESTROY_NO_TX_MSG() (_swig_ret Pjsua_destroy_flag) {
 	var swig_r Pjsua_destroy_flag
 	swig_r = (Pjsua_destroy_flag)(C._wrap_PJSUA_DESTROY_NO_TX_MSG_pjsua2_b603cabda4e82a85())
@@ -8270,6 +8864,7 @@ func _swig_getPJSUA_DESTROY_NO_TX_MSG() (_swig_ret Pjsua_destroy_flag) {
 }
 
 var PJSUA_DESTROY_NO_TX_MSG Pjsua_destroy_flag = _swig_getPJSUA_DESTROY_NO_TX_MSG()
+
 func _swig_getPJSUA_DESTROY_NO_NETWORK() (_swig_ret Pjsua_destroy_flag) {
 	var swig_r Pjsua_destroy_flag
 	swig_r = (Pjsua_destroy_flag)(C._wrap_PJSUA_DESTROY_NO_NETWORK_pjsua2_b603cabda4e82a85())
@@ -8277,7 +8872,9 @@ func _swig_getPJSUA_DESTROY_NO_NETWORK() (_swig_ret Pjsua_destroy_flag) {
 }
 
 var PJSUA_DESTROY_NO_NETWORK Pjsua_destroy_flag = _swig_getPJSUA_DESTROY_NO_NETWORK()
+
 type Pjsua_100rel_use int
+
 func _swig_getPJSUA_100REL_NOT_USED() (_swig_ret Pjsua_100rel_use) {
 	var swig_r Pjsua_100rel_use
 	swig_r = (Pjsua_100rel_use)(C._wrap_PJSUA_100REL_NOT_USED_pjsua2_b603cabda4e82a85())
@@ -8285,6 +8882,7 @@ func _swig_getPJSUA_100REL_NOT_USED() (_swig_ret Pjsua_100rel_use) {
 }
 
 var PJSUA_100REL_NOT_USED Pjsua_100rel_use = _swig_getPJSUA_100REL_NOT_USED()
+
 func _swig_getPJSUA_100REL_MANDATORY() (_swig_ret Pjsua_100rel_use) {
 	var swig_r Pjsua_100rel_use
 	swig_r = (Pjsua_100rel_use)(C._wrap_PJSUA_100REL_MANDATORY_pjsua2_b603cabda4e82a85())
@@ -8292,6 +8890,7 @@ func _swig_getPJSUA_100REL_MANDATORY() (_swig_ret Pjsua_100rel_use) {
 }
 
 var PJSUA_100REL_MANDATORY Pjsua_100rel_use = _swig_getPJSUA_100REL_MANDATORY()
+
 func _swig_getPJSUA_100REL_OPTIONAL() (_swig_ret Pjsua_100rel_use) {
 	var swig_r Pjsua_100rel_use
 	swig_r = (Pjsua_100rel_use)(C._wrap_PJSUA_100REL_OPTIONAL_pjsua2_b603cabda4e82a85())
@@ -8299,7 +8898,9 @@ func _swig_getPJSUA_100REL_OPTIONAL() (_swig_ret Pjsua_100rel_use) {
 }
 
 var PJSUA_100REL_OPTIONAL Pjsua_100rel_use = _swig_getPJSUA_100REL_OPTIONAL()
+
 type Pjsua_sip_timer_use int
+
 func _swig_getPJSUA_SIP_TIMER_INACTIVE() (_swig_ret Pjsua_sip_timer_use) {
 	var swig_r Pjsua_sip_timer_use
 	swig_r = (Pjsua_sip_timer_use)(C._wrap_PJSUA_SIP_TIMER_INACTIVE_pjsua2_b603cabda4e82a85())
@@ -8307,6 +8908,7 @@ func _swig_getPJSUA_SIP_TIMER_INACTIVE() (_swig_ret Pjsua_sip_timer_use) {
 }
 
 var PJSUA_SIP_TIMER_INACTIVE Pjsua_sip_timer_use = _swig_getPJSUA_SIP_TIMER_INACTIVE()
+
 func _swig_getPJSUA_SIP_TIMER_OPTIONAL() (_swig_ret Pjsua_sip_timer_use) {
 	var swig_r Pjsua_sip_timer_use
 	swig_r = (Pjsua_sip_timer_use)(C._wrap_PJSUA_SIP_TIMER_OPTIONAL_pjsua2_b603cabda4e82a85())
@@ -8314,6 +8916,7 @@ func _swig_getPJSUA_SIP_TIMER_OPTIONAL() (_swig_ret Pjsua_sip_timer_use) {
 }
 
 var PJSUA_SIP_TIMER_OPTIONAL Pjsua_sip_timer_use = _swig_getPJSUA_SIP_TIMER_OPTIONAL()
+
 func _swig_getPJSUA_SIP_TIMER_REQUIRED() (_swig_ret Pjsua_sip_timer_use) {
 	var swig_r Pjsua_sip_timer_use
 	swig_r = (Pjsua_sip_timer_use)(C._wrap_PJSUA_SIP_TIMER_REQUIRED_pjsua2_b603cabda4e82a85())
@@ -8321,6 +8924,7 @@ func _swig_getPJSUA_SIP_TIMER_REQUIRED() (_swig_ret Pjsua_sip_timer_use) {
 }
 
 var PJSUA_SIP_TIMER_REQUIRED Pjsua_sip_timer_use = _swig_getPJSUA_SIP_TIMER_REQUIRED()
+
 func _swig_getPJSUA_SIP_TIMER_ALWAYS() (_swig_ret Pjsua_sip_timer_use) {
 	var swig_r Pjsua_sip_timer_use
 	swig_r = (Pjsua_sip_timer_use)(C._wrap_PJSUA_SIP_TIMER_ALWAYS_pjsua2_b603cabda4e82a85())
@@ -8328,7 +8932,9 @@ func _swig_getPJSUA_SIP_TIMER_ALWAYS() (_swig_ret Pjsua_sip_timer_use) {
 }
 
 var PJSUA_SIP_TIMER_ALWAYS Pjsua_sip_timer_use = _swig_getPJSUA_SIP_TIMER_ALWAYS()
+
 type Pjsua_ipv6_use int
+
 func _swig_getPJSUA_IPV6_DISABLED() (_swig_ret Pjsua_ipv6_use) {
 	var swig_r Pjsua_ipv6_use
 	swig_r = (Pjsua_ipv6_use)(C._wrap_PJSUA_IPV6_DISABLED_pjsua2_b603cabda4e82a85())
@@ -8336,6 +8942,7 @@ func _swig_getPJSUA_IPV6_DISABLED() (_swig_ret Pjsua_ipv6_use) {
 }
 
 var PJSUA_IPV6_DISABLED Pjsua_ipv6_use = _swig_getPJSUA_IPV6_DISABLED()
+
 func _swig_getPJSUA_IPV6_ENABLED() (_swig_ret Pjsua_ipv6_use) {
 	var swig_r Pjsua_ipv6_use
 	swig_r = (Pjsua_ipv6_use)(C._wrap_PJSUA_IPV6_ENABLED_pjsua2_b603cabda4e82a85())
@@ -8343,6 +8950,7 @@ func _swig_getPJSUA_IPV6_ENABLED() (_swig_ret Pjsua_ipv6_use) {
 }
 
 var PJSUA_IPV6_ENABLED Pjsua_ipv6_use = _swig_getPJSUA_IPV6_ENABLED()
+
 func _swig_getPJSUA_IPV6_ENABLED_NO_PREFERENCE() (_swig_ret Pjsua_ipv6_use) {
 	var swig_r Pjsua_ipv6_use
 	swig_r = (Pjsua_ipv6_use)(C._wrap_PJSUA_IPV6_ENABLED_NO_PREFERENCE_pjsua2_b603cabda4e82a85())
@@ -8350,6 +8958,7 @@ func _swig_getPJSUA_IPV6_ENABLED_NO_PREFERENCE() (_swig_ret Pjsua_ipv6_use) {
 }
 
 var PJSUA_IPV6_ENABLED_NO_PREFERENCE Pjsua_ipv6_use = _swig_getPJSUA_IPV6_ENABLED_NO_PREFERENCE()
+
 func _swig_getPJSUA_IPV6_ENABLED_PREFER_IPV4() (_swig_ret Pjsua_ipv6_use) {
 	var swig_r Pjsua_ipv6_use
 	swig_r = (Pjsua_ipv6_use)(C._wrap_PJSUA_IPV6_ENABLED_PREFER_IPV4_pjsua2_b603cabda4e82a85())
@@ -8357,6 +8966,7 @@ func _swig_getPJSUA_IPV6_ENABLED_PREFER_IPV4() (_swig_ret Pjsua_ipv6_use) {
 }
 
 var PJSUA_IPV6_ENABLED_PREFER_IPV4 Pjsua_ipv6_use = _swig_getPJSUA_IPV6_ENABLED_PREFER_IPV4()
+
 func _swig_getPJSUA_IPV6_ENABLED_PREFER_IPV6() (_swig_ret Pjsua_ipv6_use) {
 	var swig_r Pjsua_ipv6_use
 	swig_r = (Pjsua_ipv6_use)(C._wrap_PJSUA_IPV6_ENABLED_PREFER_IPV6_pjsua2_b603cabda4e82a85())
@@ -8364,6 +8974,7 @@ func _swig_getPJSUA_IPV6_ENABLED_PREFER_IPV6() (_swig_ret Pjsua_ipv6_use) {
 }
 
 var PJSUA_IPV6_ENABLED_PREFER_IPV6 Pjsua_ipv6_use = _swig_getPJSUA_IPV6_ENABLED_PREFER_IPV6()
+
 func _swig_getPJSUA_IPV6_ENABLED_USE_IPV6_ONLY() (_swig_ret Pjsua_ipv6_use) {
 	var swig_r Pjsua_ipv6_use
 	swig_r = (Pjsua_ipv6_use)(C._wrap_PJSUA_IPV6_ENABLED_USE_IPV6_ONLY_pjsua2_b603cabda4e82a85())
@@ -8371,7 +8982,9 @@ func _swig_getPJSUA_IPV6_ENABLED_USE_IPV6_ONLY() (_swig_ret Pjsua_ipv6_use) {
 }
 
 var PJSUA_IPV6_ENABLED_USE_IPV6_ONLY Pjsua_ipv6_use = _swig_getPJSUA_IPV6_ENABLED_USE_IPV6_ONLY()
+
 type Pjsua_nat64_opt int
+
 func _swig_getPJSUA_NAT64_DISABLED() (_swig_ret Pjsua_nat64_opt) {
 	var swig_r Pjsua_nat64_opt
 	swig_r = (Pjsua_nat64_opt)(C._wrap_PJSUA_NAT64_DISABLED_pjsua2_b603cabda4e82a85())
@@ -8379,6 +8992,7 @@ func _swig_getPJSUA_NAT64_DISABLED() (_swig_ret Pjsua_nat64_opt) {
 }
 
 var PJSUA_NAT64_DISABLED Pjsua_nat64_opt = _swig_getPJSUA_NAT64_DISABLED()
+
 func _swig_getPJSUA_NAT64_ENABLED() (_swig_ret Pjsua_nat64_opt) {
 	var swig_r Pjsua_nat64_opt
 	swig_r = (Pjsua_nat64_opt)(C._wrap_PJSUA_NAT64_ENABLED_pjsua2_b603cabda4e82a85())
@@ -8386,7 +9000,9 @@ func _swig_getPJSUA_NAT64_ENABLED() (_swig_ret Pjsua_nat64_opt) {
 }
 
 var PJSUA_NAT64_ENABLED Pjsua_nat64_opt = _swig_getPJSUA_NAT64_ENABLED()
+
 type Pjsua_buddy_status int
+
 func _swig_getPJSUA_BUDDY_STATUS_UNKNOWN() (_swig_ret Pjsua_buddy_status) {
 	var swig_r Pjsua_buddy_status
 	swig_r = (Pjsua_buddy_status)(C._wrap_PJSUA_BUDDY_STATUS_UNKNOWN_pjsua2_b603cabda4e82a85())
@@ -8394,6 +9010,7 @@ func _swig_getPJSUA_BUDDY_STATUS_UNKNOWN() (_swig_ret Pjsua_buddy_status) {
 }
 
 var PJSUA_BUDDY_STATUS_UNKNOWN Pjsua_buddy_status = _swig_getPJSUA_BUDDY_STATUS_UNKNOWN()
+
 func _swig_getPJSUA_BUDDY_STATUS_ONLINE() (_swig_ret Pjsua_buddy_status) {
 	var swig_r Pjsua_buddy_status
 	swig_r = (Pjsua_buddy_status)(C._wrap_PJSUA_BUDDY_STATUS_ONLINE_pjsua2_b603cabda4e82a85())
@@ -8401,6 +9018,7 @@ func _swig_getPJSUA_BUDDY_STATUS_ONLINE() (_swig_ret Pjsua_buddy_status) {
 }
 
 var PJSUA_BUDDY_STATUS_ONLINE Pjsua_buddy_status = _swig_getPJSUA_BUDDY_STATUS_ONLINE()
+
 func _swig_getPJSUA_BUDDY_STATUS_OFFLINE() (_swig_ret Pjsua_buddy_status) {
 	var swig_r Pjsua_buddy_status
 	swig_r = (Pjsua_buddy_status)(C._wrap_PJSUA_BUDDY_STATUS_OFFLINE_pjsua2_b603cabda4e82a85())
@@ -8408,7 +9026,9 @@ func _swig_getPJSUA_BUDDY_STATUS_OFFLINE() (_swig_ret Pjsua_buddy_status) {
 }
 
 var PJSUA_BUDDY_STATUS_OFFLINE Pjsua_buddy_status = _swig_getPJSUA_BUDDY_STATUS_OFFLINE()
+
 type Pjsua_call_media_status int
+
 func _swig_getPJSUA_CALL_MEDIA_NONE() (_swig_ret Pjsua_call_media_status) {
 	var swig_r Pjsua_call_media_status
 	swig_r = (Pjsua_call_media_status)(C._wrap_PJSUA_CALL_MEDIA_NONE_pjsua2_b603cabda4e82a85())
@@ -8416,6 +9036,7 @@ func _swig_getPJSUA_CALL_MEDIA_NONE() (_swig_ret Pjsua_call_media_status) {
 }
 
 var PJSUA_CALL_MEDIA_NONE Pjsua_call_media_status = _swig_getPJSUA_CALL_MEDIA_NONE()
+
 func _swig_getPJSUA_CALL_MEDIA_ACTIVE() (_swig_ret Pjsua_call_media_status) {
 	var swig_r Pjsua_call_media_status
 	swig_r = (Pjsua_call_media_status)(C._wrap_PJSUA_CALL_MEDIA_ACTIVE_pjsua2_b603cabda4e82a85())
@@ -8423,6 +9044,7 @@ func _swig_getPJSUA_CALL_MEDIA_ACTIVE() (_swig_ret Pjsua_call_media_status) {
 }
 
 var PJSUA_CALL_MEDIA_ACTIVE Pjsua_call_media_status = _swig_getPJSUA_CALL_MEDIA_ACTIVE()
+
 func _swig_getPJSUA_CALL_MEDIA_LOCAL_HOLD() (_swig_ret Pjsua_call_media_status) {
 	var swig_r Pjsua_call_media_status
 	swig_r = (Pjsua_call_media_status)(C._wrap_PJSUA_CALL_MEDIA_LOCAL_HOLD_pjsua2_b603cabda4e82a85())
@@ -8430,6 +9052,7 @@ func _swig_getPJSUA_CALL_MEDIA_LOCAL_HOLD() (_swig_ret Pjsua_call_media_status) 
 }
 
 var PJSUA_CALL_MEDIA_LOCAL_HOLD Pjsua_call_media_status = _swig_getPJSUA_CALL_MEDIA_LOCAL_HOLD()
+
 func _swig_getPJSUA_CALL_MEDIA_REMOTE_HOLD() (_swig_ret Pjsua_call_media_status) {
 	var swig_r Pjsua_call_media_status
 	swig_r = (Pjsua_call_media_status)(C._wrap_PJSUA_CALL_MEDIA_REMOTE_HOLD_pjsua2_b603cabda4e82a85())
@@ -8437,6 +9060,7 @@ func _swig_getPJSUA_CALL_MEDIA_REMOTE_HOLD() (_swig_ret Pjsua_call_media_status)
 }
 
 var PJSUA_CALL_MEDIA_REMOTE_HOLD Pjsua_call_media_status = _swig_getPJSUA_CALL_MEDIA_REMOTE_HOLD()
+
 func _swig_getPJSUA_CALL_MEDIA_ERROR() (_swig_ret Pjsua_call_media_status) {
 	var swig_r Pjsua_call_media_status
 	swig_r = (Pjsua_call_media_status)(C._wrap_PJSUA_CALL_MEDIA_ERROR_pjsua2_b603cabda4e82a85())
@@ -8444,7 +9068,9 @@ func _swig_getPJSUA_CALL_MEDIA_ERROR() (_swig_ret Pjsua_call_media_status) {
 }
 
 var PJSUA_CALL_MEDIA_ERROR Pjsua_call_media_status = _swig_getPJSUA_CALL_MEDIA_ERROR()
+
 type Pjsua_med_tp_st int
+
 func _swig_getPJSUA_MED_TP_NULL() (_swig_ret Pjsua_med_tp_st) {
 	var swig_r Pjsua_med_tp_st
 	swig_r = (Pjsua_med_tp_st)(C._wrap_PJSUA_MED_TP_NULL_pjsua2_b603cabda4e82a85())
@@ -8452,6 +9078,7 @@ func _swig_getPJSUA_MED_TP_NULL() (_swig_ret Pjsua_med_tp_st) {
 }
 
 var PJSUA_MED_TP_NULL Pjsua_med_tp_st = _swig_getPJSUA_MED_TP_NULL()
+
 func _swig_getPJSUA_MED_TP_CREATING() (_swig_ret Pjsua_med_tp_st) {
 	var swig_r Pjsua_med_tp_st
 	swig_r = (Pjsua_med_tp_st)(C._wrap_PJSUA_MED_TP_CREATING_pjsua2_b603cabda4e82a85())
@@ -8459,6 +9086,7 @@ func _swig_getPJSUA_MED_TP_CREATING() (_swig_ret Pjsua_med_tp_st) {
 }
 
 var PJSUA_MED_TP_CREATING Pjsua_med_tp_st = _swig_getPJSUA_MED_TP_CREATING()
+
 func _swig_getPJSUA_MED_TP_IDLE() (_swig_ret Pjsua_med_tp_st) {
 	var swig_r Pjsua_med_tp_st
 	swig_r = (Pjsua_med_tp_st)(C._wrap_PJSUA_MED_TP_IDLE_pjsua2_b603cabda4e82a85())
@@ -8466,6 +9094,7 @@ func _swig_getPJSUA_MED_TP_IDLE() (_swig_ret Pjsua_med_tp_st) {
 }
 
 var PJSUA_MED_TP_IDLE Pjsua_med_tp_st = _swig_getPJSUA_MED_TP_IDLE()
+
 func _swig_getPJSUA_MED_TP_INIT() (_swig_ret Pjsua_med_tp_st) {
 	var swig_r Pjsua_med_tp_st
 	swig_r = (Pjsua_med_tp_st)(C._wrap_PJSUA_MED_TP_INIT_pjsua2_b603cabda4e82a85())
@@ -8473,6 +9102,7 @@ func _swig_getPJSUA_MED_TP_INIT() (_swig_ret Pjsua_med_tp_st) {
 }
 
 var PJSUA_MED_TP_INIT Pjsua_med_tp_st = _swig_getPJSUA_MED_TP_INIT()
+
 func _swig_getPJSUA_MED_TP_RUNNING() (_swig_ret Pjsua_med_tp_st) {
 	var swig_r Pjsua_med_tp_st
 	swig_r = (Pjsua_med_tp_st)(C._wrap_PJSUA_MED_TP_RUNNING_pjsua2_b603cabda4e82a85())
@@ -8480,6 +9110,7 @@ func _swig_getPJSUA_MED_TP_RUNNING() (_swig_ret Pjsua_med_tp_st) {
 }
 
 var PJSUA_MED_TP_RUNNING Pjsua_med_tp_st = _swig_getPJSUA_MED_TP_RUNNING()
+
 func _swig_getPJSUA_MED_TP_DISABLED() (_swig_ret Pjsua_med_tp_st) {
 	var swig_r Pjsua_med_tp_st
 	swig_r = (Pjsua_med_tp_st)(C._wrap_PJSUA_MED_TP_DISABLED_pjsua2_b603cabda4e82a85())
@@ -8487,7 +9118,9 @@ func _swig_getPJSUA_MED_TP_DISABLED() (_swig_ret Pjsua_med_tp_st) {
 }
 
 var PJSUA_MED_TP_DISABLED Pjsua_med_tp_st = _swig_getPJSUA_MED_TP_DISABLED()
+
 type Pjsua_call_vid_strm_op int
+
 func _swig_getPJSUA_CALL_VID_STRM_NO_OP() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_NO_OP_pjsua2_b603cabda4e82a85())
@@ -8495,6 +9128,7 @@ func _swig_getPJSUA_CALL_VID_STRM_NO_OP() (_swig_ret Pjsua_call_vid_strm_op) {
 }
 
 var PJSUA_CALL_VID_STRM_NO_OP Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_NO_OP()
+
 func _swig_getPJSUA_CALL_VID_STRM_ADD() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_ADD_pjsua2_b603cabda4e82a85())
@@ -8502,6 +9136,7 @@ func _swig_getPJSUA_CALL_VID_STRM_ADD() (_swig_ret Pjsua_call_vid_strm_op) {
 }
 
 var PJSUA_CALL_VID_STRM_ADD Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_ADD()
+
 func _swig_getPJSUA_CALL_VID_STRM_REMOVE() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_REMOVE_pjsua2_b603cabda4e82a85())
@@ -8509,6 +9144,7 @@ func _swig_getPJSUA_CALL_VID_STRM_REMOVE() (_swig_ret Pjsua_call_vid_strm_op) {
 }
 
 var PJSUA_CALL_VID_STRM_REMOVE Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_REMOVE()
+
 func _swig_getPJSUA_CALL_VID_STRM_CHANGE_DIR() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_CHANGE_DIR_pjsua2_b603cabda4e82a85())
@@ -8516,6 +9152,7 @@ func _swig_getPJSUA_CALL_VID_STRM_CHANGE_DIR() (_swig_ret Pjsua_call_vid_strm_op
 }
 
 var PJSUA_CALL_VID_STRM_CHANGE_DIR Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_CHANGE_DIR()
+
 func _swig_getPJSUA_CALL_VID_STRM_CHANGE_CAP_DEV() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_CHANGE_CAP_DEV_pjsua2_b603cabda4e82a85())
@@ -8523,6 +9160,7 @@ func _swig_getPJSUA_CALL_VID_STRM_CHANGE_CAP_DEV() (_swig_ret Pjsua_call_vid_str
 }
 
 var PJSUA_CALL_VID_STRM_CHANGE_CAP_DEV Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_CHANGE_CAP_DEV()
+
 func _swig_getPJSUA_CALL_VID_STRM_START_TRANSMIT() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_START_TRANSMIT_pjsua2_b603cabda4e82a85())
@@ -8530,6 +9168,7 @@ func _swig_getPJSUA_CALL_VID_STRM_START_TRANSMIT() (_swig_ret Pjsua_call_vid_str
 }
 
 var PJSUA_CALL_VID_STRM_START_TRANSMIT Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_START_TRANSMIT()
+
 func _swig_getPJSUA_CALL_VID_STRM_STOP_TRANSMIT() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_STOP_TRANSMIT_pjsua2_b603cabda4e82a85())
@@ -8537,6 +9176,7 @@ func _swig_getPJSUA_CALL_VID_STRM_STOP_TRANSMIT() (_swig_ret Pjsua_call_vid_strm
 }
 
 var PJSUA_CALL_VID_STRM_STOP_TRANSMIT Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_STOP_TRANSMIT()
+
 func _swig_getPJSUA_CALL_VID_STRM_SEND_KEYFRAME() (_swig_ret Pjsua_call_vid_strm_op) {
 	var swig_r Pjsua_call_vid_strm_op
 	swig_r = (Pjsua_call_vid_strm_op)(C._wrap_PJSUA_CALL_VID_STRM_SEND_KEYFRAME_pjsua2_b603cabda4e82a85())
@@ -8544,7 +9184,9 @@ func _swig_getPJSUA_CALL_VID_STRM_SEND_KEYFRAME() (_swig_ret Pjsua_call_vid_strm
 }
 
 var PJSUA_CALL_VID_STRM_SEND_KEYFRAME Pjsua_call_vid_strm_op = _swig_getPJSUA_CALL_VID_STRM_SEND_KEYFRAME()
+
 type Pjsua_vid_req_keyframe_method int
+
 func _swig_getPJSUA_VID_REQ_KEYFRAME_SIP_INFO() (_swig_ret Pjsua_vid_req_keyframe_method) {
 	var swig_r Pjsua_vid_req_keyframe_method
 	swig_r = (Pjsua_vid_req_keyframe_method)(C._wrap_PJSUA_VID_REQ_KEYFRAME_SIP_INFO_pjsua2_b603cabda4e82a85())
@@ -8552,6 +9194,7 @@ func _swig_getPJSUA_VID_REQ_KEYFRAME_SIP_INFO() (_swig_ret Pjsua_vid_req_keyfram
 }
 
 var PJSUA_VID_REQ_KEYFRAME_SIP_INFO Pjsua_vid_req_keyframe_method = _swig_getPJSUA_VID_REQ_KEYFRAME_SIP_INFO()
+
 func _swig_getPJSUA_VID_REQ_KEYFRAME_RTCP_PLI() (_swig_ret Pjsua_vid_req_keyframe_method) {
 	var swig_r Pjsua_vid_req_keyframe_method
 	swig_r = (Pjsua_vid_req_keyframe_method)(C._wrap_PJSUA_VID_REQ_KEYFRAME_RTCP_PLI_pjsua2_b603cabda4e82a85())
@@ -8559,7 +9202,9 @@ func _swig_getPJSUA_VID_REQ_KEYFRAME_RTCP_PLI() (_swig_ret Pjsua_vid_req_keyfram
 }
 
 var PJSUA_VID_REQ_KEYFRAME_RTCP_PLI Pjsua_vid_req_keyframe_method = _swig_getPJSUA_VID_REQ_KEYFRAME_RTCP_PLI()
+
 type Pjsua_call_flag int
+
 func _swig_getPJSUA_CALL_UNHOLD() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_UNHOLD_pjsua2_b603cabda4e82a85())
@@ -8567,6 +9212,7 @@ func _swig_getPJSUA_CALL_UNHOLD() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_UNHOLD Pjsua_call_flag = _swig_getPJSUA_CALL_UNHOLD()
+
 func _swig_getPJSUA_CALL_UPDATE_CONTACT() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_UPDATE_CONTACT_pjsua2_b603cabda4e82a85())
@@ -8574,6 +9220,7 @@ func _swig_getPJSUA_CALL_UPDATE_CONTACT() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_UPDATE_CONTACT Pjsua_call_flag = _swig_getPJSUA_CALL_UPDATE_CONTACT()
+
 func _swig_getPJSUA_CALL_INCLUDE_DISABLED_MEDIA() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_INCLUDE_DISABLED_MEDIA_pjsua2_b603cabda4e82a85())
@@ -8581,6 +9228,7 @@ func _swig_getPJSUA_CALL_INCLUDE_DISABLED_MEDIA() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_INCLUDE_DISABLED_MEDIA Pjsua_call_flag = _swig_getPJSUA_CALL_INCLUDE_DISABLED_MEDIA()
+
 func _swig_getPJSUA_CALL_NO_SDP_OFFER() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_NO_SDP_OFFER_pjsua2_b603cabda4e82a85())
@@ -8588,6 +9236,7 @@ func _swig_getPJSUA_CALL_NO_SDP_OFFER() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_NO_SDP_OFFER Pjsua_call_flag = _swig_getPJSUA_CALL_NO_SDP_OFFER()
+
 func _swig_getPJSUA_CALL_REINIT_MEDIA() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_REINIT_MEDIA_pjsua2_b603cabda4e82a85())
@@ -8595,6 +9244,7 @@ func _swig_getPJSUA_CALL_REINIT_MEDIA() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_REINIT_MEDIA Pjsua_call_flag = _swig_getPJSUA_CALL_REINIT_MEDIA()
+
 func _swig_getPJSUA_CALL_UPDATE_VIA() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_UPDATE_VIA_pjsua2_b603cabda4e82a85())
@@ -8602,6 +9252,7 @@ func _swig_getPJSUA_CALL_UPDATE_VIA() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_UPDATE_VIA Pjsua_call_flag = _swig_getPJSUA_CALL_UPDATE_VIA()
+
 func _swig_getPJSUA_CALL_UPDATE_TARGET() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_UPDATE_TARGET_pjsua2_b603cabda4e82a85())
@@ -8609,6 +9260,7 @@ func _swig_getPJSUA_CALL_UPDATE_TARGET() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_UPDATE_TARGET Pjsua_call_flag = _swig_getPJSUA_CALL_UPDATE_TARGET()
+
 func _swig_getPJSUA_CALL_SET_MEDIA_DIR() (_swig_ret Pjsua_call_flag) {
 	var swig_r Pjsua_call_flag
 	swig_r = (Pjsua_call_flag)(C._wrap_PJSUA_CALL_SET_MEDIA_DIR_pjsua2_b603cabda4e82a85())
@@ -8616,7 +9268,9 @@ func _swig_getPJSUA_CALL_SET_MEDIA_DIR() (_swig_ret Pjsua_call_flag) {
 }
 
 var PJSUA_CALL_SET_MEDIA_DIR Pjsua_call_flag = _swig_getPJSUA_CALL_SET_MEDIA_DIR()
+
 type Pjsua_create_media_transport_flag int
+
 func _swig_getPJSUA_MED_TP_CLOSE_MEMBER() (_swig_ret Pjsua_create_media_transport_flag) {
 	var swig_r Pjsua_create_media_transport_flag
 	swig_r = (Pjsua_create_media_transport_flag)(C._wrap_PJSUA_MED_TP_CLOSE_MEMBER_pjsua2_b603cabda4e82a85())
@@ -8624,7 +9278,9 @@ func _swig_getPJSUA_MED_TP_CLOSE_MEMBER() (_swig_ret Pjsua_create_media_transpor
 }
 
 var PJSUA_MED_TP_CLOSE_MEMBER Pjsua_create_media_transport_flag = _swig_getPJSUA_MED_TP_CLOSE_MEMBER()
+
 type Pjsua_snd_dev_id int
+
 func _swig_getPJSUA_SND_DEFAULT_CAPTURE_DEV() (_swig_ret Pjsua_snd_dev_id) {
 	var swig_r Pjsua_snd_dev_id
 	swig_r = (Pjsua_snd_dev_id)(C._wrap_PJSUA_SND_DEFAULT_CAPTURE_DEV_pjsua2_b603cabda4e82a85())
@@ -8632,6 +9288,7 @@ func _swig_getPJSUA_SND_DEFAULT_CAPTURE_DEV() (_swig_ret Pjsua_snd_dev_id) {
 }
 
 var PJSUA_SND_DEFAULT_CAPTURE_DEV Pjsua_snd_dev_id = _swig_getPJSUA_SND_DEFAULT_CAPTURE_DEV()
+
 func _swig_getPJSUA_SND_DEFAULT_PLAYBACK_DEV() (_swig_ret Pjsua_snd_dev_id) {
 	var swig_r Pjsua_snd_dev_id
 	swig_r = (Pjsua_snd_dev_id)(C._wrap_PJSUA_SND_DEFAULT_PLAYBACK_DEV_pjsua2_b603cabda4e82a85())
@@ -8639,6 +9296,7 @@ func _swig_getPJSUA_SND_DEFAULT_PLAYBACK_DEV() (_swig_ret Pjsua_snd_dev_id) {
 }
 
 var PJSUA_SND_DEFAULT_PLAYBACK_DEV Pjsua_snd_dev_id = _swig_getPJSUA_SND_DEFAULT_PLAYBACK_DEV()
+
 func _swig_getPJSUA_SND_NO_DEV() (_swig_ret Pjsua_snd_dev_id) {
 	var swig_r Pjsua_snd_dev_id
 	swig_r = (Pjsua_snd_dev_id)(C._wrap_PJSUA_SND_NO_DEV_pjsua2_b603cabda4e82a85())
@@ -8646,6 +9304,7 @@ func _swig_getPJSUA_SND_NO_DEV() (_swig_ret Pjsua_snd_dev_id) {
 }
 
 var PJSUA_SND_NO_DEV Pjsua_snd_dev_id = _swig_getPJSUA_SND_NO_DEV()
+
 func _swig_getPJSUA_SND_NULL_DEV() (_swig_ret Pjsua_snd_dev_id) {
 	var swig_r Pjsua_snd_dev_id
 	swig_r = (Pjsua_snd_dev_id)(C._wrap_PJSUA_SND_NULL_DEV_pjsua2_b603cabda4e82a85())
@@ -8653,7 +9312,9 @@ func _swig_getPJSUA_SND_NULL_DEV() (_swig_ret Pjsua_snd_dev_id) {
 }
 
 var PJSUA_SND_NULL_DEV Pjsua_snd_dev_id = _swig_getPJSUA_SND_NULL_DEV()
+
 type Pjsua_snd_dev_mode int
+
 func _swig_getPJSUA_SND_DEV_SPEAKER_ONLY() (_swig_ret Pjsua_snd_dev_mode) {
 	var swig_r Pjsua_snd_dev_mode
 	swig_r = (Pjsua_snd_dev_mode)(C._wrap_PJSUA_SND_DEV_SPEAKER_ONLY_pjsua2_b603cabda4e82a85())
@@ -8661,6 +9322,7 @@ func _swig_getPJSUA_SND_DEV_SPEAKER_ONLY() (_swig_ret Pjsua_snd_dev_mode) {
 }
 
 var PJSUA_SND_DEV_SPEAKER_ONLY Pjsua_snd_dev_mode = _swig_getPJSUA_SND_DEV_SPEAKER_ONLY()
+
 func _swig_getPJSUA_SND_DEV_NO_IMMEDIATE_OPEN() (_swig_ret Pjsua_snd_dev_mode) {
 	var swig_r Pjsua_snd_dev_mode
 	swig_r = (Pjsua_snd_dev_mode)(C._wrap_PJSUA_SND_DEV_NO_IMMEDIATE_OPEN_pjsua2_b603cabda4e82a85())
@@ -8668,7 +9330,9 @@ func _swig_getPJSUA_SND_DEV_NO_IMMEDIATE_OPEN() (_swig_ret Pjsua_snd_dev_mode) {
 }
 
 var PJSUA_SND_DEV_NO_IMMEDIATE_OPEN Pjsua_snd_dev_mode = _swig_getPJSUA_SND_DEV_NO_IMMEDIATE_OPEN()
+
 type Pjsua_ip_change_op int
+
 func _swig_getPJSUA_IP_CHANGE_OP_NULL() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_NULL_pjsua2_b603cabda4e82a85())
@@ -8676,6 +9340,7 @@ func _swig_getPJSUA_IP_CHANGE_OP_NULL() (_swig_ret Pjsua_ip_change_op) {
 }
 
 var PJSUA_IP_CHANGE_OP_NULL Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_NULL()
+
 func _swig_getPJSUA_IP_CHANGE_OP_SHUTDOWN_TP() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_SHUTDOWN_TP_pjsua2_b603cabda4e82a85())
@@ -8683,6 +9348,7 @@ func _swig_getPJSUA_IP_CHANGE_OP_SHUTDOWN_TP() (_swig_ret Pjsua_ip_change_op) {
 }
 
 var PJSUA_IP_CHANGE_OP_SHUTDOWN_TP Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_SHUTDOWN_TP()
+
 func _swig_getPJSUA_IP_CHANGE_OP_RESTART_LIS() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_RESTART_LIS_pjsua2_b603cabda4e82a85())
@@ -8690,6 +9356,7 @@ func _swig_getPJSUA_IP_CHANGE_OP_RESTART_LIS() (_swig_ret Pjsua_ip_change_op) {
 }
 
 var PJSUA_IP_CHANGE_OP_RESTART_LIS Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_RESTART_LIS()
+
 func _swig_getPJSUA_IP_CHANGE_OP_ACC_SHUTDOWN_TP() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_ACC_SHUTDOWN_TP_pjsua2_b603cabda4e82a85())
@@ -8697,6 +9364,7 @@ func _swig_getPJSUA_IP_CHANGE_OP_ACC_SHUTDOWN_TP() (_swig_ret Pjsua_ip_change_op
 }
 
 var PJSUA_IP_CHANGE_OP_ACC_SHUTDOWN_TP Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_ACC_SHUTDOWN_TP()
+
 func _swig_getPJSUA_IP_CHANGE_OP_ACC_UPDATE_CONTACT() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_ACC_UPDATE_CONTACT_pjsua2_b603cabda4e82a85())
@@ -8704,6 +9372,7 @@ func _swig_getPJSUA_IP_CHANGE_OP_ACC_UPDATE_CONTACT() (_swig_ret Pjsua_ip_change
 }
 
 var PJSUA_IP_CHANGE_OP_ACC_UPDATE_CONTACT Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_ACC_UPDATE_CONTACT()
+
 func _swig_getPJSUA_IP_CHANGE_OP_ACC_HANGUP_CALLS() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_ACC_HANGUP_CALLS_pjsua2_b603cabda4e82a85())
@@ -8711,6 +9380,7 @@ func _swig_getPJSUA_IP_CHANGE_OP_ACC_HANGUP_CALLS() (_swig_ret Pjsua_ip_change_o
 }
 
 var PJSUA_IP_CHANGE_OP_ACC_HANGUP_CALLS Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_ACC_HANGUP_CALLS()
+
 func _swig_getPJSUA_IP_CHANGE_OP_ACC_REINVITE_CALLS() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_ACC_REINVITE_CALLS_pjsua2_b603cabda4e82a85())
@@ -8718,6 +9388,7 @@ func _swig_getPJSUA_IP_CHANGE_OP_ACC_REINVITE_CALLS() (_swig_ret Pjsua_ip_change
 }
 
 var PJSUA_IP_CHANGE_OP_ACC_REINVITE_CALLS Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_ACC_REINVITE_CALLS()
+
 func _swig_getPJSUA_IP_CHANGE_OP_COMPLETED() (_swig_ret Pjsua_ip_change_op) {
 	var swig_r Pjsua_ip_change_op
 	swig_r = (Pjsua_ip_change_op)(C._wrap_PJSUA_IP_CHANGE_OP_COMPLETED_pjsua2_b603cabda4e82a85())
@@ -8725,7 +9396,9 @@ func _swig_getPJSUA_IP_CHANGE_OP_COMPLETED() (_swig_ret Pjsua_ip_change_op) {
 }
 
 var PJSUA_IP_CHANGE_OP_COMPLETED Pjsua_ip_change_op = _swig_getPJSUA_IP_CHANGE_OP_COMPLETED()
+
 type Pjsua_dtmf_method int
+
 func _swig_getPJSUA_DTMF_METHOD_RFC2833() (_swig_ret Pjsua_dtmf_method) {
 	var swig_r Pjsua_dtmf_method
 	swig_r = (Pjsua_dtmf_method)(C._wrap_PJSUA_DTMF_METHOD_RFC2833_pjsua2_b603cabda4e82a85())
@@ -8733,6 +9406,7 @@ func _swig_getPJSUA_DTMF_METHOD_RFC2833() (_swig_ret Pjsua_dtmf_method) {
 }
 
 var PJSUA_DTMF_METHOD_RFC2833 Pjsua_dtmf_method = _swig_getPJSUA_DTMF_METHOD_RFC2833()
+
 func _swig_getPJSUA_DTMF_METHOD_SIP_INFO() (_swig_ret Pjsua_dtmf_method) {
 	var swig_r Pjsua_dtmf_method
 	swig_r = (Pjsua_dtmf_method)(C._wrap_PJSUA_DTMF_METHOD_SIP_INFO_pjsua2_b603cabda4e82a85())
@@ -8740,6 +9414,7 @@ func _swig_getPJSUA_DTMF_METHOD_SIP_INFO() (_swig_ret Pjsua_dtmf_method) {
 }
 
 var PJSUA_DTMF_METHOD_SIP_INFO Pjsua_dtmf_method = _swig_getPJSUA_DTMF_METHOD_SIP_INFO()
+
 type SwigcptrStringVector uintptr
 
 func (p SwigcptrStringVector) Swigcptr() uintptr {
@@ -8835,7 +9510,7 @@ func (arg1 SwigcptrStringVector) Get(arg2 int) (_swig_ret string) {
 	swig_r_p := C._wrap_StringVector_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9165,7 +9840,7 @@ func (arg1 SwigcptrStringToStringMap) Get(arg2 string) (_swig_ret string) {
 		Swig_escape_val = arg2
 	}
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9226,6 +9901,7 @@ func _swig_getINVALID_ID() (_swig_ret int) {
 }
 
 var INVALID_ID int = _swig_getINVALID_ID()
+
 func _swig_getSUCCESS() (_swig_ret int) {
 	var swig_r int
 	swig_r = (int)(C._wrap_SUCCESS_pjsua2_b603cabda4e82a85())
@@ -9233,6 +9909,7 @@ func _swig_getSUCCESS() (_swig_ret int) {
 }
 
 var SUCCESS int = _swig_getSUCCESS()
+
 type SwigcptrError uintptr
 
 func (p SwigcptrError) Swigcptr() uintptr {
@@ -9270,7 +9947,7 @@ func (arg1 SwigcptrError) GetTitle() (_swig_ret string) {
 	swig_r_p := C._wrap_Error_title_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9289,7 +9966,7 @@ func (arg1 SwigcptrError) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_Error_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9308,7 +9985,7 @@ func (arg1 SwigcptrError) GetSrcFile() (_swig_ret string) {
 	swig_r_p := C._wrap_Error_srcFile_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9332,7 +10009,7 @@ func (arg1 SwigcptrError) Info__SWIG_0(arg2 bool) (_swig_ret string) {
 	swig_r_p := C._wrap_Error_info__SWIG_0_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0), C._Bool(_swig_i_1))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9342,7 +10019,7 @@ func (arg1 SwigcptrError) Info__SWIG_1() (_swig_ret string) {
 	swig_r_p := C._wrap_Error_info__SWIG_1_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9478,7 +10155,7 @@ func (arg1 SwigcptrVersion) GetSuffix() (_swig_ret string) {
 	swig_r_p := C._wrap_Version_suffix_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9497,7 +10174,7 @@ func (arg1 SwigcptrVersion) GetFull() (_swig_ret string) {
 	swig_r_p := C._wrap_Version_full_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9677,7 +10354,7 @@ func (arg1 SwigcptrPersistentDocument) SaveString() (_swig_ret string) {
 	swig_r_p := C._wrap_PersistentDocument_saveString_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9701,7 +10378,7 @@ func (arg1 SwigcptrPersistentDocument) UnreadName() (_swig_ret string) {
 	swig_r_p := C._wrap_PersistentDocument_unreadName_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9802,7 +10479,7 @@ func (arg1 SwigcptrPersistentDocument) ReadString__SWIG_0(arg2 string) (_swig_re
 		Swig_escape_val = arg2
 	}
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -9812,7 +10489,7 @@ func (arg1 SwigcptrPersistentDocument) ReadString__SWIG_1() (_swig_ret string) {
 	swig_r_p := C._wrap_PersistentDocument_readString__SWIG_1_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10051,7 +10728,7 @@ func (arg1 SwigcptrContainerNode) UnreadName() (_swig_ret string) {
 	swig_r_p := C._wrap_ContainerNode_unreadName_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10152,7 +10829,7 @@ func (arg1 SwigcptrContainerNode) ReadString__SWIG_0(arg2 string) (_swig_ret str
 		Swig_escape_val = arg2
 	}
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10162,7 +10839,7 @@ func (arg1 SwigcptrContainerNode) ReadString__SWIG_1() (_swig_ret string) {
 	swig_r_p := C._wrap_ContainerNode_readString__SWIG_1_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10409,7 +11086,7 @@ func (arg1 SwigcptrAuthCredInfo) GetScheme() (_swig_ret string) {
 	swig_r_p := C._wrap_AuthCredInfo_scheme_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10428,7 +11105,7 @@ func (arg1 SwigcptrAuthCredInfo) GetRealm() (_swig_ret string) {
 	swig_r_p := C._wrap_AuthCredInfo_realm_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10447,7 +11124,7 @@ func (arg1 SwigcptrAuthCredInfo) GetUsername() (_swig_ret string) {
 	swig_r_p := C._wrap_AuthCredInfo_username_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10479,7 +11156,7 @@ func (arg1 SwigcptrAuthCredInfo) GetData() (_swig_ret string) {
 	swig_r_p := C._wrap_AuthCredInfo_data_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10511,7 +11188,7 @@ func (arg1 SwigcptrAuthCredInfo) GetAkaK() (_swig_ret string) {
 	swig_r_p := C._wrap_AuthCredInfo_akaK_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10530,7 +11207,7 @@ func (arg1 SwigcptrAuthCredInfo) GetAkaOp() (_swig_ret string) {
 	swig_r_p := C._wrap_AuthCredInfo_akaOp_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10549,7 +11226,7 @@ func (arg1 SwigcptrAuthCredInfo) GetAkaAmf() (_swig_ret string) {
 	swig_r_p := C._wrap_AuthCredInfo_akaAmf_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10813,7 +11490,7 @@ func (arg1 SwigcptrTlsConfig) GetCaListFile() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_CaListFile_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10832,7 +11509,7 @@ func (arg1 SwigcptrTlsConfig) GetCertFile() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_certFile_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10851,7 +11528,7 @@ func (arg1 SwigcptrTlsConfig) GetPrivKeyFile() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_privKeyFile_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10870,7 +11547,7 @@ func (arg1 SwigcptrTlsConfig) GetPassword() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_password_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10889,7 +11566,7 @@ func (arg1 SwigcptrTlsConfig) GetCaBuf() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_CaBuf_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10908,7 +11585,7 @@ func (arg1 SwigcptrTlsConfig) GetCertBuf() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_certBuf_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10927,7 +11604,7 @@ func (arg1 SwigcptrTlsConfig) GetPrivKeyBuf() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_privKeyBuf_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -10959,7 +11636,7 @@ func (arg1 SwigcptrTlsConfig) GetCertLookupKeyword() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsConfig_certLookupKeyword_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11278,7 +11955,7 @@ func (arg1 SwigcptrTransportConfig) GetPublicAddress() (_swig_ret string) {
 	swig_r_p := C._wrap_TransportConfig_publicAddress_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11297,7 +11974,7 @@ func (arg1 SwigcptrTransportConfig) GetBoundAddress() (_swig_ret string) {
 	swig_r_p := C._wrap_TransportConfig_boundAddress_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11460,7 +12137,7 @@ func (arg1 SwigcptrTransportInfo) GetTypeName() (_swig_ret string) {
 	swig_r_p := C._wrap_TransportInfo_typeName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11479,7 +12156,7 @@ func (arg1 SwigcptrTransportInfo) GetInfo() (_swig_ret string) {
 	swig_r_p := C._wrap_TransportInfo_info_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11511,7 +12188,7 @@ func (arg1 SwigcptrTransportInfo) GetLocalAddress() (_swig_ret string) {
 	swig_r_p := C._wrap_TransportInfo_localAddress_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11530,7 +12207,7 @@ func (arg1 SwigcptrTransportInfo) GetLocalName() (_swig_ret string) {
 	swig_r_p := C._wrap_TransportInfo_localName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11603,7 +12280,7 @@ func (arg1 SwigcptrSipRxData) GetInfo() (_swig_ret string) {
 	swig_r_p := C._wrap_SipRxData_info_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11622,7 +12299,7 @@ func (arg1 SwigcptrSipRxData) GetWholeMsg() (_swig_ret string) {
 	swig_r_p := C._wrap_SipRxData_wholeMsg_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11641,7 +12318,7 @@ func (arg1 SwigcptrSipRxData) GetSrcAddress() (_swig_ret string) {
 	swig_r_p := C._wrap_SipRxData_srcAddress_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11706,7 +12383,7 @@ func (arg1 SwigcptrSipTxData) GetInfo() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTxData_info_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11725,7 +12402,7 @@ func (arg1 SwigcptrSipTxData) GetWholeMsg() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTxData_wholeMsg_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11744,7 +12421,7 @@ func (arg1 SwigcptrSipTxData) GetDstAddress() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTxData_dstAddress_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11822,7 +12499,7 @@ func (arg1 SwigcptrSipTransaction) GetMethod() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTransaction_method_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -11854,7 +12531,7 @@ func (arg1 SwigcptrSipTransaction) GetStatusText() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTransaction_statusText_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12581,7 +13258,7 @@ func (arg1 SwigcptrSipMediaType) GetXtype() (_swig_ret string) {
 	swig_r_p := C._wrap_SipMediaType_Xtype_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12600,7 +13277,7 @@ func (arg1 SwigcptrSipMediaType) GetSubType() (_swig_ret string) {
 	swig_r_p := C._wrap_SipMediaType_subType_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12648,7 +13325,7 @@ func (arg1 SwigcptrSipHeader) GetHName() (_swig_ret string) {
 	swig_r_p := C._wrap_SipHeader_hName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12667,7 +13344,7 @@ func (arg1 SwigcptrSipHeader) GetHValue() (_swig_ret string) {
 	swig_r_p := C._wrap_SipHeader_hValue_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12741,7 +13418,7 @@ func (arg1 SwigcptrSipMultipartPart) GetBody() (_swig_ret string) {
 	swig_r_p := C._wrap_SipMultipartPart_body_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12791,7 +13468,7 @@ func (arg1 SwigcptrSipTxOption) GetTargetUri() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTxOption_targetUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12810,7 +13487,7 @@ func (arg1 SwigcptrSipTxOption) GetLocalUri() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTxOption_localUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12842,7 +13519,7 @@ func (arg1 SwigcptrSipTxOption) GetContentType() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTxOption_contentType_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12861,7 +13538,7 @@ func (arg1 SwigcptrSipTxOption) GetMsgBody() (_swig_ret string) {
 	swig_r_p := C._wrap_SipTxOption_msgBody_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12953,7 +13630,7 @@ func (arg1 SwigcptrSendInstantMessageParam) GetContentType() (_swig_ret string) 
 	swig_r_p := C._wrap_SendInstantMessageParam_contentType_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -12972,7 +13649,7 @@ func (arg1 SwigcptrSendInstantMessageParam) GetContent() (_swig_ret string) {
 	swig_r_p := C._wrap_SendInstantMessageParam_content_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -16538,7 +17215,7 @@ func (arg1 SwigcptrConfPortInfo) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_ConfPortInfo_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -17914,7 +18591,7 @@ func (arg1 SwigcptrToneDigitMapDigit) GetDigit() (_swig_ret string) {
 	swig_r_p := C._wrap_ToneDigitMapDigit_digit_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -18251,7 +18928,7 @@ func (arg1 SwigcptrAudioDevInfo) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_AudioDevInfo_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -18309,7 +18986,7 @@ func (arg1 SwigcptrAudioDevInfo) GetDriver() (_swig_ret string) {
 	swig_r_p := C._wrap_AudioDevInfo_driver_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -18523,7 +19200,7 @@ func (arg1 SwigcptrAudDevManager) CapName(arg2 Pjmedia_aud_dev_cap) (_swig_ret s
 	swig_r_p := C._wrap_AudDevManager_capName_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -19208,7 +19885,7 @@ func (arg1 SwigcptrVidConfPortInfo) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_VidConfPortInfo_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -19903,7 +20580,7 @@ func (arg1 SwigcptrVideoDevInfo) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_VideoDevInfo_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -19922,7 +20599,7 @@ func (arg1 SwigcptrVideoDevInfo) GetDriver() (_swig_ret string) {
 	swig_r_p := C._wrap_VideoDevInfo_driver_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -20096,7 +20773,7 @@ func (arg1 SwigcptrVidDevManager) CapName(arg2 Pjmedia_vid_dev_cap) (_swig_ret s
 	swig_r_p := C._wrap_VidDevManager_capName_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -20236,7 +20913,7 @@ func (arg1 SwigcptrCodecInfo) GetCodecId() (_swig_ret string) {
 	swig_r_p := C._wrap_CodecInfo_codecId_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -20268,7 +20945,7 @@ func (arg1 SwigcptrCodecInfo) GetDesc() (_swig_ret string) {
 	swig_r_p := C._wrap_CodecInfo_desc_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -20318,7 +20995,7 @@ func (arg1 SwigcptrCodecFmtp) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_CodecFmtp_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -20337,7 +21014,7 @@ func (arg1 SwigcptrCodecFmtp) GetVal() (_swig_ret string) {
 	swig_r_p := C._wrap_CodecFmtp_val_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -20993,7 +21670,7 @@ func (arg1 SwigcptrCodecLyraConfig) GetModelPath() (_swig_ret string) {
 	swig_r_p := C._wrap_CodecLyraConfig_modelPath_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21464,7 +22141,7 @@ func (arg1 SwigcptrPresenceStatus) GetStatusText() (_swig_ret string) {
 	swig_r_p := C._wrap_PresenceStatus_statusText_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21496,7 +22173,7 @@ func (arg1 SwigcptrPresenceStatus) GetNote() (_swig_ret string) {
 	swig_r_p := C._wrap_PresenceStatus_note_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21515,7 +22192,7 @@ func (arg1 SwigcptrPresenceStatus) GetRpidId() (_swig_ret string) {
 	swig_r_p := C._wrap_PresenceStatus_rpidId_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21569,7 +22246,7 @@ func (arg1 SwigcptrBuddyConfig) GetUri() (_swig_ret string) {
 	swig_r_p := C._wrap_BuddyConfig_uri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21653,7 +22330,7 @@ func (arg1 SwigcptrBuddyInfo) GetUri() (_swig_ret string) {
 	swig_r_p := C._wrap_BuddyInfo_uri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21672,7 +22349,7 @@ func (arg1 SwigcptrBuddyInfo) GetContact() (_swig_ret string) {
 	swig_r_p := C._wrap_BuddyInfo_contact_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21730,7 +22407,7 @@ func (arg1 SwigcptrBuddyInfo) GetSubStateName() (_swig_ret string) {
 	swig_r_p := C._wrap_BuddyInfo_subStateName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -21762,7 +22439,7 @@ func (arg1 SwigcptrBuddyInfo) GetSubTermReason() (_swig_ret string) {
 	swig_r_p := C._wrap_BuddyInfo_subTermReason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22058,7 +22735,7 @@ func (arg1 SwigcptrAccountRegConfig) GetRegistrarUri() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountRegConfig_registrarUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22116,7 +22793,7 @@ func (arg1 SwigcptrAccountRegConfig) GetContactParams() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountRegConfig_contactParams_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22135,7 +22812,7 @@ func (arg1 SwigcptrAccountRegConfig) GetContactUriParams() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountRegConfig_contactUriParams_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22360,7 +23037,7 @@ func (arg1 SwigcptrAccountSipConfig) GetContactForced() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountSipConfig_contactForced_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22379,7 +23056,7 @@ func (arg1 SwigcptrAccountSipConfig) GetContactParams() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountSipConfig_contactParams_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22398,7 +23075,7 @@ func (arg1 SwigcptrAccountSipConfig) GetContactUriParams() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountSipConfig_contactUriParams_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22430,7 +23107,7 @@ func (arg1 SwigcptrAccountSipConfig) GetAuthInitialAlgorithm() (_swig_ret string
 	swig_r_p := C._wrap_AccountSipConfig_authInitialAlgorithm_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -22731,7 +23408,7 @@ func (arg1 SwigcptrAccountPresConfig) GetPidfTupleId() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountPresConfig_pidfTupleId_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23068,7 +23745,7 @@ func (arg1 SwigcptrAccountNatConfig) GetTurnServer() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountNatConfig_turnServer_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23100,7 +23777,7 @@ func (arg1 SwigcptrAccountNatConfig) GetTurnUserName() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountNatConfig_turnUserName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23132,7 +23809,7 @@ func (arg1 SwigcptrAccountNatConfig) GetTurnPassword() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountNatConfig_turnPassword_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23229,7 +23906,7 @@ func (arg1 SwigcptrAccountNatConfig) GetSipOutboundInstanceId() (_swig_ret strin
 	swig_r_p := C._wrap_AccountNatConfig_sipOutboundInstanceId_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23248,7 +23925,7 @@ func (arg1 SwigcptrAccountNatConfig) GetSipOutboundRegId() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountNatConfig_sipOutboundRegId_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23280,7 +23957,7 @@ func (arg1 SwigcptrAccountNatConfig) GetUdpKaData() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountNatConfig_udpKaData_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23418,7 +24095,7 @@ func (arg1 SwigcptrSendRequestParam) GetMethod() (_swig_ret string) {
 	swig_r_p := C._wrap_SendRequestParam_method_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23481,7 +24158,7 @@ func (arg1 SwigcptrSrtpCrypto) GetKey() (_swig_ret string) {
 	swig_r_p := C._wrap_SrtpCrypto_key_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23500,7 +24177,7 @@ func (arg1 SwigcptrSrtpCrypto) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_SrtpCrypto_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23641,7 +24318,7 @@ func (arg1 SwigcptrRtcpFbCap) GetCodecId() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpFbCap_codecId_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23673,7 +24350,7 @@ func (arg1 SwigcptrRtcpFbCap) GetTypeName() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpFbCap_typeName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -23692,7 +24369,7 @@ func (arg1 SwigcptrRtcpFbCap) GetParam() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpFbCap_param_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -24345,7 +25022,7 @@ func (arg1 SwigcptrAccountConfig) GetIdUri() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountConfig_idUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -24577,7 +25254,7 @@ func (arg1 SwigcptrAccountInfo) GetUri() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountInfo_uri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -24648,7 +25325,7 @@ func (arg1 SwigcptrAccountInfo) GetRegStatusText() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountInfo_regStatusText_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -24693,7 +25370,7 @@ func (arg1 SwigcptrAccountInfo) GetOnlineStatusText() (_swig_ret string) {
 	swig_r_p := C._wrap_AccountInfo_onlineStatusText_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -24880,7 +25557,7 @@ func (arg1 SwigcptrOnRegStateParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_OnRegStateParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -24973,7 +25650,7 @@ func (arg1 SwigcptrOnIncomingSubscribeParam) GetFromUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnIncomingSubscribeParam_fromUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25018,7 +25695,7 @@ func (arg1 SwigcptrOnIncomingSubscribeParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_OnIncomingSubscribeParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25087,7 +25764,7 @@ func (arg1 SwigcptrOnInstantMessageParam) GetFromUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnInstantMessageParam_fromUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25106,7 +25783,7 @@ func (arg1 SwigcptrOnInstantMessageParam) GetToUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnInstantMessageParam_toUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25125,7 +25802,7 @@ func (arg1 SwigcptrOnInstantMessageParam) GetContactUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnInstantMessageParam_contactUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25144,7 +25821,7 @@ func (arg1 SwigcptrOnInstantMessageParam) GetContentType() (_swig_ret string) {
 	swig_r_p := C._wrap_OnInstantMessageParam_contentType_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25163,7 +25840,7 @@ func (arg1 SwigcptrOnInstantMessageParam) GetMsgBody() (_swig_ret string) {
 	swig_r_p := C._wrap_OnInstantMessageParam_msgBody_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25245,7 +25922,7 @@ func (arg1 SwigcptrOnInstantMessageStatusParam) GetToUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnInstantMessageStatusParam_toUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25264,7 +25941,7 @@ func (arg1 SwigcptrOnInstantMessageStatusParam) GetMsgBody() (_swig_ret string) 
 	swig_r_p := C._wrap_OnInstantMessageStatusParam_msgBody_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25296,7 +25973,7 @@ func (arg1 SwigcptrOnInstantMessageStatusParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_OnInstantMessageStatusParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25365,7 +26042,7 @@ func (arg1 SwigcptrOnTypingIndicationParam) GetFromUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnTypingIndicationParam_fromUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25384,7 +26061,7 @@ func (arg1 SwigcptrOnTypingIndicationParam) GetToUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnTypingIndicationParam_toUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25403,7 +26080,7 @@ func (arg1 SwigcptrOnTypingIndicationParam) GetContactUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnTypingIndicationParam_contactUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25619,7 +26296,7 @@ func (arg1 SwigcptrPresNotifyParam) GetStateStr() (_swig_ret string) {
 	swig_r_p := C._wrap_PresNotifyParam_stateStr_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25638,7 +26315,7 @@ func (arg1 SwigcptrPresNotifyParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_PresNotifyParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -25752,7 +26429,7 @@ func Swig_DirectorFindBuddyMatch_callback_match_pjsua2_b603cabda4e82a85(swig_c i
 	var swig_r bool
 	var _swig_i_0 string
 	swig_p := swigDirectorLookup(swig_c).(*_swig_DirectorFindBuddyMatch)
- _swig_i_0 = swigCopyString(arg2) 
+	_swig_i_0 = swigCopyString(arg2)
 	swig_r = swig_p.Match(_swig_i_0, SwigcptrBuddy(arg3))
 	return swig_r
 }
@@ -26662,7 +27339,7 @@ func (arg1 SwigcptrRtcpSdes) GetCname() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpSdes_cname_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -26681,7 +27358,7 @@ func (arg1 SwigcptrRtcpSdes) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpSdes_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -26700,7 +27377,7 @@ func (arg1 SwigcptrRtcpSdes) GetEmail() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpSdes_email_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -26719,7 +27396,7 @@ func (arg1 SwigcptrRtcpSdes) GetPhone() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpSdes_phone_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -26738,7 +27415,7 @@ func (arg1 SwigcptrRtcpSdes) GetLoc() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpSdes_loc_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -26757,7 +27434,7 @@ func (arg1 SwigcptrRtcpSdes) GetTool() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpSdes_tool_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -26776,7 +27453,7 @@ func (arg1 SwigcptrRtcpSdes) GetNote() (_swig_ret string) {
 	swig_r_p := C._wrap_RtcpSdes_note_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27229,7 +27906,7 @@ func (arg1 SwigcptrSdpSession) GetWholeSdp() (_swig_ret string) {
 	swig_r_p := C._wrap_SdpSession_wholeSdp_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27290,7 +27967,7 @@ func (arg1 SwigcptrMediaTransportInfo) GetLocalRtpName() (_swig_ret string) {
 	swig_r_p := C._wrap_MediaTransportInfo_localRtpName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27309,7 +27986,7 @@ func (arg1 SwigcptrMediaTransportInfo) GetLocalRtcpName() (_swig_ret string) {
 	swig_r_p := C._wrap_MediaTransportInfo_localRtcpName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27328,7 +28005,7 @@ func (arg1 SwigcptrMediaTransportInfo) GetSrcRtpName() (_swig_ret string) {
 	swig_r_p := C._wrap_MediaTransportInfo_srcRtpName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27347,7 +28024,7 @@ func (arg1 SwigcptrMediaTransportInfo) GetSrcRtcpName() (_swig_ret string) {
 	swig_r_p := C._wrap_MediaTransportInfo_srcRtcpName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27464,7 +28141,7 @@ func (arg1 SwigcptrCallSetting) GetCustomCallId() (_swig_ret string) {
 	swig_r_p := C._wrap_CallSetting_customCallId_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27730,7 +28407,7 @@ func (arg1 SwigcptrCallInfo) GetLocalUri() (_swig_ret string) {
 	swig_r_p := C._wrap_CallInfo_localUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27749,7 +28426,7 @@ func (arg1 SwigcptrCallInfo) GetLocalContact() (_swig_ret string) {
 	swig_r_p := C._wrap_CallInfo_localContact_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27768,7 +28445,7 @@ func (arg1 SwigcptrCallInfo) GetRemoteUri() (_swig_ret string) {
 	swig_r_p := C._wrap_CallInfo_remoteUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27787,7 +28464,7 @@ func (arg1 SwigcptrCallInfo) GetRemoteContact() (_swig_ret string) {
 	swig_r_p := C._wrap_CallInfo_remoteContact_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27806,7 +28483,7 @@ func (arg1 SwigcptrCallInfo) GetCallIdString() (_swig_ret string) {
 	swig_r_p := C._wrap_CallInfo_callIdString_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27851,7 +28528,7 @@ func (arg1 SwigcptrCallInfo) GetStateText() (_swig_ret string) {
 	swig_r_p := C._wrap_CallInfo_stateText_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -27883,7 +28560,7 @@ func (arg1 SwigcptrCallInfo) GetLastReason() (_swig_ret string) {
 	swig_r_p := C._wrap_CallInfo_lastReason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -28097,7 +28774,7 @@ func (arg1 SwigcptrStreamInfo) GetRemoteRtpAddress() (_swig_ret string) {
 	swig_r_p := C._wrap_StreamInfo_remoteRtpAddress_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -28116,7 +28793,7 @@ func (arg1 SwigcptrStreamInfo) GetRemoteRtcpAddress() (_swig_ret string) {
 	swig_r_p := C._wrap_StreamInfo_remoteRtcpAddress_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -28187,7 +28864,7 @@ func (arg1 SwigcptrStreamInfo) GetCodecName() (_swig_ret string) {
 	swig_r_p := C._wrap_StreamInfo_codecName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -28809,7 +29486,7 @@ func (arg1 SwigcptrOnDtmfDigitParam) GetDigit() (_swig_ret string) {
 	swig_r_p := C._wrap_OnDtmfDigitParam_digit_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -28898,7 +29575,7 @@ func (arg1 SwigcptrOnDtmfEventParam) GetDigit() (_swig_ret string) {
 	swig_r_p := C._wrap_OnDtmfEventParam_digit_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -28978,7 +29655,7 @@ func (arg1 SwigcptrOnCallTransferRequestParam) GetDstUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnCallTransferRequestParam_dstUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -29082,7 +29759,7 @@ func (arg1 SwigcptrOnCallTransferStatusParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_OnCallTransferStatusParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -29186,7 +29863,7 @@ func (arg1 SwigcptrOnCallReplaceRequestParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_OnCallReplaceRequestParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -29531,7 +30208,7 @@ func (arg1 SwigcptrOnCallRedirectedParam) GetTargetUri() (_swig_ret string) {
 	swig_r_p := C._wrap_OnCallRedirectedParam_targetUri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -29898,7 +30575,7 @@ func (arg1 SwigcptrCallOpParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_CallOpParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -30011,7 +30688,7 @@ func (arg1 SwigcptrCallSendRequestParam) GetMethod() (_swig_ret string) {
 	swig_r_p := C._wrap_CallSendRequestParam_method_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -30168,7 +30845,7 @@ func (arg1 SwigcptrCallSendDtmfParam) GetDigits() (_swig_ret string) {
 	swig_r_p := C._wrap_CallSendDtmfParam_digits_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31082,7 +31759,7 @@ func (arg1 SwigcptrCall) Dump(arg2 bool, arg3 string) (_swig_ret string) {
 		Swig_escape_val = arg3
 	}
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31425,7 +32102,7 @@ func (arg1 SwigcptrJsonDocument) SaveString() (_swig_ret string) {
 	swig_r_p := C._wrap_JsonDocument_saveString_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31447,7 +32124,7 @@ func (_swig_base SwigcptrJsonDocument) UnreadName() (_swig_ret string) {
 	swig_r_p := C._wrap_JsonDocument_unreadName_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_base))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31541,7 +32218,7 @@ func (_swig_base SwigcptrJsonDocument) ReadString__SWIG_0(arg1 string) (_swig_re
 		Swig_escape_val = arg1
 	}
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31550,7 +32227,7 @@ func (_swig_base SwigcptrJsonDocument) ReadString__SWIG_1() (_swig_ret string) {
 	swig_r_p := C._wrap_JsonDocument_readString__SWIG_1_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_base))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31798,7 +32475,7 @@ func (arg1 SwigcptrOnNatDetectionCompleteParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_OnNatDetectionCompleteParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31830,7 +32507,7 @@ func (arg1 SwigcptrOnNatDetectionCompleteParam) GetNatTypeName() (_swig_ret stri
 	swig_r_p := C._wrap_OnNatDetectionCompleteParam_natTypeName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31908,7 +32585,7 @@ func (arg1 SwigcptrOnNatCheckStunServersCompleteParam) GetName() (_swig_ret stri
 	swig_r_p := C._wrap_OnNatCheckStunServersCompleteParam_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -31927,7 +32604,7 @@ func (arg1 SwigcptrOnNatCheckStunServersCompleteParam) GetAddr() (_swig_ret stri
 	swig_r_p := C._wrap_OnNatCheckStunServersCompleteParam_addr_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32047,7 +32724,7 @@ func (arg1 SwigcptrSslCertName) GetName() (_swig_ret string) {
 	swig_r_p := C._wrap_SslCertName_name_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32121,7 +32798,7 @@ func (arg1 SwigcptrSslCertInfo) GetSubjectCn() (_swig_ret string) {
 	swig_r_p := C._wrap_SslCertInfo_subjectCn_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32140,7 +32817,7 @@ func (arg1 SwigcptrSslCertInfo) GetSubjectInfo() (_swig_ret string) {
 	swig_r_p := C._wrap_SslCertInfo_subjectInfo_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32159,7 +32836,7 @@ func (arg1 SwigcptrSslCertInfo) GetIssuerCn() (_swig_ret string) {
 	swig_r_p := C._wrap_SslCertInfo_issuerCn_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32178,7 +32855,7 @@ func (arg1 SwigcptrSslCertInfo) GetIssuerInfo() (_swig_ret string) {
 	swig_r_p := C._wrap_SslCertInfo_issuerInfo_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32249,7 +32926,7 @@ func (arg1 SwigcptrSslCertInfo) GetRaw() (_swig_ret string) {
 	swig_r_p := C._wrap_SslCertInfo_raw_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32362,7 +33039,7 @@ func (arg1 SwigcptrTlsInfo) GetCipherName() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsInfo_cipherName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32381,7 +33058,7 @@ func (arg1 SwigcptrTlsInfo) GetLocalAddr() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsInfo_localAddr_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32400,7 +33077,7 @@ func (arg1 SwigcptrTlsInfo) GetRemoteAddr() (_swig_ret string) {
 	swig_r_p := C._wrap_TlsInfo_remoteAddr_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32537,7 +33214,7 @@ func (arg1 SwigcptrOnTransportStateParam) GetXtype() (_swig_ret string) {
 	swig_r_p := C._wrap_OnTransportStateParam_Xtype_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32978,7 +33655,7 @@ func (arg1 SwigcptrOnRejectedIncomingCallParam) GetLocalInfo() (_swig_ret string
 	swig_r_p := C._wrap_OnRejectedIncomingCallParam_localInfo_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -32997,7 +33674,7 @@ func (arg1 SwigcptrOnRejectedIncomingCallParam) GetRemoteInfo() (_swig_ret strin
 	swig_r_p := C._wrap_OnRejectedIncomingCallParam_remoteInfo_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33029,7 +33706,7 @@ func (arg1 SwigcptrOnRejectedIncomingCallParam) GetReason() (_swig_ret string) {
 	swig_r_p := C._wrap_OnRejectedIncomingCallParam_reason_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33098,7 +33775,7 @@ func (arg1 SwigcptrDigestChallenge) GetRealm() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestChallenge_realm_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33130,7 +33807,7 @@ func (arg1 SwigcptrDigestChallenge) GetDomain() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestChallenge_domain_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33149,7 +33826,7 @@ func (arg1 SwigcptrDigestChallenge) GetNonce() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestChallenge_nonce_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33168,7 +33845,7 @@ func (arg1 SwigcptrDigestChallenge) GetOpaque() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestChallenge_opaque_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33200,7 +33877,7 @@ func (arg1 SwigcptrDigestChallenge) GetAlgorithm() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestChallenge_algorithm_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33219,7 +33896,7 @@ func (arg1 SwigcptrDigestChallenge) GetQop() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestChallenge_qop_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33279,7 +33956,7 @@ func (arg1 SwigcptrDigestCredential) GetRealm() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_realm_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33311,7 +33988,7 @@ func (arg1 SwigcptrDigestCredential) GetUsername() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_username_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33330,7 +34007,7 @@ func (arg1 SwigcptrDigestCredential) GetNonce() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_nonce_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33349,7 +34026,7 @@ func (arg1 SwigcptrDigestCredential) GetUri() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_uri_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33368,7 +34045,7 @@ func (arg1 SwigcptrDigestCredential) GetResponse() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_response_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33387,7 +34064,7 @@ func (arg1 SwigcptrDigestCredential) GetAlgorithm() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_algorithm_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33406,7 +34083,7 @@ func (arg1 SwigcptrDigestCredential) GetCnonce() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_cnonce_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33425,7 +34102,7 @@ func (arg1 SwigcptrDigestCredential) GetOpaque() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_opaque_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33444,7 +34121,7 @@ func (arg1 SwigcptrDigestCredential) GetQop() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_qop_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33463,7 +34140,7 @@ func (arg1 SwigcptrDigestCredential) GetNc() (_swig_ret string) {
 	swig_r_p := C._wrap_DigestCredential_nc_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33555,7 +34232,7 @@ func (arg1 SwigcptrOnCredAuthParam) GetMethod() (_swig_ret string) {
 	swig_r_p := C._wrap_OnCredAuthParam_method_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33685,7 +34362,7 @@ func (arg1 SwigcptrUaConfig) GetUserAgent() (_swig_ret string) {
 	swig_r_p := C._wrap_UaConfig_userAgent_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33782,7 +34459,7 @@ func (arg1 SwigcptrUaConfig) GetUpnpIfName() (_swig_ret string) {
 	swig_r_p := C._wrap_UaConfig_upnpIfName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33888,7 +34565,7 @@ func (arg1 SwigcptrLogEntry) GetMsg() (_swig_ret string) {
 	swig_r_p := C._wrap_LogEntry_msg_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -33920,7 +34597,7 @@ func (arg1 SwigcptrLogEntry) GetThreadName() (_swig_ret string) {
 	swig_r_p := C._wrap_LogEntry_threadName_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -34112,7 +34789,7 @@ func (arg1 SwigcptrLogConfig) GetFilename() (_swig_ret string) {
 	swig_r_p := C._wrap_LogConfig_filename_get_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -35085,7 +35762,7 @@ func (arg1 SwigcptrEndpoint) UtilStrError(arg2 int) (_swig_ret string) {
 	swig_r_p := C._wrap_Endpoint_utilStrError_pjsua2_b603cabda4e82a85(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
+	swig_r_1 = swigCopyString(swig_r)
 	return swig_r_1
 }
 
@@ -35569,96 +36246,104 @@ type Endpoint interface {
 	OnRejectedIncomingCall(arg2 OnRejectedIncomingCallParam)
 }
 
-
 type SwigcptrSwigDirector_Endpoint uintptr
 type SwigDirector_Endpoint interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrSwigDirector_Endpoint) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrPjmedia_vid_dev_hwnd_type uintptr
 type Pjmedia_vid_dev_hwnd_type interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrPjmedia_vid_dev_hwnd_type) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrPjmedia_aud_dev_index uintptr
 type Pjmedia_aud_dev_index interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrPjmedia_aud_dev_index) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrSwigDirector_Account uintptr
 type SwigDirector_Account interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrSwigDirector_Account) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrSwigDirector_Buddy uintptr
 type SwigDirector_Buddy interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrSwigDirector_Buddy) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrPjsua_sip_siprec_use uintptr
 type Pjsua_sip_siprec_use interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrPjsua_sip_siprec_use) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrSwigDirector_Call uintptr
 type SwigDirector_Call interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrSwigDirector_Call) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrPjmedia_jb_discard_algo uintptr
 type Pjmedia_jb_discard_algo interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrPjmedia_jb_discard_algo) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrSwigDirector_AudioMediaPlayer uintptr
 type SwigDirector_AudioMediaPlayer interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrSwigDirector_AudioMediaPlayer) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrSwigDirector_FindBuddyMatch uintptr
 type SwigDirector_FindBuddyMatch interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrSwigDirector_FindBuddyMatch) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
 type SwigcptrSwigDirector_AudioMediaPort uintptr
 type SwigDirector_AudioMediaPort interface {
-	Swigcptr() uintptr;
+	Swigcptr() uintptr
 }
+
 func (p SwigcptrSwigDirector_AudioMediaPort) Swigcptr() uintptr {
 	return uintptr(p)
 }
-
-
 
 var swigDirectorTrack struct {
 	sync.Mutex
@@ -35700,5 +36385,3 @@ func swigDirectorDelete(c int) {
 	}
 	delete(swigDirectorTrack.m, c)
 }
-
-

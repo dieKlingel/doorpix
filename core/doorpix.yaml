@@ -20,7 +20,13 @@ sip-phone:
   username: example
   password: secret
   realm: sip.linphone.org
-  whitelist: []
+  stun-servers:
+    - stun.linphone.org:3478
+    - stun.l.google.com:19302
 
 http:
   port: 8080
+
+camera:
+  # device: v4l2src 
+  device: videotestsrc

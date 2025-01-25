@@ -7,49 +7,59 @@ import (
 	"unsafe"
 
 	"github.com/dieklingel/doorpix/core/internal/camera"
-	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 	"github.com/go-gst/go-gst/gst"
 )
 
 func Initialize() {
-	if !pjsua2.EndpointInstance().LibIsThreadRegistered() {
-		pjsua2.EndpointInstance().LibRegisterThread("appvideo_driver")
+	/*if !pjsua2.EndpointInstance().LibIsThreadRegistered() {
+		pjsua2.EndpointInstance().LibRegisterThread("appvideoCameraDriverInitalization")
+	}*/
+
+	if !isInitalized {
+		isInitalized = true
+		C.init_app_video()
 	}
-
-	C.init_app_video()
-
 }
 
-func SetCameraFactory(factory func() *camera.Camera) {
-	createNewCamera = factory
+func SetCameraDevice(dev string) {
+	device = dev
+	Initialize()
 }
 
+// The name of the camera device that is used by pjsip by this driver
+func GetCameraDeviceName() string {
+	return "DoorPiX Emulated Video Device"
+}
+
+var isInitalized bool = false
 var streams = make(map[uintptr]Stream)
-var createNewCamera func() *camera.Camera
+var device string = "videotestsrc"
 
-func createNewCameraSafe() *camera.Camera {
-	if createNewCamera == nil {
-		slog.Warn("no camera is set for the appvideo driver")
-		c, err := camera.NewFromString(
-			"videotestsrc",
-			camera.NewElement(
-				"capsfilter",
-				"caps", gst.NewCapsFromString("video/x-raw,format=I420,width=1920,height=1080,framerate=30/1"),
-			),
-		)
-		if err != nil {
-			panic(err)
-		}
+func createNewCamera() *camera.Camera {
+	c, err := camera.NewFromString(
+		device,
+		camera.NewElement("videoscale"),
+		camera.NewElement(
+			"capsfilter",
+			"caps", gst.NewCapsFromString("video/x-raw,width=1920,height=1080"),
+		),
+		camera.NewElement("videoconvert"),
+		camera.NewElement(
+			"capsfilter",
+			"caps", gst.NewCapsFromString("video/x-raw,format=I420,framerate=30/1"),
+		),
+	)
 
-		return c
+	if err != nil {
+		panic(err)
 	}
 
-	return createNewCamera()
+	return c
 }
 
 //export go_video_stream_start
 func go_video_stream_start(ptr unsafe.Pointer) {
-	cam := createNewCameraSafe()
+	cam := createNewCamera()
 	err := cam.Start()
 	if err != nil {
 		slog.Error("failed to start stream", "error", err)
