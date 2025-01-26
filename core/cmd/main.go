@@ -38,15 +38,33 @@ func main() {
 	}
 
 	app := core.NewAppWithConfig(system)
-	app.RegisterHandler(&core.SystemService{
-		System: system,
-	})
-	app.RegisterHandler(&core.PJSIPService{
-		System: system,
-	})
-	app.RegisterHandler(&core.HTTPService{
-		System: system,
-	})
+	withSystem(app, &system)
+	withHTTP(app, &system)
+	withSIPPhone(app, &system)
 
 	app.Exec()
+}
+
+func withSystem(app *core.App, system *doorpix.System) {
+	app.RegisterHandler(&core.SystemService{
+		System: *system,
+	})
+}
+
+func withHTTP(app *core.App, system *doorpix.System) {
+	if system.Config.HTTP.Enabled {
+		slog.Info("http is enabled")
+		app.RegisterHandler(&core.HTTPService{
+			System: *system,
+		})
+	}
+}
+
+func withSIPPhone(app *core.App, system *doorpix.System) {
+	if system.Config.SIPPhone.Enabled {
+		slog.Info("sip-phone is enabled")
+		app.RegisterHandler(&core.PJSIPService{
+			System: *system,
+		})
+	}
 }

@@ -24,6 +24,13 @@ func NewConfig() *Config {
 		OnEvents:     EventCollection{},
 		BeforeEvents: EventCollection{},
 		AfterEvents:  EventCollection{},
+
+		SIPPhone: SIPPhone{
+			Enabled: false,
+		},
+		HTTP: HTTPConfig{
+			Enabled: false,
+		},
 	}
 }
 
