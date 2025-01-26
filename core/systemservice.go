@@ -10,11 +10,11 @@ import (
 	"github.com/dieklingel/doorpix/core/internal/exec"
 )
 
-type SystemHandler struct {
+type SystemService struct {
 	System doorpix.System
 }
 
-func (s *SystemHandler) HandleEvent(action doorpix.Action, event *doorpix.Event) {
+func (s *SystemService) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 	switch action := action.(type) {
 	case doorpix.LogAction:
 		msg := bytes.Buffer{}
@@ -46,12 +46,12 @@ func (s *SystemHandler) HandleEvent(action doorpix.Action, event *doorpix.Event)
 	}
 }
 
-func (s *SystemHandler) Setup() {
+func (s *SystemService) Setup() {
 	s.System.Bus.Handler(s)
 }
 
-func (s *SystemHandler) Cleanup() {
+func (s *SystemService) Cleanup() {
 }
 
-func (s *SystemHandler) Exec() {
+func (s *SystemService) Exec() {
 }

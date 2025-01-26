@@ -38,13 +38,13 @@ func main() {
 	}
 
 	app := core.NewAppWithConfig(system)
-	app.RegisterHandler(&core.SystemHandler{
+	app.RegisterHandler(&core.SystemService{
 		System: system,
 	})
-	app.RegisterHandler(&core.PJSIPPhone{
+	app.RegisterHandler(&core.PJSIPService{
 		System: system,
 	})
-	app.RegisterHandler(&core.HttpHandler{
+	app.RegisterHandler(&core.HttpService{
 		System: system,
 	})
 

@@ -11,14 +11,14 @@ import (
 	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
-type PJSIPPhone struct {
+type PJSIPService struct {
 	System doorpix.System
 
 	account       *pjsip.Account
 	accountConfig pjsua2.AccountConfig
 }
 
-func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
+func (service *PJSIPService) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 	if !pjsua2.EndpointInstance().LibIsThreadRegistered() {
 		pjsua2.EndpointInstance().LibRegisterThread("")
 	}
@@ -32,7 +32,7 @@ func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 				continue
 			}
 
-			err := p.account.Invite(uri.String())
+			err := service.account.Invite(uri.String())
 			if err != nil {
 				slog.Error(err.Error())
 			}
@@ -52,7 +52,7 @@ func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 				continue
 			}
 
-			err := p.account.SendInstantMessage(uri.String(), message.String())
+			err := service.account.SendInstantMessage(uri.String(), message.String())
 			if err != nil {
 				slog.Error(err.Error())
 			}
@@ -60,21 +60,21 @@ func (p *PJSIPPhone) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 	}
 }
 
-func (p *PJSIPPhone) Setup() {
-	p.System.Bus.Handler(p)
+func (service *PJSIPService) Setup() {
+	service.System.Bus.Handler(service)
 
 	// init
-	p.init()
+	service.init()
 }
 
-func (p *PJSIPPhone) init() {
+func (service *PJSIPService) init() {
 	config := pjsua2.NewEpConfig()
 	config.GetLogConfig().SetLevel(2)
 
 	ua := config.GetUaConfig()
 	ua.SetUserAgent("DoorPiX")
 
-	for _, server := range p.System.Config.SIPPhone.StunServers {
+	for _, server := range service.System.Config.SIPPhone.StunServers {
 		ua.GetStunServer().Add(server)
 	}
 
@@ -85,10 +85,10 @@ func (p *PJSIPPhone) init() {
 
 	// needs to be called after pjlib is started
 	// TODO: refactor to a proper way to initialize the video device
-	appvideo.SetCameraDevice(p.System.Config.Camera.Device)
+	appvideo.SetCameraDevice(service.System.Config.Camera.Device)
 }
 
-func (p *PJSIPPhone) Exec() {
+func (service *PJSIPService) Exec() {
 	if !pjsua2.EndpointInstance().LibIsThreadRegistered() {
 		pjsua2.EndpointInstance().LibRegisterThread("exec")
 		slog.Debug("register thread for pjsip", "name", "exec", "for", "PJSIPPhone")
@@ -102,10 +102,10 @@ func (p *PJSIPPhone) Exec() {
 	}
 
 	// account config
-	p.accountConfig = pjsua2.NewAccountConfig()
-	p.accountConfig.GetSipConfig().GetProxies().Add(fmt.Sprintf("sip:%s;hide;transport=tls", p.System.Config.SIPPhone.Server))
-	p.accountConfig.SetIdUri(fmt.Sprintf("sip:%s@%s", p.System.Config.SIPPhone.Username, p.System.Config.SIPPhone.Realm))
-	p.accountConfig.GetRegConfig().SetRegistrarUri(fmt.Sprintf("sip:%s", p.System.Config.SIPPhone.Realm))
+	service.accountConfig = pjsua2.NewAccountConfig()
+	service.accountConfig.GetSipConfig().GetProxies().Add(fmt.Sprintf("sip:%s;hide;transport=tls", service.System.Config.SIPPhone.Server))
+	service.accountConfig.SetIdUri(fmt.Sprintf("sip:%s@%s", service.System.Config.SIPPhone.Username, service.System.Config.SIPPhone.Realm))
+	service.accountConfig.GetRegConfig().SetRegistrarUri(fmt.Sprintf("sip:%s", service.System.Config.SIPPhone.Realm))
 
 	videoDeviceIndex := -1
 	videoDevices := pjsua2.EndpointInstance().VidDevManager().EnumDev2()
@@ -116,22 +116,22 @@ func (p *PJSIPPhone) Exec() {
 		}
 	}
 	if videoDeviceIndex >= 0 {
-		p.accountConfig.GetVideoConfig().SetDefaultCaptureDevice(videoDeviceIndex)
+		service.accountConfig.GetVideoConfig().SetDefaultCaptureDevice(videoDeviceIndex)
 	}
 
-	p.accountConfig.GetVideoConfig().SetAutoTransmitOutgoing(true)
-	p.accountConfig.GetVideoConfig().SetAutoShowIncoming(false)
-	p.accountConfig.GetMediaConfig().SetSrtpSecureSignaling(1)
-	p.accountConfig.GetMediaConfig().SetSrtpUse(pjsua2.PJMEDIA_SRTP_MANDATORY)
+	service.accountConfig.GetVideoConfig().SetAutoTransmitOutgoing(true)
+	service.accountConfig.GetVideoConfig().SetAutoShowIncoming(false)
+	service.accountConfig.GetMediaConfig().SetSrtpSecureSignaling(1)
+	service.accountConfig.GetMediaConfig().SetSrtpUse(pjsua2.PJMEDIA_SRTP_MANDATORY)
 
-	cred := pjsua2.NewAuthCredInfo("digest", "*", p.System.Config.SIPPhone.Username, 0, p.System.Config.SIPPhone.Password)
-	p.accountConfig.GetSipConfig().GetAuthCreds().Add(cred)
+	cred := pjsua2.NewAuthCredInfo("digest", "*", service.System.Config.SIPPhone.Username, 0, service.System.Config.SIPPhone.Password)
+	service.accountConfig.GetSipConfig().GetAuthCreds().Add(cred)
 
 	// acccount
-	p.account = pjsip.NewAccount(p.System)
-	p.account.Create(p.accountConfig)
+	service.account = pjsip.NewAccount(service.System)
+	service.account.Create(service.accountConfig)
 }
 
-func (p *PJSIPPhone) Cleanup() {
+func (service *PJSIPService) Cleanup() {
 
 }

@@ -11,13 +11,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestHttpHandler_HandleEvent(t *testing.T) {
+func TestHttpService_HandleEvent(t *testing.T) {
 	config := doorpix.NewConfig()
 	system := doorpix.System{
 		Config: config,
 		Bus:    core.NewEventEmitterWithConfig(config),
 	}
-	handler := core.HttpHandler{
+	handler := core.HttpService{
 		System: system,
 	}
 

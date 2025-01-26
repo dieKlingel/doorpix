@@ -10,7 +10,7 @@ import (
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 )
 
-type HttpHandler struct {
+type HttpService struct {
 	System doorpix.System
 
 	server *http.Server
@@ -21,40 +21,40 @@ type APIEventRequest struct {
 	Data  map[string]any    `json:"data"`
 }
 
-func (h *HttpHandler) HandleEvent(config doorpix.Action, event *doorpix.Event) {
+func (service *HttpService) HandleEvent(config doorpix.Action, event *doorpix.Event) {
 }
 
-func (h *HttpHandler) Setup() {
-	h.System.Bus.Handler(h)
+func (service *HttpService) Setup() {
+	service.System.Bus.Handler(service)
 
-	port := h.System.Config.HTTP.Port
+	port := service.System.Config.HTTP.Port
 	if port <= 0 {
 		port = 8080
 	}
 
 	handler := http.NewServeMux()
-	handler.HandleFunc("POST /api/events", h.AddNewEvent)
-	handler.HandleFunc("GET /api/camera/stream", h.showCameraStream)
-	handler.HandleFunc("GET /api/camera/snapshot", h.showCameraFrame)
+	handler.HandleFunc("POST /api/events", service.AddNewEvent)
+	handler.HandleFunc("GET /api/camera/stream", service.showCameraStream)
+	handler.HandleFunc("GET /api/camera/snapshot", service.showCameraFrame)
 
 	// global config
-	h.server = &http.Server{
+	service.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", port),
 		Handler: handler,
 	}
 }
 
-func (h *HttpHandler) Exec() {
+func (service *HttpService) Exec() {
 	go func() {
-		if err := h.server.ListenAndServe(); err != nil {
+		if err := service.server.ListenAndServe(); err != nil {
 			slog.Error("http server error", "error", err)
 		}
 	}()
 }
 
-func (h *HttpHandler) Cleanup() {}
+func (service *HttpService) Cleanup() {}
 
-func (h *HttpHandler) AddNewEvent(w http.ResponseWriter, r *http.Request) {
+func (service *HttpService) AddNewEvent(w http.ResponseWriter, r *http.Request) {
 	var req APIEventRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -68,7 +68,7 @@ func (h *HttpHandler) AddNewEvent(w http.ResponseWriter, r *http.Request) {
 
 	for _, eventType := range allowedEventTypes {
 		if req.Event == eventType {
-			h.System.Bus.OnWithData(req.Event, req.Data)
+			service.System.Bus.OnWithData(req.Event, req.Data)
 			w.WriteHeader(http.StatusOK)
 			return
 		}
@@ -77,22 +77,19 @@ func (h *HttpHandler) AddNewEvent(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "event not allowed", http.StatusBadRequest)
 }
 
-func (h *HttpHandler) showCameraStream(w http.ResponseWriter, r *http.Request) {
+func (h *HttpService) showCameraStream(w http.ResponseWriter, r *http.Request) {
 	webcam, err := h.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	slog.Debug("b starting webcam")
 	err = webcam.Start()
-	slog.Debug("b webcam started")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer func() {
-		slog.Info("stopping webcam")
 		err = webcam.Stop()
 		if err != nil {
 			slog.Error("error stopping webcam", "error", err)
@@ -119,7 +116,7 @@ func (h *HttpHandler) showCameraStream(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *HttpHandler) showCameraFrame(w http.ResponseWriter, r *http.Request) {
+func (h *HttpService) showCameraFrame(w http.ResponseWriter, r *http.Request) {
 	webcam, err := h.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -152,9 +149,9 @@ func (h *HttpHandler) showCameraFrame(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *HttpHandler) newCamera() (*camera.Camera, error) {
+func (service *HttpService) newCamera() (*camera.Camera, error) {
 	webcam, err := camera.NewFromString(
-		h.System.Config.Camera.Device,
+		service.System.Config.Camera.Device,
 		camera.MustNewElement("jpegenc"),
 	)
 
