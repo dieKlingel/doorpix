@@ -163,6 +163,10 @@ func (c *Camera) Frame() chan []byte {
 }
 
 func (c *Camera) onNewSample(sink *app.Sink) gst.FlowReturn {
+	if !c.isRunning {
+		return gst.FlowEOS
+	}
+
 	sample := sink.PullSample()
 	if sample == nil {
 		return gst.FlowEOS

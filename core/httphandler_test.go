@@ -34,7 +34,7 @@ func TestHttpHandler_HandleEvent(t *testing.T) {
 				req, err := http.NewRequest("POST", "/api/events", body)
 				assert.NoError(t, err)
 
-				handler.HandleEmitEvent(rr, req)
+				handler.AddNewEvent(rr, req)
 				assert.Equal(t, http.StatusOK, rr.Code)
 			})
 		}
@@ -58,7 +58,7 @@ func TestHttpHandler_HandleEvent(t *testing.T) {
 				req, err := http.NewRequest("POST", "/api/events", body)
 				assert.NoError(t, err)
 
-				handler.HandleEmitEvent(rr, req)
+				handler.AddNewEvent(rr, req)
 				assert.Equal(t, http.StatusBadRequest, rr.Code)
 			})
 		}
