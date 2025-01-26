@@ -37,12 +37,12 @@ func (a *LogAction) UnmarshalYAML(node *yaml.Node) error {
 }
 
 type EvalAction struct {
-	Expressions []string `yaml:"eval"`
+	Expressions []*template.Template `yaml:"eval"`
 }
 
 func (a *EvalAction) UnmarshalYAML(node *yaml.Node) error {
 	action := struct {
-		Expressions YamlScalarOrList[string] `yaml:"eval"`
+		Expressions YamlScalarOrList[YamlStringTemplate] `yaml:"eval"`
 	}{}
 
 	err := node.Decode(&action)
@@ -50,9 +50,9 @@ func (a *EvalAction) UnmarshalYAML(node *yaml.Node) error {
 		return err
 	}
 
-	a.Expressions = make([]string, len(action.Expressions))
+	a.Expressions = make([]*template.Template, len(action.Expressions))
 	for i, expr := range action.Expressions {
-		a.Expressions[i] = string(expr)
+		a.Expressions[i] = (*template.Template)(&expr)
 	}
 	return nil
 }

@@ -78,7 +78,11 @@ func TestEvalAction_UnmarshalYaml(t *testing.T) {
 
 		assert.NoError(t, err)
 		assert.Len(t, action.Expressions, 1)
-		assert.Equal(t, "1 + 2", action.Expressions[0])
+
+		var bytes bytes.Buffer
+		err = action.Expressions[0].Execute(&bytes, nil)
+		assert.NoError(t, err)
+		assert.Equal(t, "1 + 2", bytes.String())
 	})
 
 	t.Run("should parse string", func(t *testing.T) {
@@ -89,7 +93,11 @@ func TestEvalAction_UnmarshalYaml(t *testing.T) {
 
 		assert.NoError(t, err)
 		assert.Len(t, action.Expressions, 1)
-		assert.Equal(t, "1 + 2", action.Expressions[0])
+
+		var bytes bytes.Buffer
+		err = action.Expressions[0].Execute(&bytes, nil)
+		assert.NoError(t, err)
+		assert.Equal(t, "1 + 2", bytes.String())
 	})
 }
 

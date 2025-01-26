@@ -27,7 +27,17 @@ func (s *SystemHandler) HandleEvent(action doorpix.Action, event *doorpix.Event)
 	case doorpix.SleepAction:
 		time.Sleep(time.Duration(action.Duration) * time.Second)
 	case doorpix.EvalAction:
-		out, err := exec.Run(action.Expressions)
+		expressions := make([]string, len(action.Expressions))
+		for i, expr := range action.Expressions {
+			var buf bytes.Buffer
+			if err := expr.Execute(&buf, event.Data); err != nil {
+				slog.Error(err.Error())
+				continue
+			}
+			expressions[i] = buf.String()
+		}
+
+		out, err := exec.Run(expressions)
 		if err != nil {
 			slog.Error(err.Error())
 			break
