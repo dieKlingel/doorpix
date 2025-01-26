@@ -1,0 +1,20 @@
+services:
+  weston:
+    # see: https://github.com/toradex/torizon-samples/blob/bookworm/debian-container/demonstration/docker-compose.upstream.yml 
+    # and https://developer.toradex.com/torizon/application-development/working-with-containers/working-with-weston-on-torizoncore/
+    build: .
+    volumes:
+      - ./config:/etc/xdg/weston:rw
+      - /tmp:/tmp
+      - /dev:/dev
+      - /run/udev:/run/udev
+    # privileged: true
+    cap_add:
+      - CAP_SYS_TTY_CONFIG
+    # Add device access rights through cgroup...
+    device_cgroup_rules:
+      - 'c 4:* rmw'
+      # ... for /dev/input devices
+      - 'c 13:* rmw'
+      # ... for /dev/dri devices
+      - 'c 226:* rmw'
