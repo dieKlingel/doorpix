@@ -150,9 +150,9 @@ func (h *HttpService) showCameraFrame(w http.ResponseWriter, r *http.Request) {
 }
 
 func (service *HttpService) newCamera() (*camera.Camera, error) {
-	webcam, err := camera.NewFromString(
+	webcam, err := camera.New(
 		service.System.Config.Camera.Device,
-		camera.MustNewElement("jpegenc"),
+		camera.JPEG,
 	)
 
 	return webcam, err

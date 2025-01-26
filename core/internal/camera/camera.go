@@ -29,10 +29,10 @@ func NewFromString(device string, elements ...*gst.Element) (*Camera, error) {
 		return nil, err
 	}
 
-	return New(hardwareCamera, elements...)
+	return NewFromHardwareCamera(hardwareCamera, elements...)
 }
 
-func New(hardwareCamera *HardwareCamera, elements ...*gst.Element) (*Camera, error) {
+func NewFromHardwareCamera(hardwareCamera *HardwareCamera, elements ...*gst.Element) (*Camera, error) {
 	queue, err := gst.NewElement("queue")
 	if err != nil {
 		return nil, err

@@ -7,7 +7,6 @@ import (
 	"unsafe"
 
 	"github.com/dieklingel/doorpix/core/internal/camera"
-	"github.com/go-gst/go-gst/gst"
 )
 
 func Initialize() {
@@ -36,25 +35,17 @@ var streams = make(map[uintptr]Stream)
 var device string = "videotestsrc"
 
 func createNewCamera() *camera.Camera {
-	c, err := camera.NewFromString(
+	webcam, err := camera.New(
 		device,
-		camera.MustNewElement("videoscale"),
-		camera.MustNewElement(
-			"capsfilter",
-			"caps", gst.NewCapsFromString("video/x-raw,width=1920,height=1080"),
-		),
-		camera.MustNewElement("videoconvert"),
-		camera.MustNewElement(
-			"capsfilter",
-			"caps", gst.NewCapsFromString("video/x-raw,format=I420,framerate=30/1"),
-		),
+		camera.FullHD,
+		camera.I420,
 	)
 
 	if err != nil {
 		panic(err)
 	}
 
-	return c
+	return webcam
 }
 
 //export go_video_stream_start

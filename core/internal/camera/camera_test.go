@@ -14,7 +14,7 @@ func TestCamera_New(t *testing.T) {
 		hardwareCamera, err := camera.NewHardwareCamera("videotestsrc")
 		assert.NoError(t, err)
 
-		cam, err := camera.New(hardwareCamera)
+		cam, err := camera.NewFromHardwareCamera(hardwareCamera)
 		assert.NoError(t, err)
 
 		err = cam.Start()
@@ -36,7 +36,7 @@ func TestCamera_New(t *testing.T) {
 
 		hwcam, err := camera.NewHardwareCamera("videotestsrc")
 		assert.NoError(t, err)
-		cam, err := camera.New(hwcam, jpegenc)
+		cam, err := camera.NewFromHardwareCamera(hwcam, jpegenc)
 		assert.NoError(t, err)
 
 		frameReadCounts := []int{0, 10, 100}
