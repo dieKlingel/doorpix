@@ -1,7 +1,9 @@
 package camera
 
 import (
+	"fmt"
 	"log/slog"
+	"strings"
 	"sync"
 
 	"github.com/go-gst/go-gst/gst"
@@ -18,32 +20,38 @@ type HardwareCamera struct {
 	cameraCounter int
 }
 
-func NewHardwareCamera(identifier string) (*HardwareCamera, error) {
+func NewHardwareCamera(fullIdentifier string) (*HardwareCamera, error) {
+	identifier := strings.Split(fullIdentifier, " ")[0]
+
 	if existingHardwareCamera, ok := cameras[identifier]; ok {
 		return existingHardwareCamera, nil
 	}
 
-	gstPipeline, err := gst.NewPipeline("")
+	gstPipeline, err := gst.NewPipelineFromString(fmt.Sprintf("%s ! tee name=tee", fullIdentifier))
 	if err != nil {
 		return nil, err
 	}
 
-	gstSrcElement, err := gst.NewElement(identifier)
+	gstSrcElements, err := gstPipeline.GetSourceElements()
+	if err != nil {
+		return nil, err
+	}
+	if len(gstSrcElements) != 1 {
+		return nil, fmt.Errorf("expected 1 source element, got %d", len(gstSrcElements))
+	}
+	gstSrcElement := gstSrcElements[0]
+
+	gstTeeElement, err := gstPipeline.GetElementByName("tee")
 	if err != nil {
 		return nil, err
 	}
 
-	gstTeeElement, err := gst.NewElement("tee")
-	if err != nil {
-		return nil, err
-	}
-
-	if err := gstPipeline.AddMany(gstSrcElement, gstTeeElement); err != nil {
+	/*if err := gstPipeline.AddMany(gstSrcElement, gstTeeElement); err != nil {
 		return nil, err
 	}
 	if err := gstSrcElement.Link(gstTeeElement); err != nil {
 		return nil, err
-	}
+	}*/
 
 	hwcamera := &HardwareCamera{
 		gstPipeline:   gstPipeline,

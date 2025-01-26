@@ -5,9 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/dieklingel/doorpix/core/internal/camera"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
-	"github.com/go-gst/go-gst/gst"
 )
 
 type App struct {
@@ -64,26 +62,4 @@ func (app *App) Exec() {
 	<-c
 	app.cleanup()
 	os.Exit(1)
-}
-
-func (app *App) newCameraFactory() *camera.Camera {
-	c, err := camera.NewFromString(
-		app.system.Config.Camera.Device,
-		camera.MustNewElement("videoscale"),
-		camera.MustNewElement(
-			"capsfilter",
-			"caps", gst.NewCapsFromString("video/x-raw,width=1920,height=1080"),
-		),
-		camera.MustNewElement("videoconvert"),
-		camera.MustNewElement(
-			"capsfilter",
-			"caps", gst.NewCapsFromString("video/x-raw,format=I420,framerate=30/1"),
-		),
-	)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return c
 }

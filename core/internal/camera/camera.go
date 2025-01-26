@@ -77,6 +77,11 @@ func New(hardwareCamera *HardwareCamera, elements ...*gst.Element) (*Camera, err
 	return camera, nil
 }
 
+func (c *Camera) SetProperty(key string, value any) error {
+	err := c.hardwareCamera.gstSrcElement.SetProperty(key, value)
+	return err
+}
+
 func (c *Camera) Start() error {
 	c.hardwareCamera.mutex.Lock()
 	defer c.hardwareCamera.mutex.Unlock()

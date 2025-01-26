@@ -78,10 +78,7 @@ func (h *HttpHandler) AddNewEvent(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *HttpHandler) showCameraStream(w http.ResponseWriter, r *http.Request) {
-	webcam, err := camera.NewFromString(
-		h.System.Config.Camera.Device,
-		camera.MustNewElement("jpegenc"),
-	)
+	webcam, err := h.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -123,10 +120,7 @@ func (h *HttpHandler) showCameraStream(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *HttpHandler) showCameraFrame(w http.ResponseWriter, r *http.Request) {
-	webcam, err := camera.NewFromString(
-		h.System.Config.Camera.Device,
-		camera.MustNewElement("jpegenc"),
-	)
+	webcam, err := h.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -156,4 +150,13 @@ func (h *HttpHandler) showCameraFrame(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/jpeg")
 		w.Write(frame)
 	}
+}
+
+func (h *HttpHandler) newCamera() (*camera.Camera, error) {
+	webcam, err := camera.NewFromString(
+		h.System.Config.Camera.Device,
+		camera.MustNewElement("jpegenc"),
+	)
+
+	return webcam, err
 }

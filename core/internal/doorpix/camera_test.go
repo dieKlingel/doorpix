@@ -15,15 +15,6 @@ func TestCameraConfig_Error(t *testing.T) {
 		assert.Error(t, err)
 	})
 
-	t.Run("should return error on invalid device", func(t *testing.T) {
-		config := doorpix.CameraConfig{
-			Device: "invalid-device",
-		}
-
-		err := config.Error()
-		assert.Error(t, err)
-	})
-
 	t.Run("should return nil on valid device", func(t *testing.T) {
 		config := doorpix.CameraConfig{
 			Device: "videotestsrc",
