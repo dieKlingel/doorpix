@@ -44,7 +44,7 @@ func main() {
 	app.RegisterHandler(&core.PJSIPService{
 		System: system,
 	})
-	app.RegisterHandler(&core.HttpService{
+	app.RegisterHandler(&core.HTTPService{
 		System: system,
 	})
 

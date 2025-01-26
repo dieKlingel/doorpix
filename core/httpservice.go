@@ -10,7 +10,7 @@ import (
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 )
 
-type HttpService struct {
+type HTTPService struct {
 	System doorpix.System
 
 	server *http.Server
@@ -21,10 +21,10 @@ type APIEventRequest struct {
 	Data  map[string]any    `json:"data"`
 }
 
-func (service *HttpService) HandleEvent(config doorpix.Action, event *doorpix.Event) {
+func (service *HTTPService) HandleEvent(config doorpix.Action, event *doorpix.Event) {
 }
 
-func (service *HttpService) Setup() {
+func (service *HTTPService) Setup() {
 	service.System.Bus.Handler(service)
 
 	port := service.System.Config.HTTP.Port
@@ -44,7 +44,7 @@ func (service *HttpService) Setup() {
 	}
 }
 
-func (service *HttpService) Exec() {
+func (service *HTTPService) Exec() {
 	go func() {
 		if err := service.server.ListenAndServe(); err != nil {
 			slog.Error("http server error", "error", err)
@@ -52,9 +52,9 @@ func (service *HttpService) Exec() {
 	}()
 }
 
-func (service *HttpService) Cleanup() {}
+func (service *HTTPService) Cleanup() {}
 
-func (service *HttpService) AddNewEvent(w http.ResponseWriter, r *http.Request) {
+func (service *HTTPService) AddNewEvent(w http.ResponseWriter, r *http.Request) {
 	var req APIEventRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -77,7 +77,7 @@ func (service *HttpService) AddNewEvent(w http.ResponseWriter, r *http.Request) 
 	http.Error(w, "event not allowed", http.StatusBadRequest)
 }
 
-func (h *HttpService) showCameraStream(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPService) showCameraStream(w http.ResponseWriter, r *http.Request) {
 	webcam, err := h.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -115,8 +115,8 @@ func (h *HttpService) showCameraStream(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *HttpService) showCameraFrame(w http.ResponseWriter, r *http.Request) {
-	webcam, err := h.newCamera()
+func (service *HTTPService) showCameraFrame(w http.ResponseWriter, r *http.Request) {
+	webcam, err := service.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -148,7 +148,7 @@ func (h *HttpService) showCameraFrame(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (service *HttpService) newCamera() (*camera.Camera, error) {
+func (service *HTTPService) newCamera() (*camera.Camera, error) {
 	webcam, err := camera.New(
 		service.System.Config.Camera.Device,
 		camera.JPEG,

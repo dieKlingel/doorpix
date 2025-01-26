@@ -17,7 +17,7 @@ func TestHttpService_HandleEvent(t *testing.T) {
 		Config: config,
 		Bus:    core.NewEventEmitterWithConfig(config),
 	}
-	handler := core.HttpService{
+	handler := core.HTTPService{
 		System: system,
 	}
 
