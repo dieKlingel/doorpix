@@ -12,10 +12,6 @@ package pjsua2
 // #cgo LDFLAGS: -L${SRCDIR}/../../../3rdparty/pjproject/third_party/lib -lresample-aarch64-unknown-linux-gnu -lspeex-aarch64-unknown-linux-gnu -lgsmcodec-aarch64-unknown-linux-gnu -lsrtp-aarch64-unknown-linux-gnu -lilbccodec-aarch64-unknown-linux-gnu -lg7221codec-aarch64-unknown-linux-gnu -lwebrtc-aarch64-unknown-linux-gnu -lyuv-aarch64-unknown-linux-gnu
 // #cgo LDFLAGS: -lssl -lcrypto -lm -lpthread -luuid -lrt -lasound
 // #cgo LDFLAGS: -lSDL2 -lv4l2 -lvpx -lopenh264
+// #cgo LDFLAGS: -lavformat -lavcodec -lavutil -lswscale
 // #include <pjlib.h>
 import "C"
-
-func init() {
-	// Disable logging from pjsua2, until set in endpoint config
-	C.pj_log_set_level(1)
-}
