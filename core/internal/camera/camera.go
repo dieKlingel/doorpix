@@ -2,6 +2,7 @@ package camera
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/go-gst/go-gst/gst"
 	"github.com/go-gst/go-gst/gst/app"
@@ -83,14 +84,24 @@ func (c *Camera) SetProperty(key string, value any) error {
 }
 
 func (c *Camera) Start() error {
+	slog.Debug("starting camera", "camera", c)
+
 	c.hardwareCamera.mutex.Lock()
-	defer c.hardwareCamera.mutex.Unlock()
+	slog.Debug("successfully locked the hardware device", "camera", c, "driver", c.hardwareCamera)
+
+	defer func() {
+		c.hardwareCamera.mutex.Unlock()
+		slog.Debug("successfully unlocked the hardware device", "camera", c, "driver", c.hardwareCamera)
+	}()
+
 	if c.isRunning {
+		slog.Debug("camera already running", "camera", c)
 		return nil
 	}
 
-	c.hardwareCamera.cameraCounter++
 	c.isRunning = true
+	c.hardwareCamera.cameraCounter++
+	slog.Debug("increment the hardware device counter", "camera", c, "driver", c.hardwareCamera, "counter", c.hardwareCamera.cameraCounter)
 
 	c.hardwareCamera.pause()
 
@@ -123,16 +134,25 @@ func (c *Camera) Start() error {
 }
 
 func (c *Camera) Stop() error {
+	slog.Debug("stopping camera", "camera", c)
+
 	c.hardwareCamera.mutex.Lock()
-	defer c.hardwareCamera.mutex.Unlock()
+	slog.Debug("successfully locked the hardware device", "camera", c, "driver", c.hardwareCamera)
+
+	defer func() {
+		c.hardwareCamera.mutex.Unlock()
+		slog.Debug("successfully unlocked the hardware device", "camera", c, "driver", c.hardwareCamera)
+	}()
+
 	if !c.isRunning {
 		return nil
 	}
 
-	c.hardwareCamera.cameraCounter--
 	c.isRunning = false
+	c.hardwareCamera.cameraCounter--
+	slog.Debug("decrement the hardware device counter", "camera", c, "driver", c.hardwareCamera, "counter", c.hardwareCamera.cameraCounter)
 
-	c.hardwareCamera.pause()
+	c.hardwareCamera.stop()
 
 	gstElementsSize := 2 + len(c.gstAdditionalElements)
 	allGstElements := make([]*gst.Element, gstElementsSize)
@@ -153,6 +173,8 @@ func (c *Camera) Stop() error {
 		return err
 	}
 
+	c.hardwareCamera.gstTeeElement.ReleaseRequestPad(c.gstTeeSrcPad)
+
 	if c.hardwareCamera.cameraCounter > 0 {
 		c.hardwareCamera.play()
 	} else {
@@ -168,10 +190,6 @@ func (c *Camera) Frame() chan []byte {
 }
 
 func (c *Camera) onNewSample(sink *app.Sink) gst.FlowReturn {
-	if !c.isRunning {
-		return gst.FlowEOS
-	}
-
 	sample := sink.PullSample()
 	if sample == nil {
 		return gst.FlowEOS
@@ -185,13 +203,11 @@ func (c *Camera) onNewSample(sink *app.Sink) gst.FlowReturn {
 
 	buffer.Map(gst.MapRead)
 	frame := buffer.Bytes()
+	defer buffer.Unmap()
 
 	select {
 	case c.frameChannel <- frame:
 	default:
 	}
-
-	buffer.Unmap()
-
 	return gst.FlowOK
 }

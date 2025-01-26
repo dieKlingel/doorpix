@@ -100,11 +100,10 @@ func (h *HttpService) showCameraStream(w http.ResponseWriter, r *http.Request) {
 	for {
 		select {
 		case <-r.Context().Done():
-			slog.Info("stream closed")
 			return
 		case frame, ok := <-webcam.Frame():
 			if !ok {
-				slog.Warn("no frame")
+				slog.Warn("no frame was received from the camera, canceling the stream")
 				break
 			}
 

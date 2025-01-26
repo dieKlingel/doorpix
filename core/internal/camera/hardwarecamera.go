@@ -73,36 +73,53 @@ func LookUpHardwareCamera(identifier string) (*HardwareCamera, bool) {
 }
 
 func (c *HardwareCamera) pause() {
-	slog.Debug("pausing camera")
+	slog.Debug("request to pause camera pipeline", "driver", c)
 
 	currentState := c.gstPipeline.GetCurrentState()
 	if currentState == gst.StatePlaying {
-		err := c.gstPipeline.SetState(gst.StatePaused)
+		slog.Debug("pausing camera pipeline", "driver", c)
+
+		err := c.gstPipeline.BlockSetState(gst.StatePaused)
 		if err != nil {
 			slog.Error(err.Error())
+		} else {
+			slog.Debug("successfully paused camera pipeline", "driver", c)
 		}
+	} else {
+		slog.Debug("ignoring request to pause camera pipeline, it ist not running", "driver", c, "state", currentState)
 	}
 }
 
 func (c *HardwareCamera) play() {
-	slog.Debug("playing camera")
+	slog.Debug("request to start camera pipeline", "driver", c)
 
-	err := c.gstPipeline.SetState(gst.StatePlaying)
-	if err != nil {
-		slog.Error(err.Error())
+	currentState := c.gstPipeline.GetCurrentState()
+	if currentState != gst.StatePlaying {
+		err := c.gstPipeline.BlockSetState(gst.StatePlaying)
+		if err != nil {
+			slog.Error(err.Error())
+		} else {
+			slog.Debug("successfully started camera pipeline", "driver", c)
+		}
+	} else {
+		slog.Debug("ignoring request to start camera pipeline, it is already running", "driver", c, "state", currentState)
 	}
 }
 
 func (c *HardwareCamera) stop() {
-	slog.Debug("stopping camera")
+	// not shure if this is needed
+	c.pause()
+
+	slog.Debug("request to stop camera pipeline", "driver", c)
 
 	err := c.gstPipeline.SetState(gst.StateNull)
 	if err != nil {
 		slog.Error(err.Error())
+	} else {
+		slog.Debug("successfully stopped camera pipeline", "driver", c)
 	}
 
-	// todo cleanup
-
+	// todo cleanup further resources
 }
 
 func (c *HardwareCamera) onNewPipelineBusMessage(msg *gst.Message) bool {
