@@ -3,5 +3,8 @@ services:
     build: .
     volumes:
       - ./doorpix.yaml:/etc/doorpix/doorpix.yaml:ro
+      - ${XDG_RUNTIME_DIR}/pipewire-0:${XDG_RUNTIME_DIR}/pipewire-0
     environment:
-      - XDG_RUNTIME_DIR=/tmp
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+    ports:
+      - "8080:8080"

@@ -44,7 +44,7 @@ func (c *call) OnCallState(param pjsua2.OnCallStateParam) {
 func (c *call) OnCallMediaState(param pjsua2.OnCallMediaStateParam) {
 	audioMedia := c.call.GetAudioMedia(-1)
 	if audioMedia == nil {
-		slog.Debug("no audio media", "call id", c.call.GetId())
+		slog.Warn("no audio media", "call id", c.call.GetId())
 		return
 	}
 
