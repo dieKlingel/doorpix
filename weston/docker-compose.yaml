@@ -5,7 +5,6 @@ services:
     build: .
     volumes:
       - ./config:/etc/xdg/weston:rw
-      - /tmp:/tmp
       - /dev:/dev
       - /run/udev:/run/udev
     # privileged: true
