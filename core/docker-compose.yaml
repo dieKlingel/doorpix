@@ -1,0 +1,7 @@
+services:
+  core:
+    build: .
+    volumes:
+      - ./doorpix.yaml:/etc/doorpix/doorpix.yaml:ro
+    environment:
+      - XDG_RUNTIME_DIR=/tmp
