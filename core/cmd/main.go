@@ -37,6 +37,7 @@ func main() {
 	withSystem(app, bus, config)
 	withHTTP(app, bus, config)
 	withSIPPhone(app, bus, config)
+	withRPC(app, bus, config)
 
 	ctx := context.Background()
 	app.Exec(ctx)
@@ -64,6 +65,16 @@ func withSIPPhone(app *core.App, bus *core.Bus, config doorpix.Config) {
 		app.RegisterService(&core.PJSIPService{
 			Config: config,
 			Emit:   bus.Write,
+		})
+	}
+}
+
+func withRPC(app *core.App, bus *core.Bus, config doorpix.Config) {
+	if config.RPC.Enabled {
+		slog.Info("rpc is enabled")
+		app.RegisterService(&core.RPCService{
+			Config:  config,
+			Emitter: bus.Write,
 		})
 	}
 }

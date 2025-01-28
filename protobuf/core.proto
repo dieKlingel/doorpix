@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = "github.com/dieklingel/doorpix/core/internal/proto";
+
+service Core {
+  rpc Emit(EmitRequest) returns (EmitResponse) {}
+}
+
+message EmitRequest {
+  string type = 1;
+  map<string, string> data = 2;
+}
+
+message EmitResponse {}

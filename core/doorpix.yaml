@@ -28,5 +28,9 @@ http:
   port: 8080
 
 camera:
-  # device: v4l2src 
-  device: videotestsrc
+  device: videotestsrc pattern=ball
+  # e.g. device: v4l2src device=/dev/video0
+
+rpc:
+  host: 0.0.0.0
+

@@ -17,6 +17,7 @@ type Config struct {
 	SIPPhone SIPPhone     `yaml:"sip-phone"`
 	HTTP     HTTPConfig   `yaml:"http"`
 	Camera   CameraConfig `yaml:"camera"`
+	RPC      RPCConfig    `yaml:"rpc"`
 }
 
 func NewConfig() Config {
