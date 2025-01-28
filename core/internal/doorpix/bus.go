@@ -8,5 +8,5 @@ type Bus interface {
 }
 
 type BusEventHandler interface {
-	HandleEvent(Action, *Event)
+	HandleEvent(Action, *ActionHook)
 }

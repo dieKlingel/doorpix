@@ -14,12 +14,14 @@ type Call struct {
 type call struct {
 	call    pjsua2.Call
 	account pjsua2.Account
-	sys     doorpix.System
+	config  doorpix.Config
+	emit    doorpix.Emit
 }
 
-func NewCall(account pjsua2.Account, callId int, system doorpix.System) *Call {
+func NewCall(account pjsua2.Account, callId int, config doorpix.Config, emit doorpix.Emit) *Call {
 	impl := &call{
-		sys:     system,
+		config:  config,
+		emit:    emit,
 		account: account,
 	}
 	director := pjsua2.NewDirectorCall(impl, account, callId)

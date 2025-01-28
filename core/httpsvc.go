@@ -13,7 +13,7 @@ import (
 )
 
 type HTTPService struct {
-	System doorpix.System
+	Config doorpix.Config
 
 	server *http.Server
 }
@@ -23,15 +23,10 @@ type APIEventRequest struct {
 	Data  map[string]any    `json:"data"`
 }
 
-func (service *HTTPService) HandleEvent(config doorpix.Action, event *doorpix.Event) {
-}
-
 func (service *HTTPService) Init() error {
 	slog.Debug("init http service")
 
-	service.System.Bus.Handler(service)
-
-	port := service.System.Config.HTTP.Port
+	port := service.Config.HTTP.Port
 	if port <= 0 {
 		port = 8080
 	}
@@ -148,7 +143,7 @@ func (service *HTTPService) showCameraFrame(w http.ResponseWriter, r *http.Reque
 
 func (service *HTTPService) newCamera() (*camera.Camera, error) {
 	webcam, err := camera.New(
-		service.System.Config.Camera.Device,
+		service.Config.Camera.Device,
 		camera.JPEG,
 	)
 

@@ -5,13 +5,17 @@ import (
 	"time"
 )
 
-type Event struct {
-	Data map[string]interface{}
+type ActionHook struct {
+	Data map[string]any
 }
 
-func NewEvent() *Event {
-	event := &Event{
-		Data: make(map[string]interface{}),
+func NewActionHook(data map[string]any) *ActionHook {
+	event := &ActionHook{
+		Data: data,
+	}
+
+	if event.Data == nil {
+		event.Data = make(map[string]any)
 	}
 
 	event.Data["date"] = time.Now().Format("2006-01-02")
@@ -21,14 +25,4 @@ func NewEvent() *Event {
 	}
 
 	return event
-}
-
-func (e *Event) AddData(data map[string]any) {
-	if data == nil {
-		return
-	}
-
-	for key, value := range data {
-		e.Data[key] = value
-	}
 }

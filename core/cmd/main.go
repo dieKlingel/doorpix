@@ -32,41 +32,38 @@ func main() {
 		os.Exit(1)
 	}
 
-	bus := core.NewEventEmitterWithConfig(config)
-	system := doorpix.System{
-		Config: config,
-		Bus:    bus,
-	}
-
-	app := core.NewAppWithConfig(system)
-	withSystem(app, &system)
-	withHTTP(app, &system)
-	withSIPPhone(app, &system)
+	bus := core.NewBus()
+	app := core.NewAppWithConfig(config, bus)
+	withSystem(app, bus, config)
+	withHTTP(app, bus, config)
+	withSIPPhone(app, bus, config)
 
 	ctx := context.Background()
 	app.Exec(ctx)
 }
 
-func withSystem(app *core.App, system *doorpix.System) {
+func withSystem(app *core.App, bus *core.Bus, config doorpix.Config) {
 	app.RegisterService(&core.SystemService{
-		System: *system,
+		Bus:    bus,
+		Config: config,
 	})
 }
 
-func withHTTP(app *core.App, system *doorpix.System) {
-	if system.Config.HTTP.Enabled {
+func withHTTP(app *core.App, _ *core.Bus, config doorpix.Config) {
+	if config.HTTP.Enabled {
 		slog.Info("http is enabled")
 		app.RegisterService(&core.HTTPService{
-			System: *system,
+			Config: config,
 		})
 	}
 }
 
-func withSIPPhone(app *core.App, system *doorpix.System) {
-	if system.Config.SIPPhone.Enabled {
+func withSIPPhone(app *core.App, bus *core.Bus, config doorpix.Config) {
+	if config.SIPPhone.Enabled {
 		slog.Info("sip-phone is enabled")
 		app.RegisterService(&core.PJSIPService{
-			System: *system,
+			Config: config,
+			Emit:   bus.Write,
 		})
 	}
 }

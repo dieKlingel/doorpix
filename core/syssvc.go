@@ -11,26 +11,28 @@ import (
 )
 
 type SystemService struct {
-	System doorpix.System
+	Bus    *Bus
+	Config doorpix.Config
 }
 
-func (service *SystemService) HandleEvent(action doorpix.Action, event *doorpix.Event) {
+func (service *SystemService) Run(action doorpix.Action, hook *doorpix.ActionHook) bool {
 	switch action := action.(type) {
 	case doorpix.LogAction:
 		msg := bytes.Buffer{}
-		if err := action.Message.Execute(&msg, event.Data); err != nil {
+		if err := action.Message.Execute(&msg, hook.Data); err != nil {
 			slog.Error(err.Error())
 			break
 		}
-
 		slog.Info(msg.String())
+
 	case doorpix.SleepAction:
 		time.Sleep(time.Duration(action.Duration) * time.Second)
+
 	case doorpix.EvalAction:
 		expressions := make([]string, len(action.Expressions))
 		for i, expr := range action.Expressions {
 			var buf bytes.Buffer
-			if err := expr.Execute(&buf, event.Data); err != nil {
+			if err := expr.Execute(&buf, hook.Data); err != nil {
 				slog.Error(err.Error())
 				continue
 			}
@@ -43,13 +45,18 @@ func (service *SystemService) HandleEvent(action doorpix.Action, event *doorpix.
 			break
 		}
 		fmt.Print(out)
+
+	default:
+		return false
 	}
+
+	return true
 }
 
 func (service *SystemService) Init() error {
 	slog.Debug("init system service")
 
-	service.System.Bus.Handler(service)
+	// TODO: init system service
 
 	slog.Debug("successfully initialized system service")
 	return nil

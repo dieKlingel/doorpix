@@ -31,7 +31,7 @@ func (a *Account) Invite(uri string) error {
 	account := a.Account.DirectorInterface().(*account)
 
 	param := pjsua2.NewCallOpParam()
-	call := NewCall(a, -1, account.system)
+	call := NewCall(a, -1, account.config, account.emit)
 	call.MakeCall(uri, param)
 
 	account.calls[call.GetId()] = call
@@ -63,13 +63,15 @@ func (a *Account) SendInstantMessage(uri string, message string) error {
 
 type account struct {
 	account pjsua2.Account
-	system  doorpix.System
 	calls   map[int]*Call
+	config  doorpix.Config
+	emit    doorpix.Emit
 }
 
-func NewAccount(system doorpix.System) *Account {
+func NewAccount(config doorpix.Config, emit doorpix.Emit) *Account {
 	impl := &account{
-		system: system,
+		config: config,
+		emit:   emit,
 		calls:  make(map[int]*Call),
 	}
 	director := pjsua2.NewDirectorAccount(impl)
@@ -85,7 +87,7 @@ func (a *account) OnRegState(param pjsua2.OnRegStateParam) {
 }
 
 func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
-	call := NewCall(a.account, param.GetCallId(), a.system)
+	call := NewCall(a.account, param.GetCallId(), a.config, a.emit)
 	remoteUri := call.GetInfo().GetRemoteUri()
 	regex := regexp.MustCompile("^\".*?\"\\s<sip:(.*?)>$")
 	matches := regex.FindStringSubmatch(remoteUri)
@@ -94,13 +96,13 @@ func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 	}
 
 	slog.Info("incoming call received", "uri", remoteUri)
-	a.system.Bus.On(doorpix.CallIncomingEvent)
+	a.emit(doorpix.CallIncomingEvent, nil)
 
 	callParam := pjsua2.NewCallOpParam()
 	callParam.SetStatusCode(pjsua2.PJSIP_SC_DECLINE)
 	a.calls[param.GetCallId()] = call
 
-	for _, uri := range a.system.Config.SIPPhone.Whitelist {
+	for _, uri := range a.config.SIPPhone.Whitelist {
 		if uri == remoteUri {
 			callParam.SetStatusCode(pjsua2.PJSIP_SC_OK)
 			break
@@ -119,7 +121,7 @@ func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 func (a *account) OnInstantMessage(param pjsua2.OnInstantMessageParam) {
 	slog.Debug("new message received", "from", param.GetFromUri(), "type", param.GetContentType())
 
-	a.system.Bus.On(doorpix.NewMessageEvent)
+	a.emit(doorpix.NewMessageEvent, nil)
 }
 
 func DeletePJSIPAccount(account *Account) {

@@ -2,6 +2,7 @@ package core
 
 import (
 	"context"
+	"log/slog"
 	"os"
 	"os/signal"
 	"sync"
@@ -11,15 +12,17 @@ import (
 )
 
 type App struct {
-	system doorpix.System
+	config doorpix.Config
+	bus    *Bus
 
 	services []Service
 	wg       sync.WaitGroup
 }
 
-func NewAppWithConfig(system doorpix.System) *App {
+func NewAppWithConfig(config doorpix.Config, bus *Bus) *App {
 	app := &App{
-		system: system,
+		config: config,
+		bus:    bus,
 
 		services: make([]Service, 0),
 	}
@@ -35,11 +38,10 @@ func (app *App) Exec(ctx context.Context) {
 	// init all init services
 	app.init()
 
-	app.system.Bus.On(doorpix.StartupEvent)
-
 	// exec all exec services
 	ctx, cancel := context.WithCancel(ctx)
 	app.exec(ctx)
+	app.bus.Write(doorpix.StartupEvent, nil)
 
 	// catch system signals
 	c := make(chan os.Signal, 1)
@@ -47,8 +49,11 @@ func (app *App) Exec(ctx context.Context) {
 
 	<-c
 
+	app.bus.Write(doorpix.ShutdownEvent, nil)
+	app.bus.Close()
 	cancel()
-	app.deinit()
+	app.wg.Wait()
+
 	os.Exit(1)
 }
 
@@ -63,6 +68,40 @@ func (app *App) init() {
 }
 
 func (app *App) exec(ctx context.Context) {
+
+	app.wg.Add(1)
+	go func() {
+		defer app.wg.Done()
+
+		for {
+			event, ok := <-app.bus.Listen()
+			if !ok {
+				break
+			}
+
+			actions, ok := app.config.OnEvents[event.Type]
+			if !ok {
+				continue
+			}
+
+			hook := doorpix.NewActionHook(event.Data)
+			for _, action := range actions {
+				sucess := false
+				for _, service := range app.services {
+					if service, ok := service.(RunnerService); ok {
+						sucess = service.Run(action, hook)
+						if sucess {
+							break
+						}
+					}
+				}
+				if !sucess {
+					slog.Warn("no service could run the action", "action", action)
+				}
+			}
+		}
+	}()
+
 	for _, service := range app.services {
 		if service, ok := service.(ExecService); ok {
 			if err := service.Exec(ctx, &app.wg); err != nil {
@@ -70,11 +109,4 @@ func (app *App) exec(ctx context.Context) {
 			}
 		}
 	}
-}
-
-func (app *App) deinit() {
-	app.system.Bus.On(doorpix.ShutdownEvent)
-	app.system.Bus.Wait()
-
-	app.wg.Wait()
 }

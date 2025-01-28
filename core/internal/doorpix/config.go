@@ -19,8 +19,8 @@ type Config struct {
 	Camera   CameraConfig `yaml:"camera"`
 }
 
-func NewConfig() *Config {
-	return &Config{
+func NewConfig() Config {
+	return Config{
 		OnEvents:     EventCollection{},
 		BeforeEvents: EventCollection{},
 		AfterEvents:  EventCollection{},
