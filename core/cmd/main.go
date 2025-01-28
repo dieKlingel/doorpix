@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log/slog"
 	"os"
 
@@ -42,11 +43,12 @@ func main() {
 	withHTTP(app, &system)
 	withSIPPhone(app, &system)
 
-	app.Exec()
+	ctx := context.Background()
+	app.Exec(ctx)
 }
 
 func withSystem(app *core.App, system *doorpix.System) {
-	app.RegisterHandler(&core.SystemService{
+	app.RegisterService(&core.SystemService{
 		System: *system,
 	})
 }
@@ -54,7 +56,7 @@ func withSystem(app *core.App, system *doorpix.System) {
 func withHTTP(app *core.App, system *doorpix.System) {
 	if system.Config.HTTP.Enabled {
 		slog.Info("http is enabled")
-		app.RegisterHandler(&core.HTTPService{
+		app.RegisterService(&core.HTTPService{
 			System: *system,
 		})
 	}
@@ -63,7 +65,7 @@ func withHTTP(app *core.App, system *doorpix.System) {
 func withSIPPhone(app *core.App, system *doorpix.System) {
 	if system.Config.SIPPhone.Enabled {
 		slog.Info("sip-phone is enabled")
-		app.RegisterHandler(&core.PJSIPService{
+		app.RegisterService(&core.PJSIPService{
 			System: *system,
 		})
 	}

@@ -14,7 +14,7 @@ type SystemService struct {
 	System doorpix.System
 }
 
-func (s *SystemService) HandleEvent(action doorpix.Action, event *doorpix.Event) {
+func (service *SystemService) HandleEvent(action doorpix.Action, event *doorpix.Event) {
 	switch action := action.(type) {
 	case doorpix.LogAction:
 		msg := bytes.Buffer{}
@@ -46,12 +46,11 @@ func (s *SystemService) HandleEvent(action doorpix.Action, event *doorpix.Event)
 	}
 }
 
-func (s *SystemService) Setup() {
-	s.System.Bus.Handler(s)
-}
+func (service *SystemService) Init() error {
+	slog.Debug("init system service")
 
-func (s *SystemService) Cleanup() {
-}
+	service.System.Bus.Handler(service)
 
-func (s *SystemService) Exec() {
+	slog.Debug("successfully initialized system service")
+	return nil
 }

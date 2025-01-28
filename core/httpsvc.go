@@ -1,10 +1,12 @@
 package core
 
 import (
-	"encoding/json"
+	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"net/http"
+	"sync"
 
 	"github.com/dieklingel/doorpix/core/internal/camera"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
@@ -24,7 +26,9 @@ type APIEventRequest struct {
 func (service *HTTPService) HandleEvent(config doorpix.Action, event *doorpix.Event) {
 }
 
-func (service *HTTPService) Setup() {
+func (service *HTTPService) Init() error {
+	slog.Debug("init http service")
+
 	service.System.Bus.Handler(service)
 
 	port := service.System.Config.HTTP.Port
@@ -33,7 +37,6 @@ func (service *HTTPService) Setup() {
 	}
 
 	handler := http.NewServeMux()
-	handler.HandleFunc("POST /api/events", service.AddNewEvent)
 	handler.HandleFunc("GET /api/camera/stream", service.showCameraStream)
 	handler.HandleFunc("GET /api/camera/snapshot", service.showCameraFrame)
 
@@ -42,39 +45,34 @@ func (service *HTTPService) Setup() {
 		Addr:    fmt.Sprintf(":%d", port),
 		Handler: handler,
 	}
+
+	slog.Debug("successfully initialized http service")
+	return nil
 }
 
-func (service *HTTPService) Exec() {
+func (service *HTTPService) Exec(ctx context.Context, wg *sync.WaitGroup) error {
+	slog.Debug("exec http service")
+
 	go func() {
-		if err := service.server.ListenAndServe(); err != nil {
+		if err := service.server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
 			slog.Error("http server error", "error", err)
 		}
 	}()
-}
 
-func (service *HTTPService) Cleanup() {}
+	wg.Add(1)
+	go func() {
+		<-ctx.Done()
+		slog.Debug("shutting down http service")
 
-func (service *HTTPService) AddNewEvent(w http.ResponseWriter, r *http.Request) {
-	var req APIEventRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	allowedEventTypes := []doorpix.EventType{
-		doorpix.APIRingEvent,
-		doorpix.APIUnlockEvent,
-	}
-
-	for _, eventType := range allowedEventTypes {
-		if req.Event == eventType {
-			service.System.Bus.OnWithData(req.Event, req.Data)
-			w.WriteHeader(http.StatusOK)
-			return
+		if err := service.server.Shutdown(ctx); err != nil {
+			slog.Warn("shut down http service with error", "error", err)
+		} else {
+			slog.Debug("successfully shut down http service")
 		}
-	}
+		wg.Done()
+	}()
 
-	http.Error(w, "event not allowed", http.StatusBadRequest)
+	return nil
 }
 
 func (h *HTTPService) showCameraStream(w http.ResponseWriter, r *http.Request) {
