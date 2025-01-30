@@ -1,37 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:kiosk/config/config.dart';
+import 'package:kiosk/config/config_reader.dart';
+import 'utils/touch_scroll_behaviour.dart';
+import 'views/label_page_view.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  final reader = ConfigReader();
+  reader.addPath('/etc/doorpix/doorpix.yaml');
+  reader.addPath('/etc/doorpix/config.yaml');
+  reader.addPath('doorpix.yaml');
+  reader.addPath('config.yaml');
+  final config = await reader.readConfig();
+
+  runApp(App(config));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  final Config config;
+
+  const App(this.config, {super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      scrollBehavior: TouchScrollBehavior(),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.purple,
+          brightness: Brightness.dark,
+        ),
         useMaterial3: true,
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(fontSize: 32),
+          labelLarge: TextStyle(fontSize: 32),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      themeMode: ThemeMode.dark,
+      home: PageView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
+          LabelPageView(label: config.kiosk.label),
+        ],
+      ),
     );
   }
 }

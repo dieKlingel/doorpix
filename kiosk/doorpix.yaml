@@ -1,0 +1,9 @@
+
+kiosk:
+  core: 127.0.0.1:50051
+  label: 
+    title: "Fam. XYZ"
+    street:
+      name: "XYZ"
+      number: "123"
+  
