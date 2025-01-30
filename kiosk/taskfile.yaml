@@ -11,3 +11,7 @@ tasks:
     desc: Build the project
     cmds:
       - flutter-elinux build elinux
+  containerize:
+    desc: Build the container image
+    cmds:
+      - docker buildx build --platform linux/arm64 -t ghcr.io/dieklingel/doorpix/kiosk:latest .

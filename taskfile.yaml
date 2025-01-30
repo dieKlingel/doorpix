@@ -1,0 +1,9 @@
+version: '3'
+
+includes:
+  core: 
+    taskfile: core/taskfile.yaml
+    dir: core
+  kiosk:
+    taskfile: kiosk/taskfile.yaml
+    dir: kiosk

@@ -14,3 +14,7 @@ tasks:
     desc: Run tests
     cmds:
       - go test ./...
+  containerize:
+    desc: Build the container image
+    cmds:
+      - docker buildx build --platform linux/arm64 -t ghcr.io/dieklingel/doorpix/core:latest .
