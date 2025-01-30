@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Core_Emit_FullMethodName = "/Core/Emit"
+	Core_Emit_FullMethodName   = "/Core/Emit"
+	Core_Listen_FullMethodName = "/Core/Listen"
 )
 
 // CoreClient is the client API for Core service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CoreClient interface {
 	Emit(ctx context.Context, in *EmitRequest, opts ...grpc.CallOption) (*EmitResponse, error)
+	Listen(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[RunResponse, RunRequest], error)
 }
 
 type coreClient struct {
@@ -47,11 +49,25 @@ func (c *coreClient) Emit(ctx context.Context, in *EmitRequest, opts ...grpc.Cal
 	return out, nil
 }
 
+func (c *coreClient) Listen(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[RunResponse, RunRequest], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Core_ServiceDesc.Streams[0], Core_Listen_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[RunResponse, RunRequest]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Core_ListenClient = grpc.BidiStreamingClient[RunResponse, RunRequest]
+
 // CoreServer is the server API for Core service.
 // All implementations must embed UnimplementedCoreServer
 // for forward compatibility.
 type CoreServer interface {
 	Emit(context.Context, *EmitRequest) (*EmitResponse, error)
+	Listen(grpc.BidiStreamingServer[RunResponse, RunRequest]) error
 	mustEmbedUnimplementedCoreServer()
 }
 
@@ -64,6 +80,9 @@ type UnimplementedCoreServer struct{}
 
 func (UnimplementedCoreServer) Emit(context.Context, *EmitRequest) (*EmitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Emit not implemented")
+}
+func (UnimplementedCoreServer) Listen(grpc.BidiStreamingServer[RunResponse, RunRequest]) error {
+	return status.Errorf(codes.Unimplemented, "method Listen not implemented")
 }
 func (UnimplementedCoreServer) mustEmbedUnimplementedCoreServer() {}
 func (UnimplementedCoreServer) testEmbeddedByValue()              {}
@@ -104,6 +123,13 @@ func _Core_Emit_Handler(srv interface{}, ctx context.Context, dec func(interface
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Core_Listen_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(CoreServer).Listen(&grpc.GenericServerStream[RunResponse, RunRequest]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Core_ListenServer = grpc.BidiStreamingServer[RunResponse, RunRequest]
+
 // Core_ServiceDesc is the grpc.ServiceDesc for Core service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -116,6 +142,13 @@ var Core_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Core_Emit_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Listen",
+			Handler:       _Core_Listen_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "core.proto",
 }

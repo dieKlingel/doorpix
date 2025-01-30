@@ -4,6 +4,7 @@ option go_package = "github.com/dieklingel/doorpix/core/internal/proto";
 
 service Core {
   rpc Emit(EmitRequest) returns (EmitResponse) {}
+  rpc Listen(stream RunResponse) returns (stream RunRequest) {}
 }
 
 message EmitRequest {
@@ -12,3 +13,13 @@ message EmitRequest {
 }
 
 message EmitResponse {}
+
+message RunRequest {
+  map<string, string> spec = 1;
+  map<string, string> data = 2;
+}
+
+message RunResponse {
+  bool success = 1;
+  map<string, string> data = 2;
+}

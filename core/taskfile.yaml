@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  generate:
+    desc: Generate the project
+    cmds:
+      - export PATH="$PATH:$(go env GOPATH)/bin"
+      - go generate ./...
+  build:
+    desc: Build the project
+    cmds:
+      - go build -o core cmd/main.go
+  test:
+    desc: Run tests
+    cmds:
+      - go test ./...

@@ -3,6 +3,7 @@ package doorpix
 import (
 	"fmt"
 	"text/template"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -104,6 +105,41 @@ func (a *MessageAction) UnmarshalYAML(node *yaml.Node) error {
 
 type HangupAction struct{}
 
+type RPCAction struct {
+	Timeout  time.Duration
+	Spec     map[string]string
+	Multiple bool
+}
+
+func (a *RPCAction) UnmarshalYAML(node *yaml.Node) error {
+	type rpc struct {
+		Timeout  string            `yaml:"timeout"`
+		Spec     map[string]string `yaml:"spec"`
+		Multiple bool              `yaml:"multiple"`
+	}
+
+	action := struct {
+		Rpc rpc `yaml:"rpc"`
+	}{
+		Rpc: rpc{
+			Timeout: "5s",
+		},
+	}
+
+	if err := node.Decode(&action); err != nil {
+		return err
+	}
+
+	timeout, err := time.ParseDuration(action.Rpc.Timeout)
+	if err != nil {
+		return err
+	}
+	a.Timeout = timeout
+	a.Spec = action.Rpc.Spec
+	a.Multiple = action.Rpc.Multiple
+	return nil
+}
+
 func newActionFromNode(node yaml.Node) (Action, error) {
 	if node.Kind == yaml.MappingNode {
 		raw := map[string]any{}
@@ -141,11 +177,16 @@ func newActionFromNode(node yaml.Node) (Action, error) {
 			err := node.Decode(&action)
 			return action, err
 		}
+		if raw["rpc"] != nil {
+			action := RPCAction{}
+			err := node.Decode(&action)
+			return action, err
+		}
 	} else if node.Kind == yaml.ScalarNode {
 		if node.Value == "hangup" {
 			return HangupAction{}, nil
 		}
 	}
 
-	return nil, fmt.Errorf("could not infer action type: %s", node.Value)
+	return nil, fmt.Errorf("could not infer action type in line %d", node.Line)
 }

@@ -1,7 +1,6 @@
 package camera_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/dieklingel/doorpix/core/internal/camera"
@@ -31,43 +30,20 @@ func TestCamera_New(t *testing.T) {
 	})
 
 	t.Run("create new jpeg encoded camera", func(t *testing.T) {
-		jpegenc, err := gst.NewElement("jpegenc")
+		webcam, err := camera.New("videotestsrc", camera.JPEG)
 		assert.NoError(t, err)
 
-		hwcam, err := camera.NewHardwareCamera("videotestsrc")
-		assert.NoError(t, err)
-		cam, err := camera.NewFromHardwareCamera(hwcam, jpegenc)
+		err = webcam.Start()
 		assert.NoError(t, err)
 
-		frameReadCounts := []int{0, 10, 100}
-		for _, count := range frameReadCounts {
-			t.Run(fmt.Sprintf("read %d frames", count), func(t *testing.T) {
-				err = cam.Start()
-				assert.NoError(t, err)
-
-				for i := 0; i < count; i++ {
-					_, ok := <-cam.Frame()
-					assert.True(t, ok)
-				}
-
-				err = cam.Stop()
-				assert.NoError(t, err)
-			})
+		for i := 0; i < 100; i++ {
+			_, ok := <-webcam.Frame()
+			assert.True(t, ok)
 		}
 
+		err = webcam.Stop()
+		assert.NoError(t, err)
 	})
-}
-
-func TestCamera_Start(t *testing.T) {
-
-}
-
-func TestCamera_Stop(t *testing.T) {
-
-}
-
-func TestCamera_LookUp(t *testing.T) {
-
 }
 
 func TestCamera_ReadSingleFrame(t *testing.T) {
