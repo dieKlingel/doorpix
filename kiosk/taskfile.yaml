@@ -1,12 +1,28 @@
 version: '3'
 
-tasks:
+env:
+  PATH:
+    sh: echo "$PATH:$HOME/.pub-cache/bin:$(dirname -- $(which flutter-elinux))/../flutter/bin"
+
+tasks: 
   generate:
     desc: Generate the project
+    env:
+      PATH:
+        sh: echo "$PATH:$HOME/.pub-cache/bin:$(dirname -- $(which flutter-elinux))/../flutter/bin"
     cmds:
-      - export PATH=$PATH:$HOME/.pub-cache/bin:$(dirname -- $(which flutter-elinux))/../flutter/bin
+      - command -v protoc-gen-dart 1>/dev/null || dart pub global activate protoc_plugin
       - mkdir -p lib/proto
       - protoc --dart_out=grpc:lib/proto -I ../protobuf core.proto
+  check:generate:
+    desc: Check if the generated code is in sync
+    cmds:
+      - task: generate
+      - >-
+        git diff --quiet || (
+          echo "Generated code is out of sync. Please run 'task generate' and commit the changes." &&
+          exit 1
+        )
   build:
     desc: Build the project
     cmds:
