@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  generate:
+    desc: Generate the project
+    cmds:
+      - export PATH=$PATH:$HOME/.pub-cache/bin:$(dirname -- $(which flutter-elinux))/../flutter/bin
+      - mkdir -p lib/proto
+      - protoc --dart_out=grpc:lib/proto -I ../protobuf core.proto
+  build:
+    desc: Build the project
+    cmds:
+      - flutter-elinux build elinux

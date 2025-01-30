@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk/config/config.dart';
 import 'package:kiosk/config/config_reader.dart';
+import 'core.dart';
 import 'utils/touch_scroll_behaviour.dart';
 import 'views/label_page_view.dart';
 
@@ -10,15 +11,18 @@ void main() async {
   reader.addPath('/etc/doorpix/config.yaml');
   reader.addPath('doorpix.yaml');
   reader.addPath('config.yaml');
-  final config = await reader.readConfig();
 
-  runApp(App(config));
+  final config = await reader.readConfig();
+  final core = Core(config.kiosk.core);
+
+  runApp(App(core, config));
 }
 
 class App extends StatelessWidget {
+  final Core core;
   final Config config;
 
-  const App(this.config, {super.key});
+  const App(this.core, this.config, {super.key});
 
   // This widget is the root of your application.
   @override
@@ -40,7 +44,10 @@ class App extends StatelessWidget {
       home: PageView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          LabelPageView(label: config.kiosk.label),
+          LabelPageView(
+            core: core,
+            label: config.kiosk.label,
+          ),
         ],
       ),
     );
