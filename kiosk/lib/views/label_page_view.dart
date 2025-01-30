@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 import '../components/label_view.dart';
@@ -7,14 +8,18 @@ import '../data/label_data.dart';
 class LabelPageView extends StatelessWidget {
   final Label label;
   final Core core;
+  final AudioPlayer player = AudioPlayer();
+  final Source wav = AssetSource("bell.wav");
 
-  const LabelPageView({
+  LabelPageView({
     super.key,
     required this.core,
     required this.label,
   });
 
   void onPressed() {
+    player.stop().then((value) => player.play(wav));
+
     core.emit("ring", data: {
       "source": "kiosk",
       "name": label.name,

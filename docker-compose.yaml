@@ -1,0 +1,37 @@
+services:
+  core:
+    build: core
+    ports:
+      - 50051:50051
+    volumes:
+      - ./doorpix.yaml:/etc/doorpix/doorpix.yaml:ro
+      - ./bell.wav:/etc/doorpix/bell.wav:ro
+      - ${XDG_RUNTIME_DIR}/pipewire-0:${XDG_RUNTIME_DIR}/pipewire-0
+    environment:
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+      - DOORPIX_LOG_LEVEL=debug
+  weston:
+    extends:
+      service: weston
+      file: weston/docker-compose.yaml
+    healthcheck:
+      test: [ CMD-SHELL, '[ -S "/tmp/1000-runtime-dir/wayland-0" ]' ]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - wayland-socket:/tmp/1000-runtime-dir
+  kiosk:
+    build: kiosk
+    depends_on:
+      weston:
+        condition: service_healthy
+    volumes:
+      - wayland-socket:/run/user/1000
+      - ./doorpix.yaml:/etc/doorpix/doorpix.yaml:ro
+    environment:
+      - XDG_RUNTIME_DIR=/run/user/1000
+
+volumes:
+  wayland-socket: {}
