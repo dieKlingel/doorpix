@@ -3,6 +3,7 @@ module github.com/dieklingel/doorpix/core
 go 1.23.5
 
 require (
+	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/go-gst/go-gst v1.4.0
 	github.com/stretchr/testify v1.10.0
 	google.golang.org/grpc v1.70.0
@@ -13,10 +14,12 @@ require (
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-gst/go-glib v1.4.0 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/mattn/go-pointer v0.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0 // indirect
 	golang.org/x/net v0.32.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20241202173237-19429a94021a // indirect

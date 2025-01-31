@@ -16,6 +16,7 @@ const (
 	CallStateDisconnectEvent EventType = "call-state-disconnect"
 	DtmfActionEvent          EventType = "dtmf-action"
 	CallIncomingEvent        EventType = "call-incoming"
+	MqttMessageEvent         EventType = "mqtt-message"
 	NewMessageEvent          EventType = "new-message"
 	APIRingEvent             EventType = "api:ring"
 	APIUnlockEvent           EventType = "api:unlock"

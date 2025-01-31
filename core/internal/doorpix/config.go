@@ -18,6 +18,7 @@ type Config struct {
 	HTTP     HTTPConfig   `yaml:"http"`
 	Camera   CameraConfig `yaml:"camera"`
 	RPC      RPCConfig    `yaml:"rpc"`
+	MQTT     MQTTConfig   `yaml:"mqtt"`
 }
 
 func NewConfig() Config {

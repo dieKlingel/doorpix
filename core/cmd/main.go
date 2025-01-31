@@ -37,6 +37,7 @@ func main() {
 	withSystem(app, bus, config)
 	withHTTP(app, bus, config)
 	withSIPPhone(app, bus, config)
+	withMQTT(app, bus, config)
 	withRPC(app, bus, config)
 
 	ctx := context.Background()
@@ -63,6 +64,16 @@ func withSIPPhone(app *core.App, bus *core.Bus, config doorpix.Config) {
 	if config.SIPPhone.Enabled {
 		slog.Info("sip-phone is enabled")
 		app.RegisterService(&core.PJSIPService{
+			Config: config,
+			Emit:   bus.Write,
+		})
+	}
+}
+
+func withMQTT(app *core.App, bus *core.Bus, config doorpix.Config) {
+	if config.MQTT.Enabled {
+		slog.Info("mqtt is enabled")
+		app.RegisterService(&core.MQTTService{
 			Config: config,
 			Emit:   bus.Write,
 		})

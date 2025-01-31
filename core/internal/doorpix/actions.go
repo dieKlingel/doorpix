@@ -140,6 +140,27 @@ func (a *RPCAction) UnmarshalYAML(node *yaml.Node) error {
 	return nil
 }
 
+type PublishAction struct {
+	Topic   template.Template
+	Message template.Template
+}
+
+func (a *PublishAction) UnmarshalYAML(node *yaml.Node) error {
+	action := struct {
+		Topic   YamlStringTemplate `yaml:"topic"`
+		Message YamlStringTemplate `yaml:"message"`
+	}{}
+
+	err := node.Decode(&action)
+	if err != nil {
+		return err
+	}
+
+	a.Topic = (template.Template)(action.Topic)
+	a.Message = (template.Template)(action.Message)
+	return nil
+}
+
 func newActionFromNode(node yaml.Node) (Action, error) {
 	if node.Kind == yaml.MappingNode {
 		raw := map[string]any{}
@@ -172,8 +193,13 @@ func newActionFromNode(node yaml.Node) (Action, error) {
 			err := node.Decode(&action)
 			return action, err
 		}
-		if raw["message"] != nil {
+		if raw["message"] != nil && raw["to"] != nil {
 			action := MessageAction{}
+			err := node.Decode(&action)
+			return action, err
+		}
+		if raw["topic"] != nil && raw["message"] != nil {
+			action := PublishAction{}
 			err := node.Decode(&action)
 			return action, err
 		}
