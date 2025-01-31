@@ -9,9 +9,6 @@ env:
 tasks: 
   generate:
     desc: Generate the project
-    env:
-      PATH:
-        sh: echo "$PATH:$HOME/.pub-cache/bin:$(dirname -- $(which flutter-elinux))/../flutter/bin"
     cmds:
       - command -v protoc-gen-dart 1>/dev/null || dart pub global activate protoc_plugin
       - mkdir -p lib/proto
