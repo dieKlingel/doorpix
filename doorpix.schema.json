@@ -1,0 +1,340 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DoorPix",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "on": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/actions/log"
+            },
+            {
+              "$ref": "#/$defs/actions/eval"
+            },
+            {
+              "$ref": "#/$defs/actions/publish"
+            },
+            {
+              "$ref": "#/$defs/actions/sip-message"
+            },
+            {
+              "$ref": "#/$defs/actions/sleep"
+            },
+            {
+              "$ref": "#/$defs/actions/hangup"
+            },
+            {
+              "$ref": "#/$defs/actions/invite"
+            },
+            {
+              "$ref": "#/$defs/actions/rpc"
+            }
+          ]
+        }
+      }
+    },
+    "kiosk": {
+      "type": "object"
+    },
+    "sip-phone": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "server",
+        "username",
+        "password",
+        "realm",
+        "stun-servers"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "server": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "realm": {
+          "type": "string"
+        },
+        "stun-servers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whitelist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "camera": {
+      "type": "object",
+      "required": [
+        "device"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "device": {
+          "type": "string"
+        }
+      }
+    },
+    "http": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "port": {
+          "type": "integer"
+        }
+      }
+    },
+    "mqtt": {
+      "type": "object",
+      "required": [
+        "host",
+        "port"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "subscribtions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "last-will": {
+          "type": "object",
+          "required": [
+            "topic",
+            "message"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "topic": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "rpc": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "time": {
+      "duration": {
+        "type": "string",
+        "pattern": "[-+]?([0-9]*(\\.[0-9]*)?[a-z]+)+"
+      }
+    },
+    "actions": {
+      "log": {
+        "description": "Log a message",
+        "type": "object",
+        "required": [
+          "log"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "log": {
+            "type": "string"
+          }
+        }
+      },
+      "eval": {
+        "description": "Execute a shell command",
+        "type": "object",
+        "required": [
+          "eval"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "eval": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "publish": {
+        "description": "Send a message to a mqtt topic",
+        "type": "object",
+        "required": [
+          "topic",
+          "message"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "sip-message": {
+        "description": "Send a sip instant message",
+        "type": "object",
+        "required": [
+          "to",
+          "message"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "to": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "sleep": {
+        "description": "Sleep for a number of seconds",
+        "type": "object",
+        "required": [
+          "sleep"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "sleep": {
+            "$ref": "#/$defs/time/duration"
+          }
+        }
+      },
+      "invite": {
+        "description": "Invite a sip phone",
+        "type": "object",
+        "required": [
+          "invite"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "invite": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "hangup": {
+        "oneOf": [
+          {
+            "description": "Hangup all active calls",
+            "type": "object",
+            "required": [
+              "hangup"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "hangup": {}
+            }
+          },
+          {
+            "description": "Hangup all active calls",
+            "type": "string",
+            "additionalProperties": false,
+            "enum": [
+              "hangup"
+            ]
+          }
+        ]
+      },
+      "rpc": {
+        "type": "object",
+        "required": [
+          "rpc"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rpc": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "timeout": {
+                "$ref": "#/$defs/time/duration"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "spec": {
+                "type": "object",
+                "properties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

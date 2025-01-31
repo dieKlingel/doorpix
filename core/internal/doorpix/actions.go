@@ -11,7 +11,26 @@ import (
 type Action interface{}
 
 type SleepAction struct {
-	Duration int `yaml:"sleep"`
+	Duration time.Duration `yaml:"sleep"`
+}
+
+func (a *SleepAction) UnmarshalYAML(node *yaml.Node) error {
+	action := struct {
+		Sleep string `yaml:"sleep"`
+	}{}
+
+	err := node.Decode(&action)
+	if err != nil {
+		return err
+	}
+
+	duration, err := time.ParseDuration(action.Sleep)
+	if err != nil {
+		return err
+	}
+
+	a.Duration = duration
+	return nil
 }
 
 type LogAction struct {

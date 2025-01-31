@@ -3,6 +3,7 @@ package doorpix_test
 import (
 	"bytes"
 	"testing"
+	"time"
 
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/stretchr/testify/assert"
@@ -102,18 +103,18 @@ func TestEvalAction_UnmarshalYaml(t *testing.T) {
 }
 
 func TestSleepAction_UnmarshalYaml(t *testing.T) {
-	t.Run("should parse numbber", func(t *testing.T) {
-		data := `sleep: 1000`
+	t.Run("should parse time", func(t *testing.T) {
+		data := `sleep: 1000ms`
 
 		var action doorpix.SleepAction
 		err := yaml.Unmarshal([]byte(data), &action)
 
 		assert.NoError(t, err)
-		assert.Equal(t, 1000, action.Duration)
+		assert.Equal(t, 1000*time.Millisecond, action.Duration)
 	})
 
-	t.Run("should return error on string", func(t *testing.T) {
-		data := `sleep: "1000"`
+	t.Run("should return error on int", func(t *testing.T) {
+		data := `sleep: 1000`
 
 		var action doorpix.SleepAction
 		err := yaml.Unmarshal([]byte(data), &action)

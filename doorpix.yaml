@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=doorpix.schema.json
 
 kiosk:
   core: core:50051
@@ -16,6 +17,11 @@ on:
         - gst-launch-1.0 -m filesrc location=/etc/doorpix/bell.wav ! wavparse ! autoaudiosink
   shutdown:
     - log: goodbye
+    - rpc:
+        timeout: 5s
+        spec:
+          method: Shutdown
+          service: doorpix.core.v1.Core
 
 sip-phone:
   enabled: false

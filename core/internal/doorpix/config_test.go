@@ -13,7 +13,7 @@ func TestConfigUnmarshalFromYaml(t *testing.T) {
 		data := `
 on:
   startup:
-    - sleep: 1
+    - sleep: 1s
 `
 		c := doorpix.NewConfig()
 		err := yaml.Unmarshal([]byte(data), &c)
@@ -26,7 +26,7 @@ on:
 		data := `
 on:
   startup:
-    - sleep: 1
+    - sleep: 1s
     - log: hello
     - hangup: {}
 `
