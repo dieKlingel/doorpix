@@ -7,3 +7,14 @@ includes:
   kiosk:
     taskfile: kiosk/taskfile.yaml
     dir: kiosk
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - |
+        NC='\033[0m'
+        GREEN='\033[;32m'
+        DARK_GRAY='\033[;90m'
+        echo -e "Your are on ${GREEN}doorpix${NC} version ${DARK_GRAY}$REVISION${NC}!"
+      - task --list

@@ -3,6 +3,8 @@ version: '3'
 env:
   PATH:
     sh: echo "$PATH:$HOME/.pub-cache/bin:$(dirname -- $(which flutter-elinux))/../flutter/bin"
+  REVISION:
+    sh: git describe --always
 
 tasks: 
   generate:
