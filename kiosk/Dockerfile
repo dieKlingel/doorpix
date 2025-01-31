@@ -1,4 +1,4 @@
-FROM debian:bookworm as builder
+FROM debian:bookworm AS builder
 
 RUN apt update && \
 	apt install -y git unzip curl clang cmake pkg-config libgles2-mesa-dev libxkbcommon-x11-0 libwayland-dev libglib2.0-dev libgstreamer1.0-dev

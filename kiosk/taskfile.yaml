@@ -32,4 +32,4 @@ tasks:
   containerize:
     desc: Build the container image
     cmds:
-      - docker buildx build --platform linux/arm64 -t ghcr.io/dieklingel/doorpix/kiosk:latest .
+      - docker buildx build --platform linux/arm64 -t ghcr.io/dieklingel/doorpix/kiosk:$REVISION .

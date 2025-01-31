@@ -1,0 +1,45 @@
+# docker compose -f docker-compose.prod.yaml up
+
+services:
+  core:
+    image: ghcr.io/dieklingel/doorpix/core:${REVISION:-latest}
+    volumes:
+      - ./doorpix.yaml:/etc/doorpix/doorpix.yaml:ro
+      - ${XDG_RUNTIME_DIR}/pipewire-0:/tmp/1000-runtime-dir/pipewire-0
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/1000-runtime-dir
+
+  weston:
+    image: torizon/weston:4
+    healthcheck:
+      test: [ CMD-SHELL, '[ -S "/tmp/1000-runtime-dir/wayland-0" ]' ]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - wayland-socket:/tmp/1000-runtime-dir:z
+      - ./weston/config:/etc/xdg/weston:rw
+      - /dev:/dev
+      - /run/udev:/run/udev
+    cap_add:
+      - CAP_SYS_TTY_CONFIG
+    device_cgroup_rules:
+      - 'c 4:* rmw'
+      - 'c 13:* rmw'
+      - 'c 226:* rmw'
+
+  kiosk:
+    image: ghcr.io/dieklingel/doorpix/kiosk:${REVISION:-latest}
+    depends_on:
+      weston:
+        condition: service_healthy
+    volumes:
+      - wayland-socket:/tmp/1000-runtime-dir:z
+      - ./doorpix.yaml:/etc/doorpix/doorpix.yaml:ro
+      - ${XDG_RUNTIME_DIR}/pipewire-0:/tmp/1000-runtime-dir/pipewire-0
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/1000-runtime-dir
+
+volumes:
+  wayland-socket: {}
