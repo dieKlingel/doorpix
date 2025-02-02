@@ -7,10 +7,16 @@ kiosk:
     street:
       name: "XYZ"
       number: "123"
- 
+
+tmpls:
+  reusing-workflow: &reusing-workflow
+    - log: "this is a reusing workflow"
+
 on:
   startup:
     - log: hello {{.date}} {{.time}}
+    - condition: 'true'
+      then: *reusing-workflow
   ring:
     - log: 'ring event from {{.source}} at {{.date}} {{.time}} (name: {{.name}}, street.name {{.street_name}}, street.number {{.street_number}})'
     - eval:

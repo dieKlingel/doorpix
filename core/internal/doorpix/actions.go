@@ -10,6 +10,47 @@ import (
 
 type Action interface{}
 
+type ConditionAction struct {
+	Condition template.Template
+	Then      []Action
+	Else      []Action
+}
+
+func (a *ConditionAction) UnmarshalYAML(node *yaml.Node) error {
+	raw := struct {
+		Condition YamlStringTemplate `yaml:"condition"`
+		Then      []yaml.Node        `yaml:"then"`
+		Else      []yaml.Node        `yaml:"else"`
+	}{}
+
+	err := node.Decode(&raw)
+	if err != nil {
+		return err
+	}
+
+	a.Condition = (template.Template)(raw.Condition)
+
+	a.Then = make([]Action, len(raw.Then))
+	for i, thenAction := range raw.Then {
+		action, err := newActionFromNode(thenAction)
+		if err != nil {
+			return err
+		}
+		a.Then[i] = action
+	}
+
+	a.Else = make([]Action, len(raw.Else))
+	for i, elseAction := range raw.Else {
+		action, err := newActionFromNode(elseAction)
+		if err != nil {
+			return err
+		}
+		a.Else[i] = action
+	}
+
+	return nil
+}
+
 type SleepAction struct {
 	Duration time.Duration `yaml:"sleep"`
 }
@@ -187,6 +228,11 @@ func newActionFromNode(node yaml.Node) (Action, error) {
 			return nil, err
 		}
 
+		if raw["condition"] != nil {
+			action := ConditionAction{}
+			err := node.Decode(&action)
+			return action, err
+		}
 		if raw["sleep"] != nil {
 			action := SleepAction{}
 			err := node.Decode(&action)

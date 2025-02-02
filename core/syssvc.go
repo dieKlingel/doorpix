@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"log/slog"
+	"strconv"
 	"time"
 
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
@@ -21,6 +22,22 @@ func (service *SystemService) Name() string {
 
 func (service *SystemService) Run(action doorpix.Action, hook *doorpix.ActionHook) bool {
 	switch action := action.(type) {
+	case doorpix.ConditionAction:
+		var buf bytes.Buffer
+		if err := action.Condition.Execute(&buf, hook); err != nil {
+			slog.Error(err.Error())
+			break
+		}
+		condition, ok := strconv.ParseBool(buf.String())
+		if ok != nil {
+			slog.Error(ok.Error())
+		}
+		if condition {
+			hook.AdditionalActions = append(hook.AdditionalActions, action.Then...)
+		} else {
+			hook.AdditionalActions = append(hook.AdditionalActions, action.Else...)
+		}
+
 	case doorpix.LogAction:
 		msg := bytes.Buffer{}
 		if err := action.Message.Execute(&msg, hook.Data); err != nil {

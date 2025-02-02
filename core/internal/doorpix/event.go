@@ -6,12 +6,14 @@ import (
 )
 
 type ActionHook struct {
-	Data map[string]any
+	Data              map[string]any
+	AdditionalActions []Action
 }
 
 func NewActionHook(data map[string]any) *ActionHook {
 	event := &ActionHook{
-		Data: data,
+		Data:              data,
+		AdditionalActions: make([]Action, 0),
 	}
 
 	if event.Data == nil {

@@ -4,37 +4,21 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "tmpls": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/alias/actions/all"
+        }
+      }
+    },
     "on": {
       "type": "object",
       "additionalProperties": {
         "type": "array",
         "items": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/actions/log"
-            },
-            {
-              "$ref": "#/$defs/actions/eval"
-            },
-            {
-              "$ref": "#/$defs/actions/publish"
-            },
-            {
-              "$ref": "#/$defs/actions/sip-message"
-            },
-            {
-              "$ref": "#/$defs/actions/sleep"
-            },
-            {
-              "$ref": "#/$defs/actions/hangup"
-            },
-            {
-              "$ref": "#/$defs/actions/invite"
-            },
-            {
-              "$ref": "#/$defs/actions/rpc"
-            }
-          ]
+          "$ref": "#/$defs/alias/actions/all"
         }
       }
     },
@@ -169,6 +153,41 @@
     }
   },
   "$defs": {
+    "alias": {
+      "actions": {
+        "all": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/actions/condition"
+            },
+            {
+              "$ref": "#/$defs/actions/log"
+            },
+            {
+              "$ref": "#/$defs/actions/eval"
+            },
+            {
+              "$ref": "#/$defs/actions/publish"
+            },
+            {
+              "$ref": "#/$defs/actions/sip-message"
+            },
+            {
+              "$ref": "#/$defs/actions/sleep"
+            },
+            {
+              "$ref": "#/$defs/actions/hangup"
+            },
+            {
+              "$ref": "#/$defs/actions/invite"
+            },
+            {
+              "$ref": "#/$defs/actions/rpc"
+            }
+          ]
+        }
+      }
+    },
     "time": {
       "duration": {
         "type": "string",
@@ -176,6 +195,31 @@
       }
     },
     "actions": {
+      "condition": {
+        "description": "A condition to be met",
+        "type": "object",
+        "required": [
+          "condition"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "condition": {
+            "type": "string"
+          },
+          "then": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/alias/actions/all"
+            }
+          },
+          "else": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/alias/actions/all"
+            }
+          }
+        }
+      },
       "log": {
         "description": "Log a message",
         "type": "object",

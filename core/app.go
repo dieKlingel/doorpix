@@ -93,17 +93,11 @@ func (app *App) exec(ctx context.Context) {
 
 			hook := doorpix.NewActionHook(event.Data)
 			for _, action := range actions {
-				sucess := false
-				for _, service := range app.services {
-					if service, ok := service.(RunnerService); ok {
-						sucess = service.Run(action, hook)
-						if sucess {
-							break
-						}
-					}
-				}
-				if !sucess {
-					slog.Warn("no service could run the action", "action", action)
+				app.runAction(action, hook)
+
+				for len(hook.AdditionalActions) > 0 {
+					app.runAction(hook.AdditionalActions[0], hook)
+					hook.AdditionalActions = hook.AdditionalActions[1:]
 				}
 			}
 		}
@@ -116,4 +110,17 @@ func (app *App) exec(ctx context.Context) {
 			}
 		}
 	}
+}
+
+func (app *App) runAction(action doorpix.Action, hook *doorpix.ActionHook) {
+	for _, service := range app.services {
+		if service, ok := service.(RunnerService); ok {
+			sucess := service.Run(action, hook)
+			if sucess {
+				return
+			}
+		}
+	}
+
+	slog.Warn("no service could run the action", "action", action)
 }
