@@ -15,6 +15,10 @@ type SystemService struct {
 	Config doorpix.Config
 }
 
+func (service *SystemService) Name() string {
+	return "system-service"
+}
+
 func (service *SystemService) Run(action doorpix.Action, hook *doorpix.ActionHook) bool {
 	switch action := action.(type) {
 	case doorpix.LogAction:

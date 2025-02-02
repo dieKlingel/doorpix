@@ -18,6 +18,10 @@ type HTTPService struct {
 	server *http.Server
 }
 
+func (service *HTTPService) Name() string {
+	return "http-service"
+}
+
 type APIEventRequest struct {
 	Event doorpix.EventType `json:"event"`
 	Data  map[string]any    `json:"data"`

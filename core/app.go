@@ -65,6 +65,13 @@ func (app *App) init() {
 			}
 		}
 	}
+
+	serviceNames := make([]string, len(app.services))
+	for i, service := range app.services {
+		serviceNames[i] = service.Name()
+	}
+
+	slog.Debug("initialized services", "services", serviceNames)
 }
 
 func (app *App) exec(ctx context.Context) {

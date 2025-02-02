@@ -34,6 +34,10 @@ type RPCService struct {
 	mutex       sync.Mutex
 }
 
+func (service *RPCService) Name() string {
+	return "rpc-service"
+}
+
 func (service *RPCService) Init() error {
 	slog.Debug("init rpc service")
 

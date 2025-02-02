@@ -7,7 +7,9 @@ import (
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 )
 
-type Service interface{}
+type Service interface {
+	Name() string
+}
 
 type InitService interface {
 	Init() error

@@ -19,6 +19,10 @@ type MQTTService struct {
 	client mqtt.Client
 }
 
+func (service *MQTTService) Name() string {
+	return "mqtt-service"
+}
+
 func (service *MQTTService) Init() error {
 	slog.Debug("init mqtt service")
 

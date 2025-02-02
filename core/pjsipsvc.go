@@ -28,6 +28,10 @@ type pjAction struct {
 	event  *doorpix.ActionHook
 }
 
+func (service *PJSIPService) Name() string {
+	return "pjsip-service"
+}
+
 func (service *PJSIPService) Run(action doorpix.Action, event *doorpix.ActionHook) {
 	service.pjaction <- pjAction{action, event}
 }
