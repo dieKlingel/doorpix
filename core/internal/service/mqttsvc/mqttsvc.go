@@ -1,4 +1,4 @@
-package core
+package mqttsvc
 
 import (
 	"bytes"
@@ -12,11 +12,26 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
+type MQTTServiceProps struct {
+	Host          string
+	Port          int
+	Protocol      string
+	Username      string
+	Password      string
+	Subscriptions []string
+}
+
 type MQTTService struct {
-	Config doorpix.Config
-	Emit   doorpix.Emit
+	props MQTTServiceProps
+	Emit  doorpix.Emit
 
 	client mqtt.Client
+}
+
+func New(props MQTTServiceProps) *MQTTService {
+	return &MQTTService{
+		props: props,
+	}
 }
 
 func (service *MQTTService) Name() string {
@@ -26,27 +41,38 @@ func (service *MQTTService) Name() string {
 func (service *MQTTService) Init() error {
 	slog.Debug("init mqtt service")
 
-	if len(service.Config.MQTT.Host) == 0 {
+	if len(service.props.Host) == 0 {
 		return fmt.Errorf("mqtt host is required")
 	}
-	if len(service.Config.MQTT.Protocol) == 0 {
+	if len(service.props.Protocol) == 0 {
 		return fmt.Errorf("mqtt protocol is required")
 	}
 
-	broker := fmt.Sprintf("%s://%s:%d", service.Config.MQTT.Protocol, service.Config.MQTT.Host, service.Config.MQTT.Port)
+	broker := fmt.Sprintf("%s://%s:%d", service.props.Protocol, service.props.Host, service.props.Port)
 	slog.Debug("connecting to mqtt broker", "broker", broker)
 
 	options := mqtt.NewClientOptions()
 	options.AddBroker(broker)
 	options.AutoReconnect = true
-	options.SetUsername(service.Config.MQTT.Username)
-	options.SetPassword(service.Config.MQTT.Password)
+	options.SetUsername(service.props.Username)
+	options.SetPassword(service.props.Password)
 	options.SetDefaultPublishHandler(service.onNewMessageReceived)
 	options.OnConnect = service.onConnectionEstablished
 	options.OnConnectionLost = service.onConnectionLost
 	service.client = mqtt.NewClient(options)
 
 	slog.Debug("successfully initialized mqtt service")
+	return nil
+}
+
+func (service *MQTTService) Publish(topic string, payload string) error {
+	token := service.client.Publish(topic, 2, false, payload)
+
+	sucess := token.WaitTimeout(1 * time.Second)
+	if !sucess {
+		return fmt.Errorf("failed to publish mqtt message on topic: %s", topic)
+	}
+
 	return nil
 }
 
@@ -81,15 +107,15 @@ func (service *MQTTService) Run(act doorpix.Action, hook *doorpix.ActionHook) bo
 	return true
 }
 
-func (service *MQTTService) Exec(ctx context.Context, wg *sync.WaitGroup) error {
-	slog.Debug("exec mqtt service")
+func (service *MQTTService) StartBackgroundTask(ctx context.Context, wg *sync.WaitGroup) error {
+	slog.Debug("run mqtt service in background")
 
 	token := service.client.Connect()
 	if token.Wait() && token.Error() != nil {
 		return token.Error()
 	}
 
-	for _, topic := range service.Config.MQTT.Subscribtions {
+	for _, topic := range service.props.Subscriptions {
 		token := service.client.Subscribe(topic, 2, nil)
 		sucess := token.WaitTimeout(1 * time.Second)
 		if !sucess {

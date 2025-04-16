@@ -44,6 +44,10 @@ func (c *Config) Error() error {
 	return nil
 }
 
+func (c *Config) FindAllActionsByEventType(eventtype EventType) []Action {
+	return c.OnEvents[eventtype]
+}
+
 func (c *Config) AddConfigPath(file ...string) {
 	c.files = append(c.files, file...)
 }

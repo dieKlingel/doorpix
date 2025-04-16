@@ -1,4 +1,4 @@
-package core
+package httpsvc
 
 import (
 	"context"
@@ -12,10 +12,21 @@ import (
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 )
 
+type HTTPServiceProps struct {
+	Port                    int
+	VideoStreamCameraDevice string
+}
+
 type HTTPService struct {
-	Config doorpix.Config
+	props HTTPServiceProps
 
 	server *http.Server
+}
+
+func New(props HTTPServiceProps) *HTTPService {
+	return &HTTPService{
+		props: props,
+	}
 }
 
 func (service *HTTPService) Name() string {
@@ -30,7 +41,7 @@ type APIEventRequest struct {
 func (service *HTTPService) Init() error {
 	slog.Debug("init http service")
 
-	port := service.Config.HTTP.Port
+	port := service.props.Port
 	if port <= 0 {
 		port = 8080
 	}
@@ -49,8 +60,8 @@ func (service *HTTPService) Init() error {
 	return nil
 }
 
-func (service *HTTPService) Exec(ctx context.Context, wg *sync.WaitGroup) error {
-	slog.Debug("exec http service")
+func (service *HTTPService) StartBackgroundTask(ctx context.Context, wg *sync.WaitGroup) error {
+	slog.Debug("run http service in background")
 
 	go func() {
 		if err := service.server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
@@ -147,7 +158,7 @@ func (service *HTTPService) showCameraFrame(w http.ResponseWriter, r *http.Reque
 
 func (service *HTTPService) newCamera() (*camera.Camera, error) {
 	webcam, err := camera.New(
-		service.Config.Camera.Device,
+		service.props.VideoStreamCameraDevice,
 		camera.JPEG,
 	)
 
