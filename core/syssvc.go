@@ -12,7 +12,7 @@ import (
 )
 
 type SystemService struct {
-	Bus    *Bus
+	Bus    *EventQueue
 	Config doorpix.Config
 }
 

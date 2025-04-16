@@ -1,8 +1,20 @@
+# yaml-language-server: $schema=../doorpix.schema.json
+
+tmpls:
+  unlock: &unlock
+    - log: "running unlock"
+
 on:
+  mqtt-message:
+    - sleep: 1s
+    - log: '{{.topic}}: {{.message}}'
   startup:
-    - log: hello world at {{.date}} {{.time}} from {{.pwd}}
-    - eval:
-        - echo "I am a shell command running in $SHELL"
+    - log: hello world # prints hello world to the console
+    - condition: 'true' 
+      then: 
+        - log: a
+      else:
+        - log: "unlock failed"
   shutdown:
     - log: goodbye world # prints goodbye world to the console
   api:ring:
@@ -14,8 +26,20 @@ on:
         
         {{ .message }}
         {{- end }}
+  rpc:unlock:
+    - log: unlock the door
+    - condition: '{{.door}} == "main"'
+      then:
+        - log: unlock the main door
+        - to: '{{.core}}'
+          message: '{"door": "main", "action": "unlock"}'
+      else:
+        - log: unlock the back door
+        - to: '{{.core}}'
+          message: '{"door": "back", "action": "unlock"}'
 
 sip-phone:
+  enabled: false
   server: sip.linphone.org
   username: example
   password: secret
@@ -31,6 +55,11 @@ camera:
   device: videotestsrc pattern=ball
   # e.g. device: v4l2src device=/dev/video0
 
-rpc:
-  host: 0.0.0.0
+mqtt:
+  enabled: true
+  host: broker.hivemq.com
+  port: 1883
 
+rpc:
+  enabled: true
+  host: 0.0.0.0

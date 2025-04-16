@@ -10,7 +10,7 @@ import (
 
 func TestBus(t *testing.T) {
 	t.Run("should write event", func(t *testing.T) {
-		bus := core.NewBus()
+		bus := core.NewEventQueue()
 
 		channel := bus.Listen()
 		go func() {
@@ -23,7 +23,7 @@ func TestBus(t *testing.T) {
 	})
 
 	t.Run("should close bus", func(t *testing.T) {
-		bus := core.NewBus()
+		bus := core.NewEventQueue()
 
 		wg := sync.WaitGroup{}
 

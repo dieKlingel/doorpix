@@ -9,7 +9,7 @@ type MQTTConfig struct {
 	Protocol      string
 	Username      string
 	Password      string
-	Subscribtions []string
+	Subscriptions []string
 }
 
 func (mqttConfig *MQTTConfig) UnmarshalYAML(node *yaml.Node) error {
@@ -20,7 +20,7 @@ func (mqttConfig *MQTTConfig) UnmarshalYAML(node *yaml.Node) error {
 		Protocol      string   `yaml:"protocol"`
 		Username      string   `yaml:"username"`
 		Password      string   `yaml:"password"`
-		Subscribtions []string `yaml:"subscribtions"`
+		Subscriptions []string `yaml:"subscriptions"`
 	}{
 		Enabled:  true,
 		Port:     1883,
@@ -37,6 +37,6 @@ func (mqttConfig *MQTTConfig) UnmarshalYAML(node *yaml.Node) error {
 	mqttConfig.Protocol = rawHTTPConfig.Protocol
 	mqttConfig.Username = rawHTTPConfig.Username
 	mqttConfig.Password = rawHTTPConfig.Password
-	mqttConfig.Subscribtions = rawHTTPConfig.Subscribtions
+	mqttConfig.Subscriptions = rawHTTPConfig.Subscriptions
 	return nil
 }
