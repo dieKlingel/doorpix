@@ -16,8 +16,8 @@ require (
 	github.com/go-gst/go-glib v1.4.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/mattn/go-pointer v0.0.1 // indirect
-	github.com/olebedev/emitter v0.0.0-20230411050614-349169dec2ba // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/stretchr/objx v0.5.2 // indirect
 	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0 // indirect
 	golang.org/x/net v0.32.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
