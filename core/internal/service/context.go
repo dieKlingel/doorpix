@@ -45,3 +45,7 @@ func (ctx *Context) CancelAndWait() {
 func (ctx *Context) Done() <-chan struct{} {
 	return ctx.ctx.Done()
 }
+
+func (ctx *Context) Context() context.Context {
+	return ctx.ctx
+}

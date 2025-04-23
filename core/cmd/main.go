@@ -14,7 +14,8 @@ import (
 type App struct {
 	fx.In
 
-	App *core.App `optional:"false"`
+	App        *core.App        `optional:"false"`
+	HTTPServer *core.HTTPServer `optional:"true"`
 }
 
 func main() {
