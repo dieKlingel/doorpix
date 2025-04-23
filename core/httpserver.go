@@ -1,4 +1,4 @@
-package httpsvc
+package core
 
 import (
 	"context"
@@ -6,31 +6,28 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
-	"sync"
 
 	"github.com/dieklingel/doorpix/core/internal/camera"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
+	"github.com/dieklingel/doorpix/core/internal/service"
 )
 
-type HTTPServiceProps struct {
+type HTTPServerProps struct {
 	Port                    int
 	VideoStreamCameraDevice string
 }
 
-type HTTPService struct {
-	props HTTPServiceProps
+type HTTPServer struct {
+	props HTTPServerProps
 
 	server *http.Server
+	ctx    service.Context
 }
 
-func New(props HTTPServiceProps) *HTTPService {
-	return &HTTPService{
+func NewHTTPServer(props HTTPServerProps) *HTTPServer {
+	return &HTTPServer{
 		props: props,
 	}
-}
-
-func (service *HTTPService) Name() string {
-	return "http-service"
 }
 
 type APIEventRequest struct {
@@ -38,29 +35,34 @@ type APIEventRequest struct {
 	Data  map[string]any    `json:"data"`
 }
 
-func (service *HTTPService) Init() error {
-	slog.Debug("init http service")
+func (server *HTTPServer) Start() {
+	server.ctx = service.NewContext(context.Background())
 
-	port := service.props.Port
+	port := server.props.Port
 	if port <= 0 {
 		port = 8080
 	}
 
 	handler := http.NewServeMux()
-	handler.HandleFunc("GET /api/camera/stream", service.showCameraStream)
-	handler.HandleFunc("GET /api/camera/snapshot", service.showCameraFrame)
+	handler.HandleFunc("GET /api/camera/stream", server.showCameraStream)
+	handler.HandleFunc("GET /api/camera/snapshot", server.showCameraFrame)
 
 	// global config
-	service.server = &http.Server{
+	server.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", port),
 		Handler: handler,
 	}
 
-	slog.Debug("successfully initialized http service")
-	return nil
+	server.StartBackgroundTask()
 }
 
-func (service *HTTPService) StartBackgroundTask(ctx context.Context, wg *sync.WaitGroup) error {
+func (server *HTTPServer) Stop() {
+	slog.Debug("stopping http service")
+
+	server.ctx.CancelAndWait()
+}
+
+func (service *HTTPServer) StartBackgroundTask() {
 	slog.Debug("run http service in background")
 
 	go func() {
@@ -69,23 +71,22 @@ func (service *HTTPService) StartBackgroundTask(ctx context.Context, wg *sync.Wa
 		}
 	}()
 
-	wg.Add(1)
+	service.ctx.Lock()
 	go func() {
-		<-ctx.Done()
+		defer service.ctx.Unlock()
+
+		<-service.ctx.Done()
 		slog.Debug("shutting down http service")
 
-		if err := service.server.Shutdown(ctx); err != nil {
+		if err := service.server.Shutdown(service.ctx.Context()); err != nil {
 			slog.Warn("shut down http service with error", "error", err)
 		} else {
 			slog.Debug("successfully shut down http service")
 		}
-		wg.Done()
 	}()
-
-	return nil
 }
 
-func (h *HTTPService) showCameraStream(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPServer) showCameraStream(w http.ResponseWriter, r *http.Request) {
 	webcam, err := h.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -123,7 +124,7 @@ func (h *HTTPService) showCameraStream(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (service *HTTPService) showCameraFrame(w http.ResponseWriter, r *http.Request) {
+func (service *HTTPServer) showCameraFrame(w http.ResponseWriter, r *http.Request) {
 	webcam, err := service.newCamera()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -156,7 +157,7 @@ func (service *HTTPService) showCameraFrame(w http.ResponseWriter, r *http.Reque
 	}
 }
 
-func (service *HTTPService) newCamera() (*camera.Camera, error) {
+func (service *HTTPServer) newCamera() (*camera.Camera, error) {
 	webcam, err := camera.New(
 		service.props.VideoStreamCameraDevice,
 		camera.JPEG,

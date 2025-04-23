@@ -1,19 +1,26 @@
 package providers
 
 import (
+	"github.com/dieklingel/doorpix/core"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
-	"github.com/dieklingel/doorpix/core/internal/service/httpsvc"
+	"go.uber.org/fx"
 )
 
-func NewHTTPServer(config doorpix.Config) *httpsvc.HTTPService {
+func NewHTTPServer(lifecycle fx.Lifecycle, config doorpix.Config) *core.HTTPServer {
 	if !config.HTTP.Enabled {
 		return nil
 	}
 
-	return httpsvc.New(
-		httpsvc.HTTPServiceProps{
+	server := core.NewHTTPServer(
+		core.HTTPServerProps{
 			Port:                    config.HTTP.Port,
 			VideoStreamCameraDevice: config.Camera.Device,
 		},
 	)
+
+	lifecycle.Append(
+		fx.StartStopHook(server.Start, server.Stop),
+	)
+
+	return server
 }
