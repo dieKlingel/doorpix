@@ -1,0 +1,54 @@
+package eventemitter
+
+import (
+	"log/slog"
+	"path"
+)
+
+type Context struct {
+	Event string
+	Data  map[string]any
+}
+
+type EventEmitter struct {
+	listeners []*Listener
+}
+
+func New() *EventEmitter {
+	return &EventEmitter{
+		listeners: make([]*Listener, 0),
+	}
+}
+
+func (e *EventEmitter) Emit(event string, data map[string]any) error {
+	listenrCount := 0
+
+	for _, listener := range e.listeners {
+		match, err := path.Match(listener.Pattern, event)
+		if err != nil {
+			return err
+		}
+
+		if match {
+			listener.Channel <- Context{
+				Event: event,
+				Data:  data,
+			}
+			listenrCount++
+		}
+
+	}
+
+	if listenrCount == 0 {
+		slog.Warn("no listeners for event", "event", event)
+	}
+
+	return nil
+}
+
+func (e *EventEmitter) Listen(pattern string) chan Context {
+	listener := NewListener(pattern)
+	e.listeners = append(e.listeners, listener)
+
+	return listener.Channel
+}

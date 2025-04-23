@@ -1,14 +1,21 @@
 package main
 
 import (
-	"context"
 	"log/slog"
 	"os"
 
 	"github.com/dieklingel/doorpix/core"
-	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/internal/env"
+	"github.com/dieklingel/doorpix/core/internal/eventemitter"
+	"github.com/dieklingel/doorpix/core/internal/providers"
+	"go.uber.org/fx"
 )
+
+type App struct {
+	fx.In
+
+	App *core.App `optional:"false"`
+}
 
 func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
@@ -16,24 +23,17 @@ func main() {
 	}))
 	slog.SetDefault(logger)
 
-	config := doorpix.NewConfig()
-	config.AddConfigPath(
-		"/etc/doorpix/doorpix.yaml",
-		"/etc/doorpix/config.yaml",
-		"doorpix.yaml",
-		"config.yaml",
+	app := fx.New(
+		fx.Provide(
+			eventemitter.New,
+			providers.NewApplicationConfiguration,
+			providers.NewHTTPServer,
+			providers.NewApp,
+		),
+		fx.Invoke(func(app App) {
+			// do nothing, the core.App is started by the fx.Lifecycle
+		}),
 	)
-	if err := config.Read(); err != nil {
-		slog.Error(err.Error())
-		os.Exit(1)
-	}
-	if err := config.Error(); err != nil {
-		slog.Error(err.Error())
-		os.Exit(1)
-	}
 
-	app := core.NewApp(config)
-
-	ctx := context.Background()
-	app.Exec(ctx)
+	app.Run()
 }

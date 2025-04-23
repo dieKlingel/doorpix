@@ -1,12 +1,13 @@
 package doorpix
 
 import (
+	"github.com/dieklingel/doorpix/core/internal/actions"
 	"gopkg.in/yaml.v3"
 )
 
 type EventType = string
 
-type EventCollection map[EventType][]Action
+type EventCollection map[EventType][]actions.Action
 
 const (
 	StartupEvent             EventType = "startup"
@@ -29,17 +30,17 @@ func (collection EventCollection) UnmarshalYAML(node *yaml.Node) error {
 	}
 
 	for event, rawActionNodes := range rawActionNodesByEvent {
-		actions := make([]Action, 0, len(rawActionNodes))
+		parsedActions := make([]actions.Action, 0, len(rawActionNodes))
 
 		for _, rawActionNode := range rawActionNodes {
-			action, err := newActionFromNode(rawActionNode)
+			action, err := actions.Parse(rawActionNode)
 			if err != nil {
 				return err
 			}
-			actions = append(actions, action)
+			parsedActions = append(parsedActions, action)
 		}
 
-		collection[event] = actions
+		collection[event] = parsedActions
 	}
 
 	return nil
