@@ -60,7 +60,7 @@ func newActionFromNode(node yaml.Node) (Action, error) {
 			err := node.Decode(&action)
 			return action, err
 		}
-		/*if raw["sleep"] != nil {
+		if raw["sleep"] != nil {
 			action := SleepAction{}
 			err := node.Decode(&action)
 			return action, err
@@ -95,15 +95,15 @@ func newActionFromNode(node yaml.Node) (Action, error) {
 			err := node.Decode(&action)
 			return action, err
 		}
-		if raw["rpc"] != nil {
+		/*if raw["rpc"] != nil {
 			action := RPCAction{}
 			err := node.Decode(&action)
 			return action, err
 		}*/
 	} else if node.Kind == yaml.ScalarNode {
-		/*if node.Value == "hangup" {
+		if node.Value == "hangup" {
 			return HangupAction{}, nil
-		}*/
+		}
 	}
 
 	return nil, fmt.Errorf("could not infer action type in line %d", node.Line)

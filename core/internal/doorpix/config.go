@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/dieklingel/doorpix/core/internal/actions"
 	"gopkg.in/yaml.v3"
 )
 
@@ -44,7 +45,7 @@ func (c *Config) Error() error {
 	return nil
 }
 
-func (c *Config) FindAllActionsByEventType(eventtype EventType) []Action {
+func (c *Config) FindAllActionsByEventType(eventtype EventType) []actions.Action {
 	return c.OnEvents[eventtype]
 }
 

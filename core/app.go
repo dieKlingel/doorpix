@@ -2,131 +2,102 @@ package core
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"os"
-	"os/signal"
-	"sync"
-	"syscall"
+	"strings"
 
-	"github.com/dieklingel/doorpix/core/internal/actionrunner"
+	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
-	"github.com/dieklingel/doorpix/core/internal/service/httpsvc"
-	"github.com/dieklingel/doorpix/core/internal/service/mqttsvc"
+	"github.com/dieklingel/doorpix/core/internal/eventemitter"
+	"github.com/dieklingel/doorpix/core/internal/service"
 )
 
+type Softphone interface {
+	actions.Caller
+	actions.Messanger
+}
+
 type App struct {
-	Config doorpix.Config
+	Config       doorpix.Config
+	MQTTClient   actions.Publisher
+	Softphone    Softphone
+	EventEmitter *eventemitter.EventEmitter
 
-	registry   *actionrunner.Registry
-	wg         sync.WaitGroup
-	eventQueue *EventQueue
+	ctx service.Context
 }
 
-func NewApp(config doorpix.Config) *App {
-	registry := actionrunner.Registry{}
-	eventQueue := NewEventQueue()
+func (app *App) Start(ctx context.Context) error {
+	slog.Info("Starting application")
+	app.ctx = service.NewContext(context.Background())
 
-	return &App{
-		Config:     config,
-		registry:   &registry,
-		eventQueue: eventQueue,
-	}
+	app.exec()
+	return nil
 }
 
-func (app *App) Exec(ctx context.Context) {
-	// init all init services
-	services := make([]Service, 0)
+func (app *App) Stop(ctx context.Context) error {
+	slog.Info("Stopping application")
 
-	if app.Config.HTTP.Enabled {
-		http := httpsvc.New(httpsvc.HTTPServiceProps{
-			Port:                    app.Config.HTTP.Port,
-			VideoStreamCameraDevice: app.Config.Camera.Device,
-		})
-		services = append(services, http)
-	}
+	app.ctx.CancelAndWait()
 
-	if app.Config.MQTT.Enabled {
-		mqtt := mqttsvc.New(
-			mqttsvc.MQTTServiceProps{
-				Host:          app.Config.MQTT.Host,
-				Port:          app.Config.MQTT.Port,
-				Protocol:      app.Config.MQTT.Protocol,
-				Username:      app.Config.MQTT.Username,
-				Password:      app.Config.MQTT.Password,
-				Subscriptions: app.Config.MQTT.Subscriptions,
-			},
-		)
-		services = append(services, mqtt)
-		app.registry.Publish = mqtt.Publish
-	}
-
-	for _, service := range services {
-		if service, ok := service.(InitService); ok {
-			err := service.Init()
-			if err != nil {
-				panic(err)
-			}
-		}
-	}
-
-	// exec all exec services
-	ctx, cancel := context.WithCancel(ctx)
-
-	app.exec(ctx)
-	for _, service := range services {
-		if service, ok := service.(BackgroundService); ok {
-			err := service.StartBackgroundTask(ctx, &app.wg)
-			if err != nil {
-				panic(err)
-			}
-		}
-	}
-
-	app.eventQueue.Write(doorpix.StartupEvent, nil)
-
-	// catch system signals
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
-
-	<-c
-
-	app.eventQueue.Close()
-	cancel()
-	app.wg.Wait()
-
-	os.Exit(1)
+	return nil
 }
 
-func (app *App) exec(ctx context.Context) {
-
-	app.wg.Add(1)
+func (app *App) exec() {
+	listener := app.EventEmitter.Listen("events/*")
+	app.ctx.Lock()
 	go func() {
-		defer app.wg.Done()
+		defer app.ctx.Unlock()
 
 		for {
-			event, ok := <-app.eventQueue.Listen()
-			if !ok {
-				break
-			}
-
-			actions := app.Config.FindAllActionsByEventType(event.Type)
-			if len(actions) == 0 {
-				continue
-			}
-
-			for _, action := range actions {
-				runnable, err := app.registry.CreateRunnable(action)
-				if err != nil {
-					slog.Error("could not create runnable", "error", err)
+			select {
+			case <-app.ctx.Done():
+				slog.Info("application context done")
+				return
+			case event := <-listener:
+				eventType := strings.TrimPrefix(event.Event, "events/")
+				workflow := app.Config.FindAllActionsByEventType(eventType)
+				if len(workflow) == 0 {
 					continue
 				}
 
-				err = runnable.Run(ctx)
-				if err != nil {
-					slog.Error("could not run action", "error", err)
-					continue
-				}
+				app.executeWorklow(workflow, event.Data)
 			}
 		}
 	}()
+
+	err := app.EventEmitter.Emit("events/startup", nil)
+	if err != nil {
+		slog.Error("failed to emit startup event", "error", err)
+	}
+}
+
+func (app *App) executeWorklow(workflow []actions.Action, ctx map[string]any) {
+	for _, action := range workflow {
+		var err error
+
+		switch action := action.(type) {
+		case actions.LogAction:
+			err = action.Execute(os.Stdout, ctx)
+
+		case actions.ConditionAction:
+			actions, err := action.Execute(nil)
+			if err == nil {
+				app.executeWorklow(actions, ctx)
+			}
+
+		case actions.PublishAction:
+			err = action.Execute(app.MQTTClient, ctx)
+
+		case actions.MessageAction:
+			err = action.Execute(app.Softphone, ctx)
+
+		default:
+			err = fmt.Errorf("unknown action type %T", action)
+		}
+
+		if err != nil {
+			slog.Warn("failed to execute action", "action", action, "error", err)
+		}
+	}
 }
