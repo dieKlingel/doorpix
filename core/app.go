@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
-	"strings"
 
 	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
@@ -44,27 +43,29 @@ func (app *App) Stop(ctx context.Context) error {
 }
 
 func (app *App) exec() {
-	listener := app.EventEmitter.Listen("events/*")
-	app.ctx.Lock()
-	go func() {
-		defer app.ctx.Unlock()
+	for eventPath, workflow := range app.Config.Workflows() {
+		eventPath = fmt.Sprintf("events/%s", eventPath)
+		listener := app.EventEmitter.Listen(eventPath)
 
-		for {
-			select {
-			case <-app.ctx.Done():
-				slog.Info("application context done")
-				return
-			case event := <-listener:
-				eventType := strings.TrimPrefix(event.Event, "events/")
-				workflow := app.Config.FindAllActionsByEventType(eventType)
-				if len(workflow) == 0 {
-					continue
+		app.ctx.Lock()
+		go func() {
+			defer app.ctx.Unlock()
+
+			for {
+				select {
+				case <-app.ctx.Done():
+					slog.Info("application context done")
+					return
+				case event := <-listener:
+					if len(workflow) == 0 {
+						continue
+					}
+
+					app.executeWorklow(workflow, event.Data)
 				}
-
-				app.executeWorklow(workflow, event.Data)
 			}
-		}
-	}()
+		}()
+	}
 }
 
 func (app *App) executeWorklow(workflow []actions.Action, ctx map[string]any) {

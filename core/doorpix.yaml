@@ -5,16 +5,12 @@ tmpls:
     - log: "running unlock"
 
 on:
-  mqtt-message:
-    - sleep: 1s
-    - log: '{{.topic}}: {{.message}}'
+  mqtt-message/**/*:
+    - log: '{{.Topic}}: {{.Message}}'
   startup:
     - log: hello world # prints hello world to the console
-    - condition: 'true' 
-      then: 
-        - log: a
-      else:
-        - log: "unlock failed"
+    - topic: 'doorpix/startup'
+      message: '{"status": "ok"}'
   shutdown:
     - log: goodbye world # prints goodbye world to the console
   api:ring:
@@ -57,8 +53,10 @@ camera:
 
 mqtt:
   enabled: true
-  host: broker.hivemq.com
+  host: broker.emqx.io
   port: 1883
+  subscriptions:
+    - doorpix/#
 
 rpc:
   enabled: true
