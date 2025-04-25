@@ -16,6 +16,7 @@ import (
 type Softphone interface {
 	actions.Caller
 	actions.Messanger
+	actions.Call
 }
 
 type App struct {
