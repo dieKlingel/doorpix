@@ -13,6 +13,9 @@ type LogAction struct {
 
 func (action *LogAction) Execute(writer io.Writer, data map[string]any) error {
 	err := action.Message.Execute(writer, data)
+	if err == nil {
+		io.WriteString(writer, "\n")
+	}
 	return err
 }
 
