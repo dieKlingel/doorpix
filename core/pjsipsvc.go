@@ -1,21 +1,12 @@
 package core
 
 import (
-	"bytes"
-	"context"
-	"fmt"
-	"log/slog"
-	"runtime"
-	"sync"
-
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
-	"github.com/dieklingel/doorpix/core/internal/drivers/appvideo"
 	"github.com/dieklingel/doorpix/core/internal/pjsip"
 	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
 type PJSIPService struct {
-	Emit   doorpix.Emit
 	Config doorpix.Config
 
 	account       *pjsip.Account
@@ -24,14 +15,13 @@ type PJSIPService struct {
 }
 
 type pjAction struct {
-	action doorpix.Action
-	event  *doorpix.ActionHook
 }
 
 func (service *PJSIPService) Name() string {
 	return "pjsip-service"
 }
 
+/*
 func (service *PJSIPService) Run(action doorpix.Action, event *doorpix.ActionHook) {
 	service.pjaction <- pjAction{action, event}
 }
@@ -174,3 +164,4 @@ func (service *PJSIPService) exec(ctx context.Context) {
 		}
 	}
 }
+*/

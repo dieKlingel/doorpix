@@ -5,6 +5,7 @@ go 1.23.5
 require (
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/go-gst/go-gst v1.4.0
+	github.com/google/uuid v1.6.0
 	github.com/stretchr/testify v1.10.0
 	go.uber.org/fx v1.23.0
 	google.golang.org/grpc v1.70.0

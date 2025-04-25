@@ -21,6 +21,15 @@ func NewContext(ctx context.Context) Context {
 	}
 }
 
+// Lock increments the wait group counter by 1.
+// This is used to signal that a goroutine is doing work
+// and that the main goroutine should wait for it to finish.
+//
+//	ctx.Lock()
+//	go func() {
+//	  defer m.ctx.Unlock()
+//	  // do some work
+//	}()
 func (ctx *Context) Lock() {
 	ctx.wg.Add(1)
 }
