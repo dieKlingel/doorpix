@@ -15,6 +15,7 @@ type AppParams struct {
 	Config       doorpix.Config
 	EventEmitter *eventemitter.EventEmitter
 	Publisher    actions.Publisher `optional:"true"`
+	SIPClient    core.Softphone    `optional:"true"`
 }
 
 func NewApp(lifecycle fx.Lifecycle, params AppParams) *core.App {
@@ -22,6 +23,7 @@ func NewApp(lifecycle fx.Lifecycle, params AppParams) *core.App {
 		Config:       params.Config,
 		EventEmitter: params.EventEmitter,
 		MQTTClient:   params.Publisher,
+		Softphone:    params.SIPClient,
 	}
 	lifecycle.Append(
 		fx.StartStopHook(app.Start, app.Stop),

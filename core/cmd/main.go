@@ -18,7 +18,8 @@ type App struct {
 	EventEmitter *eventemitter.EventEmitter `optional:"false"`
 	App          *core.App                  `optional:"false"`
 	HTTPServer   *core.HTTPServer           `optional:"true"`
-	MQTTClient   *core.MQTTClient           `optional:"true"`
+	MQTTClient   actions.Publisher          `optional:"true"`
+	SIPClient    core.Softphone             `optional:"true"`
 }
 
 func (app *App) Start() error {
@@ -51,6 +52,10 @@ func main() {
 			fx.Annotate(
 				providers.NewMQTTClient,
 				fx.As(new(actions.Publisher)),
+			),
+			fx.Annotate(
+				providers.NewSIPClient,
+				fx.As(new(core.Softphone)),
 			),
 			providers.NewApp,
 		),

@@ -2,9 +2,9 @@ package pjsip
 
 import (
 	"fmt"
+	"log/slog"
 	"strings"
 
-	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
@@ -13,6 +13,11 @@ import (
 // doorpix system
 type Account struct {
 	pjsua2.Account
+}
+
+type AccountProps struct {
+	OnInstantMessage func(param pjsua2.OnInstantMessageParam)
+	OnRegState       func(param pjsua2.OnRegStateParam)
 }
 
 // Invite sends an invite to the given uri. The uri must be a valid sip uri
@@ -62,16 +67,13 @@ func (a *Account) SendInstantMessage(uri string, message string) error {
 type account struct {
 	account pjsua2.Account
 	calls   map[int]*Call
-	config  doorpix.Config
+	props   AccountProps
 }
 
-/*
-
-func NewAccount(config doorpix.Config, emit doorpix.Emit) *Account {
+func NewAccount(props AccountProps) *Account {
 	impl := &account{
-		config: config,
-		emit:   emit,
-		calls:  make(map[int]*Call),
+		props: props,
+		calls: make(map[int]*Call),
 	}
 	director := pjsua2.NewDirectorAccount(impl)
 	impl.account = director
@@ -83,10 +85,12 @@ func NewAccount(config doorpix.Config, emit doorpix.Emit) *Account {
 
 func (a *account) OnRegState(param pjsua2.OnRegStateParam) {
 	slog.Info("registration state changed", "reason", param.GetReason(), "status", param.GetStatus())
+
+	a.props.OnRegState(param)
 }
 
 func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
-	call := NewCall(a.account, param.GetCallId(), a.config, a.emit)
+	/*call := NewCall(a.account, param.GetCallId(), a.config, a.emit)
 	remoteUri := call.GetInfo().GetRemoteUri()
 	regex := regexp.MustCompile("^\".*?\"\\s<sip:(.*?)>$")
 	matches := regex.FindStringSubmatch(remoteUri)
@@ -114,16 +118,15 @@ func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 		slog.Info("accept incomming call", "uri", remoteUri)
 	}
 
-	call.Answer(callParam)
+	call.Answer(callParam)*/
 }
 
 func (a *account) OnInstantMessage(param pjsua2.OnInstantMessageParam) {
-	slog.Debug("new message received", "from", param.GetFromUri(), "type", param.GetContentType())
+	slog.Debug("new message received", "from", param.GetFromUri(), "type", param.GetContentType(), "message", param.GetMsgBody())
 
-	a.emit(doorpix.NewMessageEvent, nil)
+	a.props.OnInstantMessage(param)
 }
 
 func DeletePJSIPAccount(account *Account) {
 	pjsua2.DeleteDirectorAccount(account.Account)
 }
-*/

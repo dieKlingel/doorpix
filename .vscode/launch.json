@@ -13,6 +13,9 @@
 			"program": "${workspaceFolder}/core/cmd/main.go",
 			"cwd": "${workspaceFolder}/core",
 			"args": [],
+			"env": {
+				"DOORPIX_LOG_LEVEL": "debug",
+			}
 		}
 	]
 }
