@@ -3,6 +3,7 @@ package doorpix_test
 import (
 	"testing"
 
+	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
@@ -35,10 +36,10 @@ on:
 		assert.NoError(t, err)
 
 		sleepAction := c.OnEvents[doorpix.StartupEvent][0]
-		assert.IsType(t, doorpix.SleepAction{}, sleepAction)
+		assert.IsType(t, actions.SleepAction{}, sleepAction)
 		logAction := c.OnEvents[doorpix.StartupEvent][1]
-		assert.IsType(t, doorpix.LogAction{}, logAction)
+		assert.IsType(t, actions.LogAction{}, logAction)
 		hangupAction := c.OnEvents[doorpix.StartupEvent][2]
-		assert.IsType(t, doorpix.HangupAction{}, hangupAction)
+		assert.IsType(t, actions.HangupAction{}, hangupAction)
 	})
 }

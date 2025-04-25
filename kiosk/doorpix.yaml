@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../doorpix.schema.json
 
 kiosk:
   core: 127.0.0.1:50051
