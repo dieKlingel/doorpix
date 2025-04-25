@@ -15,12 +15,13 @@ func NewMQTTClient(lifecycle fx.Lifecycle, config doorpix.Config, eventemitter *
 	client := core.NewMQTTClient(
 		eventemitter,
 		core.MQTTClientProps{
-			ClientId: config.MQTT.ClientId,
-			Host:     config.MQTT.Host,
-			Port:     config.MQTT.Port,
-			Protocol: config.MQTT.Protocol,
-			Username: config.MQTT.Username,
-			Password: config.MQTT.Password,
+			ClientId:      config.MQTT.ClientId,
+			Host:          config.MQTT.Host,
+			Port:          config.MQTT.Port,
+			Protocol:      config.MQTT.Protocol,
+			Username:      config.MQTT.Username,
+			Password:      config.MQTT.Password,
+			Subscriptions: config.MQTT.Subscriptions,
 		},
 	)
 

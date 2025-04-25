@@ -49,6 +49,10 @@ func (c *Config) FindAllActionsByEventType(eventtype EventType) []actions.Action
 	return c.OnEvents[eventtype]
 }
 
+func (c *Config) Workflows() map[string][]actions.Action {
+	return c.OnEvents
+}
+
 func (c *Config) AddConfigPath(file ...string) {
 	c.files = append(c.files, file...)
 }

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/dieklingel/doorpix/core"
+	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/env"
 	"github.com/dieklingel/doorpix/core/internal/eventemitter"
 	"github.com/dieklingel/doorpix/core/internal/providers"
@@ -47,7 +48,10 @@ func main() {
 			eventemitter.New,
 			providers.NewApplicationConfiguration,
 			providers.NewHTTPServer,
-			providers.NewMQTTClient,
+			fx.Annotate(
+				providers.NewMQTTClient,
+				fx.As(new(actions.Publisher)),
+			),
 			providers.NewApp,
 		),
 		fx.Invoke(func(lifecyle fx.Lifecycle, app App) {

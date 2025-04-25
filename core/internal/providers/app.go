@@ -2,6 +2,7 @@ package providers
 
 import (
 	"github.com/dieklingel/doorpix/core"
+	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/internal/eventemitter"
 
@@ -13,12 +14,14 @@ type AppParams struct {
 
 	Config       doorpix.Config
 	EventEmitter *eventemitter.EventEmitter
+	Publisher    actions.Publisher `optional:"true"`
 }
 
 func NewApp(lifecycle fx.Lifecycle, params AppParams) *core.App {
 	app := core.App{
 		Config:       params.Config,
 		EventEmitter: params.EventEmitter,
+		MQTTClient:   params.Publisher,
 	}
 	lifecycle.Append(
 		fx.StartStopHook(app.Start, app.Stop),
