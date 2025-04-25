@@ -3,14 +3,8 @@ package core
 //go:generate
 
 import (
-	"context"
-	"errors"
-	"fmt"
-	"io"
 	"log/slog"
-	"net"
 	"sync"
-	"time"
 
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/internal/proto"
@@ -26,8 +20,7 @@ type connection struct {
 type RPCService struct {
 	proto.UnimplementedCoreServer
 
-	Config  doorpix.Config
-	Emitter doorpix.Emit
+	Config doorpix.Config
 
 	server      *grpc.Server
 	connections []*connection
@@ -50,6 +43,7 @@ func (service *RPCService) Init() error {
 	return nil
 }
 
+/*
 func (service *RPCService) Exec(ctx context.Context, wg *sync.WaitGroup) error {
 	slog.Debug("exec rpc service")
 
@@ -182,3 +176,4 @@ func (service *RPCService) Listen(stream grpc.BidiStreamingServer[proto.RunRespo
 		}
 	}
 }
+*/

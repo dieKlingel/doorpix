@@ -14,8 +14,26 @@ import (
 type App struct {
 	fx.In
 
-	App        *core.App        `optional:"false"`
-	HTTPServer *core.HTTPServer `optional:"true"`
+	EventEmitter *eventemitter.EventEmitter `optional:"false"`
+	App          *core.App                  `optional:"false"`
+	HTTPServer   *core.HTTPServer           `optional:"true"`
+	MQTTClient   *core.MQTTClient           `optional:"true"`
+}
+
+func (app *App) Start() error {
+	err := app.EventEmitter.Emit("events/startup", map[string]any{})
+	if err != nil {
+		slog.Error("failed to emit start event", "error", err)
+	}
+	return nil
+}
+
+func (app *App) Stop() error {
+	err := app.EventEmitter.Emit("events/shutdown", map[string]any{})
+	if err != nil {
+		slog.Error("failed to emit shutdown event", "error", err)
+	}
+	return nil
 }
 
 func main() {
@@ -29,10 +47,11 @@ func main() {
 			eventemitter.New,
 			providers.NewApplicationConfiguration,
 			providers.NewHTTPServer,
+			providers.NewMQTTClient,
 			providers.NewApp,
 		),
-		fx.Invoke(func(app App) {
-			// do nothing, the core.App is started by the fx.Lifecycle
+		fx.Invoke(func(lifecyle fx.Lifecycle, app App) {
+			lifecyle.Append(fx.StartStopHook(app.Start, app.Stop))
 		}),
 	)
 

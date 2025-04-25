@@ -65,11 +65,6 @@ func (app *App) exec() {
 			}
 		}
 	}()
-
-	err := app.EventEmitter.Emit("events/startup", nil)
-	if err != nil {
-		slog.Error("failed to emit startup event", "error", err)
-	}
 }
 
 func (app *App) executeWorklow(workflow []actions.Action, ctx map[string]any) {

@@ -2,8 +2,6 @@ package pjsip
 
 import (
 	"fmt"
-	"log/slog"
-	"regexp"
 	"strings"
 
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
@@ -28,13 +26,13 @@ func (a *Account) Invite(uri string) error {
 		return fmt.Errorf("%s is not a valid sip uri", uri)
 	}
 
-	account := a.Account.DirectorInterface().(*account)
+	//åaccount := a.Account.DirectorInterface().(*account)
 
-	param := pjsua2.NewCallOpParam()
-	call := NewCall(a, -1, account.config, account.emit)
-	call.MakeCall(uri, param)
+	//param := pjsua2.NewCallOpParam()
+	//call := NewCall(a, -1, account.config)
+	//call.MakeCall(uri, param)
 
-	account.calls[call.GetId()] = call
+	//account.calls[call.GetId()] = call
 	return nil
 }
 
@@ -65,8 +63,9 @@ type account struct {
 	account pjsua2.Account
 	calls   map[int]*Call
 	config  doorpix.Config
-	emit    doorpix.Emit
 }
+
+/*
 
 func NewAccount(config doorpix.Config, emit doorpix.Emit) *Account {
 	impl := &account{
@@ -127,3 +126,4 @@ func (a *account) OnInstantMessage(param pjsua2.OnInstantMessageParam) {
 func DeletePJSIPAccount(account *Account) {
 	pjsua2.DeleteDirectorAccount(account.Account)
 }
+*/

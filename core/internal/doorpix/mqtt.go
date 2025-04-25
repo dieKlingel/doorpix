@@ -4,6 +4,7 @@ import "gopkg.in/yaml.v3"
 
 type MQTTConfig struct {
 	Enabled       bool
+	ClientId      string
 	Host          string
 	Port          int
 	Protocol      string
@@ -13,8 +14,9 @@ type MQTTConfig struct {
 }
 
 func (mqttConfig *MQTTConfig) UnmarshalYAML(node *yaml.Node) error {
-	rawHTTPConfig := struct {
+	rawMQTTConfig := struct {
 		Enabled       bool     `yaml:"enabled"`
+		ClientId      string   `yaml:"clientId"`
 		Host          string   `yaml:"host"`
 		Port          int      `yaml:"port"`
 		Protocol      string   `yaml:"protocol"`
@@ -27,16 +29,17 @@ func (mqttConfig *MQTTConfig) UnmarshalYAML(node *yaml.Node) error {
 		Protocol: "tcp",
 	}
 
-	if err := node.Decode(&rawHTTPConfig); err != nil {
+	if err := node.Decode(&rawMQTTConfig); err != nil {
 		return err
 	}
 
-	mqttConfig.Enabled = rawHTTPConfig.Enabled
-	mqttConfig.Host = rawHTTPConfig.Host
-	mqttConfig.Port = rawHTTPConfig.Port
-	mqttConfig.Protocol = rawHTTPConfig.Protocol
-	mqttConfig.Username = rawHTTPConfig.Username
-	mqttConfig.Password = rawHTTPConfig.Password
-	mqttConfig.Subscriptions = rawHTTPConfig.Subscriptions
+	mqttConfig.Enabled = rawMQTTConfig.Enabled
+	mqttConfig.ClientId = rawMQTTConfig.ClientId
+	mqttConfig.Host = rawMQTTConfig.Host
+	mqttConfig.Port = rawMQTTConfig.Port
+	mqttConfig.Protocol = rawMQTTConfig.Protocol
+	mqttConfig.Username = rawMQTTConfig.Username
+	mqttConfig.Password = rawMQTTConfig.Password
+	mqttConfig.Subscriptions = rawMQTTConfig.Subscriptions
 	return nil
 }
