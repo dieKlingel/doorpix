@@ -2,7 +2,6 @@ package actions
 
 import (
 	"bytes"
-	"fmt"
 	"text/template"
 
 	"gopkg.in/yaml.v3"
@@ -18,10 +17,6 @@ type Publisher interface {
 }
 
 func (a *PublishAction) Execute(publisher Publisher, data map[string]any) error {
-	if publisher == nil {
-		return fmt.Errorf("publisher is nil")
-	}
-
 	topic := bytes.Buffer{}
 	err := a.Topic.Execute(&topic, data)
 	if err != nil {

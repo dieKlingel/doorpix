@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"reflect"
 
 	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
@@ -54,7 +55,6 @@ func (app *App) exec() {
 			for {
 				select {
 				case <-app.ctx.Done():
-					slog.Info("application context done")
 					return
 				case event := <-listener:
 					if len(workflow) == 0 {
@@ -83,9 +83,17 @@ func (app *App) executeWorklow(workflow []actions.Action, ctx map[string]any) {
 			}
 
 		case actions.PublishAction:
+			if IsNil(app.MQTTClient) {
+				err = fmt.Errorf("mqtt client is disabled")
+				break
+			}
 			err = action.Execute(app.MQTTClient, ctx)
 
 		case actions.MessageAction:
+			if IsNil(app.Softphone) {
+				err = fmt.Errorf("softphone is disabled")
+				break
+			}
 			err = action.Execute(app.Softphone, ctx)
 
 		default:
@@ -96,4 +104,12 @@ func (app *App) executeWorklow(workflow []actions.Action, ctx map[string]any) {
 			slog.Warn("failed to execute action", "action", action, "error", err)
 		}
 	}
+}
+
+func IsNil(i any) bool {
+	if i == nil {
+		return true
+	}
+
+	return reflect.ValueOf(i).IsNil()
 }
