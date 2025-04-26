@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"regexp"
 	"runtime"
 
 	"github.com/dieklingel/doorpix/core/internal/drivers/appvideo"
@@ -20,6 +21,7 @@ type SIPClientProps struct {
 	Server      string
 	StunServers []string
 	VideoDevice string
+	Whitelist   []string
 }
 
 type SIPClient struct {
@@ -62,6 +64,16 @@ func (s *SIPClient) Stop() {
 }
 
 func (s *SIPClient) Invite(uris []string) error {
+	for _, uri := range uris {
+		cmd := &pjsip.InviteCommand{
+			Uri: uri,
+		}
+		s.command <- cmd
+		err := <-cmd.Error()
+		if err != nil {
+			return err
+		}
+	}
 
 	return nil
 }
@@ -78,12 +90,12 @@ func (s *SIPClient) SendMessage(uris []string, message string) error {
 	return err
 }
 
-func (s *SIPClient) Call(uris []string) error {
-	return nil
-}
-
 func (s *SIPClient) Hangup() error {
-	return nil
+	cmd := &pjsip.HangupCommand{}
+	s.command <- cmd
+	err := <-cmd.Error()
+
+	return err
 }
 
 func (s *SIPClient) exec() {
@@ -144,6 +156,7 @@ func (s *SIPClient) exec() {
 	s.account = pjsip.NewAccount(pjsip.AccountProps{
 		OnInstantMessage: s.onInstantMessage,
 		OnRegState:       s.onRegState,
+		OnIncomingCall:   s.onIncomingCall,
 	})
 	s.account.Create(s.accountConfig)
 
@@ -168,11 +181,20 @@ func (s *SIPClient) exec() {
 	}
 }
 
+// this method is always called from the pjsip thread
 func (s *SIPClient) processCommand(command pjsip.Command) {
 	switch cmd := command.(type) {
 
 	case *pjsip.SendInstantMessageCommand:
 		err := s.account.SendInstantMessage(cmd.Uri, cmd.Message)
+		cmd.Error() <- err
+
+	case *pjsip.InviteCommand:
+		err := s.account.Invite(cmd.Uri)
+		cmd.Error() <- err
+
+	case *pjsip.HangupCommand:
+		err := s.account.Hangup()
 		cmd.Error() <- err
 
 	default:
@@ -193,6 +215,31 @@ func (s *SIPClient) onInstantMessage(param pjsua2.OnInstantMessageParam) {
 
 	eventPath := fmt.Sprintf("events/sip-message/%s", from)
 	s.eventemitter.Emit(eventPath, data)
+}
+
+func (s *SIPClient) onIncomingCall(call *pjsip.Call, _ pjsua2.OnIncomingCallParam) {
+	remoteUri := call.GetInfo().GetRemoteUri()
+	regex := regexp.MustCompile("^.*?<(sip:|)(.*?)>$") // https://regex101.com/r/8ci6jN/1
+	matches := regex.FindStringSubmatch(remoteUri)
+	if len(matches) >= 2 {
+		remoteUri = matches[2]
+	}
+
+	isWhitelisted := false
+	for _, uri := range s.props.Whitelist {
+		if uri == remoteUri {
+			isWhitelisted = true
+			break
+		}
+	}
+
+	if isWhitelisted {
+		slog.Info("accept incomming call", "uri", remoteUri)
+		call.Accept()
+	} else {
+		slog.Info("decline incomming call, because the uri is not whitelisted", "uri", remoteUri)
+		call.Decline()
+	}
 }
 
 func (s *SIPClient) onRegState(param pjsua2.OnRegStateParam) {

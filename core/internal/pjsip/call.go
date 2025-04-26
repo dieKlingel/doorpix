@@ -3,7 +3,6 @@ package pjsip
 import (
 	"log/slog"
 
-	"github.com/dieklingel/doorpix/core/internal/doorpix"
 	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
@@ -11,16 +10,31 @@ type Call struct {
 	pjsua2.Call
 }
 
+func (c *Call) Accept() {
+	callParam := pjsua2.NewCallOpParam()
+	callParam.SetStatusCode(pjsua2.PJSIP_SC_OK)
+
+	c.Call.Answer(callParam)
+}
+
+func (c *Call) Decline() {
+	callParam := pjsua2.NewCallOpParam()
+	callParam.SetStatusCode(pjsua2.PJSIP_SC_DECLINE)
+
+	c.Call.Answer(callParam)
+}
+
 type call struct {
 	call    pjsua2.Call
 	account pjsua2.Account
-	config  doorpix.Config
 }
 
-func NewCall(account pjsua2.Account, callId int, config doorpix.Config) *Call {
-	impl := &call{
-		config: config,
+func NewCall(account pjsua2.Account) *Call {
+	return NewCallWithId(account, -1)
+}
 
+func NewCallWithId(account pjsua2.Account, callId int) *Call {
+	impl := &call{
 		account: account,
 	}
 	director := pjsua2.NewDirectorCall(impl, account, callId)
