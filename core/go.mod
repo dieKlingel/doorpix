@@ -7,6 +7,7 @@ require (
 	github.com/go-gst/go-gst v1.4.0
 	github.com/google/uuid v1.6.0
 	github.com/stretchr/testify v1.10.0
+	github.com/warthog618/go-gpiocdev v0.9.1
 	go.uber.org/fx v1.23.0
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.4

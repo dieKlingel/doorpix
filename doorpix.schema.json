@@ -150,6 +150,27 @@
           "type": "integer"
         }
       }
+    },
+    "gpio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "chip": {
+          "type": "string"
+        },
+        "pins": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   },
   "$defs": {
