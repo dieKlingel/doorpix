@@ -2,24 +2,29 @@ syntax = "proto3";
 
 option go_package = "github.com/dieklingel/doorpix/core/internal/proto";
 
+import "google/protobuf/empty.proto";
+
 service Core {
-  rpc Emit(EmitRequest) returns (EmitResponse) {}
-  rpc Listen(stream RunResponse) returns (stream RunRequest) {}
+  rpc GetKioskDefinition(google.protobuf.Empty) returns (KioskDefinitionResponse) {}
+  rpc Emit(EmitRequest) returns (google.protobuf.Empty) {}
+  rpc Listen(ListenRequest) returns (stream ListenResponse) {}
+}
+
+
+message KioskDefinitionResponse {
+  string specification = 1;
 }
 
 message EmitRequest {
-  string type = 1;
-  map<string, string> data = 2;
+  string eventPath = 1;
+  map<string, string> eventData = 2;
 }
 
-message EmitResponse {}
-
-message RunRequest {
-  map<string, string> spec = 1;
-  map<string, string> data = 2;
+message ListenRequest {
+  string eventPath = 1;
 }
 
-message RunResponse {
-  bool success = 1;
-  map<string, string> data = 2;
+message ListenResponse {
+  string eventPath = 1;
+  map<string, string> eventData = 2;
 }
