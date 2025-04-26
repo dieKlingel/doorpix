@@ -64,6 +64,9 @@ func (app *App) exec() {
 					}
 
 					app.executeWorklow(workflow, event.Data)
+					// publish state updates e.g. used by the kiosk. EmitOptional does not log a warning if the event is not handled, cause we dont know if any 3rd party is listening
+					// publishState at the end of each workflow for now, may be changed later
+					app.EventEmitter.EmitOptional("state/update", event.Data)
 				}
 			}
 		}()

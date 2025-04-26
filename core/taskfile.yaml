@@ -12,7 +12,7 @@ tasks:
     cmds:
       - command -v protoc-gen-go 1>/dev/null || go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
       - command -v protoc-gen-go-grpc 1>/dev/null || go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-      - go generate ./...
+      - PATH=$PATH:$(go env GOPATH)/bin go generate ./...
   check:generate:
     desc: Check if the generated code is in sync
     cmds:

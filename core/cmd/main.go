@@ -21,6 +21,7 @@ type App struct {
 	MQTTClient     actions.Publisher          `optional:"true"`
 	SIPClient      core.Softphone             `optional:"true"`
 	GPIOController *core.GPIOController       `optional:"true"`
+	GRPCServer     *core.GRPCServer           `optional:"true"`
 }
 
 func (app *App) Start() error {
@@ -59,6 +60,7 @@ func main() {
 				fx.As(new(core.Softphone)),
 			),
 			providers.NewGPIOController,
+			providers.NewGRPCServer,
 			providers.NewApp,
 		),
 		fx.Invoke(func(lifecyle fx.Lifecycle, app App) {

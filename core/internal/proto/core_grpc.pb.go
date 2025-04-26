@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,16 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Core_Emit_FullMethodName   = "/Core/Emit"
-	Core_Listen_FullMethodName = "/Core/Listen"
+	Core_GetKioskDefinition_FullMethodName = "/Core/GetKioskDefinition"
+	Core_Emit_FullMethodName               = "/Core/Emit"
+	Core_Listen_FullMethodName             = "/Core/Listen"
 )
 
 // CoreClient is the client API for Core service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CoreClient interface {
-	Emit(ctx context.Context, in *EmitRequest, opts ...grpc.CallOption) (*EmitResponse, error)
-	Listen(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[RunResponse, RunRequest], error)
+	GetKioskDefinition(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*KioskDefinitionResponse, error)
+	Emit(ctx context.Context, in *EmitRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Listen(ctx context.Context, in *ListenRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListenResponse], error)
 }
 
 type coreClient struct {
@@ -39,9 +42,19 @@ func NewCoreClient(cc grpc.ClientConnInterface) CoreClient {
 	return &coreClient{cc}
 }
 
-func (c *coreClient) Emit(ctx context.Context, in *EmitRequest, opts ...grpc.CallOption) (*EmitResponse, error) {
+func (c *coreClient) GetKioskDefinition(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*KioskDefinitionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EmitResponse)
+	out := new(KioskDefinitionResponse)
+	err := c.cc.Invoke(ctx, Core_GetKioskDefinition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coreClient) Emit(ctx context.Context, in *EmitRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Core_Emit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -49,25 +62,32 @@ func (c *coreClient) Emit(ctx context.Context, in *EmitRequest, opts ...grpc.Cal
 	return out, nil
 }
 
-func (c *coreClient) Listen(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[RunResponse, RunRequest], error) {
+func (c *coreClient) Listen(ctx context.Context, in *ListenRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListenResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Core_ServiceDesc.Streams[0], Core_Listen_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[RunResponse, RunRequest]{ClientStream: stream}
+	x := &grpc.GenericClientStream[ListenRequest, ListenResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Core_ListenClient = grpc.BidiStreamingClient[RunResponse, RunRequest]
+type Core_ListenClient = grpc.ServerStreamingClient[ListenResponse]
 
 // CoreServer is the server API for Core service.
 // All implementations must embed UnimplementedCoreServer
 // for forward compatibility.
 type CoreServer interface {
-	Emit(context.Context, *EmitRequest) (*EmitResponse, error)
-	Listen(grpc.BidiStreamingServer[RunResponse, RunRequest]) error
+	GetKioskDefinition(context.Context, *emptypb.Empty) (*KioskDefinitionResponse, error)
+	Emit(context.Context, *EmitRequest) (*emptypb.Empty, error)
+	Listen(*ListenRequest, grpc.ServerStreamingServer[ListenResponse]) error
 	mustEmbedUnimplementedCoreServer()
 }
 
@@ -78,10 +98,13 @@ type CoreServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCoreServer struct{}
 
-func (UnimplementedCoreServer) Emit(context.Context, *EmitRequest) (*EmitResponse, error) {
+func (UnimplementedCoreServer) GetKioskDefinition(context.Context, *emptypb.Empty) (*KioskDefinitionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetKioskDefinition not implemented")
+}
+func (UnimplementedCoreServer) Emit(context.Context, *EmitRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Emit not implemented")
 }
-func (UnimplementedCoreServer) Listen(grpc.BidiStreamingServer[RunResponse, RunRequest]) error {
+func (UnimplementedCoreServer) Listen(*ListenRequest, grpc.ServerStreamingServer[ListenResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method Listen not implemented")
 }
 func (UnimplementedCoreServer) mustEmbedUnimplementedCoreServer() {}
@@ -105,6 +128,24 @@ func RegisterCoreServer(s grpc.ServiceRegistrar, srv CoreServer) {
 	s.RegisterService(&Core_ServiceDesc, srv)
 }
 
+func _Core_GetKioskDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoreServer).GetKioskDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Core_GetKioskDefinition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoreServer).GetKioskDefinition(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Core_Emit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmitRequest)
 	if err := dec(in); err != nil {
@@ -124,11 +165,15 @@ func _Core_Emit_Handler(srv interface{}, ctx context.Context, dec func(interface
 }
 
 func _Core_Listen_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(CoreServer).Listen(&grpc.GenericServerStream[RunResponse, RunRequest]{ServerStream: stream})
+	m := new(ListenRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoreServer).Listen(m, &grpc.GenericServerStream[ListenRequest, ListenResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Core_ListenServer = grpc.BidiStreamingServer[RunResponse, RunRequest]
+type Core_ListenServer = grpc.ServerStreamingServer[ListenResponse]
 
 // Core_ServiceDesc is the grpc.ServiceDesc for Core service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -137,6 +182,10 @@ var Core_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "Core",
 	HandlerType: (*CoreServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetKioskDefinition",
+			Handler:    _Core_GetKioskDefinition_Handler,
+		},
 		{
 			MethodName: "Emit",
 			Handler:    _Core_Emit_Handler,
@@ -147,7 +196,6 @@ var Core_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "Listen",
 			Handler:       _Core_Listen_Handler,
 			ServerStreams: true,
-			ClientStreams: true,
 		},
 	},
 	Metadata: "core.proto",
