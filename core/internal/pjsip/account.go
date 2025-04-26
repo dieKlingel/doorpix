@@ -18,6 +18,7 @@ type Account struct {
 type AccountProps struct {
 	OnInstantMessage func(param pjsua2.OnInstantMessageParam)
 	OnRegState       func(param pjsua2.OnRegStateParam)
+	OnIncomingCall   func(call *Call, param pjsua2.OnIncomingCallParam)
 }
 
 // Invite sends an invite to the given uri. The uri must be a valid sip uri
@@ -31,13 +32,26 @@ func (a *Account) Invite(uri string) error {
 		return fmt.Errorf("%s is not a valid sip uri", uri)
 	}
 
-	//åaccount := a.Account.DirectorInterface().(*account)
+	account := a.Account.DirectorInterface().(*account)
 
-	//param := pjsua2.NewCallOpParam()
-	//call := NewCall(a, -1, account.config)
-	//call.MakeCall(uri, param)
+	param := pjsua2.NewCallOpParam()
+	call := NewCall(a)
+	call.MakeCall(uri, param)
 
-	//account.calls[call.GetId()] = call
+	account.calls[call.GetId()] = call
+	return nil
+}
+
+// Hangup hangs all active calls
+func (a *Account) Hangup() error {
+	account := a.Account.DirectorInterface().(*account)
+	for index, call := range account.calls {
+		if call.IsActive() {
+			call.Hangup(pjsua2.NewCallOpParam())
+			delete(account.calls, index)
+		}
+	}
+
 	return nil
 }
 
@@ -90,35 +104,12 @@ func (a *account) OnRegState(param pjsua2.OnRegStateParam) {
 }
 
 func (a *account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
-	/*call := NewCall(a.account, param.GetCallId(), a.config, a.emit)
-	remoteUri := call.GetInfo().GetRemoteUri()
-	regex := regexp.MustCompile("^\".*?\"\\s<sip:(.*?)>$")
-	matches := regex.FindStringSubmatch(remoteUri)
-	if len(matches) >= 1 {
-		remoteUri = matches[1]
-	}
+	call := NewCallWithId(a.account, param.GetCallId())
 
-	slog.Info("incoming call received", "uri", remoteUri)
-	a.emit(doorpix.CallIncomingEvent, nil)
-
-	callParam := pjsua2.NewCallOpParam()
-	callParam.SetStatusCode(pjsua2.PJSIP_SC_DECLINE)
+	slog.Debug("incoming call", "from", call.GetInfo().GetRemoteUri(), "callId", param.GetCallId())
 	a.calls[param.GetCallId()] = call
 
-	for _, uri := range a.config.SIPPhone.Whitelist {
-		if uri == remoteUri {
-			callParam.SetStatusCode(pjsua2.PJSIP_SC_OK)
-			break
-		}
-	}
-
-	if callParam.GetStatusCode() == pjsua2.PJSIP_SC_DECLINE {
-		slog.Info("decline incomming call, because the uri is not whitelisted", "uri", remoteUri)
-	} else {
-		slog.Info("accept incomming call", "uri", remoteUri)
-	}
-
-	call.Answer(callParam)*/
+	a.props.OnIncomingCall(call, param)
 }
 
 func (a *account) OnInstantMessage(param pjsua2.OnInstantMessageParam) {

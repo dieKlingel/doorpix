@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"os"
 	"reflect"
+	"time"
 
 	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
@@ -96,6 +97,23 @@ func (app *App) executeWorklow(workflow []actions.Action, ctx map[string]any) {
 				break
 			}
 			err = action.Execute(app.Softphone, ctx)
+
+		case actions.InviteAction:
+			if IsNil(app.Softphone) {
+				err = fmt.Errorf("softphone is disabled")
+				break
+			}
+			err = action.Execute(app.Softphone, ctx)
+
+		case actions.HangupAction:
+			if IsNil(app.Softphone) {
+				err = fmt.Errorf("softphone is disabled")
+				break
+			}
+			err = action.Execute(app.Softphone, ctx)
+
+		case actions.SleepAction:
+			err = action.Execute(time.Sleep)
 
 		default:
 			err = fmt.Errorf("unknown action type %T", action)

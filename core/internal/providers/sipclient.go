@@ -19,6 +19,7 @@ func NewSIPClient(lifecycle fx.Lifecycle, eventemitter *eventemitter.EventEmitte
 		Server:      config.SIPPhone.Server,
 		StunServers: config.SIPPhone.StunServers,
 		VideoDevice: config.Camera.Device,
+		Whitelist:   config.SIPPhone.Whitelist,
 	})
 
 	lifecycle.Append(fx.StartStopHook(sipClient.Start, sipClient.Stop))

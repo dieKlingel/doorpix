@@ -25,3 +25,13 @@ type SendInstantMessageCommand struct {
 	Uri     string
 	Message string
 }
+
+type InviteCommand struct {
+	BaseCommand
+
+	Uri string
+}
+
+type HangupCommand struct {
+	BaseCommand
+}
