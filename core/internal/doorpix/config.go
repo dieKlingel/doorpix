@@ -20,6 +20,7 @@ type Config struct {
 	Camera   CameraConfig `yaml:"camera"`
 	RPC      RPCConfig    `yaml:"rpc"`
 	MQTT     MQTTConfig   `yaml:"mqtt"`
+	GPIO     GPIOConfig   `yaml:"gpio"`
 }
 
 func NewConfig() Config {

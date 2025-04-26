@@ -15,11 +15,12 @@ import (
 type App struct {
 	fx.In
 
-	EventEmitter *eventemitter.EventEmitter `optional:"false"`
-	App          *core.App                  `optional:"false"`
-	HTTPServer   *core.HTTPServer           `optional:"true"`
-	MQTTClient   actions.Publisher          `optional:"true"`
-	SIPClient    core.Softphone             `optional:"true"`
+	EventEmitter   *eventemitter.EventEmitter `optional:"false"`
+	App            *core.App                  `optional:"false"`
+	HTTPServer     *core.HTTPServer           `optional:"true"`
+	MQTTClient     actions.Publisher          `optional:"true"`
+	SIPClient      core.Softphone             `optional:"true"`
+	GPIOController *core.GPIOController       `optional:"true"`
 }
 
 func (app *App) Start() error {
@@ -57,6 +58,7 @@ func main() {
 				providers.NewSIPClient,
 				fx.As(new(core.Softphone)),
 			),
+			providers.NewGPIOController,
 			providers.NewApp,
 		),
 		fx.Invoke(func(lifecyle fx.Lifecycle, app App) {
