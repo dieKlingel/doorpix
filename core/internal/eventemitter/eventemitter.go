@@ -28,7 +28,7 @@ func (e *EventEmitter) EmitOptional(event string, data map[string]any) error {
 		}
 
 		if match {
-			listener.Channel <- Context{
+			listener.channel <- Context{
 				Event: event,
 				Data:  data,
 			}
@@ -48,7 +48,7 @@ func (e *EventEmitter) Emit(event string, data map[string]any) error {
 		}
 
 		if match {
-			listener.Channel <- Context{
+			listener.channel <- Context{
 				Event: event,
 				Data:  data,
 			}
@@ -64,9 +64,10 @@ func (e *EventEmitter) Emit(event string, data map[string]any) error {
 	return nil
 }
 
-func (e *EventEmitter) Listen(pattern string) chan Context {
+func (e *EventEmitter) Listen(pattern string) *Listener {
 	listener := NewListener(pattern)
+	listener.eventEmitter = e
 	e.listeners = append(e.listeners, listener)
 
-	return listener.Channel
+	return listener
 }
