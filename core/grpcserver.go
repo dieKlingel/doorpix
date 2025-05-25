@@ -128,7 +128,12 @@ func (rpc *rpcMethods) Listen(req *proto.ListenRequest, stream grpc.ServerStream
 		select {
 		case <-rpc.server.ctx.Done():
 			return nil
-		case event := <-listener:
+		case <-stream.Context().Done():
+			slog.Debug("rpc client disconnected")
+			listener.Close()
+			return nil
+
+		case event := <-listener.Listen():
 			data := make(map[string]string)
 			for key, value := range event.Data {
 				data[key] = fmt.Sprintf("%v", value)

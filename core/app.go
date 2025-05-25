@@ -58,7 +58,7 @@ func (app *App) exec() {
 				select {
 				case <-app.ctx.Done():
 					return
-				case event := <-listener:
+				case event := <-listener.Listen():
 					if len(workflow) == 0 {
 						continue
 					}
