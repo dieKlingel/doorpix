@@ -2,6 +2,7 @@ package actions_test
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 	"testing"
 
@@ -22,7 +23,7 @@ func TestLogActionExecute(t *testing.T) {
 		err := action.Execute(&buf, nil)
 		assert.NoError(t, err)
 
-		assert.Equal(t, message, buf.String())
+		assert.Equal(t, fmt.Sprintln(message), buf.String())
 	})
 
 	t.Run("template with variable", func(t *testing.T) {
@@ -35,7 +36,7 @@ func TestLogActionExecute(t *testing.T) {
 		err := action.Execute(&buf, map[string]any{"test": "test"})
 		assert.NoError(t, err)
 
-		assert.Equal(t, "test log message test", buf.String())
+		assert.Equal(t, fmt.Sprintln("test log message test"), buf.String())
 	})
 
 	t.Run("template with variable and nil map", func(t *testing.T) {
@@ -48,7 +49,7 @@ func TestLogActionExecute(t *testing.T) {
 		err := action.Execute(&buf, nil)
 		assert.NoError(t, err)
 
-		assert.Equal(t, "test log message ", buf.String())
+		assert.Equal(t, fmt.Sprintln("test log message "), buf.String())
 	})
 
 	t.Run("log to stdout", func(t *testing.T) {
@@ -57,10 +58,12 @@ func TestLogActionExecute(t *testing.T) {
 			Message: template.Must(template.New("").Parse(message)),
 		}
 
-		logger := logs.IoWriterFunc(func(msg string, args ...any) {
-			assert.Equal(t, message, msg)
+		var output string
+		logger := logs.IoWriterFunc(func(msg string) {
+			output += msg
 		})
 		err := action.Execute(logger, nil)
+		assert.Equal(t, fmt.Sprintln(message), output)
 		assert.NoError(t, err)
 	})
 }
