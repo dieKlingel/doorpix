@@ -59,7 +59,7 @@ func TestLogActionExecute(t *testing.T) {
 		}
 
 		var output string
-		logger := logs.IoWriterFunc(func(msg string) {
+		logger := logs.IoWriterFunc(func(msg string, args ...any) {
 			output += msg
 		})
 		err := action.Execute(logger, nil)
