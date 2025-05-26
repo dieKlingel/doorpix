@@ -4,9 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
-	"os"
-	"reflect"
-	"time"
 
 	"github.com/dieklingel/doorpix/core/internal/actions"
 	"github.com/dieklingel/doorpix/core/internal/doorpix"
@@ -21,34 +18,37 @@ type Softphone interface {
 }
 
 type App struct {
-	Config       doorpix.Config
-	MQTTClient   actions.Publisher
-	Softphone    Softphone
-	EventEmitter *eventemitter.EventEmitter
+	Config              doorpix.Config
+	EventEmitter        *eventemitter.EventEmitter
+	BasePipelineBuilder *PipelineBuilder
 
 	ctx service.Context
 }
 
-func (app *App) Start(ctx context.Context) error {
+func (app *App) Start() error {
 	slog.Info("Starting application")
 	app.ctx = service.NewContext(context.Background())
 
-	app.exec()
-	return nil
+	return app.exec()
 }
 
-func (app *App) Stop(ctx context.Context) error {
+func (app *App) Stop() {
 	slog.Info("Stopping application")
-
 	app.ctx.CancelAndWait()
-
-	return nil
 }
 
-func (app *App) exec() {
+func (app *App) exec() error {
 	for eventPath, workflow := range app.Config.Workflows() {
 		eventPath = fmt.Sprintf("events/%s", eventPath)
 		listener := app.EventEmitter.Listen(eventPath)
+		pipeline, err := app.BasePipelineBuilder.Clone().WithActions(workflow).Build()
+		if err != nil {
+			return fmt.Errorf("failed to build pipeline for event %s: %w", eventPath, err)
+		}
+		if pipeline.IsEmpty() {
+			slog.Debug("workflow is empty, skipping", "eventPath", eventPath)
+			continue
+		}
 
 		app.ctx.Lock()
 		go func() {
@@ -59,79 +59,15 @@ func (app *App) exec() {
 				case <-app.ctx.Done():
 					return
 				case event := <-listener.Listen():
-					if len(workflow) == 0 {
-						continue
-					}
+					pipeline.Run(event.Data)
 
-					app.executeWorklow(workflow, event.Data)
-					// publish state updates e.g. used by the kiosk. EmitOptional does not log a warning if the event is not handled, cause we dont know if any 3rd party is listening
+					// publish state updates e.g. used by the kiosk.
 					// publishState at the end of each workflow for now, may be changed later
-					app.EventEmitter.EmitOptional("state/update", event.Data)
+					app.EventEmitter.Emit("state/update", event.Data)
 				}
 			}
 		}()
 	}
-}
 
-func (app *App) executeWorklow(workflow []actions.Action, ctx map[string]any) {
-	for _, action := range workflow {
-		var err error
-
-		switch action := action.(type) {
-		case actions.LogAction:
-			err = action.Execute(os.Stdout, ctx)
-
-		case actions.ConditionAction:
-			actions, err := action.Execute(nil)
-			if err == nil {
-				app.executeWorklow(actions, ctx)
-			}
-
-		case actions.PublishAction:
-			if IsNil(app.MQTTClient) {
-				err = fmt.Errorf("mqtt client is disabled")
-				break
-			}
-			err = action.Execute(app.MQTTClient, ctx)
-
-		case actions.MessageAction:
-			if IsNil(app.Softphone) {
-				err = fmt.Errorf("softphone is disabled")
-				break
-			}
-			err = action.Execute(app.Softphone, ctx)
-
-		case actions.InviteAction:
-			if IsNil(app.Softphone) {
-				err = fmt.Errorf("softphone is disabled")
-				break
-			}
-			err = action.Execute(app.Softphone, ctx)
-
-		case actions.HangupAction:
-			if IsNil(app.Softphone) {
-				err = fmt.Errorf("softphone is disabled")
-				break
-			}
-			err = action.Execute(app.Softphone, ctx)
-
-		case actions.SleepAction:
-			err = action.Execute(time.Sleep)
-
-		default:
-			err = fmt.Errorf("unknown action type %T", action)
-		}
-
-		if err != nil {
-			slog.Warn("failed to execute action", "action", action, "error", err)
-		}
-	}
-}
-
-func IsNil(i any) bool {
-	if i == nil {
-		return true
-	}
-
-	return reflect.ValueOf(i).IsNil()
+	return nil
 }

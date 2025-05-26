@@ -45,7 +45,7 @@ func NewMQTTClient(eventemitter *eventemitter.EventEmitter, props MQTTClientProp
 	}
 }
 
-func (m *MQTTClient) Start(ctx context.Context) error {
+func (m *MQTTClient) Start() error {
 	if len(m.props.Host) == 0 {
 		return fmt.Errorf("mqtt host is required")
 	}
@@ -75,7 +75,7 @@ func (m *MQTTClient) Start(ctx context.Context) error {
 	return m.exec()
 }
 
-func (m *MQTTClient) Stop(ctx context.Context) error {
+func (m *MQTTClient) Stop() error {
 	slog.Info("stop the mqtt client")
 	return nil
 }

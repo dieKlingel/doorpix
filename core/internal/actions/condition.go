@@ -16,29 +16,29 @@ type ConditionAction struct {
 	Else      []Action
 }
 
-func (a *ConditionAction) Execute(data map[string]any) ([]Action, error) {
+func (a *ConditionAction) Execute(data map[string]any) (bool, error) {
 	condition := bytes.Buffer{}
 	err := a.Condition.Execute(&condition, data)
 	if err != nil {
-		return nil, err
+		return false, err
 	}
 
 	command := fmt.Sprintf("%s && echo -n true || echo -n false", condition.String())
 	value, err := exec.Command("bash", "-c", command).Output()
 	if err != nil {
-		return nil, err
+		return false, err
 	}
 
 	conditionMet, err := strconv.ParseBool(string(value))
 	if err != nil {
-		return nil, err
+		return false, err
 	}
 
 	if conditionMet {
-		return a.Then, nil
+		return true, nil
 	}
 
-	return a.Else, nil
+	return false, nil
 }
 
 func (a *ConditionAction) UnmarshalYAML(node *yaml.Node) error {

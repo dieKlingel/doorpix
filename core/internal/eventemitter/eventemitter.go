@@ -1,7 +1,6 @@
 package eventemitter
 
 import (
-	"log/slog"
 	"path"
 )
 
@@ -20,27 +19,7 @@ func New() *EventEmitter {
 	}
 }
 
-func (e *EventEmitter) EmitOptional(event string, data map[string]any) error {
-	for _, listener := range e.listeners {
-		match, err := path.Match(listener.Pattern, event)
-		if err != nil {
-			return err
-		}
-
-		if match {
-			listener.channel <- Context{
-				Event: event,
-				Data:  data,
-			}
-		}
-	}
-
-	return nil
-}
-
 func (e *EventEmitter) Emit(event string, data map[string]any) error {
-	listenrCount := 0
-
 	for _, listener := range e.listeners {
 		match, err := path.Match(listener.Pattern, event)
 		if err != nil {
@@ -52,13 +31,8 @@ func (e *EventEmitter) Emit(event string, data map[string]any) error {
 				Event: event,
 				Data:  data,
 			}
-			listenrCount++
 		}
 
-	}
-
-	if listenrCount == 0 {
-		slog.Warn("no listeners for event", "event", event)
 	}
 
 	return nil

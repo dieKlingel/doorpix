@@ -89,6 +89,20 @@ func (g *GPIOController) onLineChange(event gpiocdev.LineEvent) {
 		"Name":      pinName,
 		"Timestamp": event.Timestamp,
 	}
-	eventPath := fmt.Sprintf("events/gpio/%s/%s", pinName, eventType)
-	g.eventemitter.Emit(eventPath, eventData)
+
+	g.eventemitter.Emit(withGPIOEventPath(pinName, event.Type), eventData)
+}
+
+func withGPIOEventPath(pinName string, edge gpiocdev.LineEventType) string {
+	var edgeStr string
+	switch edge {
+	case gpiocdev.LineEventRisingEdge:
+		edgeStr = "rising"
+	case gpiocdev.LineEventFallingEdge:
+		edgeStr = "falling"
+	default:
+		panic(fmt.Sprintf("unknown GPIO event type: %v", edge))
+	}
+
+	return fmt.Sprintf("events/gpio/%s/%s", pinName, edgeStr)
 }
