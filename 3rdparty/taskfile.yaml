@@ -10,4 +10,4 @@ tasks:
         ./configure && \
         make dep && \
         make && \
-        make install
+        sudo make install
