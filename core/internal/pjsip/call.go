@@ -3,7 +3,7 @@ package pjsip
 import (
 	"log/slog"
 
-	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
+	"github.com/dieklingel/pjproject-dist/go/pjsua2"
 )
 
 type Call struct {

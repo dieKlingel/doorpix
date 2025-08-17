@@ -15,6 +15,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/dieklingel/pjproject-dist/go/pjsua2 v0.0.0-20250817142347-752d5f8f02b1 // indirect
 	github.com/go-gst/go-glib v1.4.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/mattn/go-pointer v0.0.1 // indirect
