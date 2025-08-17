@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"strings"
 
-	"github.com/dieklingel/pjproject-dist/go/pjsua2"
+	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
 // Account is a wrapper around the pjsua2.Account struct. It provides a user

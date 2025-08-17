@@ -1,7 +1,7 @@
 package pjsip
 
 import (
-	"github.com/dieklingel/pjproject-dist/go/pjsua2"
+	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
 type AudioMediaPort struct {

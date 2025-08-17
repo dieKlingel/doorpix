@@ -11,7 +11,7 @@ import (
 	"github.com/dieklingel/doorpix/core/internal/eventemitter"
 	"github.com/dieklingel/doorpix/core/internal/pjsip"
 	"github.com/dieklingel/doorpix/core/internal/service"
-	"github.com/dieklingel/pjproject-dist/go/pjsua2"
+	"github.com/dieklingel/doorpix/core/pkg/pjsua2"
 )
 
 type SIPClientProps struct {
