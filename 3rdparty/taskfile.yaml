@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install pjsua lib
+    cmds:
+      - cp ../core/pj_config_site.h.in pjproject/pjlib/include/pj/config_site.h
+      - |
+        cd pjproject && \
+        ./configure && \
+        make dep && \
+        make && \
+        make install

@@ -7,6 +7,9 @@ includes:
   kiosk:
     taskfile: kiosk/taskfile.yaml
     dir: kiosk
+  3rdparty:
+    taskfile: 3rdparty/taskfile.yaml
+    dir: 3rdparty
 
 tasks:
   default:
