@@ -45,10 +45,10 @@ RUN apt-get update && \
 	libvpx-dev \
 	libspeexdsp-dev
 
-ARG PJ_PROJECT_SRC_DIR="pjproject"
-COPY ${PJ_PROJECT_SRC_DIR} /pjproject
-RUN cd /pjproject && \
-	./configure && \
+WORKDIR /3rdparty
+RUN git clone https://github.com/pjsip/pjproject.git && \
+	cd pjproject && \
+	./configure CFLAGS="-DPJMEDIA_HAS_VIDEO=1 -DPJ_ICE_MAX_CAND=32 -DPJSIP_MAX_PKT_LEN=12288 -DPJ_ICE_MAX_CHECKS=512"  && \
 	make dep && \
 	make && \
 	make install
