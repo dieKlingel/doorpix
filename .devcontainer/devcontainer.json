@@ -11,6 +11,10 @@
     }
   },
 
+  "mounts": [
+    "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"
+  ],
+
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "moby": true,
@@ -36,6 +40,16 @@
       "username": "vscode",
       "userUid": "1001",
       "userGid": "1001"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mhutchie.git-graph",
+        "esbenp.prettier-vscode",
+        "golang.go"
+      ]
     }
   }
 
