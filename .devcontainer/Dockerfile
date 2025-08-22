@@ -3,7 +3,6 @@ FROM mcr.microsoft.com/devcontainers/base:bookworm
 LABEL org.opencontainers.image.authors="Kai Mayer <kai.mayer@dieklingel.com>"
 
 ### Install PJSIP Dependencies
-
 RUN apt-get update && \
 	apt-get install -y \
 	build-essential \
@@ -45,10 +44,15 @@ RUN apt-get update && \
 	libvpx-dev \
 	libspeexdsp-dev
 
-WORKDIR /3rdparty
-RUN git clone https://github.com/pjsip/pjproject.git && \
-	cd pjproject && \
-	./configure CFLAGS="-DPJMEDIA_HAS_VIDEO=1 -DPJ_ICE_MAX_CAND=32 -DPJSIP_MAX_PKT_LEN=12288 -DPJ_ICE_MAX_CHECKS=512"  && \
+# Install dev dependencies
+RUN apt-get install -y \
+	swig \
+	protobuf-compiler
+
+ARG PJ_PROJECT_SRC_DIR="pjproject"
+COPY ${PJ_PROJECT_SRC_DIR} /3rdparty/pjproject
+WORKDIR /3rdparty/pjproject
+RUN ./configure CFLAGS="-DPJMEDIA_HAS_VIDEO=1 -DPJ_ICE_MAX_CAND=32 -DPJSIP_MAX_PKT_LEN=12288 -DPJ_ICE_MAX_CHECKS=512"  && \
 	make dep && \
 	make && \
 	make install
