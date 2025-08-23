@@ -21,7 +21,7 @@ func (r *Runner) Run(pipeline *Pipeline) error {
 		return ErrPipelineIsNil
 	}
 
-	var delegates []StepDelegate = make([]StepDelegate, 0, len(pipeline.Steps))
+	var delegates []StepDelegate[any] = make([]StepDelegate[any], 0, len(pipeline.Steps))
 
 	for _, step := range pipeline.Steps {
 		provider, exists := r.registry.GetProvider(step.Uses)
