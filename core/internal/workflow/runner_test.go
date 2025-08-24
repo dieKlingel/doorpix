@@ -88,7 +88,7 @@ func TestRunnerRun(t *testing.T) {
 func TestRunnerFindPipelines(t *testing.T) {
 	t.Run("should return all pipelines", func(t *testing.T) {
 		runner := workflow.NewRunner(workflow.NewRegistry())
-		runner.SetPipelineSource([]*workflow.Pipeline{
+		runner.SetPipelineSource([]workflow.Pipeline{
 			{
 				Trigger: "test",
 			},
@@ -101,7 +101,7 @@ func TestRunnerFindPipelines(t *testing.T) {
 
 	t.Run("should return matching pipelines", func(t *testing.T) {
 		runner := workflow.NewRunner(workflow.NewRegistry())
-		runner.SetPipelineSource([]*workflow.Pipeline{
+		runner.SetPipelineSource([]workflow.Pipeline{
 			{
 				Trigger: "test/*",
 			},
@@ -122,7 +122,7 @@ func TestRunnerFindPipelines(t *testing.T) {
 		sourceErr := fmt.Errorf("source error")
 
 		runner := workflow.NewRunner(workflow.NewRegistry())
-		runner.SetPipelineSourceFunc(func() ([]*workflow.Pipeline, error) {
+		runner.SetPipelineSourceFunc(func() ([]workflow.Pipeline, error) {
 			return nil, sourceErr
 		})
 
@@ -139,7 +139,7 @@ func TestRunnerFindPipelines(t *testing.T) {
 
 	t.Run("should return err on invalid pattern", func(t *testing.T) {
 		runner := workflow.NewRunner(workflow.NewRegistry())
-		runner.SetPipelineSource([]*workflow.Pipeline{
+		runner.SetPipelineSource([]workflow.Pipeline{
 			{
 				Trigger: "a[",
 			},

@@ -10,7 +10,7 @@ type Runner struct {
 	source   PipelineSourceFunc
 }
 
-type PipelineSourceFunc func() ([]*Pipeline, error)
+type PipelineSourceFunc func() ([]Pipeline, error)
 
 func NewRunner(registry *Registry) *Runner {
 	return &Runner{
@@ -22,13 +22,13 @@ func (r *Runner) SetPipelineSourceFunc(source PipelineSourceFunc) {
 	r.source = source
 }
 
-func (r *Runner) SetPipelineSource(pipelines []*Pipeline) {
-	r.source = func() ([]*Pipeline, error) {
+func (r *Runner) SetPipelineSource(pipelines []Pipeline) {
+	r.source = func() ([]Pipeline, error) {
 		return pipelines, nil
 	}
 }
 
-func (r *Runner) FindPipelines(s fmt.Stringer) ([]*Pipeline, error) {
+func (r *Runner) FindPipelines(s fmt.Stringer) ([]Pipeline, error) {
 	if r.source == nil {
 		return nil, ErrSourceIsNil
 	}
@@ -38,7 +38,7 @@ func (r *Runner) FindPipelines(s fmt.Stringer) ([]*Pipeline, error) {
 		return nil, err
 	}
 
-	result := make([]*Pipeline, 0)
+	result := make([]Pipeline, 0)
 	for _, pipeline := range pipelines {
 		match, err := path.Match(pipeline.Trigger, s.String())
 
