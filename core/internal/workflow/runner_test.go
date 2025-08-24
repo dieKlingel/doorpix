@@ -2,9 +2,11 @@ package workflow_test
 
 import (
 	"fmt"
+	"path"
 	"testing"
 
 	"github.com/dieklingel/doorpix/core/internal/workflow"
+	"github.com/dieklingel/doorpix/core/internal/workflow/event"
 	"github.com/dieklingel/doorpix/core/internal/workflowtest"
 	"github.com/stretchr/testify/assert"
 )
@@ -80,5 +82,70 @@ func TestRunnerRun(t *testing.T) {
 		})
 
 		assert.Error(t, err)
+	})
+}
+
+func TestRunnerFindPipelines(t *testing.T) {
+	t.Run("should return all pipelines", func(t *testing.T) {
+		runner := workflow.NewRunner(workflow.NewRegistry())
+		runner.SetPipelineSource([]*workflow.Pipeline{
+			{
+				Trigger: "test",
+			},
+		})
+
+		pipelines, err := runner.FindPipelines(event.New("test"))
+		assert.NoError(t, err)
+		assert.Len(t, pipelines, 1)
+	})
+
+	t.Run("should return matching pipelines", func(t *testing.T) {
+		runner := workflow.NewRunner(workflow.NewRegistry())
+		runner.SetPipelineSource([]*workflow.Pipeline{
+			{
+				Trigger: "test/*",
+			},
+			{
+				Trigger: "test/*",
+			},
+			{
+				Trigger: "other/*",
+			},
+		})
+
+		pipelines, err := runner.FindPipelines(event.New("test/1"))
+		assert.NoError(t, err)
+		assert.Len(t, pipelines, 2)
+	})
+
+	t.Run("should handle erro in pipeline source", func(t *testing.T) {
+		sourceErr := fmt.Errorf("source error")
+
+		runner := workflow.NewRunner(workflow.NewRegistry())
+		runner.SetPipelineSourceFunc(func() ([]*workflow.Pipeline, error) {
+			return nil, sourceErr
+		})
+
+		_, err := runner.FindPipelines(event.New("test/1"))
+		assert.ErrorIs(t, err, sourceErr)
+	})
+
+	t.Run("should return err on unset source", func(t *testing.T) {
+		runner := workflow.NewRunner(workflow.NewRegistry())
+		_, err := runner.FindPipelines(event.New("test/1"))
+
+		assert.ErrorIs(t, err, workflow.ErrSourceIsNil)
+	})
+
+	t.Run("should return err on invalid pattern", func(t *testing.T) {
+		runner := workflow.NewRunner(workflow.NewRegistry())
+		runner.SetPipelineSource([]*workflow.Pipeline{
+			{
+				Trigger: "a[",
+			},
+		})
+
+		_, err := runner.FindPipelines(event.New("test/1"))
+		assert.ErrorIs(t, err, path.ErrBadPattern)
 	})
 }

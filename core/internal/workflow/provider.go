@@ -3,11 +3,11 @@ package workflow
 type ProviderFunc func(ctx *Context) error
 
 type Provider interface {
-	Parse(step Step) (StepDelegate[any], error)
+	Parse(step Step) (StepDelegate, error)
 }
 
-type StepDelegate[T any] struct {
+type StepDelegate struct {
 	Step    Step
 	Execute ProviderFunc
-	Parent  T
+	Parent  any
 }

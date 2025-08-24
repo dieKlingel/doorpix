@@ -7,12 +7,12 @@ type NilProvider struct {
 	RunError   error
 }
 
-func (p *NilProvider) Parse(step workflow.Step) (workflow.StepDelegate[any], error) {
+func (p *NilProvider) Parse(step workflow.Step) (workflow.StepDelegate, error) {
 	if p.ParseError != nil {
-		return workflow.StepDelegate[any]{}, p.ParseError
+		return workflow.StepDelegate{}, p.ParseError
 	}
 
-	return workflow.StepDelegate[any]{
+	return workflow.StepDelegate{
 		Step: step,
 		Execute: func(ctx *workflow.Context) error {
 			return p.RunError

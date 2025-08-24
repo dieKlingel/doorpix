@@ -30,9 +30,9 @@ func NewMqttProvider(client MqttClient) *MqttProvider {
 	}
 }
 
-func (p *MqttProvider) Parse(step workflow.Step) (workflow.StepDelegate[MqttStepOptions], error) {
+func (p *MqttProvider) Parse(step workflow.Step) (workflow.StepDelegate, error) {
 	options := MqttStepOptions{}
-	delegate := workflow.StepDelegate[MqttStepOptions]{
+	delegate := workflow.StepDelegate{
 		Step:   step,
 		Parent: options,
 	}
