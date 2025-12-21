@@ -13,7 +13,7 @@ type Webcam struct {
 	name   string
 	driver Driver
 
-	sessions map[string]*Session
+	sessions map[string]*session
 	mutex    sync.Mutex
 }
 
@@ -21,7 +21,7 @@ func NewWebcam(name string, driver Driver) (*Webcam, error) {
 	webcam := &Webcam{
 		name:     name,
 		driver:   driver,
-		sessions: make(map[string]*Session),
+		sessions: make(map[string]*session),
 	}
 
 	appsink, err := driver.GetAppSinkByName(name)
@@ -36,7 +36,7 @@ func NewWebcam(name string, driver Driver) (*Webcam, error) {
 	return webcam, nil
 }
 
-func (w *Webcam) Start() (*Session, error) {
+func (w *Webcam) Start() (Session, error) {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
 
@@ -52,7 +52,7 @@ func (w *Webcam) Start() (*Session, error) {
 		return nil, err
 	}
 
-	session := &Session{
+	session := &session{
 		name:   sessionName,
 		webcam: w,
 		frame:  make(chan []byte),
@@ -63,7 +63,7 @@ func (w *Webcam) Start() (*Session, error) {
 	return session, nil
 }
 
-func (w *Webcam) stop(session *Session) error {
+func (w *Webcam) stop(session *session) error {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
 

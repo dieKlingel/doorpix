@@ -5,20 +5,25 @@ import (
 	"math/rand/v2"
 )
 
-type Session struct {
+type Session interface {
+	Stop() error
+	Frame() chan []byte
+}
+
+type session struct {
 	name   string
 	webcam *Webcam
 	frame  chan []byte
 }
 
-func (session *Session) Stop() error {
+func (session *session) Stop() error {
 	session.webcam.stop(session)
 	close(session.frame)
 
 	return nil
 }
 
-func (session *Session) Frame() chan []byte {
+func (session *session) Frame() chan []byte {
 	return session.frame
 }
 

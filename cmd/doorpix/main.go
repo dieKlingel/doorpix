@@ -1,10 +1,15 @@
 package main
 
 import (
+	"context"
 	"log/slog"
+	"os"
+	"os/signal"
+	"time"
 
 	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/dieklingel/doorpix/internal/transport/http"
+	"github.com/dieklingel/doorpix/internal/transport/sip"
 )
 
 func main() {
@@ -19,14 +24,19 @@ func main() {
 	httpServer := http.NewServer(http.ServerProps{
 		Webcam: must(camera.NewWebcam("http-camera", driver)),
 	})
+	sipClient := sip.NewClient(sip.ClientProps{})
 
-	httpServer.Serve()
-}
+	serve(&httpServer)
+	serve(&sipClient)
 
-func must[T any](value T, err error) T {
-	if err != nil {
-		panic(err)
-	}
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+	<-c
 
-	return value
+	slog.Info("stopping doorpix")
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
+	defer cancel()
+
+	shutdown(&httpServer, ctx)
+	shutdown(&sipClient, ctx)
 }

@@ -1,6 +1,7 @@
 package http
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 
@@ -20,6 +21,7 @@ type ServerProps struct {
 type Server struct {
 	router *mux.Router
 	port   int
+	srv    *http.Server
 }
 
 func NewServer(props ServerProps) Server {
@@ -44,8 +46,13 @@ func (s *Server) Serve() error {
 		Addr:    fmt.Sprintf(":%d", s.port),
 		Handler: s.router,
 	}
+	s.srv = server
 
 	return server.ListenAndServe()
+}
+
+func (s *Server) Shutdown(ctx context.Context) error {
+	return s.srv.Shutdown(ctx)
 }
 
 /**
