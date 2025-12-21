@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"github.com/dieklingel/doorpix/internal/transport/http"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	httpServer := http.NewServer(http.ServerProps{})
+	httpServer.Serve()
 }
