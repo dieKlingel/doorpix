@@ -4,14 +4,15 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/gorilla/mux"
 )
 
 type handler struct {
-	webcam Webcam
+	webcam *camera.Webcam
 }
 
-func Handler(webcam Webcam) http.Handler {
+func Handler(webcam *camera.Webcam) http.Handler {
 	router := mux.NewRouter()
 
 	handler := &handler{webcam: webcam}
@@ -26,20 +27,72 @@ func (h *handler) handleStream(w http.ResponseWriter, r *http.Request) {
 	slog.Debug("handle camera stream")
 
 	if h.webcam == nil {
-		http.Error(w, "webcam not configured", http.StatusInternalServerError)
+		http.Error(w, "camera not configured", http.StatusInternalServerError)
 		return
 	}
 
-	http.Error(w, "not implemented", http.StatusNotImplemented)
+	session, err := h.webcam.Start()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	defer func() {
+		err = session.Stop()
+		if err != nil {
+			slog.Error("error stopping webcam", "error", err)
+		}
+	}()
+
+	w.Header().Set("Content-Type", "multipart/x-mixed-replace; boundary=frame")
+	for {
+		select {
+		case <-r.Context().Done():
+			return
+		case frame, ok := <-session.Frame():
+			if !ok {
+				slog.Warn("no frame was received from the camera, canceling the stream")
+				break
+			}
+
+			w.Write([]byte("--frame\n"))
+			w.Write([]byte("Content-Type: image/jpeg\n\n"))
+			w.Write(frame)
+			w.Write([]byte("\n"))
+		}
+	}
 }
 
 func (h *handler) handleSnapshot(w http.ResponseWriter, r *http.Request) {
 	slog.Debug("handle camera snapshot")
 
 	if h.webcam == nil {
-		http.Error(w, "webcam not configured", http.StatusInternalServerError)
+		http.Error(w, "camera not configured", http.StatusInternalServerError)
 		return
 	}
 
-	http.Error(w, "not implemented", http.StatusNotImplemented)
+	session, err := h.webcam.Start()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer func() {
+		err = session.Stop()
+		if err != nil {
+			slog.Error("error stopping webcam", "error", err)
+		}
+	}()
+
+	select {
+	case <-r.Context().Done():
+		return
+	case frame, ok := <-session.Frame():
+		if !ok {
+			http.Error(w, "no frame", http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "image/jpeg")
+		w.Write(frame)
+	}
 }

@@ -14,7 +14,7 @@ const DefaultPort = 8080
 
 type ServerProps struct {
 	Port   *int
-	webcam camera.Webcam
+	Webcam *camera.Webcam
 }
 
 type Server struct {
@@ -34,7 +34,7 @@ func NewServer(props ServerProps) Server {
 
 	server.Subrouter("/livez", livez.Handler())
 	server.Subrouter("/healthz", healthz.Handler())
-	server.Subrouter("/camera", camera.Handler(props.webcam))
+	server.Subrouter("/camera", camera.Handler(props.Webcam))
 
 	return server
 }

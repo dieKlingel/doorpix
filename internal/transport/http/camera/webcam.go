@@ -1,7 +1,5 @@
 package camera
 
-type Webcam interface {
-	Start() error
-	Stop() error
-	Frame() chan []byte
-}
+import "github.com/dieklingel/doorpix/internal/media/camera"
+
+type Webcam = camera.Webcam
