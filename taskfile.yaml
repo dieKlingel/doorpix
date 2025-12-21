@@ -5,3 +5,8 @@ tasks:
     desc: "Build the project"
     cmds:
       - go build cmd/doorpix/main.go
+
+  test:
+    desc: "Run tests"
+    cmds:
+      - go test ./...
