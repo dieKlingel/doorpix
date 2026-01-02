@@ -7,6 +7,8 @@ import (
 	"os/signal"
 	"time"
 
+	_ "github.com/dieklingel/doorpix/pkg/pjsua2"
+
 	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/dieklingel/doorpix/internal/transport/http"
 	"github.com/dieklingel/doorpix/internal/transport/sip"
@@ -39,4 +41,33 @@ func main() {
 
 	shutdown(&httpServer, ctx)
 	shutdown(&sipClient, ctx)
+}
+
+func must[T any](value T, err error) T {
+	if err != nil {
+		panic(err)
+	}
+
+	return value
+}
+
+type Server interface {
+	Serve() error
+	Shutdown(ctx context.Context) error
+}
+
+func serve(srv Server) {
+	go func() {
+		err := srv.Serve()
+		if err != nil {
+			slog.Error(err.Error())
+		}
+	}()
+}
+
+func shutdown(srv Server, ctx context.Context) {
+	err := srv.Shutdown(ctx)
+	if err != nil {
+		slog.Error(err.Error())
+	}
 }
