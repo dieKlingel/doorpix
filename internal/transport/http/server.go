@@ -8,14 +8,16 @@ import (
 	"github.com/dieklingel/doorpix/internal/transport/http/camera"
 	"github.com/dieklingel/doorpix/internal/transport/http/healthz"
 	"github.com/dieklingel/doorpix/internal/transport/http/livez"
+	"github.com/dieklingel/doorpix/internal/transport/http/sip"
 	"github.com/gorilla/mux"
 )
 
 const DefaultPort = 8080
 
 type ServerProps struct {
-	Port   *int
-	Webcam *camera.Webcam
+	Port      *int
+	Webcam    camera.Webcam
+	UserAgent sip.UserAgent
 }
 
 type Server struct {
@@ -36,7 +38,12 @@ func NewServer(props ServerProps) Server {
 
 	server.Subrouter("/livez", livez.Handler())
 	server.Subrouter("/healthz", healthz.Handler())
-	server.Subrouter("/camera", camera.Handler(props.Webcam))
+	if props.Webcam != nil {
+		server.Subrouter("/camera", camera.Handler(props.Webcam))
+	}
+	if props.UserAgent != nil {
+		server.Subrouter("/sip", sip.Handler(props.UserAgent))
+	}
 
 	return server
 }

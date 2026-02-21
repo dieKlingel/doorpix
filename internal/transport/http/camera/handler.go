@@ -4,15 +4,14 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/gorilla/mux"
 )
 
 type handler struct {
-	webcam *camera.Webcam
+	webcam Webcam
 }
 
-func Handler(webcam *camera.Webcam) http.Handler {
+func Handler(webcam Webcam) http.Handler {
 	router := mux.NewRouter()
 
 	handler := &handler{webcam: webcam}
