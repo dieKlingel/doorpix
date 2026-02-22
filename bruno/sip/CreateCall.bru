@@ -1,0 +1,21 @@
+meta {
+  name: CreateCall
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/sip/calls
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "uri": "sip:kai123@sip.linphone.org"
+  }
+}
+
+docs {
+  This request retrieves a list of users from the JSONPlaceholder API.
+}
