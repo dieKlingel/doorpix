@@ -1,0 +1,9 @@
+sip: 
+  enabled: true
+  username: '{{ .DOORPIX_SIP_USERNAME }}'
+  password: '{{ .DOORPIX_SIP_PASSWORD }}'
+  realm: '{{ .DOORPIX_SIP_REALM }}'
+
+http:
+  enabled: true
+  port: '{{ or .DOORPIX_HTTP_PORT "8080" }}'

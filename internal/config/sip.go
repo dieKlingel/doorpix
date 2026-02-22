@@ -14,7 +14,7 @@ type SIP struct {
 
 func (sip *SIP) UnmarshalYAML(node *yaml.Node) error {
 	raw := struct {
-		Enabled     bool     `yaml:"enabled"`
+		Enabled     Bool     `yaml:"enabled"`
 		Username    string   `yaml:"username"`
 		Password    string   `yaml:"password"`
 		Server      string   `yaml:"server"`
@@ -29,7 +29,7 @@ func (sip *SIP) UnmarshalYAML(node *yaml.Node) error {
 		return err
 	}
 
-	sip.Enabled = raw.Enabled
+	sip.Enabled = bool(raw.Enabled)
 	sip.Username = raw.Username
 	sip.Password = raw.Password
 	sip.Server = raw.Server
