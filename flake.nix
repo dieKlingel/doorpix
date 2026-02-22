@@ -14,7 +14,8 @@
     systems,
   }: rec {
     checks = nixpkgs.lib.genAttrs (import systems) (system: let
-      pkgs = import nixpkgs { inherit system; };
+      overlays = [ (import ./overlays/pjsip-overlay.nix) ];
+      pkgs = import nixpkgs { inherit system; inherit overlays; };
     in {
       default = pkgs.stdenv.mkDerivation {
         name = "doorpix test";
@@ -59,7 +60,8 @@
     });
 
     devShells = nixpkgs.lib.genAttrs (import systems) (system: let
-      pkgs = import nixpkgs { inherit system; };
+      overlays = [ (import ./overlays/pjsip-overlay.nix) ];
+      pkgs = import nixpkgs { inherit system; inherit overlays; };
     in {
       default = pkgs.mkShell {
         packages = with pkgs; [

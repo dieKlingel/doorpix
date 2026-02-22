@@ -28,7 +28,7 @@ func NewCallFromId(acc *Account, id int) *Call {
 		account: acc,
 	}
 	osThread.invoke(func() {
-		delegate := pjsua2.NewDirectorCall(call, acc.delegate)
+		delegate := pjsua2.NewDirectorCall(call, acc.delegate, id)
 		call.delegate = delegate
 	})
 

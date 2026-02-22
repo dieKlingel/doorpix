@@ -38,15 +38,21 @@ func NewAccount(props AccountProps) (*Account, error) {
 		acc.delegate = delegate
 
 		transport := pjsua2.NewTransportConfig()
-		if res := pjsua2.EndpointInstance().TransportCreate(pjsua2.PJSIP_TRANSPORT_TLS, transport); res != 0 {
+		if res := pjsua2.EndpointInstance().TransportCreate(pjsua2.PJSIP_TRANSPORT_UDP, transport); res != 0 {
 			err = fmt.Errorf("could not create transport of type tls")
 			return
 		}
 
 		cfg := pjsua2.NewAccountConfig()
-		cfg.GetSipConfig().GetProxies().Add(fmt.Sprintf("sip:%s;hide;transport=tls", domain))
+		cfg.GetSipConfig().GetProxies().Add(fmt.Sprintf("sip:%s;hide;transport=udp", domain))
 		cfg.SetIdUri(fmt.Sprintf("sip:%s@%s", username, realm))
 		cfg.GetRegConfig().SetRegistrarUri(fmt.Sprintf("sip:%s", domain))
+
+		cfg.GetVideoConfig().SetDefaultCaptureDevice(-1)
+		cfg.GetVideoConfig().SetAutoTransmitOutgoing(true)
+		cfg.GetVideoConfig().SetAutoShowIncoming(false)
+		cfg.GetMediaConfig().SetSrtpSecureSignaling(0)
+		cfg.GetMediaConfig().SetSrtpUse(pjsua2.PJMEDIA_SRTP_OPTIONAL)
 
 		cred := pjsua2.NewAuthCredInfo("digest", "*", username, 0, password)
 		cfg.GetSipConfig().GetAuthCreds().Add(cred)
@@ -70,6 +76,7 @@ func (acc *Account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 
 	op := pjsua2.NewCallOpParam()
 	op.SetStatusCode(pjsua2.PJSIP_SC_OK)
+
 	call.delegate.Answer(op)
 }
 
