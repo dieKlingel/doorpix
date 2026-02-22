@@ -32,7 +32,12 @@ func (h *handler) getAllCalls(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
-	w.Write([]byte("[]\r\n"))
+	calls := h.ua.Calls()
+	err := json.NewEncoder(w).Encode(calls)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func (h *handler) getAccount(w http.ResponseWriter, r *http.Request) {

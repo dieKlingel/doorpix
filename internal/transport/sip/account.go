@@ -2,12 +2,14 @@ package sip
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
 type Account struct {
 	delegate pjsua2.Account
+	calls    map[int]*Call
 }
 
 type AccountProps struct {
@@ -18,7 +20,9 @@ type AccountProps struct {
 }
 
 func NewAccount(props AccountProps) (*Account, error) {
-	acc := &Account{}
+	acc := &Account{
+		calls: make(map[int]*Call),
+	}
 	username := props.Username
 	realm := props.Realm
 	domain := props.Domain
@@ -57,7 +61,19 @@ func NewAccount(props AccountProps) (*Account, error) {
 	return acc, nil
 }
 
-func (acc *Account) OnIncomingCall(arg2 pjsua2.OnIncomingCallParam) {
+func (acc *Account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
+	id := param.GetCallId()
+	slog.Info("received incomming call", "callId", id)
+
+	call := NewCall(CallProps{
+		Account: acc,
+		Id:      id,
+	})
+	acc.calls[id] = call
+
+	op := pjsua2.NewCallOpParam()
+	op.SetStatusCode(pjsua2.PJSIP_SC_OK)
+	call.delegate.Answer(op)
 }
 
 func (acc *Account) OnRegStarted(arg2 pjsua2.OnRegStartedParam) {

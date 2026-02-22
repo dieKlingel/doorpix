@@ -5,5 +5,6 @@ import (
 )
 
 type UserAgent interface {
+	Calls() []sip.CallInfo
 	AccountInfo() *sip.AccountInfo
 }

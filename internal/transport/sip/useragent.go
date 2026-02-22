@@ -65,6 +65,25 @@ func (ua *UserAgent) AccountInfo() *AccountInfo {
 	}
 }
 
+func (ua *UserAgent) Calls() []CallInfo {
+	if ua.account == nil {
+		return make([]CallInfo, 0)
+	}
+
+	var callInfos []CallInfo = make([]CallInfo, 0, len(ua.account.calls))
+	osThread.invoke(func() {
+		for _, call := range ua.account.calls {
+			info := call.delegate.GetInfo()
+			callInfos = append(callInfos, CallInfo{
+				Id:        info.GetId(),
+				RemoteUri: info.GetRemoteUri(),
+			})
+		}
+	})
+
+	return callInfos
+}
+
 func (ua *UserAgent) Shutdown(ctx context.Context) error {
 	finished := make(chan struct{})
 
