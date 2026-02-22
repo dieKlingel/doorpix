@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"fmt"
 
 	"gopkg.in/yaml.v3"
@@ -17,17 +18,35 @@ func (b *Bool) UnmarshalYAML(node *yaml.Node) error {
 	switch v := raw.(type) {
 	case bool:
 		*b = Bool(v)
+	case int:
+		switch v {
+		case 0:
+			*b = Bool(false)
+		case 1:
+			*b = Bool(true)
+		default:
+			return errors.Join(
+				ErrUnexpectedInput,
+				&yaml.TypeError{Errors: []string{fmt.Sprintf("invalid int value: %d", v)}},
+			)
+		}
 	case string:
 		switch v {
-		case "true", "True", "TRUE", "":
+		case "true", "True", "TRUE":
 			*b = Bool(true)
 		case "false", "False", "FALSE":
 			*b = Bool(false)
 		default:
-			return &yaml.TypeError{Errors: []string{"invalid boolean value: " + v}}
+			return errors.Join(
+				ErrUnexpectedInput,
+				&yaml.TypeError{Errors: []string{fmt.Sprintf("invalid boolean value: %s", v)}},
+			)
 		}
 	default:
-		return &yaml.TypeError{Errors: []string{"expected boolean or string, got " + node.ShortTag()}}
+		return errors.Join(
+			ErrUnexpectedInput,
+			&yaml.TypeError{Errors: []string{fmt.Sprintf("expected boolean, int or string, got %s", node.ShortTag())}},
+		)
 	}
 
 	return nil
@@ -51,7 +70,10 @@ func (i *Int) UnmarshalYAML(node *yaml.Node) error {
 		}
 		*i = Int(parsed)
 	default:
-		return &yaml.TypeError{Errors: []string{"expected integer or string, got " + node.ShortTag()}}
+		return errors.Join(
+			ErrUnexpectedInput,
+			&yaml.TypeError{Errors: []string{"expected integer or string, got " + node.ShortTag()}},
+		)
 	}
 
 	return nil
