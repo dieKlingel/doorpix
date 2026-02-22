@@ -65,10 +65,7 @@ func (acc *Account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 	id := param.GetCallId()
 	slog.Info("received incomming call", "callId", id)
 
-	call := NewCall(CallProps{
-		Account: acc,
-		Id:      id,
-	})
+	call := NewCallFromId(acc, id)
 	acc.calls[id] = call
 
 	op := pjsua2.NewCallOpParam()

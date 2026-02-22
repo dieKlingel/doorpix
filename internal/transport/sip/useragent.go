@@ -2,6 +2,7 @@ package sip
 
 import (
 	"context"
+	"errors"
 
 	"github.com/dieklingel/go-pjproject/pjsua2"
 )
@@ -71,17 +72,64 @@ func (ua *UserAgent) Calls() []CallInfo {
 	}
 
 	var callInfos []CallInfo = make([]CallInfo, 0, len(ua.account.calls))
-	osThread.invoke(func() {
-		for _, call := range ua.account.calls {
-			info := call.delegate.GetInfo()
-			callInfos = append(callInfos, CallInfo{
-				Id:        info.GetId(),
-				RemoteUri: info.GetRemoteUri(),
-			})
-		}
-	})
+	for _, call := range ua.account.calls {
+		info := call.Info()
+		callInfos = append(callInfos, *info)
+	}
 
 	return callInfos
+}
+
+func (ua *UserAgent) Invite(uri string) (*CallInfo, error) {
+	if ua.account == nil {
+		return nil, ErrNotReady
+	}
+
+	var err error
+	osThread.invoke(func() {
+		if osThread.endpoint.UtilVerifySipUri(uri) != 0 {
+			err = errors.Join(ErrInvalidUri, errors.New(uri))
+		}
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	call := NewCall(ua.account)
+
+	osThread.invoke(func() {
+		op := pjsua2.NewCallOpParam()
+		call.delegate.MakeCall(uri, op)
+
+		id := call.delegate.GetId()
+		ua.account.calls[id] = call
+	})
+
+	info := call.Info()
+	return info, nil
+}
+
+func (ua *UserAgent) CallById(id int) *CallInfo {
+	call, exists := ua.account.calls[id]
+	if !exists {
+		return nil
+	}
+
+	return call.Info()
+}
+
+func (ua *UserAgent) Hangup(id int) {
+	call, exists := ua.account.calls[id]
+	if !exists {
+		return
+	}
+
+	delete(call.account.calls, id)
+
+	osThread.invoke(func() {
+		op := pjsua2.NewCallOpParam()
+		call.delegate.Hangup(op)
+	})
 }
 
 func (ua *UserAgent) Shutdown(ctx context.Context) error {

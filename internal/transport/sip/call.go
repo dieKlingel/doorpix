@@ -11,17 +11,24 @@ type Call struct {
 	delegate pjsua2.Call
 }
 
-type CallProps struct {
-	Account *Account
-	Id      int
-}
-
-func NewCall(props CallProps) *Call {
+func NewCall(acc *Account) *Call {
 	call := &Call{
-		account: props.Account,
+		account: acc,
 	}
 	osThread.invoke(func() {
-		delegate := pjsua2.NewDirectorCall(call, props.Account.delegate, props.Id)
+		delegate := pjsua2.NewDirectorCall(call, acc.delegate)
+		call.delegate = delegate
+	})
+
+	return call
+}
+
+func NewCallFromId(acc *Account, id int) *Call {
+	call := &Call{
+		account: acc,
+	}
+	osThread.invoke(func() {
+		delegate := pjsua2.NewDirectorCall(call, acc.delegate)
 		call.delegate = delegate
 	})
 
@@ -37,4 +44,18 @@ func (c *Call) OnCallState(param pjsua2.OnCallStateParam) {
 	case pjsua2.PJSIP_INV_STATE_DISCONNECTED:
 		delete(c.account.calls, info.GetId())
 	}
+}
+
+func (c *Call) Info() *CallInfo {
+	var callInfo CallInfo
+	osThread.invoke(func() {
+		info := c.delegate.GetInfo()
+		callInfo = CallInfo{
+			Id:        info.GetId(),
+			RemoteUri: info.GetRemoteUri(),
+			State:     info.GetStateText(),
+		}
+	})
+
+	return &callInfo
 }
