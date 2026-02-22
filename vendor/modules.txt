@@ -1,0 +1,33 @@
+# github.com/davecgh/go-spew v1.1.1
+## explicit
+github.com/davecgh/go-spew/spew
+# github.com/dieklingel/go-pjproject v1.0.2
+## explicit; go 1.21
+github.com/dieklingel/go-pjproject/pjsua2
+# github.com/go-gst/go-glib v1.4.0
+## explicit; go 1.23.1
+github.com/go-gst/go-glib/glib
+# github.com/go-gst/go-gst v1.4.0
+## explicit; go 1.23
+github.com/go-gst/go-gst/gst
+github.com/go-gst/go-gst/gst/app
+github.com/go-gst/go-gst/gst/base
+# github.com/gorilla/mux v1.8.1
+## explicit; go 1.20
+github.com/gorilla/mux
+# github.com/mattn/go-pointer v0.0.1
+## explicit
+github.com/mattn/go-pointer
+# github.com/pmezard/go-difflib v1.0.0
+## explicit
+github.com/pmezard/go-difflib/difflib
+# github.com/stretchr/testify v1.11.1
+## explicit; go 1.17
+github.com/stretchr/testify/assert
+github.com/stretchr/testify/assert/yaml
+# golang.org/x/exp v0.0.0-20251219203646-944ab1f22d93
+## explicit; go 1.24.0
+golang.org/x/exp/constraints
+# gopkg.in/yaml.v3 v3.0.1
+## explicit
+gopkg.in/yaml.v3
