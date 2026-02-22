@@ -7,29 +7,34 @@ import (
 	"os/signal"
 	"time"
 
-	_ "github.com/dieklingel/doorpix/pkg/pjsua2"
-
-	"github.com/dieklingel/doorpix/internal/media/camera"
-	"github.com/dieklingel/doorpix/internal/transport/http"
-	"github.com/dieklingel/doorpix/internal/transport/sip"
+	"github.com/dieklingel/doorpix/internal/app"
+	"github.com/dieklingel/doorpix/internal/config"
 )
 
 func main() {
+	cfg, err := config.NewBuilder().
+		AddConfigFile("doorpix.yaml").
+		AddConfigFile("~/doorpix.yaml").
+		Build()
+
+	if err != nil {
+		slog.Error("failed to build config", "error", err)
+		os.Exit(1)
+	}
+
 	slog.SetLogLoggerLevel(slog.LevelDebug)
 	slog.Info("starting doorpix...")
 
-	driver := must(camera.NewGstDriver(`
-		autovideosrc ! video/x-raw,width=800,height=600,framerate=20/1 ! tee name=tee
-			tee. ! queue ! valve name=valve-http-camera ! jpegenc ! appsink name=appsink-http-camera
-	`))
+	cameraDriver := app.CreateCameraDriver(cfg)
+	userAgent := app.CreateUserAgent(cfg)
+	httpServer := app.CreateHTTPServer(cfg, cameraDriver, userAgent)
 
-	httpServer := http.NewServer(http.ServerProps{
-		Webcam: must(camera.NewWebcam("http-camera", driver)),
-	})
-	sipClient := sip.NewClient(sip.ClientProps{})
-
-	serve(&httpServer)
-	serve(&sipClient)
+	if httpServer != nil {
+		serve(httpServer)
+	}
+	if userAgent != nil {
+		serve(userAgent)
+	}
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
@@ -39,16 +44,12 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
-	shutdown(&httpServer, ctx)
-	shutdown(&sipClient, ctx)
-}
-
-func must[T any](value T, err error) T {
-	if err != nil {
-		panic(err)
+	if httpServer != nil {
+		shutdown(httpServer, ctx)
 	}
-
-	return value
+	if userAgent != nil {
+		shutdown(userAgent, ctx)
+	}
 }
 
 type Server interface {

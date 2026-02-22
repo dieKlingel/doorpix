@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"runtime"
 
-	"github.com/dieklingel/go-pjproject/v2/pjsua2"
+	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
 type bridge struct {

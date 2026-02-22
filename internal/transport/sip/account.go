@@ -3,7 +3,7 @@ package sip
 import (
 	"fmt"
 
-	"github.com/dieklingel/go-pjproject/v2/pjsua2"
+	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
 type Account struct {

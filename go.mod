@@ -3,7 +3,7 @@ module github.com/dieklingel/doorpix
 go 1.25.5
 
 require (
-	github.com/dieklingel/go-pjproject/v2 v2.15.1
+	github.com/dieklingel/go-pjproject v1.0.2
 	github.com/go-gst/go-gst v1.4.0
 	github.com/gorilla/mux v1.8.1
 	github.com/stretchr/testify v1.11.1

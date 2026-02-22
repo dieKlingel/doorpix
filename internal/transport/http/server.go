@@ -26,7 +26,7 @@ type Server struct {
 	srv    *http.Server
 }
 
-func NewServer(props ServerProps) Server {
+func NewServer(props ServerProps) *Server {
 	router := mux.NewRouter()
 
 	port := DefaultPort
@@ -45,7 +45,7 @@ func NewServer(props ServerProps) Server {
 		server.Subrouter("/sip", sip.Handler(props.UserAgent))
 	}
 
-	return server
+	return &server
 }
 
 func (s *Server) Serve() error {

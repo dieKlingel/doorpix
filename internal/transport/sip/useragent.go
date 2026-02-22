@@ -3,7 +3,7 @@ package sip
 import (
 	"context"
 
-	"github.com/dieklingel/go-pjproject/v2/pjsua2"
+	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
 type UserAgentProps struct {
@@ -19,8 +19,8 @@ type UserAgent struct {
 }
 
 // Only one UserAgent should be created at all
-func NewUserAgent(props UserAgentProps) UserAgent {
-	return UserAgent{
+func NewUserAgent(props UserAgentProps) *UserAgent {
+	return &UserAgent{
 		props: props,
 	}
 }
