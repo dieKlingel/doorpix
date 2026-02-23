@@ -5,7 +5,17 @@ self: super: {
     configureFlags = (oldAttrs.configureFlags or []) ++ [
     ];
 
-    buildInputs = oldAttrs.buildInputs ++ [ super.openh264 super.libvpx super.libyuv super.libv4l super.libopus super.bcg729 super.SDL2 super.libx11 ];
+    buildInputs = oldAttrs.buildInputs ++ [
+      super.pkg-config
+      super.openh264
+      super.libvpx
+      super.libyuv
+      super.libv4l
+      super.libopus
+      super.bcg729
+      super.SDL2
+      super.libx11
+    ];
 
     # Optionally, add patches or extra files
     postPatch = ''

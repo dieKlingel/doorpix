@@ -46,6 +46,25 @@ func (c *Call) OnCallState(param pjsua2.OnCallStateParam) {
 	}
 }
 
+func (c *Call) OnCallMediaState(arg2 pjsua2.OnCallMediaStateParam) {
+	// TODO(koifresh): wiring correct media connection, this just connects the default audio in/out to every call
+	callAudioMedia := c.delegate.GetAudioMedia(-1)
+	if callAudioMedia == nil {
+		slog.Warn("the call has no audo media", "callId", c.delegate.GetId())
+		return
+	}
+
+	captureDevMedia := osThread.endpoint.AudDevManager().GetCaptureDevMedia()
+	if captureDevMedia != nil {
+		captureDevMedia.StartTransmit(callAudioMedia)
+	}
+
+	playbackDevMedia := osThread.endpoint.AudDevManager().GetPlaybackDevMedia()
+	if playbackDevMedia != nil {
+		callAudioMedia.StartTransmit(playbackDevMedia)
+	}
+}
+
 func (c *Call) Info() *CallInfo {
 	var callInfo CallInfo
 	osThread.invoke(func() {

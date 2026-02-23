@@ -32,6 +32,14 @@
         buildInputs = with pkgs; [
           pkg-config
           pjsip
+          openh264
+          libvpx
+          libyuv
+          libv4l
+          libopus
+          bcg729
+          SDL2
+          libx11
           openssl
           alsa-lib
           gst_all_1.gstreamer
@@ -70,6 +78,14 @@
           go
           pkg-config
           pjsip
+          openh264
+          libvpx
+          libyuv
+          libv4l
+          libopus
+          bcg729
+          SDL2
+          libx11
           openssl
           alsa-lib
           gst_all_1.gstreamer
