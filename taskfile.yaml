@@ -1,6 +1,13 @@
 version: "3"
 
 tasks:
+  run:
+    desc: Run doorpix
+    cmds:
+      - |
+        export $(cat .env | xargs) &> /dev/null
+        go run ./cmd/doorpix/main.go
+
   build:
     desc: "Build the project"
     cmds:
