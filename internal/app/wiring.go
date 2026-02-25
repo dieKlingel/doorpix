@@ -11,10 +11,11 @@ func CreateCameraDriver(cfg *config.Config) camera.Driver {
 	return must(camera.NewGstDriver(`
 		autovideosrc ! video/x-raw,width=800,height=600,framerate=20/1 ! tee name=tee
 			tee. ! queue ! valve name=valve-http-camera ! jpegenc ! appsink name=appsink-http-camera
+			tee. ! queue ! valve name=valve-sip-camera ! videoscale ! videoconvert ! video/x-raw,format=I420,width=720,height=480 ! appsink name=appsink-sip-camera
 	`))
 }
 
-func CreateUserAgent(cfg *config.Config) *sip.UserAgent {
+func CreateUserAgent(cfg *config.Config, driver camera.Driver) *sip.UserAgent {
 	if !cfg.SIP.Enabled {
 		return nil
 	}
@@ -24,6 +25,7 @@ func CreateUserAgent(cfg *config.Config) *sip.UserAgent {
 		Password: cfg.SIP.Password,
 		Realm:    cfg.SIP.Realm,
 		Domain:   cfg.SIP.Server,
+		Webcam:   must(camera.NewWebcam("sip-camera", driver)),
 	})
 }
 

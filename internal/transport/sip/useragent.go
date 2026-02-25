@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	cameradriver "github.com/dieklingel/doorpix/internal/transport/sip/driver/camera"
 	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
@@ -12,6 +13,7 @@ type UserAgentProps struct {
 	Password string
 	Realm    string
 	Domain   string
+	Webcam   cameradriver.Webcam
 }
 
 type UserAgent struct {
@@ -37,6 +39,10 @@ func (ua *UserAgent) Serve() error {
 	if !success {
 		return NativeThreadError
 	}
+
+	osThread.invoke(func() {
+		cameradriver.Register(ua.props.Webcam)
+	})
 
 	acc, err := NewAccount(AccountProps{
 		Username: ua.props.Username,

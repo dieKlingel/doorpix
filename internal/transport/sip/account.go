@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 
+	cameradriver "github.com/dieklingel/doorpix/internal/transport/sip/driver/camera"
 	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
@@ -53,6 +54,15 @@ func NewAccount(props AccountProps) (*Account, error) {
 		cfg.GetVideoConfig().SetAutoShowIncoming(false)
 		cfg.GetMediaConfig().SetSrtpSecureSignaling(0)
 		cfg.GetMediaConfig().SetSrtpUse(pjsua2.PJMEDIA_SRTP_OPTIONAL)
+
+		cdevs := osThread.endpoint.VidDevManager().EnumDev2()
+		for i := range cdevs.Size() {
+			dev := cdevs.Get(int(i))
+			if dev.GetName() == cameradriver.DeviceName() {
+				cfg.GetVideoConfig().SetDefaultCaptureDevice(dev.GetId())
+			}
+			slog.Info("account: camera capture device found", "name", dev.GetName(), "id", dev.GetId())
+		}
 
 		cred := pjsua2.NewAuthCredInfo("digest", "*", username, 0, password)
 		cfg.GetSipConfig().GetAuthCreds().Add(cred)

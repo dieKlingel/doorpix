@@ -26,7 +26,7 @@ func main() {
 	slog.Info("starting doorpix...")
 
 	cameraDriver := app.CreateCameraDriver(cfg)
-	userAgent := app.CreateUserAgent(cfg)
+	userAgent := app.CreateUserAgent(cfg, cameraDriver)
 	httpServer := app.CreateHTTPServer(cfg, cameraDriver, userAgent)
 
 	if httpServer != nil {
