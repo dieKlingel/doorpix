@@ -28,22 +28,29 @@ func New(cfg *config.Config) *Server {
 
 	var userAgent *sip.UserAgent = nil
 	if cfg.SIP.Enabled {
-		userAgent = sip.NewUserAgent(sip.UserAgentProps{
-			Username: cfg.SIP.Username,
-			Password: cfg.SIP.Password,
-			Realm:    cfg.SIP.Realm,
-			Domain:   cfg.SIP.Server,
-			Webcam:   must(camera.NewWebcam("sip-camera", cameraDriver)),
-		})
+		props := sip.UserAgentProps{
+			Username:  cfg.SIP.Username,
+			Password:  cfg.SIP.Password,
+			Realm:     cfg.SIP.Realm,
+			Domain:    cfg.SIP.Server,
+			Webcam:    must(camera.NewWebcam("sip-camera", cameraDriver)),
+			Whitelist: cfg.SIP.Whitelist,
+		}
+
+		slog.Debug("server: create sip user agent", "username", props.Username, "realm", props.Realm, "domain", props.Domain, "whitelist", props.Whitelist)
+		userAgent = sip.NewUserAgent(props)
 	}
 
 	var httpServer *http.Server = nil
 	if cfg.HTTP.Enabled {
-		httpServer = http.NewServer(http.ServerProps{
+		props := http.ServerProps{
 			Webcam:    must(camera.NewWebcam("http-camera", cameraDriver)),
 			UserAgent: userAgent,
 			Port:      &cfg.HTTP.Port,
-		})
+		}
+
+		slog.Debug("server: create http server", "port", cfg.HTTP.Port)
+		httpServer = http.NewServer(props)
 	}
 
 	return &Server{

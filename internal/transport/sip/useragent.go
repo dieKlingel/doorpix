@@ -9,11 +9,12 @@ import (
 )
 
 type UserAgentProps struct {
-	Username string
-	Password string
-	Realm    string
-	Domain   string
-	Webcam   cameradriver.Webcam
+	Username  string
+	Password  string
+	Realm     string
+	Domain    string
+	Webcam    cameradriver.Webcam
+	Whitelist []string
 }
 
 type UserAgent struct {
@@ -49,10 +50,11 @@ func (ua *UserAgent) Serve() error {
 	}
 
 	acc, err := NewAccount(AccountProps{
-		Username: ua.props.Username,
-		Password: ua.props.Password,
-		Realm:    ua.props.Realm,
-		Domain:   ua.props.Domain,
+		Username:  ua.props.Username,
+		Password:  ua.props.Password,
+		Realm:     ua.props.Realm,
+		Domain:    ua.props.Domain,
+		Whitelist: ua.props.Whitelist,
 	})
 
 	ua.account = acc

@@ -3,27 +3,32 @@ package sip
 import (
 	"fmt"
 	"log/slog"
+	"slices"
 
 	cameradriver "github.com/dieklingel/doorpix/internal/transport/sip/driver/camera"
 	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
 type Account struct {
-	delegate pjsua2.Account
-	calls    map[int]*Call
+	delegate  pjsua2.Account
+	calls     map[int]*Call
+	whitelist []string
 }
 
 type AccountProps struct {
-	Username string
-	Password string
-	Realm    string
-	Domain   string
+	Username  string
+	Password  string
+	Realm     string
+	Domain    string
+	Whitelist []string
 }
 
 func NewAccount(props AccountProps) (*Account, error) {
 	acc := &Account{
-		calls: make(map[int]*Call),
+		calls:     make(map[int]*Call),
+		whitelist: props.Whitelist,
 	}
+
 	username := props.Username
 	realm := props.Realm
 	domain := props.Domain
@@ -81,13 +86,21 @@ func NewAccount(props AccountProps) (*Account, error) {
 
 func (acc *Account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 	id := param.GetCallId()
-	slog.Info("account: received incomming call", "callId", id)
 
 	call := NewCallFromId(acc, id)
 	acc.calls[id] = call
+	from := Uri(call.delegate.GetInfo().GetRemoteUri())
+	to := Uri(call.delegate.GetInfo().GetLocalUri())
+	isWhitelisted := slices.Contains(acc.whitelist, from)
+
+	slog.Info("account: received incomming call", "callId", id, "from", from, "to", to, "whitelisted", isWhitelisted, "whitelist", acc.whitelist)
 
 	op := pjsua2.NewCallOpParam()
-	op.SetStatusCode(pjsua2.PJSIP_SC_OK)
+	if isWhitelisted {
+		op.SetStatusCode(pjsua2.PJSIP_SC_OK)
+	} else {
+		op.SetStatusCode(pjsua2.PJSIP_SC_DECLINE)
+	}
 
 	call.delegate.Answer(op)
 }
