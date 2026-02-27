@@ -58,10 +58,12 @@ func NewAccount(props AccountProps) (*Account, error) {
 		cdevs := osThread.endpoint.VidDevManager().EnumDev2()
 		for i := range cdevs.Size() {
 			dev := cdevs.Get(int(i))
-			if dev.GetName() == cameradriver.DeviceName() {
+			slog.Info("account: camera capture device found", "name", dev.GetName(), "id", dev.GetId(), "driver", dev.GetDriver())
+
+			if dev.GetDriver() == cameradriver.DRIVER_NAME {
 				cfg.GetVideoConfig().SetDefaultCaptureDevice(dev.GetId())
+				slog.Info("account: set default camera capture device", "name", dev.GetName(), "id", dev.GetId(), "driver", dev.GetDriver())
 			}
-			slog.Info("account: camera capture device found", "name", dev.GetName(), "id", dev.GetId())
 		}
 
 		cred := pjsua2.NewAuthCredInfo("digest", "*", username, 0, password)
@@ -79,7 +81,7 @@ func NewAccount(props AccountProps) (*Account, error) {
 
 func (acc *Account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 	id := param.GetCallId()
-	slog.Info("received incomming call", "callId", id)
+	slog.Info("account: received incomming call", "callId", id)
 
 	call := NewCallFromId(acc, id)
 	acc.calls[id] = call
@@ -91,19 +93,28 @@ func (acc *Account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 }
 
 func (acc *Account) OnRegStarted(arg2 pjsua2.OnRegStartedParam) {
-
+	slog.Info("account: registration started", "renew", arg2.GetRenew())
 }
 
-func (acc *Account) OnRegState(arg2 pjsua2.OnRegStateParam) {
+func (acc *Account) OnRegState(param pjsua2.OnRegStateParam) {
+	status := param.GetStatus()
+	reason := param.GetReason()
+	code := param.GetCode()
 
+	slog.Info("account: registration state changed", "status", status, "reason", reason, "code", code)
 }
 
 func (acc *Account) OnIncomingSubscribe(arg2 pjsua2.OnIncomingSubscribeParam) {
 
 }
 
-func (acc *Account) OnInstantMessage(arg2 pjsua2.OnInstantMessageParam) {
+func (acc *Account) OnInstantMessage(param pjsua2.OnInstantMessageParam) {
+	from := param.GetFromUri()
+	to := param.GetToUri()
+	contentType := param.GetContentType()
+	body := param.GetMsgBody()
 
+	slog.Info("account: received instant message", "from", from, "to", to, "contentType", contentType, "body", body)
 }
 
 func (acc *Account) OnInstantMessageStatus(arg2 pjsua2.OnInstantMessageStatusParam) {

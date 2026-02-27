@@ -40,9 +40,13 @@ func (ua *UserAgent) Serve() error {
 		return NativeThreadError
 	}
 
+	var err error
 	osThread.invoke(func() {
-		cameradriver.Register(ua.props.Webcam)
+		err = cameradriver.Register("Internal", ua.props.Webcam)
 	})
+	if err != nil {
+		return err
+	}
 
 	acc, err := NewAccount(AccountProps{
 		Username: ua.props.Username,

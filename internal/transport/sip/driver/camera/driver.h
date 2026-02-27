@@ -12,6 +12,6 @@
 extern int go_stream_start(void *stream);
 extern int go_stream_get_frame(pjmedia_vid_dev_stream *stream, pjmedia_frame *frame);
 extern int go_stream_stop(void *stream);
-void Register();
+int Register(factory_options options);
 
 #endif // DRIVER_H

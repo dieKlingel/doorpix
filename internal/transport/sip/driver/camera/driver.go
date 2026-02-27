@@ -13,6 +13,8 @@ import (
 const (
 	PJ_SUCCESS = 0
 	PJ_FAILURE = 1
+
+	DRIVER_NAME = "github.com/dieklingel/doorpix"
 )
 
 type Webcam interface {
@@ -26,7 +28,7 @@ type CameraDriver struct {
 
 var driver *CameraDriver = nil
 
-func Register(webcam Webcam) error {
+func Register(name string, webcam Webcam) error {
 	if driver != nil {
 		return ErrAlreadyInitialized
 	}
@@ -36,16 +38,27 @@ func Register(webcam Webcam) error {
 		sessions: make(map[uintptr]camera.Session),
 	}
 
-	C.Register()
-	return nil
-}
+	status := C.Register(C.factory_options{
+		width:              720,
+		height:             480,
+		framerate:          15,
+		name:               C.CString(name),
+		name_length:        C.int(len(name)),
+		driver_name:        C.CString(DRIVER_NAME),
+		driver_name_length: C.int(len(DRIVER_NAME)),
+	})
 
-func DeviceName() string {
-	return "DoorPiX Video"
+	if status == PJ_SUCCESS {
+		return nil
+	}
+
+	return ErrRegistrationFailed
 }
 
 //export go_stream_start
 func go_stream_start(ptr unsafe.Pointer) C.int {
+	slog.Debug("start a new stream", "ptr", ptr, "driver", DRIVER_NAME)
+
 	session, err := driver.webcam.Start()
 
 	if err != nil {
@@ -59,6 +72,8 @@ func go_stream_start(ptr unsafe.Pointer) C.int {
 
 //export go_stream_stop
 func go_stream_stop(ptr unsafe.Pointer) C.int {
+	slog.Debug("stop a camera stream", "ptr", ptr, "driver", DRIVER_NAME)
+
 	session, exists := driver.sessions[uintptr(ptr)]
 	if !exists {
 		return PJ_SUCCESS

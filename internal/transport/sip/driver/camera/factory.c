@@ -12,29 +12,28 @@ pjmedia_vid_dev_factory_op factory_op = {
 
 pj_status_t factory_init(pjmedia_vid_dev_factory *f)
 {
-	printf("factory_init\n");
 	return PJ_SUCCESS;
 }
 
 unsigned int factory_get_dev_count(pjmedia_vid_dev_factory *f)
 {
-	printf("factory_get_dev_count\n");
 	return 1;
 }
 
 pj_status_t factory_get_dev_info(pjmedia_vid_dev_factory *f, unsigned int index, pjmedia_vid_dev_info *info)
 {
-	printf("factory_get_dev_info\n");
-	pj_ansi_strxcpy(info->name, "DoorPiX Video", 14);
-	pj_ansi_strxcpy(info->driver, "DoorPiX", 8);
+	factory_t *factory = (factory_t *)f;
+
+	pj_ansi_strxcpy(info->name, factory->options.name, factory->options.name_length + 1);
+	pj_ansi_strxcpy(info->driver, factory->options.driver_name, factory->options.driver_name_length + 1);
 	info->dir = PJMEDIA_DIR_CAPTURE;
 	info->has_callback = PJ_FALSE;
 	info->fmt_cnt = 1;
 	info->fmt[0].id = PJMEDIA_FORMAT_I420;
 	info->fmt[0].detail_type = PJMEDIA_FORMAT_DETAIL_VIDEO;
-	info->fmt[0].det.vid.size.w = 720;
-	info->fmt[0].det.vid.size.h = 480;
-	info->fmt[0].det.vid.fps.num = 15;
+	info->fmt[0].det.vid.size.w = factory->options.width;
+	info->fmt[0].det.vid.size.h = factory->options.height;
+	info->fmt[0].det.vid.fps.num = factory->options.framerate;
 	info->fmt[0].det.vid.fps.denum = 1;
 	info->caps = 0;
 
@@ -43,14 +42,11 @@ pj_status_t factory_get_dev_info(pjmedia_vid_dev_factory *f, unsigned int index,
 
 pj_status_t factory_create_stream(pjmedia_vid_dev_factory *pj_factory, pjmedia_vid_dev_param *param, const pjmedia_vid_dev_cb *cb, void *user_data, pjmedia_vid_dev_stream **p_vid_strm)
 {
-	printf("factory_create_stream\n");
 	factory_t *factory = (factory_t *)pj_factory;
-	pj_pool_factory *pool_factory = factory->pool_factory;
-	pj_pool_t *pool = pj_pool_create(pool_factory, "appvideo%p", 512, 512, NULL);
 
 	stream_t *stream = PJ_POOL_ZALLOC_T(factory->pool, stream_t);
-	stream->pool_factory = pool_factory;
-	stream->pool = pool;
+	stream->pool_factory = factory->pool_factory;
+	stream->pool = factory->pool;
 	stream->base.op = &stream_op;
 
 	// output

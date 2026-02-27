@@ -17,12 +17,23 @@ pj_status_t factory_create_stream(pjmedia_vid_dev_factory *f, pjmedia_vid_dev_pa
 pj_status_t factory_default_param(pj_pool_t *pool, pjmedia_vid_dev_factory *f, unsigned index, pjmedia_vid_dev_param *param);
 pj_status_t factory_refresh(pjmedia_vid_dev_factory *f);
 
+typedef struct factory_options {
+	char *name;
+	int name_length;
+	char *driver_name;
+	int driver_name_length;
+	int width;
+	int height;
+	int framerate;
+} factory_options;
+
 typedef struct factory
 {
 	pjmedia_vid_dev_factory base;
 
 	pj_pool_t *pool;
 	pj_pool_factory *pool_factory;
+	factory_options options;
 } factory_t;
 
 extern pjmedia_vid_dev_factory_op factory_op;
