@@ -1,0 +1,25 @@
+meta {
+  name: CreateEvent
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/events
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "path": "/webhook/1",
+    "properties": {
+      "hello": "world"
+    }
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

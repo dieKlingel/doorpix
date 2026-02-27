@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/dieklingel/doorpix/internal/config"
+	"github.com/dieklingel/doorpix/internal/eventemitter"
 	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/dieklingel/doorpix/internal/transport/http"
 	"github.com/dieklingel/doorpix/internal/transport/sip"
@@ -25,6 +26,7 @@ func New(cfg *config.Config) *Server {
 			tee. ! queue ! valve name=valve-http-camera ! jpegenc ! appsink name=appsink-http-camera
 			tee. ! queue ! valve name=valve-sip-camera ! videoscale ! videoconvert ! video/x-raw,format=I420,width=720,height=480 ! appsink name=appsink-sip-camera
 	`))
+	oplog := eventemitter.NewEventEmitter()
 
 	var userAgent *sip.UserAgent = nil
 	if cfg.SIP.Enabled {
@@ -47,6 +49,7 @@ func New(cfg *config.Config) *Server {
 			Webcam:    must(camera.NewWebcam("http-camera", cameraDriver)),
 			UserAgent: userAgent,
 			Port:      &cfg.HTTP.Port,
+			Oplog:     oplog,
 		}
 
 		slog.Debug("server: create http server", "port", cfg.HTTP.Port)

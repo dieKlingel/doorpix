@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/dieklingel/doorpix/internal/eventemitter"
 	"github.com/dieklingel/doorpix/internal/transport/http/camera"
+	"github.com/dieklingel/doorpix/internal/transport/http/events"
 	"github.com/dieklingel/doorpix/internal/transport/http/healthz"
 	"github.com/dieklingel/doorpix/internal/transport/http/livez"
 	"github.com/dieklingel/doorpix/internal/transport/http/sip"
@@ -18,12 +20,14 @@ type ServerProps struct {
 	Port      *int
 	Webcam    camera.Webcam
 	UserAgent sip.UserAgent
+	Oplog     eventemitter.EventEmitter
 }
 
 type Server struct {
 	router *mux.Router
 	port   int
 	srv    *http.Server
+	oplog  eventemitter.EventEmitter
 }
 
 func NewServer(props ServerProps) *Server {
@@ -34,7 +38,11 @@ func NewServer(props ServerProps) *Server {
 		port = *props.Port
 	}
 
-	server := Server{router: router, port: port}
+	server := Server{
+		router: router,
+		port:   port,
+		oplog:  props.Oplog,
+	}
 
 	server.Subrouter("/livez", livez.Handler())
 	server.Subrouter("/healthz", healthz.Handler())
@@ -43,6 +51,9 @@ func NewServer(props ServerProps) *Server {
 	}
 	if props.UserAgent != nil {
 		server.Subrouter("/sip", sip.Handler(props.UserAgent))
+	}
+	if props.Oplog != nil {
+		server.Subrouter("/events", events.Handler(props.Oplog))
 	}
 
 	return &server
