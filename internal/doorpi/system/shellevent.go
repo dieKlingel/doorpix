@@ -5,8 +5,8 @@ import (
 )
 
 type ShellEvent struct {
-	Cmd    string
-	Silent bool
+	Cmd    string `json:"cmd"`
+	Silent bool   `json:"silent"`
 }
 
 func NewShellEventFromEvent(event oplog.Event) (*ShellEvent, error) {

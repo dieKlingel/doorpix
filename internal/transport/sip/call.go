@@ -42,9 +42,10 @@ func (c *Call) OnCallState(param pjsua2.OnCallStateParam) {
 	id := info.GetId()
 	state := info.GetState()
 	stateText := info.GetStateText()
+	remote := Uri(info.GetRemoteUri())
 
-	slog.Info("call state changed", "callId", id, "state", state, "text", stateText)
-	oplog.Dispatch(fmt.Sprintf("system/doorpix/calls/%d/state", id), "id", id, "state", state, "text", stateText)
+	slog.Info("call state changed", "callId", id, "state", state, "text", stateText, "remote", remote)
+	oplog.Dispatch(fmt.Sprintf("system/doorpix/calls/%d/state", id), "id", id, "state", state, "text", stateText, "remote", remote)
 
 	switch state {
 	case pjsua2.PJSIP_INV_STATE_DISCONNECTED:

@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/dieklingel/doorpix/internal/config"
+	"github.com/dieklingel/doorpix/internal/doorpi/call"
 	"github.com/dieklingel/doorpix/internal/doorpi/system"
 	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/dieklingel/doorpix/internal/oplog"
@@ -20,6 +21,7 @@ type Server struct {
 	userAgent    *sip.UserAgent
 	httpServer   *http.Server
 	shellService *system.ShellService
+	callService  *call.CallService
 	listeners    []func(ctx context.Context)
 }
 
@@ -61,6 +63,10 @@ func New(cfg *config.Config) *Server {
 	}
 
 	shellService := system.NewShellService()
+	var callService *call.CallService = nil
+	if userAgent != nil {
+		callService = call.NewCallService(userAgent)
+	}
 
 	listeners := make([]func(context.Context), 0, len(cfg.Events))
 	for _, eventhandler := range cfg.Events {
@@ -97,6 +103,7 @@ func New(cfg *config.Config) *Server {
 		userAgent:    userAgent,
 		httpServer:   httpServer,
 		shellService: shellService,
+		callService:  callService,
 		listeners:    listeners,
 	}
 }
@@ -127,6 +134,12 @@ func (s *Server) Exec() {
 	if s.shellService != nil {
 		go func() {
 			s.shellService.Serve()
+		}()
+	}
+
+	if s.callService != nil {
+		go func() {
+			s.callService.Serve()
 		}()
 	}
 
@@ -166,6 +179,10 @@ func (s *Server) Exec() {
 	}
 
 	if s.shellService != nil {
+		s.shellService.Shutdown(ctx)
+	}
+
+	if s.callService != nil {
 		s.shellService.Shutdown(ctx)
 	}
 

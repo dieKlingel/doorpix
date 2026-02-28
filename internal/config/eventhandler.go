@@ -1,7 +1,8 @@
 package config
 
 var ServiceType = map[string]string{
-	"shell": "internal/doorpix/service/shell",
+	"shell":  "internal/doorpix/service/shell",
+	"invite": "internal/doorpix/service/call/invite",
 }
 
 type Step struct {
