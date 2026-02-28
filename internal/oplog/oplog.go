@@ -24,6 +24,10 @@ func (l *Logger) SetWriter(wr Writer) {
 	l.writer = wr
 }
 
+func On(topic string) <-chan Event {
+	return logger.emitter.On(topic)
+}
+
 func Dispatch(topic string, args ...any) {
 	evt, err := logger.emitter.Dispatch(topic, args...)
 	if err != nil {

@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/dieklingel/doorpix/internal/config"
+	"github.com/dieklingel/doorpix/internal/doorpi/system"
 	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/dieklingel/doorpix/internal/oplog"
 	"github.com/dieklingel/doorpix/internal/transport/http"
@@ -18,6 +19,7 @@ type Server struct {
 	cameraDriver camera.Driver
 	userAgent    *sip.UserAgent
 	httpServer   *http.Server
+	shellService *system.ShellService
 }
 
 func New(cfg *config.Config) *Server {
@@ -57,10 +59,13 @@ func New(cfg *config.Config) *Server {
 		httpServer = http.NewServer(props)
 	}
 
+	shellService := system.NewShellService()
+
 	return &Server{
 		cameraDriver: cameraDriver,
 		userAgent:    userAgent,
 		httpServer:   httpServer,
+		shellService: shellService,
 	}
 }
 
@@ -84,6 +89,12 @@ func (s *Server) Exec() {
 			if err != nil {
 				slog.Error(err.Error())
 			}
+		}()
+	}
+
+	if s.shellService != nil {
+		go func() {
+			s.shellService.Serve()
 		}()
 	}
 
@@ -112,6 +123,10 @@ func (s *Server) Exec() {
 		if err != nil {
 			slog.Error(err.Error())
 		}
+	}
+
+	if s.shellService != nil {
+		s.shellService.Shutdown(ctx)
 	}
 
 	oplog.Dispatch("system/doorpix/lifecycle/shutdown", "lifecycle", "shutdown")

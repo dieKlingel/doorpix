@@ -110,10 +110,10 @@ func (e *InMemoryEventEmitter) Dispatch(path string, args ...any) (Event, error)
 	return e.DispatchProperties(path, values)
 }
 
-func (e *InMemoryEventEmitter) On(path string) chan Event {
+func (e *InMemoryEventEmitter) On(path string) <-chan Event {
 	channel := make(chan Event)
 	if _, exists := e.listeners[path]; !exists {
-		e.listeners[path] = make([]chan Event, 1)
+		e.listeners[path] = make([]chan Event, 0)
 	}
 
 	e.listeners[path] = append(e.listeners[path], channel)
