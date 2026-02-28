@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"slices"
 
+	"github.com/dieklingel/doorpix/internal/oplog"
 	cameradriver "github.com/dieklingel/doorpix/internal/transport/sip/driver/camera"
 	"github.com/dieklingel/go-pjproject/pjsua2"
 )
@@ -94,15 +95,18 @@ func (acc *Account) OnIncomingCall(param pjsua2.OnIncomingCallParam) {
 	isWhitelisted := slices.Contains(acc.whitelist, from)
 
 	slog.Info("account: received incomming call", "callId", id, "from", from, "to", to, "whitelisted", isWhitelisted, "whitelist", acc.whitelist)
+	oplog.Dispatch(fmt.Sprintf("system/doorpix/calls:incomming/%s", from), "id", id, "from", from, "to", to)
 
 	op := pjsua2.NewCallOpParam()
 	if isWhitelisted {
 		op.SetStatusCode(pjsua2.PJSIP_SC_OK)
+		call.delegate.Answer(op)
+		oplog.Dispatch(fmt.Sprintf("system/doorpix/calls:answer/%s", from), "id", id, "from", from, "to", to)
 	} else {
 		op.SetStatusCode(pjsua2.PJSIP_SC_DECLINE)
+		call.delegate.Answer(op)
+		oplog.Dispatch(fmt.Sprintf("system/doorpix/call:decline/%s", from), "id", id, "from", from, "to", to)
 	}
-
-	call.delegate.Answer(op)
 }
 
 func (acc *Account) OnRegStarted(arg2 pjsua2.OnRegStartedParam) {

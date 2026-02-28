@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/dieklingel/doorpix/internal/config"
-	"github.com/dieklingel/doorpix/internal/eventemitter"
 	"github.com/dieklingel/doorpix/internal/media/camera"
+	"github.com/dieklingel/doorpix/internal/oplog"
 	"github.com/dieklingel/doorpix/internal/transport/http"
 	"github.com/dieklingel/doorpix/internal/transport/sip"
 )
@@ -26,7 +26,9 @@ func New(cfg *config.Config) *Server {
 			tee. ! queue ! valve name=valve-http-camera ! jpegenc ! appsink name=appsink-http-camera
 			tee. ! queue ! valve name=valve-sip-camera ! videoscale ! videoconvert ! video/x-raw,format=I420,width=720,height=480 ! appsink name=appsink-sip-camera
 	`))
-	oplog := eventemitter.NewEventEmitter()
+	oplog.Default().SetWriter(&oplog.FileWriter{
+		File: ".doorpix.oplog",
+	})
 
 	var userAgent *sip.UserAgent = nil
 	if cfg.SIP.Enabled {
@@ -49,7 +51,6 @@ func New(cfg *config.Config) *Server {
 			Webcam:    must(camera.NewWebcam("http-camera", cameraDriver)),
 			UserAgent: userAgent,
 			Port:      &cfg.HTTP.Port,
-			Oplog:     oplog,
 		}
 
 		slog.Debug("server: create http server", "port", cfg.HTTP.Port)
@@ -66,6 +67,8 @@ func New(cfg *config.Config) *Server {
 func (s *Server) Exec() {
 	// Startup
 	slog.Info("app server: starting up doorpix")
+	oplog.Dispatch("system/doorpix/lifecycle/booting", "lifecycle", "booting")
+
 	if s.httpServer != nil {
 		go func() {
 			err := s.httpServer.Serve()
@@ -84,16 +87,19 @@ func (s *Server) Exec() {
 		}()
 	}
 
+	oplog.Dispatch("system/doorpix/lifecycle/booted", "lifecycle", "booted")
+
 	// Catch Signal
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	<-c
 
+	// Shutdown
 	slog.Info("app server: shutting down doorpix")
+	oplog.Dispatch("system/doorpix/lifecycle/stopping", "lifecycle", "stopping")
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
-	// Shutdown
 	if s.httpServer != nil {
 		err := s.httpServer.Shutdown(ctx)
 		if err != nil {
@@ -107,6 +113,8 @@ func (s *Server) Exec() {
 			slog.Error(err.Error())
 		}
 	}
+
+	oplog.Dispatch("system/doorpix/lifecycle/shutdown", "lifecycle", "shutdown")
 }
 
 func must[T any](value T, err error) T {

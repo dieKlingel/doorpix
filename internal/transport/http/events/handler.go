@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/dieklingel/doorpix/internal/eventemitter"
+	"github.com/dieklingel/doorpix/internal/oplog"
 	"github.com/gorilla/mux"
 )
 
-func Handler(oplog eventemitter.EventEmitter) http.Handler {
+func Handler() http.Handler {
 	router := mux.NewRouter()
 
 	router.Path("/").Methods("GET").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -31,18 +31,13 @@ func Handler(oplog eventemitter.EventEmitter) http.Handler {
 			return
 		}
 
-		event, err := oplog.DispatchProperties(body.Path, body.Properties)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
+		args := make([]any, 0, len(body.Properties)*2)
+		for key, value := range body.Properties {
+			args = append(args, key, value)
 		}
 
-		w.Header().Set("Content-Type", "application/json")
+		oplog.Dispatch(body.Path, args...)
 		w.WriteHeader(http.StatusCreated)
-		err = json.NewEncoder(w).Encode(event)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
 	})
 
 	return router

@@ -1,8 +1,10 @@
 package sip
 
 import (
+	"fmt"
 	"log/slog"
 
+	"github.com/dieklingel/doorpix/internal/oplog"
 	"github.com/dieklingel/go-pjproject/pjsua2"
 )
 
@@ -37,8 +39,12 @@ func NewCallFromId(acc *Account, id int) *Call {
 
 func (c *Call) OnCallState(param pjsua2.OnCallStateParam) {
 	info := c.delegate.GetInfo()
+	id := info.GetId()
 	state := info.GetState()
-	slog.Info("call state changed", "callId", info.GetId(), "state", info.GetStateText())
+	stateText := info.GetStateText()
+
+	slog.Info("call state changed", "callId", id, "state", state, "text", stateText)
+	oplog.Dispatch(fmt.Sprintf("system/doorpix/calls/%d/state", id), "id", id, "state", state, "text", stateText)
 
 	switch state {
 	case pjsua2.PJSIP_INV_STATE_DISCONNECTED:

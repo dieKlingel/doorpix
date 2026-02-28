@@ -1,14 +1,19 @@
 package eventemitter
 
 import (
+	"errors"
 	"fmt"
+	"math/big"
+	"path"
 	"time"
 )
 
 type InMemoryEventEmitter struct {
-	size  int
-	index int
-	log   []Event
+	revision  *big.Int
+	size      int
+	index     int
+	log       []Event
+	listeners map[string][]chan Event
 }
 
 func NewEventEmitter() EventEmitter {
@@ -16,9 +21,11 @@ func NewEventEmitter() EventEmitter {
 	index := 0
 
 	return &InMemoryEventEmitter{
-		size:  size,
-		index: index,
-		log:   make([]Event, 0, size),
+		revision:  big.NewInt(0),
+		size:      size,
+		index:     index,
+		log:       make([]Event, 0, size),
+		listeners: make(map[string][]chan Event),
 	}
 }
 
@@ -32,8 +39,37 @@ func (e *InMemoryEventEmitter) Events() []Event {
 	return events
 }
 
+func (e *InMemoryEventEmitter) DispatchEvent(event Event) error {
+	errs := make([]error, 0)
+
+	for k, v := range e.listeners {
+		match, err := path.Match(k, event.Path)
+		if err != nil {
+			errs = append(errs, err)
+			continue
+		}
+
+		if match {
+			for _, channel := range v {
+				channel <- event
+			}
+		}
+	}
+
+	if len(errs) == 0 {
+		return nil
+	}
+
+	return errors.Join(errs...)
+}
+
 func (e *InMemoryEventEmitter) DispatchProperties(path string, properties map[string]any) (Event, error) {
+	rev := e.revision.Add(e.revision, big.NewInt(1))
+	id := big.NewInt(1)
+	id.Set(rev)
+
 	event := Event{
+		Id:         id.Text(10),
 		Path:       path,
 		Properties: properties,
 		Timestamp:  time.Now(),
@@ -49,6 +85,7 @@ func (e *InMemoryEventEmitter) DispatchProperties(path string, properties map[st
 		e.index = 0
 	}
 
+	e.DispatchEvent(event)
 	return event, nil
 }
 
@@ -71,4 +108,14 @@ func (e *InMemoryEventEmitter) Dispatch(path string, args ...any) (Event, error)
 	}
 
 	return e.DispatchProperties(path, values)
+}
+
+func (e *InMemoryEventEmitter) On(path string) chan Event {
+	channel := make(chan Event)
+	if _, exists := e.listeners[path]; !exists {
+		e.listeners[path] = make([]chan Event, 1)
+	}
+
+	e.listeners[path] = append(e.listeners[path], channel)
+	return channel
 }
