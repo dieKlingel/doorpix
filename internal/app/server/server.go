@@ -29,7 +29,7 @@ func New(cfg *config.Config) *Server {
 			tee. ! queue ! valve name=valve-sip-camera ! videoscale ! videoconvert ! video/x-raw,format=I420,width=720,height=480 ! appsink name=appsink-sip-camera
 	`))
 	oplog.Default().SetWriter(&oplog.FileWriter{
-		File: ".doorpix.oplog",
+		File: ".doorpix.oplog.jsonl",
 	})
 
 	var userAgent *sip.UserAgent = nil

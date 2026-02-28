@@ -33,3 +33,4 @@ go.work.sum
 
 # doorpix
 *.oplog
+*.oplog.jsonl
