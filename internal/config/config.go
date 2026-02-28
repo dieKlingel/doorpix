@@ -9,8 +9,9 @@ import (
 )
 
 type Config struct {
-	HTTP HTTP `yaml:"http"`
-	SIP  SIP  `yaml:"sip"`
+	HTTP   HTTP           `yaml:"http"`
+	SIP    SIP            `yaml:"sip"`
+	Events []EventHandler `yaml:"events"`
 }
 
 func Parse(content []byte) (*Config, error) {

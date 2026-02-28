@@ -20,6 +20,7 @@ type Server struct {
 	userAgent    *sip.UserAgent
 	httpServer   *http.Server
 	shellService *system.ShellService
+	listeners    []func(ctx context.Context)
 }
 
 func New(cfg *config.Config) *Server {
@@ -61,11 +62,41 @@ func New(cfg *config.Config) *Server {
 
 	shellService := system.NewShellService()
 
+	listeners := make([]func(context.Context), 0, len(cfg.Events))
+	for _, eventhandler := range cfg.Events {
+		f := func(ctx context.Context) {
+			for {
+				select {
+
+				case in := <-oplog.On(eventhandler.Event):
+					for _, step := range eventhandler.Steps {
+						topic, exists := config.ServiceType[step.Type]
+						if !exists {
+							continue
+						}
+
+						args := make([]any, 0, len(step.Properties)*2+1)
+						args = append(args, "parentId", in.Id)
+						for key, value := range step.Properties {
+							args = append(args, key, value)
+						}
+
+						oplog.Dispatch(topic, args...)
+					}
+				case <-ctx.Done():
+					return
+				}
+			}
+		}
+		listeners = append(listeners, f)
+	}
+
 	return &Server{
 		cameraDriver: cameraDriver,
 		userAgent:    userAgent,
 		httpServer:   httpServer,
 		shellService: shellService,
+		listeners:    listeners,
 	}
 }
 
@@ -100,6 +131,12 @@ func (s *Server) Exec() {
 
 	oplog.Dispatch("system/doorpix/lifecycle/booted", "lifecycle", "booted")
 
+	// TODO(koifresh): clean this up, and create some clean mapper between the events
+	ctx, cancel := context.WithCancel(context.Background())
+	for _, listener := range s.listeners {
+		go listener(ctx)
+	}
+
 	// Catch Signal
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
@@ -108,7 +145,9 @@ func (s *Server) Exec() {
 	// Shutdown
 	slog.Info("app server: shutting down doorpix")
 	oplog.Dispatch("system/doorpix/lifecycle/stopping", "lifecycle", "stopping")
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
+	cancel()
+
+	ctx, cancel = context.WithTimeout(ctx, time.Second*15)
 	defer cancel()
 
 	if s.httpServer != nil {
