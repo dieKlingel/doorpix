@@ -1,14 +1,17 @@
 package oplog
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
-var ErrPropertyDoesNotExist = errors.New("event: property does not exist")
-var ErrPropertyIsNotAString = errors.New("event: property is not of type string")
+var ErrPropertyDoesNotExist = errors.New("property does not exist")
+var ErrPropertyIsNotAString = errors.New("property is not of type string")
 
 func ParseString(evt Event, key string) (string, error) {
 	raw, exists := evt.Properties[key]
 	if !exists {
-		return "", ErrPropertyDoesNotExist
+		return "", fmt.Errorf("parser: '%s' %w", key, ErrPropertyDoesNotExist)
 	}
 
 	stringValue, ok := raw.(string)

@@ -64,19 +64,20 @@ func New(cfg *config.Config) *Server {
 
 	listeners := make([]func(context.Context), 0, len(cfg.Events))
 	for _, eventhandler := range cfg.Events {
+		channel := oplog.On(eventhandler.Event)
 		f := func(ctx context.Context) {
 			for {
 				select {
 
-				case in := <-oplog.On(eventhandler.Event):
+				case in := <-channel:
 					for _, step := range eventhandler.Steps {
 						topic, exists := config.ServiceType[step.Type]
 						if !exists {
 							continue
 						}
 
-						args := make([]any, 0, len(step.Properties)*2+1)
-						args = append(args, "parentId", in.Id)
+						args := make([]any, 0, len(step.Properties)*2+4)
+						args = append(args, "parentId", in.Id, "source", "config")
 						for key, value := range step.Properties {
 							args = append(args, key, value)
 						}

@@ -35,14 +35,15 @@ func (s *ShellService) Serve() {
 				continue
 			}
 
-			output, err := exec.Command("sh", "-c", evt.Cmd).CombinedOutput()
-			if err != nil {
-				slog.Error("system shell: an error occoured executing a command", "error", err.Error(), "command", evt.Cmd, "silent", evt.Silent)
-				continue
-			}
-			if !evt.Silent {
-				fmt.Print(string(output))
-			}
+			go func() {
+				output, err := exec.Command("sh", "-c", evt.Cmd).CombinedOutput()
+				if err != nil {
+					slog.Error("system shell: an error occoured executing a command", "error", err.Error(), "command", evt.Cmd, "silent", evt.Silent)
+				}
+				if !evt.Silent {
+					fmt.Print(string(output))
+				}
+			}()
 		}
 	}
 }

@@ -31,7 +31,8 @@ func Handler() http.Handler {
 			return
 		}
 
-		args := make([]any, 0, len(body.Properties)*2)
+		args := make([]any, 0, len(body.Properties)*2+2)
+		args = append(args, "source", "http")
 		for key, value := range body.Properties {
 			args = append(args, key, value)
 		}
