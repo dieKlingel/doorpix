@@ -24,12 +24,12 @@ func NewCallService(userAgent UserAgent) *CallService {
 	}
 }
 
-func (s *CallService) Serve() {
+func (s *CallService) Run() error {
 	channel := oplog.On("internal/doorpix/service/call/invite")
 	for {
 		select {
 		case <-s.done:
-			return
+			return nil
 		case ev := <-channel:
 			slog.Debug("call invite: received new invite event", "event", ev)
 			event := &CallEvent{}
@@ -48,9 +48,11 @@ func (s *CallService) Serve() {
 	}
 }
 
-func (s *CallService) Shutdown(ctx context.Context) {
+func (s *CallService) Stop(ctx context.Context) error {
 	select {
 	case s.done <- struct{}{}:
 	case <-ctx.Done():
 	}
+
+	return nil
 }

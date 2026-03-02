@@ -29,7 +29,7 @@ func NewUserAgent(props UserAgentProps) *UserAgent {
 	}
 }
 
-func (ua *UserAgent) Serve() error {
+func (ua *UserAgent) Run() error {
 	go osThread.run()
 
 	success := false
@@ -144,7 +144,7 @@ func (ua *UserAgent) Hangup(id int) {
 	})
 }
 
-func (ua *UserAgent) Shutdown(ctx context.Context) error {
+func (ua *UserAgent) Stop(ctx context.Context) error {
 	finished := make(chan struct{})
 
 	go osThread.invoke(func() {

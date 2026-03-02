@@ -53,7 +53,7 @@ func NewServer(props ServerProps) *Server {
 	return &server
 }
 
-func (s *Server) Serve() error {
+func (s *Server) Run() error {
 	server := &http.Server{
 		Addr:    fmt.Sprintf(":%d", s.port),
 		Handler: s.router,
@@ -63,7 +63,7 @@ func (s *Server) Serve() error {
 	return server.ListenAndServe()
 }
 
-func (s *Server) Shutdown(ctx context.Context) error {
+func (s *Server) Stop(ctx context.Context) error {
 	return s.srv.Shutdown(ctx)
 }
 

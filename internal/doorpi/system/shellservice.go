@@ -19,13 +19,13 @@ func NewShellService() *ShellService {
 	}
 }
 
-func (s *ShellService) Serve() {
+func (s *ShellService) Run() error {
 	channel := oplog.On("internal/doorpix/service/shell")
 
 	for {
 		select {
 		case <-s.done:
-			return
+			return nil
 		case ev := <-channel:
 			slog.Debug("system shell: received new shell event", "event", ev)
 			event := &ShellEvent{
@@ -51,9 +51,11 @@ func (s *ShellService) Serve() {
 	}
 }
 
-func (s *ShellService) Shutdown(ctx context.Context) {
+func (s *ShellService) Stop(ctx context.Context) error {
 	select {
 	case s.done <- struct{}{}:
 	case <-ctx.Done():
 	}
+
+	return nil
 }
