@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"os"
 	"os/signal"
+	"sync"
 	"time"
 
 	"github.com/dieklingel/doorpix/internal/config"
@@ -96,14 +97,18 @@ func (s *Server) Exec() {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
+	wg := sync.WaitGroup{}
 
 	for _, worker := range s.workers {
-		err := worker.Stop(ctx)
-		if err != nil {
-			slog.Error("an error occoured stopping a worker", "error", err.Error())
-		}
+		wg.Go(func() {
+			err := worker.Stop(ctx)
+			if err != nil {
+				slog.Error("an error occoured stopping a worker", "error", err.Error())
+			}
+		})
 	}
 
+	wg.Wait()
 	oplog.Dispatch("system/doorpix/lifecycle/shutdown", "lifecycle", "shutdown")
 }
 
