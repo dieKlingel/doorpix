@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/dieklingel/doorpix/internal/config"
+	"github.com/dieklingel/doorpix/internal/device/gpio"
 	"github.com/dieklingel/doorpix/internal/doorpi/call"
 	"github.com/dieklingel/doorpix/internal/doorpi/system"
 	"github.com/dieklingel/doorpix/internal/media/camera"
@@ -22,7 +23,7 @@ type Server struct {
 }
 
 func New(cfg *config.Config) *Server {
-	workers := make([]Worker, 0, 5)
+	workers := make([]Worker, 0, 6)
 	cameraDriver := must(camera.NewGstDriver(`
 		autovideosrc ! video/x-raw,width=800,height=600,framerate=20/1 ! tee name=tee
 			tee. ! queue ! valve name=valve-http-camera ! jpegenc ! appsink name=appsink-http-camera
@@ -57,6 +58,15 @@ func New(cfg *config.Config) *Server {
 
 		slog.Debug("server: create http server", "port", cfg.HTTP.Port)
 		workers = append(workers, http.NewServer(props))
+	}
+
+	if cfg.GPIO.Enabled {
+		props := gpio.ControllerProps{
+			Chip:   cfg.GPIO.Chip,
+			Inputs: cfg.GPIO.Inputs,
+		}
+
+		workers = append(workers, gpio.NewController(props))
 	}
 
 	if userAgent != nil {

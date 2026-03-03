@@ -11,6 +11,7 @@ import (
 type Config struct {
 	HTTP   HTTP           `yaml:"http"`
 	SIP    SIP            `yaml:"sip"`
+	GPIO   GPIO           `yaml:"gpio"`
 	Events []EventHandler `yaml:"events"`
 }
 
