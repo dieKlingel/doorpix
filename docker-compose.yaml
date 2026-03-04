@@ -1,0 +1,17 @@
+
+services:
+  doorpix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./doorpix.yaml:/var/doorpix/doorpix.yaml:ro
+      - ${XDG_RUNTIME_DIR}/pipewire-0:/run/user/1000/pipewire-0
+    environment:
+      XDG_RUNTIME_DIR: /run/user/1000
+    devices:
+      - /dev/video0:/dev/video0
+    env_file:
+      - .env
