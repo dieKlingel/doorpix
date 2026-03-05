@@ -2,6 +2,16 @@ name: Containerize doorpix
 
 on:
   workflow_dispatch:
+    inputs:
+      platforms:
+        description: The platforms to build the oci image for
+        default: linux/amd64,linux/arm64
+        required: false
+        type: choice
+        options:
+          - linux/amd64,linux/arm64
+          - linux/amd64
+          - linux/arm64
   push:
     tags:
       - v*
@@ -37,6 +47,6 @@ jobs:
           push: ${{ github.ref_type == 'tag' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ inputs.platforms }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
