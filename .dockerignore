@@ -1,45 +1,16 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+# Allowlisting gitignore template for GO projects prevents us
+# from adding various unwanted local files, such as generated
+# files, developer configurations or IDE-specific files etc.
 #
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# Recommended: Go.AllowList.gitignore
 
-# Test binary, built with `go test -c`
-*.test
+# Ignore everything
+*
 
-# Code coverage profiles and other test artifacts
-*.out
-coverage.*
-*.coverprofile
-profile.cov
-
-# Dependency directories (remove the comment below to include it)
-# vendor/
-
-# Go workspace file
-go.work
-go.work.sum
-
-# env file
-.env
-
-# Editor/IDE
-# .idea/
-# .vscode/
-
-# doorpix
-.github
-.vscode
-bruno
-*.oplog
-*.oplog.jsonl
-docker-compose.yaml
-Dockerfile
-flake.lock
-flake.nix
-README.md
-taskfile.yaml
+# But not these files...
+!**/*.go
+!internal
+!vendor
+!go.sum
+!go.mod
+!overlays/config_site.h
