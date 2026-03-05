@@ -6,12 +6,19 @@ on:
       platforms:
         description: The platforms to build the oci image for
         default: linux/amd64,linux/arm64
-        required: false
         type: choice
         options:
           - linux/amd64,linux/arm64
           - linux/amd64
           - linux/arm64
+      runner:
+        description: The action runner
+        default: ubuntu-latest
+        type: choice
+        options:
+          - ubuntu-latest
+          - ubuntu-24.04-arm
+
   push:
     tags:
       - v*
@@ -27,7 +34,7 @@ permissions:
 
 jobs:
   containerize:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     steps:
       - uses: actions/checkout@v6
       - uses: docker/setup-qemu-action@v4
