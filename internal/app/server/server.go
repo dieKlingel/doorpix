@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"os"
 	"os/signal"
@@ -24,13 +25,16 @@ type Server struct {
 
 func New(cfg *config.Config) *Server {
 	workers := make([]Worker, 0, 6)
-	cameraDriver := must(camera.NewGstDriver(`
-		autovideosrc ! video/x-raw,width=800,height=600,framerate=20/1 ! tee name=tee
+	cameraDriver := must(camera.NewGstDriver(fmt.Sprintf(`
+		%s ! tee name=tee
 			tee. ! queue ! valve name=valve-http-camera ! jpegenc ! appsink name=appsink-http-camera
 			tee. ! queue ! valve name=valve-sip-camera ! videoscale ! videoconvert ! video/x-raw,format=I420,width=720,height=480 ! appsink name=appsink-sip-camera
-	`))
+		`,
+		cfg.Camera.Device,
+	)))
+
 	oplog.Default().SetWriter(&oplog.FileWriter{
-		File: ".doorpix.oplog.jsonl",
+		File: "logs/.doorpix.oplog.jsonl",
 	})
 
 	var userAgent *sip.UserAgent = nil

@@ -12,11 +12,20 @@ type Config struct {
 	HTTP   HTTP           `yaml:"http"`
 	SIP    SIP            `yaml:"sip"`
 	GPIO   GPIO           `yaml:"gpio"`
+	Camera Camera         `yaml:"camera"`
 	Events []EventHandler `yaml:"events"`
 }
 
 func Parse(content []byte) (*Config, error) {
-	var c Config
+	var c Config = Config{
+		HTTP: HTTP{
+			Enabled: true,
+			Port:    8080,
+		},
+		Camera: Camera{
+			Device: "autovideosrc",
+		},
+	}
 	var expanded = bytes.Buffer{}
 
 	err := template.Must(template.New("config").Parse(string(content))).Execute(&expanded, EnvVars())

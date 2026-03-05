@@ -8,19 +8,20 @@ type HTTP struct {
 }
 
 func (http *HTTP) UnmarshalYAML(node *yaml.Node) error {
-	rawHTTPConfig := struct {
-		Enabled Bool `yaml:"enabled"`
-		Port    Int  `yaml:"port"`
-	}{
-		Enabled: Bool(true),
-		Port:    Int(8080),
-	}
+	raw := struct {
+		Enabled *Bool `yaml:"enabled"`
+		Port    *Int  `yaml:"port"`
+	}{}
 
-	if err := node.Decode(&rawHTTPConfig); err != nil {
+	if err := node.Decode(&raw); err != nil {
 		return err
 	}
 
-	http.Enabled = bool(rawHTTPConfig.Enabled)
-	http.Port = int(rawHTTPConfig.Port)
+	if raw.Enabled != nil {
+		http.Enabled = bool(*raw.Enabled)
+	}
+	if raw.Port != nil {
+		http.Port = int(*raw.Port)
+	}
 	return nil
 }
