@@ -1,6 +1,7 @@
 FROM golang:trixie AS builder
 
 ARG PJSIP_VERSION=2.15.1
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
     git \
