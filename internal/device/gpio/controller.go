@@ -3,26 +3,30 @@ package gpio
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/dieklingel/doorpix/internal/oplog"
 	"github.com/warthog618/go-gpiocdev"
 )
 
 type ControllerProps struct {
-	Chip   string
-	Inputs []int
+	Chip         string
+	Inputs       []int
+	DebounceTime time.Duration
 }
 
 type Controller struct {
-	chip   string
-	inputs []int
-	lines  *gpiocdev.Lines
+	chip         string
+	inputs       []int
+	debounceTime time.Duration
+	lines        *gpiocdev.Lines
 }
 
 func NewController(props ControllerProps) *Controller {
 	return &Controller{
-		chip:   props.Chip,
-		inputs: props.Inputs,
+		chip:         props.Chip,
+		inputs:       props.Inputs,
+		debounceTime: props.DebounceTime,
 	}
 }
 
@@ -32,6 +36,8 @@ func (c *Controller) Run() error {
 		c.inputs,
 		gpiocdev.AsInput,
 		gpiocdev.WithBothEdges,
+		gpiocdev.WithPullDown,
+		gpiocdev.WithDebounce(c.debounceTime),
 		gpiocdev.WithEventHandler(c.OnGpioEvent),
 	)
 

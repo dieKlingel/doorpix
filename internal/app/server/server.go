@@ -66,10 +66,12 @@ func New(cfg *config.Config) *Server {
 
 	if cfg.GPIO.Enabled {
 		props := gpio.ControllerProps{
-			Chip:   cfg.GPIO.Chip,
-			Inputs: cfg.GPIO.Inputs,
+			Chip:         cfg.GPIO.Chip,
+			Inputs:       cfg.GPIO.Inputs,
+			DebounceTime: cfg.GPIO.DebounceTime,
 		}
 
+		slog.Debug("server: create gpio controller", "chip", props.Chip, "debounce-time", props.DebounceTime, "inputs", props.Inputs)
 		workers = append(workers, gpio.NewController(props))
 	}
 

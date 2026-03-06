@@ -1,6 +1,4 @@
 
-
-
 services:
   doorpix:
     image: ghcr.io/dieklingel/doorpix:0.1.0-rc1
@@ -15,6 +13,7 @@ services:
     environment:
       XDG_RUNTIME_DIR: /run/user/1000
     devices:
+      - /dev/gpiochip0:/dev/gpiochip0
       - /dev/video0:/dev/video0
     env_file:
       - .env

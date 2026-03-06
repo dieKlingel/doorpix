@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"html/template"
 	"os"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -21,6 +22,10 @@ func Parse(content []byte) (*Config, error) {
 		HTTP: HTTP{
 			Enabled: true,
 			Port:    8080,
+		},
+		GPIO: GPIO{
+			Enabled:      false,
+			DebounceTime: 200 * time.Millisecond,
 		},
 		Camera: Camera{
 			Device: "autovideosrc",

@@ -1,0 +1,22 @@
+sip: 
+  enabled: false
+  username: '{{ .DOORPIX_SIP_USERNAME }}'
+  password: '{{ .DOORPIX_SIP_PASSWORD }}'
+  realm: '{{ .DOORPIX_SIP_REALM }}'
+  whitelist: []
+
+http:
+  enabled: true
+  port: '{{ or .DOORPIX_HTTP_PORT "8080" }}'
+
+camera:
+  device: '{{ or .DOORPIX_CAMERA_DEVICE "autovideosrc" }}'
+
+gpio:
+  enabled: false
+  debounce-time: 200ms
+  chip: /dev/gpiochip0
+  inputs:
+    - 14
+
+events: []
