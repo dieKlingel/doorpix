@@ -71,8 +71,7 @@ RUN apt update && apt install --no-install-recommends -y \
 
 COPY --from=builder /usr/local/bin/doorpix /usr/local/bin/doorpix
 RUN groupadd -g 1000 doorpix && \
-    useradd -u 1000 -g doorpix -s /bin/sh -m doorpix && \
-    usermod -a -G tape doorpix # video group
+    useradd -u 1000 -g doorpix -s /bin/sh -m doorpix
 WORKDIR /var/doorpix
 USER doorpix
 EXPOSE 8080
