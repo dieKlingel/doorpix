@@ -1,7 +1,7 @@
 
 services:
   doorpix:
-    image: ghcr.io/dieklingel/doorpix:0.1.0-rc1
+    image: ghcr.io/dieklingel/doorpix:0.1.0-alpha1
     ports:
       - 8080:8080
     volumes:
