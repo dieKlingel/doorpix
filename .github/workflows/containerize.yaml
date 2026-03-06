@@ -2,23 +2,6 @@ name: Containerize doorpix
 
 on:
   workflow_dispatch:
-    inputs:
-      platforms:
-        description: The platforms to build the oci image for
-        default: linux/amd64,linux/arm64
-        type: choice
-        options:
-          - linux/amd64,linux/arm64
-          - linux/amd64
-          - linux/arm64
-      runner:
-        description: The action runner
-        default: ubuntu-latest
-        type: choice
-        options:
-          - ubuntu-latest
-          - ubuntu-24.04-arm
-
   push:
     tags:
       - v*
@@ -34,7 +17,13 @@ permissions:
 
 jobs:
   containerize:
-    runs-on: ${{ inputs.runner || 'ubuntu-latest' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - ubuntu-24.04-arm
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
       - uses: docker/setup-qemu-action@v4
@@ -60,6 +49,5 @@ jobs:
           push: ${{ github.ref_type == 'tag' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: ${{ inputs.platforms || 'linux/amd64,linux/arm64' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
