@@ -111,8 +111,7 @@ func (e *InMemoryEventEmitter) Dispatch(path string, args ...any) (Event, error)
 }
 
 func (e *InMemoryEventEmitter) On(path string) <-chan Event {
-	// the channel can hold up to 10 event, to allow sending events, even if a single listener takes some time to process them
-	channel := make(chan Event, 10)
+	channel := make(chan Event)
 	if _, exists := e.listeners[path]; !exists {
 		e.listeners[path] = make([]chan Event, 0)
 	}

@@ -10,6 +10,7 @@ import (
 type CallService struct {
 	done      chan struct{}
 	userAgent UserAgent
+	channel   <-chan oplog.Event
 }
 
 func NewSipService(userAgent UserAgent) *CallService {
@@ -19,13 +20,16 @@ func NewSipService(userAgent UserAgent) *CallService {
 	}
 }
 
-func (s *CallService) Run() error {
-	channel := oplog.On("internal/doorpix/service/call/invite")
+func (s *CallService) Listen() {
+	s.channel = oplog.On("internal/doorpix/service/call/invite")
+}
+
+func (s *CallService) Serve() error {
 	for {
 		select {
 		case <-s.done:
 			return nil
-		case ev := <-channel:
+		case ev := <-s.channel:
 			slog.Debug("call invite: received new invite event", "event", ev)
 			event := &CallEvent{}
 
@@ -41,6 +45,15 @@ func (s *CallService) Run() error {
 			}
 		}
 	}
+}
+
+func (s *CallService) Run() error {
+	if s.channel == nil {
+		s.Listen()
+	}
+
+	s.Serve()
+	return nil
 }
 
 func (s *CallService) Stop(ctx context.Context) error {
