@@ -7,11 +7,12 @@ services:
     volumes:
       - ./doorpix.yaml:/var/doorpix/doorpix.yaml:ro
       - ${XDG_RUNTIME_DIR}/pipewire-0:/run/user/1000/pipewire-0
-    group_add:
-      - ${VIDEO_GROUP_ID:-44}
-      - ${GPIO_GROUP_ID:-986}
     environment:
       XDG_RUNTIME_DIR: /run/user/1000
+    group_add:
+      - ${AUDIO_GROUP_ID:-29}
+      - ${VIDEO_GROUP_ID:-44}
+      - ${GPIO_GROUP_ID:-986}
     devices:
       - /dev/gpiochip0:/dev/gpiochip0
       - /dev/video0:/dev/video0

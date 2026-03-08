@@ -14,9 +14,15 @@ camera:
 
 gpio:
   enabled: false
-  debounce-time: 200ms
+  debounce-time: 50ms
   chip: /dev/gpiochip0
   inputs:
-    - 14
+    - 14 # The GPIO/BCM Pin 14, physical pin 8: https://pinout.xyz/pinout/pin8_gpio14/
 
-events: []
+events:
+  - event: system/doorpix/gpio/14/rising
+    steps:
+      - type: shell
+        with:
+          cmd: |
+            gst-launch-1.0 playbin uri=file:///var/doorpix/audio.wav
