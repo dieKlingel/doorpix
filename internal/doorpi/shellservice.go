@@ -1,21 +1,22 @@
-package system
+package doorpi
 
 import (
 	"context"
 	"fmt"
 	"log/slog"
-	"os/exec"
 
 	"github.com/dieklingel/doorpix/internal/oplog"
 )
 
 type ShellService struct {
-	done chan struct{}
+	commander Commander
+	done      chan struct{}
 }
 
-func NewShellService() *ShellService {
+func NewShellService(commander Commander) *ShellService {
 	return &ShellService{
-		done: make(chan struct{}),
+		commander: commander,
+		done:      make(chan struct{}),
 	}
 }
 
@@ -39,7 +40,7 @@ func (s *ShellService) Run() error {
 			}
 
 			go func() {
-				output, err := exec.Command("sh", "-c", event.Cmd).CombinedOutput()
+				output, err := s.commander.Exec("sh", "-c", event.Cmd)
 				if err != nil {
 					slog.Error("system shell: an error occoured executing a command", "error", err.Error(), "command", event.Cmd, "silent", event.Silent)
 				}

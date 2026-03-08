@@ -72,6 +72,9 @@
       pkgs = import nixpkgs { inherit system; inherit overlays; };
     in {
       default = pkgs.mkShell {
+        # see: https://github.com/go-delve/delve/issues/3085
+        hardeningDisable = [ "fortify" ];
+
         packages = with pkgs; [
           vim
           go-task

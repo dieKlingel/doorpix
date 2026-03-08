@@ -1,23 +1,18 @@
-package call
+package doorpi
 
 import (
 	"context"
 	"log/slog"
 
 	"github.com/dieklingel/doorpix/internal/oplog"
-	"github.com/dieklingel/doorpix/internal/transport/sip"
 )
-
-type UserAgent interface {
-	Invite(uri string) (*sip.CallInfo, error)
-}
 
 type CallService struct {
 	done      chan struct{}
 	userAgent UserAgent
 }
 
-func NewCallService(userAgent UserAgent) *CallService {
+func NewSipService(userAgent UserAgent) *CallService {
 	return &CallService{
 		done:      make(chan struct{}),
 		userAgent: userAgent,

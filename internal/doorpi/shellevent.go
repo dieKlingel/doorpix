@@ -1,4 +1,4 @@
-package system
+package doorpi
 
 import (
 	"github.com/dieklingel/doorpix/internal/oplog"

@@ -11,8 +11,8 @@ import (
 
 	"github.com/dieklingel/doorpix/internal/config"
 	"github.com/dieklingel/doorpix/internal/device/gpio"
-	"github.com/dieklingel/doorpix/internal/doorpi/call"
-	"github.com/dieklingel/doorpix/internal/doorpi/system"
+	"github.com/dieklingel/doorpix/internal/device/shell"
+	"github.com/dieklingel/doorpix/internal/doorpi"
 	"github.com/dieklingel/doorpix/internal/media/camera"
 	"github.com/dieklingel/doorpix/internal/oplog"
 	"github.com/dieklingel/doorpix/internal/transport/http"
@@ -76,9 +76,9 @@ func New(cfg *config.Config) *Server {
 	}
 
 	if userAgent != nil {
-		workers = append(workers, call.NewCallService(userAgent))
+		workers = append(workers, doorpi.NewSipService(userAgent))
 	}
-	workers = append(workers, system.NewShellService())
+	workers = append(workers, doorpi.NewShellService(shell.NewController()))
 	workers = append(workers, NewEventMuxer(cfg.Events))
 
 	return &Server{
