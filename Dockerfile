@@ -67,7 +67,8 @@ RUN apt update && apt install --no-install-recommends -y \
     gstreamer1.0-gl \
     gstreamer1.0-gtk3 \
     gstreamer1.0-qt5 \
-    gstreamer1.0-pulseaudio
+    gstreamer1.0-pulseaudio \
+    curl
 
 COPY --from=builder /usr/local/bin/doorpix /usr/local/bin/doorpix
 RUN groupadd -g 1000 doorpix && \
