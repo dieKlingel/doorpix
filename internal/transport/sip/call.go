@@ -70,6 +70,16 @@ func (c *Call) OnCallMediaState(arg2 pjsua2.OnCallMediaStateParam) {
 	if playbackDevMedia != nil {
 		callAudioMedia.StartTransmit(playbackDevMedia)
 	}
+
+	mediaInfos := c.delegate.GetInfo().GetMedia()
+	for i := 0; i < int(mediaInfos.Size()); i++ {
+		mediaInfo := mediaInfos.Get(i)
+		dir := MediaDir(mediaInfo.GetDir())
+		status := CallMediaStatus(mediaInfo.GetStatus())
+		xType := MediaType(mediaInfo.GetXtype())
+
+		slog.Debug("call: media info found", "index", mediaInfo.GetIndex(), "status", status.String(), "direction", dir.String(), "type", xType.String())
+	}
 }
 
 func (c *Call) Info() *CallInfo {

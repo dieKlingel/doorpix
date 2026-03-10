@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/big"
 	"path"
+	"sync"
 	"time"
 )
 
@@ -14,6 +15,7 @@ type InMemoryEventEmitter struct {
 	index     int
 	log       []Event
 	listeners map[string][]chan Event
+	mutex     sync.Mutex
 }
 
 func NewEventEmitter() EventEmitter {
@@ -111,6 +113,9 @@ func (e *InMemoryEventEmitter) Dispatch(path string, args ...any) (Event, error)
 }
 
 func (e *InMemoryEventEmitter) On(path string) <-chan Event {
+	e.mutex.Lock()
+	defer e.mutex.Unlock()
+
 	channel := make(chan Event)
 	if _, exists := e.listeners[path]; !exists {
 		e.listeners[path] = make([]chan Event, 0)
