@@ -144,6 +144,25 @@ func (ua *UserAgent) Hangup(id int) {
 	})
 }
 
+func (ua *UserAgent) SendMessage(uri string, body string) error {
+	if ua.account == nil {
+		return ErrNotReady
+	}
+
+	osThread.invoke(func() {
+		buddy := pjsua2.NewBuddy()
+		cfg := pjsua2.NewBuddyConfig()
+		cfg.SetUri(uri)
+		buddy.Create(ua.account.delegate, cfg)
+
+		param := pjsua2.NewSendInstantMessageParam()
+		param.SetContent(body)
+		buddy.SendInstantMessage(param)
+	})
+
+	return nil
+}
+
 func (ua *UserAgent) Stop(ctx context.Context) error {
 	finished := make(chan struct{})
 
